@@ -12186,25 +12186,868 @@ public class JButtonDemo03 extends JFrame {
 
 #### 6.列表
 
+- 下拉框
 
+```java
+package github.GUI.Demo06;
 
+import javax.swing.*;
+import java.awt.*;
 
+/**
+ * @author subeiLY
+ * @create 2021-06-05 16:23
+ */
+public class TextComboxDemo01 extends JFrame {
+    public TextComboxDemo01(){
+        Container container = this.getContentPane();
+        JComboBox box = new JComboBox();
 
+        box.addItem(null);
+        box.addItem("正在热映");
+        box.addItem("已下架");
+        box.addItem("即将上架");
 
+        container.add(box);
 
+        this.setVisible(true);
+        this.setSize(500,500);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+    }
+
+    public static void main(String[] args) {
+        new TextComboxDemo01();
+    }
+}
+```
+
+![1623305116647](img/SE/07/1623305116647.png)
+
+- 列表框
+
+```java
+package github.GUI.Demo06;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Vector;
+
+/**
+ * @author subeiLY
+ * @create 2021-06-05 16:26
+ */
+public class TextComboxDemo02 extends JFrame{
+    public TextComboxDemo02(){
+        Container container = this.getContentPane();
+        // 生成列表的内容
+//        String[] contents = {"1","2","3"};
+
+        Vector vector = new Vector();
+
+        // 列表中放入需要的内容
+        JList jList = new JList(vector);
+
+        vector.add("赵公明");
+        vector.add("吕岳");
+        vector.add("吴刚");
+
+        container.add(jList);
+
+        this.setVisible(true);
+        this.setSize(500,500);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+    }
+
+    public static void main(String[] args) {
+        new TextComboxDemo02();
+    }
+}
+```
+
+![1623305476562](img/SE/07/1623305476562.png)
+
+- 应用场景
+  - 选择地区，或者一些单个选项；
+  - 列表：展示信息，一股是动态扩容！
 
 #### 7.文本框
 
+```java
+package github.GUI.Demo06;
 
+import javax.swing.*;
+import java.awt.*;
 
+/**
+ * @author subeiLY
+ * @create 2021-06-05 16:33
+ */
+// 文本框
+public class TestTextDemo01 extends JFrame{
+    public TestTextDemo01(){
+        Container container = this.getContentPane();
 
+        JTextField textField = new JTextField("Hello");
+        JTextField textField1 = new JTextField("World", 30);
+
+        container.add(textField,BorderLayout.SOUTH);
+        container.add(textField1,BorderLayout.NORTH);
+
+        this.setVisible(true);
+        this.setSize(500,500);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+    }
+
+    public static void main(String[] args) {
+        new TestTextDemo01();
+    }
+}
+```
+
+![1623305783587](img/SE/07/1623305783587.png)
+
+```java
+package github.GUI.Demo06;
+
+import javax.swing.*;
+import java.awt.*;
+
+/**
+ * @author subeiLY
+ * @create 2021-06-05 16:37
+ */
+// 密码框
+public class TestTextDemo02 extends JFrame {
+    public TestTextDemo02(){
+        Container container = this.getContentPane();
+
+        JPasswordField passwordField = new JPasswordField();
+        passwordField.setEchoChar('*');
+
+        container.add(passwordField);
+
+        this.setVisible(true);
+        this.setSize(500,500);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+    }
+
+    public static void main(String[] args) {
+        new TestTextDemo02();
+    }
+}
+```
+
+![1623305966966](img/SE/07/1623305966966.png)
+
+```java
+package github.GUI.Demo05;
+
+import javax.swing.*;
+import java.awt.*;
+
+/**
+ * @author subeiLY
+ * @create 2021-06-05 16:04
+ */
+// 文本域
+public class JScroPallDemo extends JFrame {
+
+    public JScroPallDemo(){
+        Container container = this.getContentPane();
+        // 文本域
+        JTextArea textArea = new JTextArea(20, 30);
+        textArea.setText("欢迎查阅！！");
+
+        // 面板
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        container.add(scrollPane);
+
+        this.setVisible(true);
+        this.setBounds(200,200,300,350);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) {
+        new JScroPallDemo();
+    }
+}
+```
+
+![1623306186155](img/SE/07/1623306186155.png)
 
 ### 4.贪吃蛇小游戏
 
+> 素材链接：[https://www.yuque.com/nizhegechouloudetuboshu/library/foie2x](https://www.yuque.com/nizhegechouloudetuboshu/library/foie2x)
+
+#### 1.静态界面绘制
+
+![1623308439432](img/SE/07/1623308439432.png)
+
+- StartGame.java
+
+```java
+package github.GUI.snack;
+
+import javax.swing.*;
+
+/**
+ * @author subeiLY
+ * @create 2021-06-05 17:32
+ */
+public class StartGame {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Java-贪吃蛇小游戏");
+
+        frame.setBounds(10,10,915,820); // 设置窗口的位置和大小
+        frame.setResizable(false);  // 窗口大小不可调整,即固定窗口大小
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 设置关闭事件，游戏可以关闭
+
+        //正常游戏界面的绘制
+        frame.add(new GamePanel());
+
+        frame.setVisible(true); // 展示窗口
+    }
+}
+```
+
+- Date.java
+
+```java
+package github.GUI.snack;
+
+import javax.swing.*;
+import java.net.URL;
+
+/**
+ * @author subeiLY
+ * @create 2021-06-05 17:41
+ */
+// 数据中心
+public class Data {
+    //头部图片
+    public static URL headerUrl = Data.class.getResource("statics/header.png");
+    public static ImageIcon header = new ImageIcon(headerUrl);
+    //头部：上下左右
+    public static URL upUrl = Data.class.getResource("statics/up.png");
+    public static URL downUrl = Data.class.getResource("statics/down.png");
+    public static URL leftUrl = Data.class.getResource("statics/left.png");
+    public static URL rightUrl = Data.class.getResource("statics/right.png");
+    public static ImageIcon up = new ImageIcon(upUrl);
+    public static ImageIcon down = new ImageIcon(downUrl);
+    public static ImageIcon left = new ImageIcon(leftUrl);
+    public static ImageIcon right = new ImageIcon(rightUrl);
+    //身体
+    public static URL bodyUrl = Data.class.getResource("statics/body.png");
+    public static ImageIcon body = new ImageIcon(bodyUrl);
+    //食物
+    public static URL foodUrl = Data.class.getResource("statics/food.png");
+    public static ImageIcon food = new ImageIcon(foodUrl);
+}
+```
+
+- GamePanel.java
+
+```java
+package github.GUI.snack;
+
+import javax.swing.*;
+import java.awt.*;
+
+/**
+ * @author subeiLY
+ * @create 2021-06-05 17:38
+ */
+public class GamePanel extends JPanel {
+
+    // 绘制面板
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);    // 清屏
+        // 绘制静态面板
+        this.setBackground(Color.white);
+        Data.header.paintIcon(this,g,25,10);    // 头部广告栏画上去
+        g.fillRect(25,125,850,625);  // 默认的游戏界面
+    }
+
+}
+```
+
+![1623311266744](img/SE/07/1623311266744.png)
+
+#### 2.绘制静态小蛇
+
+```java
+package github.GUI.snack;
+
+import javax.swing.*;
+import java.awt.*;
+
+/**
+ * @author subeiLY
+ * @create 2021-06-05 17:38
+ */
+public class GamePanel extends JPanel {
+
+    // 定义蛇的数据结构
+    int length; // 定义蛇的长度
+    int[] snakeX = new int[600];  // 蛇的坐标x
+    int[] snakeY = new int[500];  // 蛇的坐标y
+    String fx = "R"; // 蛇的方向 ： R:右  L:左  U:上  D:下
+    boolean isStart = false; // 游戏是否开始
 
 
+    // 构造器
+    public GamePanel(){
+        init();
+    }
 
+    // 初始化方法
+    public void init(){
+        length = 3; // 初始小蛇有三节,包括小脑袋
+        // 初始化开始的蛇,给蛇定位,
+        snakeX[0] = 100; snakeY[0] = 125;
+        snakeX[1] = 75; snakeY[1] = 120;
+        snakeX[2] = 50; snakeY[2] = 120;
+
+    }
+
+    // 绘制面板
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);    // 清屏
+        // 绘制静态面板
+        this.setBackground(Color.white);
+        Data.header.paintIcon(this,g,25,10);    // 头部广告栏画上去
+        g.fillRect(25,125,850,625);  // 默认的游戏界面
+
+        // 把小蛇画上去
+        if (fx.equals("R")){ // 蛇的头通过方向变量来判断
+            Data.right.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }else if (fx.equals("L")){
+            Data.left.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }else if (fx.equals("U")){
+            Data.up.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }else if (fx.equals("D")){
+            Data.down.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }
+        for (int i = 1; i < length; i++) {
+            Data.body.paintIcon(this,g,snakeX[i],snakeY[i]); // 蛇的身体长度根据length来控制
+        }
+
+        // 游戏状态
+        if (isStart==false){
+            g.setColor(Color.white);
+            g.setFont(new Font("微软雅黑",Font.BOLD,40));   // 设置字体
+            g.drawString("按下空格开始游戏!",300,300);  // 文字提示
+        }
+
+    }
+
+}
+```
+
+#### 3.小蛇开始移动
+
+```java
+package github.GUI.snack;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+/**
+ * @author subeiLY
+ * @create 2021-06-05 17:38
+ */
+public class GamePanel extends JPanel implements KeyListener, ActionListener {
+
+    // 定义蛇的数据结构
+    int length; // 定义蛇的长度
+    int[] snakeX = new int[600];  // 蛇的坐标x
+    int[] snakeY = new int[500];  // 蛇的坐标y
+    String fx = "R"; // 蛇的方向 ： R:右  L:左  U:上  D:下
+    boolean isStart = false; // 游戏是否开始
+
+    boolean isFail = false; // 游戏是否结束
+
+    // 定时器:第一个参数，就是定时执行时间,100毫秒执行一次
+    Timer timer = new Timer(100, this);
+
+    // 构造器
+    public GamePanel(){
+        init();
+        // 获得焦点和键盘事件
+        this.setFocusable(true); // 获取焦点事件
+        this.addKeyListener(this); // 键盘监听事件
+        timer.start();
+    }
+
+    // 初始化方法
+    public void init(){
+        length = 3; // 初始小蛇有三节,包括小脑袋
+        // 初始化开始的蛇,给蛇定位,
+        snakeX[0] = 100; snakeY[0] = 125;
+        snakeX[1] = 75; snakeY[1] = 125;
+        snakeX[2] = 50; snakeY[2] = 125;
+
+    }
+
+    // 绘制面板
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);    // 清屏
+        // 绘制静态面板
+        this.setBackground(Color.white);
+        Data.header.paintIcon(this,g,25,10);    // 头部广告栏画上去
+        g.fillRect(25,125,850,625);  // 默认的游戏界面
+
+        // 把小蛇画上去
+        if (fx.equals("R")){ // 蛇的头通过方向变量来判断
+            Data.right.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }else if (fx.equals("L")){
+            Data.left.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }else if (fx.equals("U")){
+            Data.up.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }else if (fx.equals("D")){
+            Data.down.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }
+        for (int i = 1; i < length; i++) {
+            Data.body.paintIcon(this,g,snakeX[i],snakeY[i]); // 蛇的身体长度根据length来控制
+        }
+
+        // 游戏状态
+        if (isStart==false){
+            g.setColor(Color.white);
+            g.setFont(new Font("微软雅黑",Font.BOLD,40));   // 设置字体
+            g.drawString("按下空格开始游戏!",300,300);  // 文字提示
+        }
+
+    }
+
+    // 键盘监听事件
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode(); // 获取按下的键盘
+
+        if (keyCode==KeyEvent.VK_SPACE){ // 如果是空格
+            isStart = !isStart; // 取反
+            repaint();
+        }
+
+        // 小蛇移动
+        if (keyCode==KeyEvent.VK_LEFT){
+            fx = "L";
+        }else if (keyCode==KeyEvent.VK_RIGHT){
+            fx = "R";
+        }else if (keyCode==KeyEvent.VK_UP){
+            fx = "U";
+        }else if (keyCode==KeyEvent.VK_DOWN){
+            fx = "D";
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    // 定时执行时的操作
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (isStart && isFail==false) {  // 如果游戏是开始状态，且没有结束，则小蛇移动
+            // 右移:即让后一个移到前一个的位置即可 !
+            for (int i = length - 1; i > 0; i--) { // 除了脑袋都往前移：身体移动
+                snakeX[i] = snakeX[i - 1]; // 即第i节(后一节)的位置变为(i-1：前一节)节的位置！
+                snakeY[i] = snakeY[i - 1];
+            }
+            // 通过方向控制，头部移动
+            if (fx.equals("R")) {
+                snakeX[0] = snakeX[0] + 25;
+                if (snakeX[0] > 850) snakeX[0] = 25;    // 边界判断
+            } else if (fx.equals("L")) {
+                snakeX[0] = snakeX[0] - 25;
+                if (snakeX[0] < 25) snakeX[0] = 850;    // 边界判断
+            } else if (fx.equals("U")) {
+                snakeY[0] = snakeY[0] - 25;
+                if (snakeY[0] < 125) snakeY[0] = 725;    // 边界判断
+            } else if (fx.equals("D")) {
+                snakeY[0] = snakeY[0] + 25;
+                if (snakeY[0] > 725) snakeY[0] = 125;    // 边界判断
+            }
+            repaint();  //重画页面
+        }
+        timer.start();  // 定时器开启
+    }
+}
+```
+
+#### 4.小蛇开始吃食物
+
+```java
+package github.GUI.snack;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Random;
+
+/**
+ * @author subeiLY
+ * @create 2021-06-05 17:38
+ */
+public class GamePanel extends JPanel implements KeyListener, ActionListener {
+
+    // 定义蛇的数据结构
+    int length; // 定义蛇的长度
+    int[] snakeX = new int[600];  // 蛇的坐标x
+    int[] snakeY = new int[500];  // 蛇的坐标y
+    String fx = "R"; // 蛇的方向 ： R:右  L:左  U:上  D:下
+    boolean isStart = false; // 游戏是否开始
+    boolean isFail = false; // 游戏是否结束
+
+    // 食物的坐标
+    int foodx;
+    int foody;
+    Random random = new Random();
+
+    // 定时器:第一个参数，就是定时执行时间,100毫秒执行一次
+    Timer timer = new Timer(100, this);
+
+    // 构造器
+    public GamePanel(){
+        init();
+        // 获得焦点和键盘事件
+        this.setFocusable(true); // 获取焦点事件
+        this.addKeyListener(this); // 键盘监听事件
+        timer.start();
+    }
+
+    // 初始化方法
+    public void init(){
+        length = 3; // 初始小蛇有三节,包括小脑袋
+        // 初始化开始的蛇,给蛇定位,
+        snakeX[0] = 100; snakeY[0] = 125;
+        snakeX[1] = 75; snakeY[1] = 125;
+        snakeX[2] = 50; snakeY[2] = 125;
+
+        // 把食物随机分布到界面上
+        foodx = 25 + 25 * random.nextInt(34);
+        foody = 125 + 25 * random.nextInt(25);
+
+    }
+
+    // 绘制面板
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);    // 清屏
+        // 绘制静态面板
+        this.setBackground(Color.white);
+        Data.header.paintIcon(this,g,25,10);    // 头部广告栏画上去
+        g.fillRect(25,125,850,625);  // 默认的游戏界面
+
+        // 把小蛇画上去
+        if (fx.equals("R")){ // 蛇的头通过方向变量来判断
+            Data.right.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }else if (fx.equals("L")){
+            Data.left.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }else if (fx.equals("U")){
+            Data.up.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }else if (fx.equals("D")){
+            Data.down.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }
+        for (int i = 1; i < length; i++) {
+            Data.body.paintIcon(this,g,snakeX[i],snakeY[i]); // 蛇的身体长度根据length来控制
+        }
+
+        // 游戏状态
+        if (isStart==false){
+            g.setColor(Color.white);
+            g.setFont(new Font("微软雅黑",Font.BOLD,40));   // 设置字体
+            g.drawString("按下空格开始游戏!",300,300);  // 文字提示
+        }
+
+        // 画食物
+        Data.food.paintIcon(this,g,foodx,foody);
+
+    }
+
+    // 键盘监听事件
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode(); // 获取按下的键盘
+
+        if (keyCode==KeyEvent.VK_SPACE){ // 如果是空格
+            isStart = !isStart; // 取反
+            repaint();
+        }
+        
+        // 小蛇移动
+        if (keyCode==KeyEvent.VK_LEFT){
+            fx = "L";
+        }else if (keyCode==KeyEvent.VK_RIGHT){
+            fx = "R";
+        }else if (keyCode==KeyEvent.VK_UP){
+            fx = "U";
+        }else if (keyCode==KeyEvent.VK_DOWN){
+            fx = "D";
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    // 定时执行时的操作
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (isStart && isFail==false) {  // 如果游戏是开始状态，且没有结束，则小蛇移动
+            // 右移:即让后一个移到前一个的位置即可 !
+            for (int i = length - 1; i > 0; i--) { // 除了脑袋都往前移：身体移动
+                snakeX[i] = snakeX[i - 1]; // 即第i节(后一节)的位置变为(i-1：前一节)节的位置！
+                snakeY[i] = snakeY[i - 1];
+            }
+            // 通过方向控制，头部移动
+            if (fx.equals("R")) {
+                snakeX[0] = snakeX[0] + 25;
+                if (snakeX[0] > 850) snakeX[0] = 25;    // 边界判断
+            } else if (fx.equals("L")) {
+                snakeX[0] = snakeX[0] - 25;
+                if (snakeX[0] < 25) snakeX[0] = 850;    // 边界判断
+            } else if (fx.equals("U")) {
+                snakeY[0] = snakeY[0] - 25;
+                if (snakeY[0] < 125) snakeY[0] = 725;    // 边界判断
+            } else if (fx.equals("D")) {
+                snakeY[0] = snakeY[0] + 25;
+                if (snakeY[0] > 725) snakeY[0] = 125;    // 边界判断
+            }
+
+            // 吃食物:当蛇的头和食物一样时，算吃到食物！
+            if (snakeX[0]==foodx && snakeY[0]==foody){
+                length++; // 1.长度加一
+                // 2.重新生成食物
+                foodx = 25 + 25 * random.nextInt(34);
+                foody = 125 + 25 * random.nextInt(25);
+            }
+
+            repaint();  //重画页面
+        }
+        timer.start();  // 定时器开启
+    }
+}
+```
+
+#### 5.失败判定，积分系统
+
+```java
+package github.GUI.snack;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Random;
+
+/**
+ * @author subeiLY
+ * @create 2021-06-05 17:38
+ */
+public class GamePanel extends JPanel implements KeyListener, ActionListener {
+
+    // 定义蛇的数据结构
+    int length; // 定义蛇的长度
+    int[] snakeX = new int[600];  // 蛇的坐标x
+    int[] snakeY = new int[500];  // 蛇的坐标y
+    String fx = "R"; // 蛇的方向 ： R:右  L:左  U:上  D:下
+    boolean isStart = false; // 游戏是否开始
+    boolean isFail = false; // 游戏是否结束
+
+    // 食物的坐标
+    int foodx;
+    int foody;
+    Random random = new Random();
+
+    // 定时器:第一个参数，就是定时执行时间,100毫秒执行一次
+    Timer timer = new Timer(100, this);
+
+    int score; // 游戏分数
+
+    // 构造器
+    public GamePanel(){
+        init();
+        // 获得焦点和键盘事件
+        this.setFocusable(true); // 获取焦点事件
+        this.addKeyListener(this); // 键盘监听事件
+        timer.start();
+    }
+
+    // 初始化方法
+    public void init(){
+        length = 3; // 初始小蛇有三节,包括小脑袋
+        // 初始化开始的蛇,给蛇定位,
+        snakeX[0] = 100; snakeY[0] = 125;
+        snakeX[1] = 75; snakeY[1] = 125;
+        snakeX[2] = 50; snakeY[2] = 125;
+
+        // 把食物随机分布到界面上
+        foodx = 25 + 25 * random.nextInt(34);
+        foody = 125 + 25 * random.nextInt(25);
+
+        score = 0; //初始化游戏分数
+    }
+
+    // 绘制面板
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);    // 清屏
+        // 绘制静态面板
+        this.setBackground(Color.white);
+        Data.header.paintIcon(this,g,25,10);    // 头部广告栏画上去
+        g.fillRect(25,125,850,625);  // 默认的游戏界面
+
+        // 把小蛇画上去
+        if (fx.equals("R")){ // 蛇的头通过方向变量来判断
+            Data.right.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }else if (fx.equals("L")){
+            Data.left.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }else if (fx.equals("U")){
+            Data.up.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }else if (fx.equals("D")){
+            Data.down.paintIcon(this,g,snakeX[0],snakeY[0]);
+        }
+        for (int i = 1; i < length; i++) {
+            Data.body.paintIcon(this,g,snakeX[i],snakeY[i]); // 蛇的身体长度根据length来控制
+        }
+
+        // 游戏状态
+        if (isStart==false){
+            g.setColor(Color.white);
+            g.setFont(new Font("微软雅黑",Font.BOLD,40));   // 设置字体
+            g.drawString("按下空格开始游戏!",300,300);  // 文字提示
+        }
+
+        // 画食物
+        Data.food.paintIcon(this,g,foodx,foody);
+
+        g.setColor(Color.white);
+        g.setFont(new Font("微软雅黑",Font.BOLD,18));
+        g.drawString("长度: " + length,750,35);
+        g.drawString("分数: " + score,750,50);
+
+        // 游戏失败
+        if(isFail){
+            g.setColor(Color.RED);
+            g.setFont(new Font("微软雅黑",Font.BOLD,40));
+            g.drawString("失败, 按下空格重新开始",200,300);
+        }
+    }
+
+    // 键盘监听事件
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode(); // 获取按下的键盘
+
+        if (keyCode==KeyEvent.VK_SPACE){ // 如果是空格
+            if (isFail){ // 如果游戏失败,从头再来！
+                isFail = false;
+                init(); // 重新初始化
+            }else { // 否则，暂停游戏
+                isStart = !isStart; // 取反
+            }
+            repaint();
+        }
+
+        // 小蛇移动
+        if (keyCode==KeyEvent.VK_LEFT){
+            fx = "L";
+        }else if (keyCode==KeyEvent.VK_RIGHT){
+            fx = "R";
+        }else if (keyCode==KeyEvent.VK_UP){
+            fx = "U";
+        }else if (keyCode==KeyEvent.VK_DOWN){
+            fx = "D";
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    // 定时执行时的操作
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (isStart && isFail==false) {  // 如果游戏是开始状态，且没有结束，则小蛇移动
+            // 右移:即让后一个移到前一个的位置即可 !
+            for (int i = length - 1; i > 0; i--) { // 除了脑袋都往前移：身体移动
+                snakeX[i] = snakeX[i - 1]; // 即第i节(后一节)的位置变为(i-1：前一节)节的位置！
+                snakeY[i] = snakeY[i - 1];
+            }
+            // 通过方向控制，头部移动
+            if (fx.equals("R")) {
+                snakeX[0] = snakeX[0] + 25;
+                if (snakeX[0] > 850) snakeX[0] = 25;    // 边界判断
+            } else if (fx.equals("L")) {
+                snakeX[0] = snakeX[0] - 25;
+                if (snakeX[0] < 25) snakeX[0] = 850;    // 边界判断
+            } else if (fx.equals("U")) {
+                snakeY[0] = snakeY[0] - 25;
+                if (snakeY[0] < 125) snakeY[0] = 725;    // 边界判断
+            } else if (fx.equals("D")) {
+                snakeY[0] = snakeY[0] + 25;
+                if (snakeY[0] > 725) snakeY[0] = 125;    // 边界判断
+            }
+
+            // 吃食物:当蛇的头和食物一样时，算吃到食物！
+            if (snakeX[0]==foodx && snakeY[0]==foody){
+                length++; // 1.长度加一
+                // 2.重新生成食物
+                foodx = 25 + 25 * random.nextInt(34);
+                foody = 125 + 25 * random.nextInt(25);
+            }
+
+            // 结束判断，头和身体撞到了
+            for (int i = 1; i < length; i++) {
+                // 如果头和身体碰撞，那就说明游戏失败
+                if (snakeX[i]==snakeX[0] && snakeY[i]==snakeY[0] ){
+                    isFail = true;
+                }
+            }
+
+            repaint();  //重画页面
+        }
+        timer.start();  // 定时器开启
+    }
+}
+```
+
+> Java版贪吃蛇开发完成！！！
+>
+> 可执行exe文件：https://download.csdn.net/download/m0_46153949/19552033
 
 
 ## 网络编程
