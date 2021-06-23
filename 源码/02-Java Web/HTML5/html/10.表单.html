@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆注册</title>
+</head>
+<body>
+<h1>注册</h1>
+
+<!--
+    form表单
+    action:表单提交的动作，可以是交给一个网址，也可以是交给一个请求处理地址
+    method:post / get 请求方式
+        get方式提交：我们可以在ur1中看到我们提交的信息，不安全，高效
+        post：比较安全，可以传输大文件
+-->
+<form action="DemoHtml01.html" method="post">
+    <!--
+        文本输入框:input type="text"
+        value="前端" 默认初始值
+        maxlength="8" 最长能写几个字符
+        size="30" 文本框的长度
+    -->
+    <p>名字:<input type="text" name="username" placeholder="请输入用户名"> </p>
+    <!--
+        密码框:input type="pwd"
+    -->
+    <p>密码:<input type="password" hidden name="password"> </p>
+
+    <!--
+        单选框标签:input type="radio"
+        value:单选框的值
+        name:表示组
+        checked:默认选中
+    -->
+    <p>性别:
+        <input type="radio" value="man" name="sex" checked>男
+        <input type="radio" value="woman" name="sex">女
+    </p>
+
+    <!--
+        多选框:input type="checkbox"
+    -->
+    <p>爱好:
+        <input type="checkbox" value="sleep" name="hobby">睡觉
+        <input type="checkbox" value="code" name="hobby" checked>敲代码
+        <input type="checkbox" value="chat" name="hobby">聊天
+        <input type="checkbox" value="game" name="hobby">游戏
+    </p>
+
+    <!--
+        按钮:
+        input type="button" 普通按钮
+        input type="image"  图像按钮
+        input type="submit" 提交按钮
+        input type="reset" 重置按钮
+    -->
+    <p>
+        <input type="button" name="btn" value="点击变长">
+        <input type="image" src="../resources/image/02.jpg" width="200px" height="200px">
+    </p>
+
+    <!--
+        下拉框,列表框
+    -->
+    <p>国家:
+        <select name="列表名称">
+            <option value="China">中国</option>
+            <option value="USA">美国</option>
+            <option value="Russia">俄罗斯</option>
+            <option value="UK">英国</option>
+            <option value="France">法国</option>
+        </select>
+    </p>
+
+    <!--
+        文本域
+        textarea name="textarea"
+        cols="40" rows="10"
+    -->
+    <p>反馈:
+        <textarea name="textarea" cols="40" rows="10">文本内容</textarea>
+    </p>
+
+    <!--
+        文件域
+        input type="file" name="files"
+    -->
+    <p>
+        <input type="file" name="files">
+        <input type="button" name="upload" value="上传">
+    </p>
+
+    <!--
+        邮件: 会简单验证是否是邮箱地址
+		url: 会简单验证是否是网络地址
+        number: 数字验证
+    -->
+    <p>
+        邮箱：<input type="email" name="email">
+        url：<input type="url">
+    </p>
+
+    <!--
+        数字验证
+        max: 最大数量
+        min: 最小数量
+        step: 每次点击增加或减少的数量
+    -->
+    <p>
+        商品数量:<input type="number" name="数量" max="100" min="1" step="1" required>
+    </p>
+
+    <!--滑块-->
+    <p>
+        音量:<input type="range" min="0" max="100" name="voice" step="2">
+    </p>
+
+    <!--搜索框-->
+    <p>
+        搜索:<input type="search">
+    </p>
+
+    <!--增强鼠标可用性-->
+    <p>
+        <label for="mark">你点我试试!</label>
+        <input type="text" id="mark">
+    </p>
+
+    <!--正则表达式-->
+    <p>自定义邮箱:
+        <input type="text" name="myEmail" pattern="^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$">
+    </p>
+
+    <p>
+        <input type="submit">   <!--提交-->
+        <input type="reset" value="清空表单">    <!--重置-->
+    </p>
+
+</form>
+
+</body>
+</html>
