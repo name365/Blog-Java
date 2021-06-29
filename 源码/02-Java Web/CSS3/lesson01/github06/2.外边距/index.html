@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>外边距</title>
+    <style>
+        #box{
+            width: 300px;
+            border: 1px solid peru;
+            margin: 0 auto;
+        }
+        h2{
+            font-size: 16px;
+            background-color: antiquewhite;
+            line-height: 30px;
+            margin: 0;
+            color: hotpink;
+        }
+        form{
+            background: khaki;
+        }
+        input{
+            border: 1px solid tomato;
+        }
+        div:nth-of-type(1){
+            padding: 10px; /* 内边距 */
+        }
+    </style>
+</head>
+<body>
+
+<div id="box">
+    <h2>会员登陆</h2>
+    <form action="#">
+        <div>
+            <span>用户名:</span>
+            <input type="text">
+        </div>
+        <div>
+            <span>密&emsp;码:</span>
+            <input type="text">
+        </div>
+        <div>
+            <span>邮&emsp;箱:</span>
+            <input type="text">
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

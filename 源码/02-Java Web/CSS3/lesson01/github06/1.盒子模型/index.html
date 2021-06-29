@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>盒子</title>
+    <style>
+        /*body总有一个默认的外边距为0*/
+        /*h1,ul,li,a,body{*/
+        /*    margin: 0;*/
+        /*    padding: 0;*/
+        /*    text-decoration: none;*/
+        /*}*/
+        /*border：粗细 样式 颜色*/
+        #box{
+            width: 300px;
+            border: 1px solid peru;
+            padding: 0 0 0 0;
+        }
+        h2{
+            font-size: 16px;
+            background-color: antiquewhite;
+            line-height: 30px;
+            margin: 0;
+            color: hotpink;
+
+        }
+        form{
+            background: khaki;
+        }
+        div:nth-of-type(1) input{
+            border: 3px solid seagreen;
+        }
+        div:nth-of-type(2) input{
+            border: 3px dashed gray;
+        }
+        div:nth-of-type(3) input{
+            border: 2px solid royalblue;
+        }
+    </style>
+</head>
+<body>
+
+<div id="box">
+    <h2>会员登陆</h2>
+    <form action="#">
+        <div>
+            <span>用户名:</span>
+            <input type="text">
+        </div>
+        <div>
+            <span>密&emsp;码:</span>
+            <input type="text">
+        </div>
+        <div>
+            <span>邮&emsp;箱:</span>
+            <input type="text">
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

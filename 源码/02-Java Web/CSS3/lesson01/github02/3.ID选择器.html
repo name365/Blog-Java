@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*
+        id选择器: id必须保证全局唯一
+        #id名称{}
+        不遵循就近原则,优先级是固定的
+        id选择器 > class类选择器 > 标签选择器
+         */
+        #git02{
+            color: darkorange;
+        }
+        #git03{
+            color: cadetblue;
+        }
+        #git01{
+            color: cornflowerblue;
+        }
+        h1{
+            color: darkseagreen;
+        }
+    </style>
+</head>
+<body>
+
+<h1 id="git01" class="git02">id选择器:git01</h1>
+<h1 id="git02" class="git02">id选择器:git02</h1>
+<h1 class="git03">id选择器:git03</h1>
+<h1 id="git03" class="git01">id选择器:git01</h1>
+<h1>id选择器:git03</h1>
+
+</body>
+</html>

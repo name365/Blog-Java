@@ -1,0 +1,38 @@
+#nav{
+    width: 300px;
+    background: beige;
+}
+.title{
+    font-size: 18px;
+    font-weight: bold;
+    text-indent: 2em;/*缩进*/
+    line-height: 35px;
+    background: gold;
+}
+/*ul li*/
+/*
+    list-style:
+        non 去掉实心圆
+        circle 空心圆
+        square 正方形
+*/
+/* nav替换效果 */
+/*
+    ul{
+        background: antiquewhite;
+    }
+*/
+ul li{
+    height: 30px;
+    list-style: none;
+    text-indent: 1em;
+}
+a{
+    text-decoration: none;
+    font-size: 14px;
+    color: darkorange;
+}
+a:hover{
+    color: dodgerblue;
+    text-decoration: underline;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>背景</title>
+    <style>
+        body{
+            background-color: #08AEEA;
+            background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+        }
+        div{
+            width: 500px;
+            height: 200px;
+            border: 1px solid mediumaquamarine;
+            background-image: url("img/str.png");
+            /* 默认是全部平铺的 */
+        }
+        /*水平平铺*/
+        .div1{
+            background-repeat: repeat-x;
+        }
+        /*垂直平铺*/
+        .div2{
+            background-repeat: repeat-y;
+        }
+        /*不平铺*/
+        .div3{
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+
+<div class="div1"></div>
+<div class="div2"></div>
+<div class="div3"></div>
+
+</body>
+</html>

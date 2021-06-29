@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>伪类选择器</title>
+    <style>
+        ul li:first-child{
+            /*ul的第一个子元素*/
+            background: mediumaquamarine;
+        }
+        ul li:last-child{
+            /*ul的最后一个子元素*/
+            background: lightpink;
+        }
+        /*
+        选中p1:定位到父元素,选择当前的第一个元素
+            选择当前P元素的父级元素，选中父级元素的第一个，并且是当前元素才生效！
+         */
+        p:nth-child(1){
+            background: greenyellow;
+        }
+        p:nth-of-type(2){
+            /*选中父元素下的第二个p元素*/
+            background: lightseagreen;
+        }
+        a:hover{
+            color: royalblue;
+        }
+    </style>
+</head>
+<body>
+
+<a href="">9521</a>
+<p>p1</p>
+<p>p2</p>
+<p>p3</p>
+<h3>h3</h3>
+<ul>
+    <li>1li01</li>
+    <li>1li02</li>
+    <li>1li03</li>
+    <li>1li04</li>
+</ul>
+<ul>
+    <li>2li01</li>
+    <li>2li02</li>
+    <li>2li03</li>
+    <li>2li04</li>
+</ul>
+<a href="https://www.taobao.com/">淘宝</a>
+
+</body>
+</html>

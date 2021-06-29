@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*
+        后代选择器
+         */
+        body p{
+            background: deeppink;
+        }
+        /*
+        子选择器
+         */
+        /*body>p{*/
+        /*    background: olive;*/
+        /*}*/
+        /*
+        相邻兄弟选择器:只选择一个,相邻向下
+         */
+        .active + p{
+            background: blueviolet;
+        }
+        /*
+        通用兄弟选择器，当前选中元素的向下的所有兄弟元素
+         */
+        .active2~p{
+            background: dodgerblue;
+        }
+    </style>
+</head>
+<body>
+
+<p>后代选择器p1</p>
+<p class="active">子选择器p2</p>
+<p>相邻兄弟选择器p3</p>
+<p class="active2">通用兄弟选择器p4</p>
+<p>通用兄弟选择器p5</p>
+
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>HTML5 Canvas模拟飞机航班线路动画DEMO演示</title>
+
+    <style>
+        *{margin:0;padding:0;}
+        canvas {
+            background:#111;
+            background-size:cover;
+            display:block;
+        }
+        body{overflow: hidden;}
+    </style>
+
+</head>
+<body>
+
+<div></div>
+
+<script>
+
+    window.requestAnimFrame=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||function(a){window.setTimeout(a,1E3/60)}}();
+
+    $ = {};
+
+    $.util = {
+        rand: function( min, max ) {
+            return Math.random() * ( max - min ) + min;
+        },
+        randInt: function( min, max ) {
+            return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+        },
+        norm: function( val, min, max ) {
+            return ( val - min ) / ( max - min );
+        },
+        lerp: function( norm, min, max ) {
+            return ( max - min ) * norm + min;
+        },
+        map: function( val, sMin, sMax, dMin, dMax ) {
+            return $.util.lerp( $.util.norm( val, sMin, sMax), dMin, dMax );
+        },
+        clamp: function( val, min, max ) {
+            return Math.min( Math.max( val, Math.min( min, max ) ), Math.max( min, max ) );
+        },
+        distance: function( p1, p2 ) {
+            var dx = p1.x - p2.x,
+                dy = p1.y - p2.y;
+            return Math.sqrt( dx * dx + dy * dy );
+        },
+        angle: function( p1, p2 ) {
+            return Math.atan2( p1.y - p2.y, p1.x - p2.x );
+        },
+        inRange: function( val, min, max ) {
+            return val >= Math.min( min, max ) && val <= Math.max( min, max );
+        },
+        pointInRect: function( x, y, rect ) {
+            return $.util.inRange( x, rect.x, rect.x + rect.width ) &&
+                $.util.inRange( y, rect.y, rect.y + rect.height );
+        },
+        pointInArc: function( p, a ) {
+            return distance( p, a ) <= a.radius;
+        },
+        setProps: function( obj, props ) {
+            for( var k in props ) {
+                obj[ k ] = props[ k ];
+            }
+        },
+        multicurve: function( points, ctx ) {
+            var p0, p1, midx, midy;
+            ctx.moveTo(points[0].x, points[0].y);
+            for(var i = 1; i < points.length - 2; i += 1) {
+                p0 = points[i];
+                p1 = points[i + 1];
+                midx = (p0.x + p1.x) / 2;
+                midy = (p0.y + p1.y) / 2;
+                ctx.quadraticCurveTo(p0.x, p0.y, midx, midy);
+            }
+            p0 = points[points.length - 2];
+            p1 = points[points.length - 1];
+            ctx.quadraticCurveTo(p0.x, p0.y, p1.x, p1.y);
+        }
+    };
+
+    $.init = function() {
+        // setup
+        $.c = document.createElement( 'canvas' );
+        $.ctx = $.c.getContext( '2d' );
+        document.body.appendChild( $.c );
+
+        // collections
+        $.ports = [];
+        $.planes = [];
+
+        // events
+        window.addEventListener( 'resize', $.reset, false );
+        window.addEventListener( 'click', $.reset, false );
+        $.reset();
+        $.step();
+    };
+
+    $.reset = function() {
+        // dimensions
+        $.cw = $.c.width = window.innerWidth;
+        $.ch = $.c.height = window.innerHeight;
+        $.dimAvg = ( $.cw + $.ch ) / 2;
+
+        // type / font
+        $.ctx.textAlign = 'center';
+        $.ctx.textBaseline = 'middle';
+        $.ctx.font = '16px monospace';
+
+        // options / settings
+        $.opt = {};
+        $.opt.portCount = 6;
+        $.opt.planeCount = 80;
+        $.opt.portSpacingDist = $.dimAvg / $.opt.portCount;
+        $.opt.holdingDist = 5;
+        $.opt.approachDist = 80;
+        $.opt.planeDist = 20;
+        $.opt.pathSpacing = 15;
+        $.opt.pathCount = 40;
+        $.opt.avoidRadius = 30;
+        $.opt.avoidMult = 0.025;
+
+        // collections
+        $.ports.length = 0;
+        $.planes.length = 0;
+
+        // delta
+        $.lt = Date.now();
+        $.dt = 1;
+        $.et = 0;
+        $.tick = 0;
+
+        // setup ports
+        for( var i = 0; i < $.opt.portCount; i++ ) {
+            $.ports.push( new $.Port() );
+        }
+
+        // setup planes
+        for( var i = 0; i < $.opt.planeCount; i++ ) {
+            $.planes.push( new $.Plane() );
+        }
+    };
+
+    $.Port = function() {
+        this.x = $.util.rand( $.cw * 0.1, $.cw * 0.9 );
+        this.y = $.util.rand( $.ch * 0.1, $.ch * 0.9 );
+        while( !this.validSpacing() ) {
+            this.x = $.util.rand( $.cw * 0.1, $.cw * 0.9 );
+            this.y = $.util.rand( $.ch * 0.1, $.ch * 0.9 );
+        }
+    };
+
+    $.Port.prototype.validSpacing = function() {
+        var spaced = true,
+            i = $.ports.length;
+        while( i-- ) {
+            var otherPort = $.ports[ i ];
+            if( $.util.distance( otherPort, this ) < $.opt.portSpacingDist ) {
+                spaced = false;
+                break;
+            }
+        }
+        return spaced;
+    };
+
+    $.Port.prototype.update = function( i ) {
+        var j = $.planes.length;
+        this.approachingCount = 0;
+        while( j-- ) {
+            var plane = $.planes[ j ];
+            if( plane.destIndex == i && plane.approaching ) {
+                this.approachingCount++;
+            }
+        }
+    };
+
+    $.Port.prototype.render = function( i ) {
+        $.ctx.beginPath();
+        $.ctx.arc( this.x, this.y, 3 + ( this.approachingCount + 5 ), 0, Math.PI * 2 );
+        $.ctx.fillStyle = 'hsla(120, 90%, 80%, ' + ( 0.35 + Math.sin( $.et / 20 ) * 0.2 ) + ')';
+        $.ctx.fill();
+
+        $.ctx.fillStyle = '#fff';
+        $.ctx.fillText( this.approachingCount, this.x, this.y - 30 );
+    };
+
+    $.Plane = function( opt ) {
+        this.originIndex = $.util.randInt( 0, $.ports.length - 1 );
+        this.origin = $.ports[ this.originIndex ];
+        this.path = [];
+        this.x = this.origin.x;
+        this.y = this.origin.y;
+        this.vx = $.util.rand( -0.35, 0.35 );
+        this.vy = $.util.rand( -0.35, 0.35 );
+        this.vmax = 1;
+        this.accel = 0.01;
+        this.decel = 0.96;
+        this.angle = 0;
+        this.approaching = false;
+        this.holding = false;
+        this.setDest();
+    };
+
+    $.Plane.prototype.setDest = function() {
+        if( this.destIndex != undefined ) {
+            this.originIndex = this.destIndex;
+            this.origin = $.ports[ this.originIndex ];
+        }
+        this.destIndex = $.util.randInt( 0, $.ports.length - 1 );
+        while( this.destIndex == this.originIndex ) {
+            this.destIndex = $.util.randInt( 0, $.ports.length - 1 );
+        }
+        this.dest = $.ports[ this.destIndex ];
+        this.approaching = false;
+        this.holding = false;
+    }
+
+    $.Plane.prototype.update = function( i ) {
+        this.ox = this.x;
+        this.oy = this.y;
+        if( $.tick % $.opt.pathSpacing == 0 ) {
+            this.path.push( { x: this.x, y: this.y } );
+        }
+        if( this.path.length > $.opt.pathCount ) {
+            this.path.shift();
+        }
+
+        this.angle = $.util.angle( this.dest, this );
+        this.speed = ( Math.abs( this.vx ) + Math.abs( this.vy ) ) / 2;
+
+        if( !$.util.pointInRect( this.x, this.y, { x: 0, y: 0, width: $.cw, height: $.ch } ) ) {
+            this.vx *= this.decel;
+            this.vy *= this.decel;
+        }
+
+        if( this.speed > 0.1 ) {
+            if( $.util.distance( this.dest, this ) < $.opt.approachDist ) {
+                this.vx *= this.decel;
+                this.vy *= this.decel;
+                this.approaching = true;
+            }
+        }
+
+        if( $.util.distance( this.dest, this ) < $.opt.holdingDist ) {
+            this.holding = true;
+            this.setDest();
+        }
+
+        this.vx += Math.cos( this.angle ) * this.accel;
+        this.vy += Math.sin( this.angle ) * this.accel;
+        if( this.speed > this.vmax ) {
+            this.vx *= this.decel;
+            this.vy *= this.decel;
+        }
+
+        this.x += this.vx * $.dt;
+        this.y += this.vy * $.dt;
+    };
+
+    $.Plane.prototype.render = function( i ) {
+        if( this.approaching ) {
+            $.ctx.strokeStyle = 'hsla(0, 80%, 50%, 1)';
+        } else {
+            $.ctx.strokeStyle = 'hsla(180, 80%, 50%, 1)';
+        }
+
+        $.ctx.beginPath();
+        $.ctx.moveTo( this.x, this.y );
+        var angle = $.util.angle( { x: this.ox, y: this.oy }, this );
+        $.ctx.lineWidth = 2;
+        $.ctx.lineTo(
+            this.x - Math.cos( angle ) * ( 3 + this.speed * 2 ),
+            this.y - Math.sin( angle ) * ( 3 + this.speed * 2 )
+        );
+        $.ctx.stroke();
+
+        var pathLength = this.path.length;
+        if( pathLength > 1) {
+            $.ctx.strokeStyle = 'hsla(0, 0%, 100%, 0.15)';
+            $.ctx.lineWidth = 1;
+            $.ctx.beginPath();
+
+            if( pathLength >= $.opt.pathCount ) {
+                var angle = $.util.angle( this.path[ 1 ], this.path[ 0 ] ),
+                    dx = this.path[ 0 ].x - this.path[ 1 ].x,
+                    dy = this.path[ 0 ].y - this.path[ 1 ].y,
+                    dist = Math.sqrt( dx * dx + dy * dy ),
+                    x = this.path[ 0 ].x + Math.cos( angle ) * ( dist * ( ( $.tick % $.opt.pathSpacing ) / $.opt.pathSpacing ) ),
+                    y = this.path[ 0 ].y + Math.sin( angle ) * ( dist * ( ( $.tick % $.opt.pathSpacing ) / $.opt.pathSpacing ) );
+            } else {
+                var x = this.path[ 0 ].x,
+                    y = this.path[ 0 ].y
+            }
+
+            $.ctx.moveTo( x, y );
+            for( var i = 1; i < pathLength; i++ ) {
+                var point = this.path[ i ];
+                $.ctx.lineTo( point.x, point.y );
+            }
+            $.ctx.lineTo( this.x, this.y );
+            $.ctx.stroke();
+        }
+    };
+
+    $.step = function() {
+        requestAnimFrame( $.step );
+
+        // clear
+        $.ctx.globalCompositeOperation = 'destination-out';
+        $.ctx.fillStyle = 'hsla(0, 0%, 0%, 1)';
+        $.ctx.fillRect( 0, 0, $.cw, $.ch );
+        $.ctx.globalCompositeOperation = 'lighter';
+
+        // collections
+        var i;
+        i = $.ports.length; while( i-- ) { $.ports[ i ].update( i ) }
+        i = $.planes.length; while( i-- ) { $.planes[ i ].update( i ) }
+        i = $.ports.length; while( i-- ) { $.ports[ i ].render( i ) }
+        i = $.planes.length; while( i-- ) { $.planes[ i ].render( i ) }
+
+        // delta
+        var now = Date.now();
+        $.dt = $.util.clamp( ( now - $.lt ) / ( 1000 / 60 ), 0.001, 10 );
+        $.lt = now;
+        $.et += $.dt;
+        $.tick++;
+    };
+
+    $.init();
+</script>
+
+</body>
+</html>

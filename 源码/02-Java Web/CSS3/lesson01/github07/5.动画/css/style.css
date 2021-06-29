@@ -1,0 +1,195 @@
+@import url(master.css);
+
+body {
+    background: #000;
+    overflow: hidden;
+    -webkit-animation-name: pulse;
+    -webkit-animation-duration: 30s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes pulse {
+    from {
+        background: #000;
+    }
+    25% {
+        background-color: #003;
+    }
+    50% {
+        background-color: #030;
+    }
+    to {
+        background: #000;
+    }
+}
+
+p {
+    z-index: 0;
+    color: rgba(0, 0, 0, 0);
+}
+
+#fog,
+#fog-2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2000px;
+    height: 2000px;
+    margin-top: -1000px;
+    margin-left: -1000px;
+    opacity: .5;
+    background: url(../img/fog.png) repeat-x 0 center;
+    -webkit-animation-name: fogAnimation;
+    -webkit-animation-duration: 30s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+#fog-2 {
+    opacity: 1;
+    -webkit-animation-duration: 120s;
+}
+
+@-webkit-keyframes fogAnimation {
+    from {
+        -webkit-transform: rotate(0deg);
+        background-position: 0 center;
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        background-position: 1000px center;
+    }
+}
+
+#glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 800px;
+    margin: -400px 0 0 -400px;
+    background: url(../img/glow.png) repeat-x 0 0;
+    -webkit-animation-name: glowAnimation;
+    -webkit-animation-duration: 5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes glowAnimation {
+    from {
+        opacity: 1;
+    }
+    50% {
+        opacity: .75;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#light {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 800px;
+    margin: -400px 0 0 -400px;
+    background: url(../img/light.png) no-repeat center center;
+    -webkit-animation-name: lightAnimation;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes lightAnimation {
+    from {
+        opacity: .25;
+    }
+    50% {
+        opacity: .5;
+    }
+    to {
+        opacity: .25;
+    }
+}
+
+#stars,
+#stars-2,
+#small-stars,
+#small-stars-2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    margin: -300px 0 0 -300px;
+    background: url(../img/stars-large.png) no-repeat center center;
+    -webkit-animation-name: starsLarge;
+    -webkit-animation-duration: 60s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes starsLarge {
+    from {
+        -webkit-transform: rotate(0deg) scale(3);
+        opacity: .1;
+    }
+    to {
+        -webkit-transform: rotate(360deg) scale(.5);
+        opacity: 0;
+    }
+}
+
+#stars-2 {
+    -webkit-animation-name: starsLargeAlt;
+    -webkit-animation-duration: 45s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes starsLargeAlt {
+    from {
+        -webkit-transform: rotate(180deg) scale(3);
+        opacity: .25;
+    }
+    to {
+        -webkit-transform: rotate(360deg) scale(.5);
+        opacity: 0;
+    }
+}
+
+#small-stars,
+#small-stars-2 {
+    background: url(../img/stars-small.png) no-repeat center center;
+    -webkit-animation-duration: 15s;
+    -webkit-animation-name: starsSmall;
+}
+
+#small-stars-2 {
+    -webkit-animation-name: starsSmallAlt;
+    -webkit-animation-duration: 30s;
+}
+
+@-webkit-keyframes starsSmall {
+    from {
+        -webkit-transform: rotate(360deg) scale(3);
+        opacity: .25;
+    }
+    to {
+        -webkit-transform: rotate(0deg) scale(.5);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes starsSmallAlt {
+    from {
+        -webkit-transform: rotate(0deg) scale(3);
+        opacity: .1;
+    }
+    to {
+        -webkit-transform: rotate(360deg) scale(.5);
+        opacity: 0;
+    }
+}

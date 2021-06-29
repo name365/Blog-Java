@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3快速入门</title>
+    <!--外部样式-->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 规范:<style>可以编写CSS的代码，每一个声明最好以“;”结尾
+            语法:
+                选择器{
+                    声明1;
+                    声明2;
+                    声明3;
+                }
+    -->
+    <style>
+        <!--内部样式-->
+        h1{
+            color: blue;
+        }
+        <!--导入式-->
+        @import url("css/style.css");
+    </style>
+</head>
+<body>
+<!--优先级:就近原则——行内样式 > 内部样式 > 外部样式-->
+<!--行内样式:在标签元素中，编写一个style属性，编写样式即可-->
+<h1 style="color: aquamarine">CSS3测试</h1>
+
+</body>
+</html>

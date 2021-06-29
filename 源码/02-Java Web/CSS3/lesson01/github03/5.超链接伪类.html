@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*超链接有默认的颜色*/
+        a{
+            text-decoration: hotpink;
+            color: #000000;
+        }
+        /*鼠标悬浮的状态*/
+        a:hover{
+            color: dodgerblue;
+        }
+        /*鼠标按住未释放的状态*/
+        a:active{
+            color:green
+        }
+        /*点击之后的状态*/
+        a:visited{
+            color:mediumpurple;
+        }
+        /*
+            text-shadow:5px 5px 5px 颜色
+
+            第一个参数：表示水平偏移
+	        第二个参数：表示垂直偏移
+	        第三个参数：表示模糊半径
+	        第四个参数：表示颜色
+        */
+        #price{
+            text-shadow: #eaff29 5px 5px 5px;
+        }
+        /*默认阴影颜色*/
+        a:link{
+            background: bisque;
+        }
+    </style>
+</head>
+<body>
+
+<a href="#">
+    <img src="img/harf.jpg" width="400" height="200" alt="">
+</a>
+<p>
+    <a href="#">Java博客</a>
+</p>
+<p id="price">
+    <a href="#">哇哈哈</a>
+</p>
+
+</body>
+</html>

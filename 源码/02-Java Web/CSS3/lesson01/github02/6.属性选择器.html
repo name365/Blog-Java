@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性选择器</title>
+    <style>
+        .demo a{
+            float: left;
+            display: block;
+            height: 50px;
+            width: 50px;
+            border-radius: 10px;
+            background: aquamarine;
+            text-align: center;
+            color: gray;
+            text-decoration: none;
+            margin-right: 5px;
+            /*line-height:50px;*/
+            font: bold 20px/50px Arial;
+        }
+        /*
+        属性名,属性名 = 属性值（正则）
+              = 表示绝对等于
+             *= 表示包含
+             ^= 表示以...开头
+             $= 表示以...结尾
+             存在id属性的元素
+                a[]{}
+         */
+        a[id]{
+            background: deeppink;
+        }
+        a[id=first]{
+            /*
+            id=first的元素
+            */
+            background: greenyellow;
+        }
+
+        a[class*="links"]{
+            /*
+            class 中有links的元素
+            */
+            background: green;
+        }
+
+        a[href^=http]{
+            /*
+            选中href中以http开头的元素
+            */
+            background: aquamarine;
+        }
+        a[href$=pdf]{
+            /*
+            选中href中以http开头的元素
+            */
+            background: aquamarine;
+        }
+    </style>
+</head>
+<body>
+
+<p class="demo">
+    <a href="https://www.taobao.com/" class="links item first" id="first">淘宝</a>
+    <a href="" class="links item active" target="_blank " title="test">链接</a>
+    <a href="img/hello.html" class="links item">网页</a>
+    <a href="img/str1.png" class="links item">png</a>
+    <a href="img/str2.jpg" class="links item">jpg</a>
+    <a href="abc" class="links item">链2</a>
+    <a href="/fy.pdf" class="links item">pdf</a>
+    <a href="/quit.pdf" class="links item">pdf2</a>
+    <a href="dump.doc" class="links item">doc</a>
+    <a href="kiko.doc" class="links item last">doc2</a>
+</p>
+
+</body>
+</html>

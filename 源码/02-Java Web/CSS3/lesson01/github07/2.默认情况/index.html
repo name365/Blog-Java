@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路径</title>
+    <style>
+        /* 相对路径: 相对于自己原来的位置进行偏移 */
+        body{
+            padding: 20px;
+        }
+        div{
+            margin: 10px;
+            padding: 5px;
+            font-size: 12px;
+            line-height: 25px;
+        }
+        #father{
+            border: #6646f3 1px solid;
+            padding: 0;
+        }
+        #first{
+            border: #ff38f5 1px solid;
+            background-color: #e83970;
+            position: relative; /* 相对定位：上下左右*/
+            top: -20px; /* 向上偏移20px */
+            left: 20px; /* 向右偏移20px */
+        }
+        #second{
+            border: #3ad518 1px solid;
+            background-color: #08e0fc;
+        }
+        #third{
+            background-color: #5075f8;
+            border: #fcb346 1px solid;
+            position: relative;
+            bottom: 10px;   /* 向上偏移10px */
+        }
+    </style>
+</head>
+<body>
+
+<div id="father">
+    <div id="first">第一个盒子</div>
+    <div id="second">第二个盒子</div>
+    <div id="third">第三个盒子</div>
+</div>
+
+</body>
+</html>
