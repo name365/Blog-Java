@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>方法</title>
+    <script>
+        var subeily = {
+            name:'哇哈哈',
+            birth:2000,
+            // 方法
+            age:function () {
+                // 今年-出生年
+                var now = new Date().getFullYear();
+                return now-this.birth;
+            }
+        }
+        // 属性
+        subeily.name;
+        // 方法，注意带()
+        subeily.age();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

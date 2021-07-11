@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/jquery-3.5.1.js"></script>
+</head>
+<body>
+
+<ul id="test-ul">
+    <li class="js">JavaScript</li>
+    <li name="python">Python</li>
+
+</ul>
+
+<script>
+    $('#test-ul li[name=python]').text(); // 获得值
+    $('#test-ul li[name=python]').text('设置值'); // 设置值
+    $('#test-ul').html(); // 获得值
+    $('#test-ul').html('<strong>123</strong>'); // 设置值
+
+    $('#test-ul li[name=python]').css({"color","red"});
+
+    $('#test-ul li[name=python]').show();
+    $('#test-ul li[name=python]').hide();
+
+    $(window).width()
+    $(window).height()
+    $('#test-ul li[name=python]').toggle();
+
+    $('#form').ajax();
+
+    $.ajax({url:"test.html",context:document.body,success:function(){
+            $(this).addClass("done");
+        }});
+</script>
+
+</body>
+</html>

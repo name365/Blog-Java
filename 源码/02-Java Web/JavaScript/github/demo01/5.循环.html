@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        // var age = 12;
+        //
+        // if(age<=12){ // 第一个判断
+        //     alert("subei");
+        // }else if(age<18){   // 第二个判断
+        //     alert("subeiLY");
+        // }else{  // 否则
+        //     alert("NULL~~~");
+        // }
+        //
+        // while(age<100){
+        //     age = age + 1;
+        //     console.log(age);
+        // }
+        //
+        // do{
+        //     age = age + 1;
+        //     console.log(age);
+        // }while(age<100);
+        //
+        // for(let i=0;i<100;i++){
+        //     console.log(i);
+        // }
+
+        var age = [12,99,56,34,75,128,69];
+        // // 函数
+        // age.forEach(function (value){
+        //     console.log(value);
+        // })
+
+        for(var num in age){
+            if(age.hasOwnProperty(num)){
+                console.log("存在！");
+                console.log(age[num]);
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

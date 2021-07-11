@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action = "post">
+    <p>
+        <span>用户名：</span>
+        <input type="text" id = "username" />
+    </p>
+    <!-- 多选框的值就是定义好的value -->
+    <p>
+        <span>性别：</span>
+        <input type = "radio" name = "sex" value = "man" id = "boy"/>男
+        <input type = "radio" name = "sex" value = "woman" id = "girl"/>女
+    </p>
+</form>
+
+<script>
+    var input_text = document.getElementById("username");
+    var boy_radio = document.getElementById("boy");
+    var girl_radio = document.getElementById("girl");
+    // 得到输入框的值
+    // input_text.value;
+    // 修改输入框的值
+    input_text.value="admin";
+
+    // 对于单选框，多选框等等固定的值，boy_radio.value只能取到当前的值
+    boy_radio.checked = true;  // 赋值
+    // girl_radio.checked;  // 查看返回的结果，是否为true，如果为true，则被选中。
+</script>
+
+</body>
+</html>

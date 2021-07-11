@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="father">
+    <h1>标题一</h1>
+    <p id="p1">p1</p>
+    <p class="p2">p2</p>
+</div>
+
+<script>
+    var self = document.getElementById('p1');
+    var father = p1.parentElement;
+    father.removeChild(self);
+
+    // 删除是一个动态过程
+    father.removeChild(father.children[0]);
+    // father.removeChild(father.children[1]);
+    // father.removeChild(father.children[2]);
+</script>
+
+</body>
+</html>

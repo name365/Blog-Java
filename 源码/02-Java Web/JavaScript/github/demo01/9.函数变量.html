@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变量</title>
+    <script>
+        function str(){
+            var x = 1;
+            x = x + 1;
+        }
+        x = x + 2; // Uncaught ReferenceError: x is not defined
+        // function str(){
+        //     var x = 1;
+        //     x = x + 1;
+        // }
+        // function str2(){
+        //     var x = 'A';
+        //     x = x + 1;
+        // }
+        // x = x + 2;
+        // function num() {
+        //     var x = 1;
+        //
+        //     // 内部函数可以访问外部函数的成员，反之则不行
+        //     function num2(){
+        //         var y = x + 1;  // 2
+        //         console.log(y);
+        //     }
+        //
+        //
+        //     var z = y + 1;  // Uncaught ReferenceError: y is not defined
+        // }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

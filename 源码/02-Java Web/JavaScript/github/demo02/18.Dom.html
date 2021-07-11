@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p id="js">JavaScript</p>
+<div id="list">
+    <p id="se">javaSE</p>
+    <p id="me">javaME</p>
+    <p id="ee">javaEE</p>
+</div>
+
+<script>
+    var js = document.getElementById('js'); // 已经存在的节点
+    var list = document.getElementById('list');
+    // 通过JS创建一个新的节点
+    var newP = document.creatElement('p');  // 创建一个p标签
+    newP.id = 'newP';
+    newP.innerText = 'Hello,subeiLY';
+    // 创建一个标签节点
+    var myScript = document.creatElement('script');
+    myScript.setAttribute('type','text/javascript');
+
+    // 可以创建一个style标签
+    var myStyle = document.creatElement('style');   // 创建了一个空style标签
+    myStyle.setAttribute('type','text/css');
+    myStyle.innerHTML = 'body{background-color:chartreuse;}';   // 设置标签内容
+
+    document.getElementByTagName('head')[0].appendChild(myStyle);
+</script>
+
+</body>
+</html>

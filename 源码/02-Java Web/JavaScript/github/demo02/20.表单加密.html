@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- MD5加密工具类 -->
+    <script src = "https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js">
+
+    </script>
+</head>
+<body>
+
+    <!--
+        表达绑定提交事件
+		οnsubmit= 绑定一个提交检测的函数，true;false
+		将这个结果返回给表单，使用onsubmit接收
+	-->
+<form action="http://guozhivip.com/" method="post" onsubmit="return aaa()">
+    <p>
+        <span>用户名：</span>
+        <input type="text" id="username" name="username"/>
+    </p>
+    <p>
+        <span>密码：</span>
+        <input type="password" id="password" />
+    </p>
+    <p>
+        <span>性别：</span>
+        <input type = "radio" name = "sex" value = "man" id = "boy"/>男
+        <input type = "radio" name = "sex" value = "woman" id = "girl"/>女
+    </p>
+    <input type="hidden" id="md5-password" name="password">
+
+    <!--绑定事件,onclick被点击-->
+    <button type="submit">提交</button>
+
+</form>
+
+<script>
+    function aaa(){
+        alert(1);
+        var username = document.getElementById("username");
+        var pwd = document.getElementById("password");
+        var md5pwd = document.getElementById("md5-password");
+        // pwd.value = md5(pwd,value);
+        md5pwd.value = mad5(pwd.value);
+        // 可以校验判断表单内容，true就是通过提交，false就是阻止提交
+        return false;
+    }
+</script>
+
+</body>
+</html>

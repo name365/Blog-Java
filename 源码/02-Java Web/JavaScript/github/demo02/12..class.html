@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>class继承</title>
+<script>
+    // ES6之后========================
+    // 定义一个学生的类
+    class Student{
+        constructor(name){
+            this.name = name;
+        }
+        hello(){
+            alert('hello');
+        }
+    }
+
+    class XStudent extends Student{
+        constructor(name,grade) {
+            super(name);
+            this.grade = grade;
+        }
+        myGrade(){
+            alert('2021级小学生入学');
+        }
+    }
+
+    var xiaoming = new Student("xiaoming");
+    var xiaohong = new XStudent("xiaohong",2);
+</script>
+</head>
+<body>
+
+</body>
+</html>

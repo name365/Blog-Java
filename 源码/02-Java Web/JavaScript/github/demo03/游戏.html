@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>学生抽奖界面</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            font-size: 20px;
+            font-family: "宋体";
+            color: #00ff00;
+            text-shadow: 7px 10px 1px #008800;
+        }
+        body{
+            background-color: #000000;
+        }
+        .all{
+            width: 100%;
+            height: 100vh;
+            perspective: 500px;
+            overflow: hidden;
+            perspective: 500px;
+        }
+        .strs{
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            transition: 3s;
+        }
+        .strs div{
+            width: 30px;
+            text-align: center;
+            height: 100vh;
+        }
+        .cz{
+            width: 100px;
+            height: 10vh;
+            position: absolute;
+            top: 90vh;
+            left: 48%;
+            font-size: 2em;
+            font-weight: 900;
+            color: red;
+            text-shadow: 1px 1px 1px red;
+        }
+        .cz:hover{
+            color: #00ff00;
+            text-shadow: 1px 1px 1px #008800;
+        }
+        .result{
+            width: 40%;
+            height: 80px;
+            position: absolute;
+            top: 40vh;
+            left: 30%;
+            color: #00ff00;
+            text-shadow: 1px 1px 1px #008800;
+            font-size: 3em;
+            font-weight: 900;
+            opacity: 0;
+            transition: 2s;
+            text-align: center;
+        }
+        .rank{
+            width: 200px;
+            border: 2px solid #00FF00;
+            position: absolute;
+            top: 65vh;
+            left: 85%;
+        }
+        .rank p{
+            width: 100%;
+            text-align: center;
+            text-shadow: 0px 0px 0px transparent;
+        }
+        .rank p:hover{
+            color: yellow;
+        }
+        .update{
+            width: 500px;
+            height: 30vh;
+            position: absolute;
+            top: -35vh;
+            left: 38%;
+            background-color: black;
+            border: 1px solid #00FF00;
+            display: flex;
+            justify-content: center;
+            transition: 1s;
+        }
+        .tx{
+            background: transparent;
+            margin-top: 15vh;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="all" ondblclick="update()" onmousemove="moves(event)">
+    <div class="strs" id="strs"></div>
+    <div class="cz" id="cz" onclick="starts()">开始</div>
+    <div class="result" id="result"></div>
+    <div class="rank" id="rank" onmousedown="rankdown()" onmouseup="rankup()"><p>历史记录</p></div>
+    <div class="update" id="update">
+        <p>
+            <input type="text" list="updatelist" class="tx" id="tx"/>
+            <datalist id="updatelist"></datalist>
+            <input type="button" value="删除" class="tx" onclick="update1()"/>
+            <input type="button" value="添加" class="tx" onclick="update2()"/>
+            <input type="button" value="取消" class="tx" onclick="update3()"/>
+        </p>
+    </div>
+</div>
+<script>
+    var names = [
+        "张三",
+        "程贤政",
+        "谢行",
+        "邱思宇",
+        "廖永胜",
+        "刘东",
+        "刘向鸿",
+        "朱美琳",
+        "刘佳",
+        "董金杰",
+        "张瑞",
+        "赵文豪",
+        "黄俊涛",
+        "李小华",
+        "黄建军",
+        "余洋",
+        "江琳",
+        "张羽",
+        "肖怀智",
+        "王文宇",
+        "向俊瑾",
+        "秦渝均",
+        "邓桂兰",
+        "何洁",
+        "陈广",
+        "张士杰",
+        "李丹",
+        "肖晴",
+        "张渝",
+        "王子晓",
+        "陆恋钰",
+        "周兴怡",
+        "黎雪彬",
+        "刘琳",
+        "杜涛",
+        "米俊龙",
+        "陈益巧",
+        "周雪",
+        "许小祥",
+        "李林",
+        "邓东华",
+        "杨彩雪"
+    ];
+    var namess = [];
+    bg();
+    function bg(){
+        document.getElementById("strs").innerHTML='';
+        for(var i=0;i<51;i++){
+            var rdmnum = Math.floor(Math.random()*names.length);
+            var str = '';
+            str+='<div>';
+            var rdmnum1 = Math.floor(Math.random()*10)+1;
+            for(var h=rdmnum1;h>0;h--){
+                str+='<font style="opacity: '+h/10+';">'+names[rdmnum]+'</font>';
+            }
+            str+='</div>';
+            document.getElementById("strs").innerHTML+=str;
+        }
+    }
+    var start1 = null;
+    var num1 = 0;
+    function starts(){
+        if(num1==0){
+            start1=setInterval(bg,100);
+            document.getElementById("cz").innerText="停止";
+            document.getElementById("strs").style.transform="translateZ(0px) translateY(0px)";
+            document.getElementById("result").style.opacity="0";
+            num1=1;
+        }else{
+            clearInterval(start1);
+            document.getElementById("cz").innerText="开始";
+            document.getElementById("strs").style.transform="translateZ(450px) translateY(350px)";
+            document.getElementById("result").style.opacity="1";
+            var rdmname = document.getElementById("strs").childNodes[25].firstChild.innerText;
+            document.getElementById("result").innerText='恭喜'+rdmname+'同学中奖了';
+            namess.unshift(rdmname+' 中奖');
+            rank();
+            num1=0;
+        }
+    }
+    function rank(){
+        document.getElementById("rank").innerHTML='<p>历史记录</p>';
+        for(var i=0;i<namess.length;i++){
+            if(i==10){
+                break;
+            }
+            document.getElementById("rank").innerHTML+='<p>'+namess[i]+'</p>';
+        }
+    }
+    function update(){
+        document.getElementById("update").style.top="18vh";
+    }
+    function updatelist(){
+        document.getElementById("updatelist").innerHTML='';
+        for(var i=0;i<names.length;i++){
+            document.getElementById("updatelist").innerHTML+='<option>'+names[i]+'</option>'
+        }
+    }
+    updatelist();
+    function update3(){
+        document.getElementById("update").style.top="-35vh";
+        document.getElementById("tx").value='';
+    }
+    function update1(){
+        var str = document.getElementById("tx").value;
+        for(var i=0;i<names.length;i++){
+            if(names[i]==str){
+                namess.unshift(names[i]+' 删除');
+                names.splice(i,1);
+                updatelist();
+                document.getElementById("tx").value='';
+                rank();
+                break;
+            }
+        }
+    }
+    function update2(){
+        var str = document.getElementById("tx").value;
+        namess.unshift(str+' 添加');
+        names.push(str);
+        updatelist();
+        rank();
+        document.getElementById("tx").value='';
+    }
+    var x,y,start2;
+    function rankdown(){
+        start2 = setInterval(rankmove);
+    }
+    function rankup(){
+        clearInterval(start2);
+    }
+    function rankmove(){
+        document.getElementById("rank").style.left=x-20+'px';
+        document.getElementById("rank").style.top=y-10+'px';
+    }
+    function moves(xy){
+        x=xy.clientX;
+        y=xy.clientY;
+    }
+</script>
+</body>
+</html>

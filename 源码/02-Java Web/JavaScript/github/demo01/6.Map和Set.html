@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        // ES6 Map
+        // 学生成绩，学生姓名
+        // var names = ["Tone","jay","sony"];
+        // var scores = [92,84,96];
+
+        var map = new Map([['Tone',92],['jay',84],['sony',96]]);
+        var name = map.get('Tone'); // 通过key获得value
+        map.set('admin',123456);    // 新增
+        map.delete('Tone'); //删除
+
+        var set = new Set([1,2,3,4,5,6,7,8]);
+        set.add(2); // 添加
+        set.delete(1);   // 删除
+        console.log(set.has(3));    // 是否包含某个元素
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <style>
+        #divMove{
+            width: 120px;
+            height: 120px;
+            border: 1px solid deepskyblue;
+        }
+    </style>
+</head>
+<body>
+
+<!--获取当前鼠标坐标-->
+mouse:<span id="mouseMove"></span>
+<div id="divMove">
+    移动一下试试！
+</div>
+
+<script>
+    // 加载完成后，响应事件
+    $(function () {
+       $('#divMove').mousemove(function (e) {
+           $('#mouseMove').text("x: "+e.pageX + ",y: "+e.pageY);
+       });
+    });
+</script>
+
+</body>
+</html>

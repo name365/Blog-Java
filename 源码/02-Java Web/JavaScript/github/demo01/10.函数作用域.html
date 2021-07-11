@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function num(){
+            var x=1;
+            function num2(){
+                var x = 'A';
+                console.log('inner' + x);
+            }
+            console.log('outer' + x);
+            num2();
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

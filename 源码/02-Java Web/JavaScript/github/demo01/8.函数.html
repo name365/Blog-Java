@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数</title>
+    <script>
+        function abs(x) {
+            if(x>=0){
+                return x;
+            }else{
+                return -x;
+            }
+        }
+
+        var abs = function (x){
+            if(x>=0){
+                return x;
+            }else{
+                return -x;
+            }
+        }
+
+        var abs = function(x){
+            // 手动抛出异常来判断
+            if(typeof x!== 'number'){
+                throw 'Not a Number';
+            }
+            if(x>=0){
+                return x;
+            }else{
+                return -x;
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
