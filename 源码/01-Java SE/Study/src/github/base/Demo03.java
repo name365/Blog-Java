@@ -63,9 +63,11 @@ public class Demo03 {
         System.out.println("-------------------------------------");
 
         //
-        String sa = new String("hello world");
-        String sb = new String("hello world");
+        String sa = new String("hello,world");
+        String sb = new String("hello,world");
         System.out.println(sa==sb);     // false
+        String s = new String("125");
+        System.out.println(s);
 
         String sc = "hello world";
         String sd = "hello world";

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c3p0-config>
+    <!--
+    C3P0的缺省(默认)配置，
+    如果在代码中“ComboPooledDataSource ds = new ComboPooledDataSource();”这样写
+    就表示使用的是C3P0的缺省(默认)配置信息来创建数据源
+    -->
+    <default-config>
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/jdbcStudy? useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true</property>
+        <property name="user">root</property>
+        <property name="password">root</property>
+        <property name="acquireIncrement">5</property>
+        <property name="initialPoolSize">10</property>
+        <property name="minPoolSize">5</property>
+        <property name="maxPoolSize">20</property>
+    </default-config>
+    <!--
+    C3P0的命名配置，
+    如果在代码中“ComboPooledDataSource ds = new
+    ComboPooledDataSource("MySQL");”这样写就表示使用的是name是MySQL的配置
+    信息来创建数据源
+    -->
+    <named-config name="MySQL">
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/jdbcStudy?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true</property>
+        <property name="user">root</property>
+        <property name="password">root</property>
+        <property name="acquireIncrement">5</property>
+        <property name="initialPoolSize">10</property>
+        <property name="minPoolSize">5</property>
+        <property name="maxPoolSize">20</property>
+    </named-config>
+</c3p0-config>
