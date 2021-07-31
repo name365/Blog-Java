@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0"
+         metadata-complete="true">
+
+    <!--注册Servlet-->
+    <servlet>
+        <servlet-name>hello</servlet-name>
+        <servlet-class>com.github.servlet.HelloServlet</servlet-class>
+    </servlet>
+    <!--Servlet的请求路径-->
+<!--  localhost:8080/Servlet/hello/hello  -->
+    <servlet-mapping>
+        <servlet-name>hello</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+    
+    <!-- 可以自定义后缀实现请求映射
+         注意点，*前面不能加项目映射的路径
+         hello/subei.github
+        -->
+    <servlet-mapping>
+        <servlet-name>hello</servlet-name>
+        <url-pattern>*.github</url-pattern>
+    </servlet-mapping>
+    
+<!--  404  -->
+    <servlet>
+        <servlet-name>error</servlet-name>
+        <servlet-class>com.github.servlet.ErrorServelt</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>error</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    
+</web-app>
