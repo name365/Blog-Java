@@ -14,6 +14,12 @@
         <module>response</module>
         <module>Session</module>
         <module>Jsp</module>
+        <module>JSP02</module>
+        <module>Filer</module>
+        <module>JDBC</module>
+        <module>SMBMS</module>
+        <module>file</module>
+        <module>file</module>
     </modules>
 
     <dependencies>

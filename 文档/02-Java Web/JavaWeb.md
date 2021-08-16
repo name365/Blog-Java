@@ -2516,21 +2516,67 @@ C:\Users\subei\AppData\Local\JetBrains\IntelliJIdea2020.2\tomcat\Unnamed_JavaWeb
 - exception
 
 ```java
-pageContext.setAttribute("name1","天启1号"); // 保存的数据只在一个页面中有效
-request.setAttribute("name2","天启2号"); // 保存的数据只在一次请求中有效，请求转发会携带这个数据
-session.setAttribute("name3","天启3号"); // 保存的数据只在一次会话中有效，从打开浏览器到关闭浏览器
-application.setAttribute("name4","天启4号");  // 保存的数据只在服务器中有效，从打开服务器到关闭服务器
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<%--内置对象--%>
+<%
+    pageContext.setAttribute("name1","天启1号"); // 保存的数据只在一个页面中有效
+    request.setAttribute("name2","天启2号"); // 保存的数据只在一次请求中有效，请求转发会携带这个数据
+    session.setAttribute("name3","天启3号"); // 保存的数据只在一次会话中有效，从打开浏览器到关闭浏览器
+    application.setAttribute("name4","天启4号");  // 保存的数据只在服务器中有效，从打开服务器到关闭服务器
+%>
+
+<%--
+    脚本片段中的代码，会被原封不动生成到.jsp.java
+    要求：这里面的代码，必须保证Java语法的正确性
+--%>
+
+<%
+    // 从pageContent取出，我们通过寻找的方式来
+    // 从底层到高层（作用域）:
+    String name1 = (String) pageContext.findAttribute("name1");
+    String name2 = (String) pageContext.findAttribute("name2");
+    String name3 = (String) pageContext.findAttribute("name3");
+    String name4 = (String) pageContext.findAttribute("name4");
+    String name5 = (String) pageContext.findAttribute("name5"); // 作用域
+
+%>
+
+<%--使用EL表达式输出 ${} --%>
+<h1>取出的值:</h1>
+<h3>${name1}</h3>
+<h3>${name2}</h3>
+<h3>${name3}</h3>
+<h3>${name4}</h3>
+<h3> <%=name5%> </h3>
+
+</body>
+</html>
 ```
 
+![image-20210801175726215](img/JavaWeb/image-20210801175726215.png)
+
+> 如果EL表达式不生效，请在JSP页面最上面加上：<%@page isELIgnored="false" %>
+
+![image-20210801175312931](img/JavaWeb/image-20210801175312931.png)
+
 - request：客户端向服务器发送请求，产生的数据，用户看完就没用了，比如：新闻，用户看完没用的！
-
 - session：客户端向服务器发送请求，产生的数据，用户用完一会还有用，比如：购物车；
-
 - application：客户端向服务器发送请求，产生的数据，一个用户用完了，其他用户还可能使用，比如：聊天数据；
 
 ### 6.JSP标签.JSTL标签.EL表达式
 
-```xml
+- EL表达式：  ${ }
+  - **获取数据**
+  - **执行运算**
+  - **获取web开发的常用对象**
+
+
+```jsp
 <!-- JSTL表达式的依赖 -->
 <dependency>
     <groupId>javax.servlet.jsp.jstl</groupId>
@@ -2545,49 +2591,84 @@ application.setAttribute("name4","天启4号");  // 保存的数据只在服务�
 </dependency>
 ```
 
-- EL表达式：  ${ }
-  - **获取数据**
-  - **执行运算**
-  - **获取web开发的常用对象**
-
 - **JSP标签**
 
+![image-20210802105718417](img/JavaWeb/image-20210802105718417.png)
+
+- jspTag.jsp
+
 ```jsp
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>jspTag</title>
+</head>
+<body>
+
+<h1>Tag1</h1>
+
 <%--jsp:include--%>
 
 <%--
-http://localhost:8080/jsptag.jsp?name=kuangshen&age=12
+http://localhost:8080/Jsp/jspTag.jsp?name=subeily&age=18
 --%>
 
-<jsp:forward page="/jsptag2.jsp">
-    <jsp:param name="name" value="kuangshen"></jsp:param>
-    <jsp:param name="age" value="12"></jsp:param>
+<jsp:forward page="/jspTag2.jsp">
+    <jsp:param name="name" value="subeiLY"/>
+    <jsp:param name="age" value="18"/>
 </jsp:forward>
+
+
+</body>
+</html>
 ```
 
-- **JSTL表达式**
+- jspTag2.jsp
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>jspTag2</title>
+</head>
+<body>
+
+<h1>Tag2</h1>
+
+<%--取出参数--%>
+    
+名字:<%=request.getParameter("name")%>
+年龄:<%=request.getParameter("age")%>
+
+</body>
+</html>
+```
+
+![image-20210802105915771](img/JavaWeb/image-20210802105915771.png)
+
+- [**JSTL表达式**](https://www.runoob.com/jsp/jsp-jstl.html)
   - JSTL标签库的使用就是为了弥补HTML标签的不足；它自定义许多标签，可以供我们使用，标签的功能和Java代码一样！
-
 - **格式化标签**
-
 - **SQL标签**
-
 - **XML 标签**
-
 - **核心标签** （掌握部分）
 
 ![1568362473764](img/JavaWeb/1568362473764.png)
 
 - **JSTL标签库使用步骤**：
-  - 引入对应的 taglib
-  - 使用其中的方法
-  - **在Tomcat 也需要引入 jstl的包，否则会报错：JSTL解析错误**
+  - 引入对应的 taglib；
+  - 使用其中的方法；
+  - **在Tomcat 的lib目录下也需要引入 jstl-api-1.2.jar、standard-1.1.2.jar的包，否则会报错：JSTL解析错误**；
 
 - c：if
 
 ```jsp
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%--引入jstl核心标签库--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
 <head>
-    <title>Title</title>
+    <title>core-if</title>
 </head>
 <body>
 
@@ -2595,10 +2676,10 @@ http://localhost:8080/jsptag.jsp?name=kuangshen&age=12
 
 <hr>
 
-<form action="coreif.jsp" method="get">
+<form action="core-if.jsp" method="get">
     <%--
-    EL表达式获取表单中的数据
-    ${param.参数名}
+        EL表达式获取表单中的数据
+        ${param.参数名}
     --%>
     <input type="text" name="username" value="${param.username}">
     <input type="submit" value="登录">
@@ -2613,15 +2694,25 @@ http://localhost:8080/jsptag.jsp?name=kuangshen&age=12
 <c:out value="${isAdmin}"/>
 
 </body>
+</html>
 ```
+
+![image-20210802113054041](img/JavaWeb/image-20210802113054041.png)
 
 - c:choose   c:when
 
 ```jsp
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%--引入jstl核心标签库--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<head>
+    <title>core-for</title>
+</head>
 <body>
 
 <%--定义一个变量score，值为85--%>
-<c:set var="score" value="55"/>
+<c:set var="score" value="65"/>
 
 <c:choose>
     <c:when test="${score>=90}">
@@ -2639,11 +2730,22 @@ http://localhost:8080/jsptag.jsp?name=kuangshen&age=12
 </c:choose>
 
 </body>
+</html>
 ```
 
 - c:forEach
 
 ```jsp
+<%@ page import="java.util.ArrayList" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%--引入jstl核心标签库--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<head>
+    <title>core-foreach</title>
+</head>
+<body>
+
 <%
 
     ArrayList<String> people = new ArrayList<>();
@@ -2671,6 +2773,9 @@ step,   步长
 <c:forEach var="people" items="${list}" begin="1" end="3" step="1" >
     <c:out value="${people}"/> <br>
 </c:forEach>
+
+</body>
+</html>
 ```
 
 ## 9.JavaBean
@@ -2691,26 +2796,70 @@ ORM ：对象关系映射
 
 **people表**
 
-| id   | name    | age  | address |
-| ---- | ------- | ---- | ------- |
-| 1    | 饺子1号 | 3    | 成都    |
-| 2    | 饺子2号 | 18   | 成都    |
-| 3    | 饺子3号 | 85   | 成都    |
+|  id  |  name   | age  | address |
+| :--: | :-----: | :--: | :-----: |
+|  1   | 饺子1号 |  3   |  成都   |
+|  2   | 饺子2号 |  18  |  成都   |
+|  3   | 饺子3号 |  85  |  成都   |
+
+![image-20210802161642932](img/JavaWeb/image-20210802161642932.png)
+
 
 ```java
 class People{
     private int id;
     private String name;
-    private int id;
+    private int age;
     private String address;
 }
+```
 
+![image-20210802162035461](img/JavaWeb/image-20210802162035461.png)
+
+```java
 class A{
     new People(1,"饺子1号",3，"成都");
     new People(2,"饺子1号",18，"成都");
     new People(3,"饺子1号",85，"成都");
 }
 ```
+
+- javaBean.jsp
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+
+<%
+//    People people = new People();
+//    people.setAddress();
+//    people.setId();
+//    people.getAge()
+//    people.setName();
+
+%>
+
+<jsp:useBean id="people" class="com.github.pojo.People" />
+
+<jsp:setProperty name="people" property="address" value="成都"/>
+<jsp:setProperty name="people" property="id" value="1"/>
+<jsp:setProperty name="people" property="age" value="2"/>
+<jsp:setProperty name="people" property="name" value="哇哈哈AD钙"/>
+
+姓名:<jsp:getProperty name="people" property="name"/>
+ ID:<jsp:getProperty name="people" property="id"/>
+年龄:<jsp:getProperty name="people" property="age"/>
+地址:<jsp:getProperty name="people" property="address"/>
+
+</body>
+</html>
+```
+
+![image-20210802163852023](img/JavaWeb/image-20210802163852023.png)
 
 - 过滤器
 - 文件上传
@@ -2783,25 +2932,83 @@ Filter开发步骤：
 
 2. 编写过滤器
 
-   1. 导包不要错
+   1. 导包不要错；
 
-      ![1568425162525](img/JavaWeb/1568425162525.png)
-
-      实现Filter接口，重写对应的方法即可
-
-      ```java
-      public class CharacterEncodingFilter implements Filter {
+      ```xml
+      <?xml version="1.0" encoding="UTF-8"?>
+      <project xmlns="http://maven.apache.org/POM/4.0.0"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+          <parent>
+              <artifactId>JavaWeb-02-Servlet</artifactId>
+              <groupId>com.github</groupId>
+              <version>1.0-SNAPSHOT</version>
+          </parent>
+          <modelVersion>4.0.0</modelVersion>
       
-          //初始化：web服务器启动，就以及初始化了，随时等待过滤对象出现！
-          public void init(FilterConfig filterConfig) throws ServletException {
+          <artifactId>Filer</artifactId>
+      
+          <dependencies>
+              <!--   Servlet 依赖   -->
+              <dependency>
+                  <groupId>javax.servlet</groupId>
+                  <artifactId>servlet-api</artifactId>
+                  <version>2.5</version>
+              </dependency>
+              <!--        JSP 依赖   -->
+              <dependency>
+                  <groupId>javax.servlet.jsp</groupId>
+                  <artifactId>javax.servlet.jsp-api</artifactId>
+                  <version>2.3.3</version>
+              </dependency>
+              <!--        JSTL表达式的依赖-->
+              <dependency>
+                  <groupId>javax.servlet.jsp.jstl</groupId>
+                  <artifactId>jstl-api</artifactId>
+                  <version>1.2</version>
+              </dependency>
+              <!--        standard标签库-->
+              <dependency>
+                  <groupId>taglibs</groupId>
+                  <artifactId>standard</artifactId>
+                  <version>1.1.2</version>
+              </dependency>
+              <!--    连接数据库-->
+              <dependency>
+                  <groupId>mysql</groupId>
+                  <artifactId>mysql-connector-java</artifactId>
+                  <version>5.1.47</version>
+              </dependency>
+          </dependencies>
+      
+      </project>
+      ```
+   
+      ![image-20210802171522721](img/JavaWeb/image-20210802171522721.png)
+   
+   2. 实现Filter接口，重写对应的方法即可；
+   
+      ```java
+      package com.github.filter;
+      
+      import javax.servlet.*;
+      import java.io.IOException;
+      
+      public class CharacterEncodingFilter implements Filter {
+          
+          /**
+           * 初始化：web服务器启动，就以及初始化了，随时等待过滤对象出现！
+           */
+          public void init(FilterConfig filterConfig) {
               System.out.println("CharacterEncodingFilter初始化");
           }
       
-          //Chain : 链
-          /*
-          1. 过滤中的所有代码，在过滤特定请求的时候都会执行
-          2. 必须要让过滤器继续同行
-              chain.doFilter(request,response);
+          /**
+           * Chain : 链
+           * 
+           * 1. 过滤中的所有代码，在过滤特定请求的时候都会执行
+           * 2. 必须要让过滤器继续同行
+           *    chain.doFilter(request,response);
            */
           public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
               request.setCharacterEncoding("utf-8");
@@ -2809,48 +3016,68 @@ Filter开发步骤：
               response.setContentType("text/html;charset=UTF-8");
       
               System.out.println("CharacterEncodingFilter执行前....");
-              chain.doFilter(request,response); //让我们的请求继续走，如果不写，程序到这里就被拦截停止！
+              // 让我们的请求继续走，如果不写，程序到这里就被拦截停止！
+              chain.doFilter(request,response);
               System.out.println("CharacterEncodingFilter执行后....");
           }
       
-          //销毁：web服务器关闭的时候，过滤会销毁
+          /**
+           * 销毁：web服务器关闭的时候，过滤会销毁
+           */
           public void destroy() {
               System.out.println("CharacterEncodingFilter销毁");
           }
       }
       ```
    
-3. 在web.xml中配置 Filter
+3. 在web.xml中配置 Filter；
 
    ```xml
-   <filter>
-       <filter-name>CharacterEncodingFilter</filter-name>
-       <filter-class>com.kuang.filter.CharacterEncodingFilter</filter-class>
-   </filter>
-   <filter-mapping>
-       <filter-name>CharacterEncodingFilter</filter-name>
-       <!--只要是 /servlet的任何请求，会经过这个过滤器-->
-       <url-pattern>/servlet/*</url-pattern>
-       <!--<url-pattern>/*</url-pattern>-->
-   </filter-mapping>
-   ```
-
+   <?xml version="1.0" encoding="UTF-8"?>
+   <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+            version="4.0">
    
+       <filter>
+           <filter-name>CharacterEncodingFilter</filter-name>
+           <filter-class>com.github.filter.CharacterEncodingFilter</filter-class>
+       </filter>
+       <filter-mapping>
+           <filter-name>CharacterEncodingFilter</filter-name>
+           <!--只要是 /servlet的任何请求，会经过这个过滤器-->
+           <url-pattern>/servlet/*</url-pattern>
+           <!--<url-pattern>/*</url-pattern>-->
+       </filter-mapping>
+   
+   </web-app>
+   ```
 
 ## 12.监听器
 
 实现一个监听器的接口；（有N种）
 
-1. 编写一个监听器
+1. 编写一个监听器；
 
    实现监听器的接口…
 
    ```java
-   //统计网站在线人数 ： 统计session
-   public class OnlineCountListener implements HttpSessionListener {
+   package com.github.listener;
    
-       //创建session监听： 看你的一举一动
-       //一旦创建Session就会触发一次这个事件！
+   import javax.servlet.ServletContext;
+   import javax.servlet.http.HttpSessionEvent;
+   import javax.servlet.http.HttpSessionListener;
+   
+   /**
+    * @author: subei
+    * @Description: 统计网站在线人数 ： 统计session
+    */
+   public class OnlineCountListener implements HttpSessionListener {
+       /**
+        * 创建session监听： 看你的一举一动
+        * 一旦创建Session就会触发一次这个事件！
+        * @param se
+        */
        public void sessionCreated(HttpSessionEvent se) {
            ServletContext ctx = se.getSession().getServletContext();
    
@@ -2866,11 +3093,13 @@ Filter开发步骤：
            }
    
            ctx.setAttribute("OnlineCount",onlineCount);
-   
        }
    
-       //销毁session监听
-       //一旦销毁Session就会触发一次这个事件！
+       /**
+        * 销毁session监听
+        * 一旦销毁Session就会触发一次这个事件！
+        * @param se
+        */
        public void sessionDestroyed(HttpSessionEvent se) {
            ServletContext ctx = se.getSession().getServletContext();
    
@@ -2884,53 +3113,59 @@ Filter开发步骤：
            }
    
            ctx.setAttribute("OnlineCount",onlineCount);
-   
        }
-   
-       /*
-       Session销毁：
-       1. 手动销毁  getSession().invalidate();
-       2. 自动销毁
+       /**
+        * Session销毁：
+        * 1. 手动销毁  getSession().invalidate();
+        * 2. 自动销毁
         */
    }
-   
    ```
    
-2. web.xml中注册监听器
+2. web.xml中注册监听器；
 
    ```xml
    <!--注册监听器-->
    <listener>
-       <listener-class>com.kuang.listener.OnlineCountListener</listener-class>
+       <listener-class>com.github.listener.OnlineCountListener</listener-class>
    </listener>
    ```
 
 3. 看情况是否使用！
 
-
-
 ## 13.过滤器.监听器常见应用
 
-**监听器：GUI编程中经常使用；**
+- **监听器：GUI编程中经常使用；**
 
 ```java
+package com.github.listener;
+
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 public class TestPanel {
     public static void main(String[] args) {
-        Frame frame = new Frame("中秋节快乐");  //新建一个窗体
-        Panel panel = new Panel(null); //面板
-        frame.setLayout(null); //设置窗体的布局
+        // 新建一个窗体
+        Frame frame = new Frame("建军节快乐");  
+        // 面板
+        Panel panel = new Panel(null);
+        // 设置窗体的布局
+        frame.setLayout(null); 
 
         frame.setBounds(300,300,500,500);
-        frame.setBackground(new Color(0,0,255)); //设置背景颜色
+        // 设置背景颜色1
+        frame.setBackground(new Color(68, 227, 177)); 
 
         panel.setBounds(50,50,300,300);
-        panel.setBackground(new Color(0,255,0)); //设置背景颜色
+        // 设置背景颜色2
+        panel.setBackground(new Color(255, 242,0)); 
 
         frame.add(panel);
 
         frame.setVisible(true);
 
-        //监听事件，监听关闭事件
+        // 监听事件，监听关闭事件
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -2942,28 +3177,235 @@ public class TestPanel {
 }
 ```
 
-
-
-用户登录之后才能进入主页！用户注销后就不能进入主页了！
+> 案例：用户登录之后才能进入主页！用户注销后就不能进入主页了！
 
 1. 用户登录之后，向Sesison中放入用户的数据
-
 2. 进入主页的时候要判断用户是否已经登录；要求：在过滤器中实现！
 
-   ```java
-   HttpServletRequest request = (HttpServletRequest) req;
-   HttpServletResponse response = (HttpServletResponse) resp;
-   
-   if (request.getSession().getAttribute(Constant.USER_SESSION)==null){
-       response.sendRedirect("/error.jsp");
-   }
-   
-   chain.doFilter(request,response);
-   ```
+- 因为：个人tomcat配置的为 /Filer 如下图：
+
+![image-20210803212625696](img/JavaWeb/image-20210803212625696.png)
+
+- LoginServlet.java
+
+```java
+package com.github.servlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class LoginServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        super.doGet(req,resp);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 获取前端请求的参数
+        String username = req.getParameter("username");
+
+        // 登陆成功
+        if("admin".equals(username)){
+            req.getSession().setAttribute("USER_SESSION",req.getSession().getId());
+            resp.sendRedirect("/Filer/sys/success.jsp");
+
+        } else {    // 登陆失败
+            resp.sendRedirect("/Filer/error.jsp");
+        }
+    }
+}
+```
+
+- LogoutServlet.java
+
+```java
+package com.github.servlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class LogoutServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Object user_session = req.getSession().getAttribute("USER_SESSION");
+        if(user_session!=null){
+            req.getSession().removeAttribute("USER_SESSION");
+            resp.sendRedirect("/Filer/Login.jsp");
+        } else {
+            resp.sendRedirect("/Filer/Login.jsp");
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req,resp);
+    }
+}
+```
+
+- Login.jsp
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+
+<h1>登陆界面</h1>
+<form action="/Filer/servlet/login" method="post">
+    <input type="text" name="username">
+    <input type="submit">
+</form>
+
+</body>
+</html>
+```
+
+- success.jsp
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>成功</title>
+</head>
+<body>
+
+<%--<%--%>
+<%--    Object userSession = request.getSession().getAttribute("USER_SESSION");--%>
+<%--    if(userSession==null){--%>
+<%--        response.sendRedirect("Filer/Login.jsp");--%>
+<%--    }--%>
+<%--%>--%>
+
+<h1>主页</h1>
+
+<p><a href="/Filer/servlet/logout">注销</a> </p>
+
+</body>
+</html>
+```
+
+- error.jsp
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>error</title>
+</head>
+<body>
+
+<h1>错误</h1>
+<h3>没有权限，用户名错误</h3>
+
+<p> <a href="/Filer/Login.jsp">返回登录主页</a></p>
+
+</body>
+</html>
+```
+
+- 进行登录注销无法登录判断；
+- Constant.java
+
+```java
+package com.github.Util;
+
+public class Constant {
+    public static String USER_SESSION="USER_SESSION";
+}
+```
+
+- SysFilter.java
+
+```java
+package com.github.listener;
+
+import com.github.Util.Constant;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class SysFilter implements Filter {
+
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) resp;
+
+        if (request.getSession().getAttribute(Constant.USER_SESSION)==null){
+            response.sendRedirect("/Filer/error.jsp");
+        }
+
+        chain.doFilter(request,response);
+    }
+
+    public void destroy() {
+
+    }
+}
+```
+
+- web.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.github.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/servlet/login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.github.servlet.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/servlet/logout</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>SysFilter</filter-name>
+        <filter-class>com.github.listener.SysFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SysFilter</filter-name>
+        <url-pattern>/sys/*</url-pattern>
+    </filter-mapping>
+    
+</web-app>
+```
+
+- 运行结果如下：
+
+![login](img/JavaWeb/login.gif)
 
 ## 14.JDBC
 
-什么是JDBC ： Java连接数据库！
+- 什么是JDBC ： Java连接数据库！
 
 ![1568439601825](img/JavaWeb/1568439601825.png)
 
@@ -2976,6 +3418,8 @@ public class TestPanel {
 **实验环境搭建**
 
 ```sql
+USE jdbc;
+
 CREATE TABLE users(
     id INT PRIMARY KEY,
     `name` VARCHAR(40),
@@ -3007,7 +3451,7 @@ SELECT	* FROM users;
 
 - IDEA中连接数据库：
 
-![1568440926845](img/JavaWeb/1568440926845.png)
+![](img/JavaWeb/1568440926845.png)
 
 - **JDBC 固定步骤：**
 
@@ -3019,26 +3463,30 @@ SELECT	* FROM users;
 6. 关闭连接
 
 ```java
+package com.github.test;
+
+import java.sql.*;
+
 public class TestJdbc {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        //配置信息
-        //useUnicode=true&characterEncoding=utf-8 解决中文乱码
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        // 配置信息
+        // useUnicode=true&characterEncoding=utf-8 解决中文乱码
         String url="jdbc:mysql://localhost:3306/jdbc?useUnicode=true&characterEncoding=utf-8";
         String username = "root";
-        String password = "123456";
+        String password = "root";
 
-        //1.加载驱动
+        // 1.加载驱动
         Class.forName("com.mysql.jdbc.Driver");
-        //2.连接数据库,代表数据库
+        // 2.连接数据库,代表数据库
         Connection connection = DriverManager.getConnection(url, username, password);
 
-        //3.向数据库发送SQL的对象Statement,PreparedStatement : CRUD
+        // 3.向数据库发送SQL的对象Statement,PreparedStatement : CRUD
         Statement statement = connection.createStatement();
 
-        //4.编写SQL
+        // 4.编写SQL
         String sql = "select * from users";
 
-        //5.执行查询SQL，返回一个 ResultSet  ： 结果集
+        // 5.执行查询SQL，返回一个 ResultSet  ： 结果集
         ResultSet rs = statement.executeQuery(sql);
 
         while (rs.next()){
@@ -3049,65 +3497,70 @@ public class TestJdbc {
             System.out.println("birthday="+rs.getObject("birthday"));
         }
 
-        //6.关闭连接，释放资源（一定要做） 先开后关
+        // 6.关闭连接，释放资源（一定要做） 先开后关
         rs.close();
         statement.close();
         connection.close();
     }
 }
-
 ```
 
-
-
-**预编译SQL**
+- **预编译SQL**
 
 ```java
+package com.github.test;
+
+import java.sql.*;
+
 public class TestJDBC2 {
-    public static void main(String[] args) throws Exception {
-        //配置信息
-        //useUnicode=true&characterEncoding=utf-8 解决中文乱码
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        // 配置信息
+        // useUnicode=true&characterEncoding=utf-8 解决中文乱码
         String url="jdbc:mysql://localhost:3306/jdbc?useUnicode=true&characterEncoding=utf-8";
         String username = "root";
-        String password = "123456";
+        String password = "root";
 
-        //1.加载驱动
+        // 1.加载驱动
         Class.forName("com.mysql.jdbc.Driver");
-        //2.连接数据库,代表数据库
+        // 2.连接数据库,代表数据库
         Connection connection = DriverManager.getConnection(url, username, password);
 
-        //3.编写SQL
+        // 3.编写SQL
         String sql = "insert into  users(id, name, password, email, birthday) values (?,?,?,?,?);";
 
-        //4.预编译
+        // 4.预编译
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-        preparedStatement.setInt(1,2);//给第一个占位符？ 的值赋值为1；
-        preparedStatement.setString(2,"狂神说Java");//给第二个占位符？ 的值赋值为狂神说Java；
-        preparedStatement.setString(3,"123456");//给第三个占位符？ 的值赋值为123456；
-        preparedStatement.setString(4,"24736743@qq.com");//给第四个占位符？ 的值赋值为1；
-        preparedStatement.setDate(5,new Date(new java.util.Date().getTime()));//给第五个占位符？ 的值赋值为new Date(new java.util.Date().getTime())；
+        // 给第一个占位符？ 的值赋值为1；
+        preparedStatement.setInt(1,2);
+        // 给第二个占位符？ 的值赋值为狂神说Java；
+        preparedStatement.setString(2,"哇哈哈AD钙");
+        // 给第三个占位符？ 的值赋值为123456；
+        preparedStatement.setString(3,"123456");
+        // 给第四个占位符？ 的值赋值为1；
+        preparedStatement.setString(4,"24736743@qq.com");
+        // 给第五个占位符？ 的值赋值为new Date(new java.util.Date().getTime())；
+        preparedStatement.setDate(5,new Date(new java.util.Date().getTime()));
 
-        //5.执行SQL
+        // 5.执行SQL
         int i = preparedStatement.executeUpdate();
 
         if (i>0){
             System.out.println("插入成功@");
         }
 
-        //6.关闭连接，释放资源（一定要做） 先开后关
+        // 6.关闭连接，释放资源（一定要做） 先开后关
         preparedStatement.close();
         connection.close();
     }
 }
-
 ```
 
 **事务**
 
-要么都成功，要么都失败！
+- 要么都成功，要么都失败！
 
-ACID原则：保证数据的安全。
+- ACID原则：保证数据的安全。
 
 ```java
 开启事务
@@ -3124,7 +3577,7 @@ A(900)   --100-->   B(1100)
 
 **Junit单元测试**
 
-依赖
+- 依赖
 
 ```xml
 <!--单元测试-->
@@ -3137,7 +3590,7 @@ A(900)   --100-->   B(1100)
 
 简单使用
 
-@Test注解只有在方法上有效，只要加了这个注解的方法，就可以直接运行！
+- @Test注解只有在方法上有效，只要加了这个注解的方法，就可以直接运行！
 
 ```java
 @Test
@@ -3146,17 +3599,17 @@ public void test(){
 }
 ```
 
-![1568442261610](img/JavaWeb/1568442261610.png)
+![image-20210804103811478](img/JavaWeb/image-20210804103811478.png)
 
-失败的时候是红色：
+- 失败的时候是红色：
 
 ![1568442289597](img/JavaWeb/1568442289597.png)
 
-
-
-**搭建一个环境**
+- **搭建一个环境**
 
 ```sql
+USE jdbc;
+
 CREATE TABLE account(
    id INT PRIMARY KEY AUTO_INCREMENT,
    `name` VARCHAR(40),
@@ -3169,39 +3622,49 @@ INSERT INTO account(`name`,money) VALUES('C',1000);
 ```
 
 ```java
+package com.github.test;
+
+import org.junit.Test;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class TestJdbc3 {
     @Test
     public void test() {
-        //配置信息
-        //useUnicode=true&characterEncoding=utf-8 解决中文乱码
+        // 配置信息
+        // useUnicode=true&characterEncoding=utf-8 解决中文乱码
         String url="jdbc:mysql://localhost:3306/jdbc?useUnicode=true&characterEncoding=utf-8";
         String username = "root";
-        String password = "123456";
+        String password = "root";
 
         Connection connection = null;
 
-        //1.加载驱动
+        // 1.加载驱动
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            //2.连接数据库,代表数据库
-             connection = DriverManager.getConnection(url, username, password);
+            // 2.连接数据库,代表数据库
+            connection = DriverManager.getConnection(url, username, password);
 
-            //3.通知数据库开启事务,false 开启
+            // 3.通知数据库开启事务,false 开启
             connection.setAutoCommit(false);
 
             String sql = "update account set money = money-100 where name = 'A'";
             connection.prepareStatement(sql).executeUpdate();
 
-            //制造错误
-            //int i = 1/0;
+            // 制造错误
+            // int i = 1/0;
 
             String sql2 = "update account set money = money+100 where name = 'B'";
             connection.prepareStatement(sql2).executeUpdate();
 
-            connection.commit();//以上两条SQL都执行成功了，就提交事务！
+            // 以上两条SQL都执行成功了，就提交事务！
+            connection.commit();
             System.out.println("success");
         } catch (Exception e) {
             try {
-                //如果出现异常，就通知数据库回滚事务
+                // 如果出现异常，就通知数据库回滚事务
                 connection.rollback();
             } catch (SQLException e1) {
                 e1.printStackTrace();
@@ -3215,5 +3678,1214 @@ INSERT INTO account(`name`,money) VALUES('C',1000);
             }
         }
     }
+}
 ```
+
+![image-20210804104005793](img/JavaWeb/image-20210804104005793.png)
+
+## 15.smbms项目
+
+> 参考smbms项目
+
+## 16.文件传输原理及实现
+
+> 此部分内容参考：[博客园-Jpbito](https://www.cnblogs.com/thhh/)
+
+- 新建一个空项目；
+
+![image-20210815183700545](img/File/image-20210815183700545.png)
+
+![image-20210815183750739](img/File/image-20210815183750739.png)
+
+![image-20210815183843948](img/File/image-20210815183843948.png)
+
+![image-20210815183923446](img/File/image-20210815183923446.png)
+
+![image-20210815184006668](img/File/image-20210815184006668.png)
+
+![image-20210815184050733](img/File/image-20210815184050733.png)
+
+![image-20210815184247915](img/File/image-20210815184247915.png)
+
+![image-20210815184329776](img/File/image-20210815184329776.png)
+
+![image-20210815212305474](img/File/image-20210815212305474.png)
+
+- 修改web.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0"
+         metadata-complete="true">
+</web-app>
+```
+
+- 配置Tomcat，运行空项目。可运行再执行下面操作。
+
+![image-20210815222528129](img/File/image-20210815222528129.png)
+
+![image-20210815222727411](img/File/image-20210815222727411.png)
+
+- 整体框架；
+
+![image-20210815161733712](img/File/image-20210815161733712.png)
+
+> 具体实现
+
+- 文件在网络上都是使用IO的方式，即流的方式进行的传输，要实现的文件上传功能可以直接使用apache的组件commons-fileupload(针对文件上传的工具类包)，这个jar包又依赖commons-io包(封装了大量的IO操作的工具类)，所以在实现文件上传功能的时候需要导入如下两个依赖：
+
+- maven导入URL：
+  - https://mvnrepository.com/artifact/commons-io/commons-io
+  - https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
+
+- 在Maven网站上我们有两种导入jar包的方式。
+
+![image-20210816092837790](img/File/image-20210816092837790.png)
+
+![image-20210816092937180](img/File/image-20210816092937180.png)
+
+> 如何查看所下载的jar包中的源码是什么？
+
+- 双击打开下载的jar包；
+
+![image-20210816093513730](img/File/image-20210816093513730.png)
+
+- 这些都是别人写好的Java代码编译之后的\*.class文件，如果想要查看源码，可以使用反编译工具来获得，==最简单的反编译工具就是我们使用的IDEA==，直接将 *.class拷贝到IDEA中的文件夹，就可以查看它的源码了。
+- 为什么压缩的是.class文件？
+  - 因为这个文件已经通过了编译器的编译，引入 \*.class文件可以减少编译这些引用的代码的步骤与时间，直接拿过来就可以使用；更是一种原作者保护自己源码的一种手段！
+- 如何查看这些*.class中的源码？
+  - 反编译。
+
+![image-20210816094133135](img/File/image-20210816094133135.png)
+
+![image-20210816094204632](img/File/image-20210816094204632.png)
+
+> 手动导入需要的jar包。
+
+- 在IDEA中，新建一个lib包，复制jar包到lib文件夹。
+
+![image-20210816094335569](img/File/image-20210816094335569.png)
+
+![image-20210816094418268](img/File/image-20210816094418268.png)
+
+![image-20210816094435699](img/File/image-20210816094435699.png)
+
+![image-20210816094541987](img/File/image-20210816094541987.png)
+
+> 上传文件都是通过使用表单实现的。
+
+
+<p>     
+    <input type="file" name="file"> 
+</p>
+
+```jsp
+<p>     
+    <input type="file" name="file"> 
+</p>
+```
+
+- 注意：上传文件的表单是上面这么写的，但是如果一个表单中包含文件数据，那么该表单如果想要提交文件数据，那么它必须包含enctype属性，且属性值必须为：`enctype="multipart/form-data"`
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<h2>Hello World!</h2>
+
+<%--
+    通过表单上传文件
+    get:上传文件有大小限制
+    post:上传文件无大小限制
+--%>
+
+<form action="${pageContext.request.contextPath}/upload.do" enctype="multipart/form-data" method="post">
+    上传用户: <input type="text" name="username"><br>
+    上传文件1: <input type="file" name="file1"><br>
+    上传文件2: <input type="file" name="file2"><br>
+    <input type="submit" value="提交文件">
+</form>
+
+</body>
+</html>
+```
+
+![image-20210816095904145](img/File/image-20210816095904145.png)
+
+- 【面试：文件上传调优】
+  1. 上传的文件存放在一个不能使用外界URL访问的目录下面；
+  2. 上传到同一个文件夹中的文件名称应该唯一：使用时间戳/UUID/MD5等手段实现；
+  3. 限制上传文件的最大值：因为服务器上硬盘资源很贵，不能让用户随意的使用；
+  4. 限制文件上传类型：比如这个文件夹只用来存储图片，那你就不能上传一个.mp4的文件；
+
+> 编写servlet
+
+- 前端jsp页面——index.jsp；
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<h2>Hello World!</h2>
+
+<%--
+    通过表单上传文件
+    get:上传文件有大小限制,只能提交4-5kb的数据
+    post:上传文件无大小限制
+    注意：文件一般比较大，所以上传文件都是使用post方式提交
+    ${pageContext.request.contextPath}:获取到webapp路径
+--%>
+
+<form action="${pageContext.request.contextPath}/upload.do" enctype="multipart/form-data" method="post">
+    上传用户: <input type="text" name="username"><br>
+    上传文件1: <input type="file" name="file1"><br>
+    上传文件2: <input type="file" name="file2"><br>
+    <p> <input type="submit" value="提交文件">  | <input type="reset" value="重置"> </p>
+</form>
+
+</body>
+</html>
+```
+
+- 上传成功后的页面——success.jsp；
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>成功</title>
+</head>
+<body>
+
+<%=request.getAttribute("msg")%>
+<h2>🎉上传成功🎉</h2>
+
+</body>
+</html>
+```
+
+- 新建servlet包
+
+![image-20210816103329895](img/File/image-20210816103329895.png)
+
+![image-20210816103407914](img/File/image-20210816103407914.png)
+
+- 修改web.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0"
+         metadata-complete="true">
+
+    <servlet>
+        <servlet-name>upload</servlet-name>
+        <servlet-class>com.github.servlet.FileSerlvet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>upload</servlet-name>
+        <url-pattern>/upload.do</url-pattern>
+    </servlet-mapping>
+</web-app>
+```
+
+![image-20210816104532024](img/File/image-20210816104532024.png)
+
+![image-20210816104552316](img/File/image-20210816104552316.png)
+
+- servlet层
+
+```java
+package com.github.servlet;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.ProgressListener;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+
+/**
+ * @author subei
+ */
+public class FileSerlvet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        // response.getWriter().append("Served at: ").append(request.getContextPath());
+
+        // 判断上传的文件普通表单还是带文件的表单
+        if (!ServletFileUpload.isMultipartContent(request)) {
+            return;//终止方法运行,说明这是一个普通的表单,直接返回
+        }
+        //创建上传文件的保存路径,建议在WEB-INF路径下,安全,用户无法直接访间上传的文件;
+        String uploadPath =this.getServletContext().getRealPath("/WEB-INF/upload");
+        File uploadFile = new File(uploadPath);
+        if (!uploadFile.exists()){
+            uploadFile.mkdir(); //创建这个月录
+        }
+
+        // 创建上传文件的保存路径，建议在WEB-INF路径下，安全，用户无法直接访问上传的文件
+        String tmpPath = this.getServletContext().getRealPath("/WEB-INF/tmp");
+        File file = new File(tmpPath);
+        if (!file.exists()) {
+            file.mkdir();//创建临时目录
+        }
+
+        // 处理上传的文件,一般都需要通过流来获取,我们可以使用 request, getInputstream(),原生态的文件上传流获取,十分麻烦
+        // 但是我们都建议使用 Apache的文件上传组件来实现, common-fileupload,它需要旅 commons-io组件;
+        try {
+            // 创建DiskFileItemFactory对象，处理文件路径或者大小限制
+            DiskFileItemFactory factory = getDiskFileItemFactory(file);
+            /*
+             * //通过这个工厂设置一个缓冲区,当上传的文件大于这个缓冲区的时候,将他放到临时文件 factory.setSizeThreshold(1024 *
+             * 1024); //缓存区大小为1M factory.setRepository (file);//临时目录的保存目录,需要一个File
+             */
+
+            // 2、获取ServletFileUpload
+            ServletFileUpload upload = getServletFileUpload(factory);
+
+            // 3、处理上传文件
+            // 把前端请求解析，封装成FileItem对象，需要从ServletFileUpload对象中获取
+            String msg = uploadParseRequest(upload, request, uploadPath);
+
+            // Servlet请求转发消息
+            System.out.println(msg);
+            if(msg == "文件上传成功!") {
+                // Servlet请求转发消息
+                request.setAttribute("msg",msg);
+                request.getRequestDispatcher("success.jsp").forward(request, response);
+            }else {
+                msg ="请上传文件";
+                request.setAttribute("msg",msg);
+                request.getRequestDispatcher("success.jsp").forward(request, response);
+            }
+
+        } catch (FileUploadException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+    }
+
+    public static DiskFileItemFactory getDiskFileItemFactory(File file) {
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        // 通过这个工厂设置一个缓冲区,当上传的文件大于这个缓冲区的时候,将他放到临时文件中;
+        factory.setSizeThreshold(1024 * 1024);// 缓冲区大小为1M
+        factory.setRepository(file);// 临时目录的保存目录,需要一个file
+        return factory;
+    }
+
+    public static ServletFileUpload getServletFileUpload(DiskFileItemFactory factory) {
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        // 监听长传进度
+        upload.setProgressListener(new ProgressListener() {
+
+            // pBYtesRead:已读取到的文件大小
+            // pContextLength:文件大小
+            @Override
+            public void update(long pBytesRead, long pContentLength, int pItems) {
+                System.out.println("总大小：" + pContentLength + "已上传：" + pBytesRead);
+            }
+        });
+
+        // 处理乱码问题
+        upload.setHeaderEncoding("UTF-8");
+        // 设置单个文件的最大值
+        upload.setFileSizeMax(1024 * 1024 * 10);
+        // 设置总共能够上传文件的大小
+        // 1024 = 1kb * 1024 = 1M * 10 = 10м
+
+        return upload;
+    }
+
+    public static String uploadParseRequest(ServletFileUpload upload, HttpServletRequest request, String uploadPath)
+            throws FileUploadException, IOException {
+
+        String msg = "";
+
+        // 把前端请求解析，封装成FileItem对象
+        List<FileItem> fileItems = upload.parseRequest(request);
+        for (FileItem fileItem : fileItems) {
+            if (fileItem.isFormField()) {// 判断上传的文件是普通的表单还是带文件的表单
+                // getFieldName指的是前端表单控件的name;
+                String name = fileItem.getFieldName();
+                String value = fileItem.getString("UTF-8"); // 处理乱码
+                System.out.println(name + ": " + value);
+            } else {// 判断它是上传的文件
+
+                // ============处理文件==============
+
+                // 拿到文件名
+                String uploadFileName = fileItem.getName();
+                System.out.println("上传的文件名: " + uploadFileName);
+                if (uploadFileName.trim().equals("") || uploadFileName == null) {
+                    continue;
+                }
+
+                // 获得上传的文件名/images/girl/paojie.png
+                String fileName = uploadFileName.substring(uploadFileName.lastIndexOf("/") + 1);
+                // 获得文件的后缀名
+                String fileExtName = uploadFileName.substring(uploadFileName.lastIndexOf(".") + 1);
+
+                /*
+                 * 如果文件后缀名fileExtName不是我们所需要的 就直按return.不处理,告诉用户文件类型不对。
+                 */
+
+                System.out.println("文件信息[件名: " + fileName + " ---文件类型" + fileExtName + "]");
+                // 可以使用UID（唯一识别的通用码),保证文件名唯
+                // 0UID. randomUUID(),随机生一个唯一识别的通用码;
+                String uuidPath = UUID.randomUUID().toString();
+
+                // ================处理文件完毕==============
+
+                // 存到哪? uploadPath
+                // 文件真实存在的路径realPath
+                String realPath = uploadPath + "/" + uuidPath;
+                // 给每个文件创建一个对应的文件夹
+                File realPathFile = new File(realPath);
+                if (!realPathFile.exists()) {
+                    realPathFile.mkdir();
+                }
+                // ==============存放地址完毕==============
+
+
+                // 获得文件上传的流
+                InputStream inputStream = fileItem.getInputStream();
+                // 创建一个文件输出流
+                // realPath =真实的文件夹;
+                // 差了一个文件;加上翰出文件的名产"/"+uuidFileName
+                FileOutputStream fos = new FileOutputStream(realPath + "/" + fileName);
+
+                // 创建一个缓冲区
+                byte[] buffer = new byte[1024 * 1024];
+                // 判断是否读取完毕
+                int len = 0;
+                // 如果大于0说明还存在数据;
+                while ((len = inputStream.read(buffer)) > 0) {
+                    fos.write(buffer, 0, len);
+                }
+                // 关闭流
+                fos.close();
+                inputStream.close();
+
+                msg = "文件上传成功!";
+                fileItem.delete(); // 上传成功,清除临时文件
+                //=============文件传输完成=============
+            }
+        }
+        return msg;
+
+    }
+}
+```
+
+![image-20210816113752256](img/File/image-20210816110825147.png)
+
+- 运行后，如下情况：
+
+![image-20210816113836748](img/File/image-20210816113836748.png)
+
+- 在pom.xml中添加jar包的maven;
+
+```xml
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.6</version>
+    </dependency>
+```
+
+- 再次运行；
+
+![image-20210816114054823](img/File/image-20210816114054823.png)
+
+- 显示成功，但文件在哪里？？？
+
+![image-20210816114509156](img/File/image-20210816114509156.png)
+
+## 17.邮件发送原理及实现
+
+### 1.概述
+
+> 传输协议
+
+- SMTP协议
+  发送邮件：
+  我们通常把处理用户smtp请求(邮件发送请求)的服务器称之为SMTP服务器(邮件发送服务器)。
+- POP3协议
+  接收邮件：
+  我们通常把处理用户pop3请求(邮件接收请求)的服务器称之为POP3服务器(邮件接收服务器)。
+
+> 邮件收发原理
+>
+> - 请参考：[连接](https://www.jb51.net/article/125852.htm)
+
+> 使用Java实现邮件发送需要使用到的类
+
+- 我们将用代码完成邮件的发送。这在实际项目中应用的非常广泛，比如注册需要发送邮件进行账号激活，再比如A项目中利用邮件进行任务提醒等等。
+- 使用Java发送Emai分简单，但是首先你应该准备 JavaMail API和 Java Activation framework。
+- 得到两个jar包：
+  - [mail.jar](https://mvnrepository.com/artifact/javax.mail/mail/1.4.7)
+  - [activation.jar](https://mvnrepository.com/artifact/javax.activation/activation/1.1.1)
+
+> 导入jar包时，报错：`Cannot resolve mail.jar:mail.jar:1.4`
+>
+> - 解决：maven重新导入如下。
+
+```xml
+    <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+        <groupId>javax.mail</groupId>
+        <artifactId>mail</artifactId>
+        <version>1.4.7</version>
+    </dependency>
+```
+
+- JavaMail是sωn公司（现以被甲骨文收购）为方便Java开发人员在应用程序中实现邮件发送和接收功能而提供的一套标准开发包，它支持一些常用的邮件协议，如前面所讲的SMTP,POP3，IMAP，还有MIME等。我们在使用 JavaMail！API编写邮件时，无须考虑邮件的底层实现细节，只要调用 Javamail开发包中相应的API类就可以了。
+
+- 我们可以先尝试发送一封简单的邮件，确保电脑可以连接网络。  
+  - 创建包含邮件服务器的网络连接信息的Session对象。
+  - 创建代表邮件内容的Message对象； 
+  - 创建Transport对象，连接服务器，发送Message，关闭连接；
+- 主要有四个核心类，我们在编写程序时，记住这四个核心类，就很容易编写出Java邮件处理程序。
+
+![image-20210816161821576](img/File/image-20210816161821576.png)
+
+### 2.简单邮件
+
+> 邮件分类
+
+-  简单邮件：没有除了文字以外的其他所有文件(包括附件和图片、视频等)，即纯文本邮件；
+-  复杂邮件：除了传统的文字信息外，还包括了一些非文字数据的邮件；
+
+![image-20210816164151437](img/File/image-20210816164151437.png)
+
+> 需要发送邮件首先就要我们的邮箱账号支持POP3和SMTP协议,所以我们需要开启邮箱的POP3+SMTP服务，然后我们需要复制下图中的授权码，这个授权码就相当于你的QQ密码，你可以使用你的邮箱账号+授权码来发送邮件,而SMTP服务器也就是使用这个来识别你的身份的。
+
+![image-20210816162226437](img/File/image-20210816162226437.png)
+
+```java
+package com.github.test;
+
+import com.sun.mail.util.MailSSLSocketFactory;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+
+/**
+ * @Author: subei
+ * @Description: 一封简单的邮件
+ */
+public class MailDemo01 {
+    public static void main(String[] args) throws Exception {
+        Properties prop = new Properties();
+        prop.setProperty("mail.host", "smtp.qq.com");
+        // 设置QQ邮件服务器
+        prop.setProperty("mail.transport.protocol", "smtp");
+        // 邮件发送协议
+        prop.setProperty("mail.smtp.auth", "true");
+        // 需要验证用户名密码
+
+        // 关于QQ邮箱，还要设置SSL加密，加上以下代码即可
+        MailSSLSocketFactory sf = new MailSSLSocketFactory();
+        sf.setTrustAllHosts(true);
+        prop.put("mail.smtp.ssl.enable", "true");
+        prop.put("mail.smtp.ssl.socketFactory", sf);
+
+        // 使用JavaMail发送邮件的5个步骤
+
+        // 1.创建定义整个应用程序所需的环境信息的 Session 对象
+        // 使用QQ邮箱的时候才需要，其他邮箱不需要这一段代码
+        Session session = Session.getDefaultInstance(prop, new Authenticator() {
+            // 获取和SMTP服务器的连接对象
+            @Override
+            public PasswordAuthentication getPasswordAuthentication() {
+                // 发件人邮件用户名、授权码
+                return new PasswordAuthentication("XXXX@qq.com", "授权码");
+            }
+        });
+
+        // 开启Session的debug模式，这样就可以查看到程序发送Email的运行状态
+        session.setDebug(true);
+
+        // 2.通过session得到transport对象
+        Transport ts = session.getTransport();
+        // 通过这一次和SMTP服务器的连接对象获取发送邮件的传输对象
+
+        // 3.使用邮箱的用户名和授权码连上SMTP邮件服务器，即登陆
+        ts.connect("smtp.qq.com", "XXXX@qq.com", "授权码");
+
+        // 4.创建邮件对象MimeMessage——点击网页上的写信
+        // 创建一个邮件对象
+        MimeMessage message = new MimeMessage(session);
+        // 指明邮件的发件人——在网页上填写发件人
+        message.setFrom(new InternetAddress("XXXX@qq.com"));
+        // 设置发件人
+        // 指明邮件的收件人，现在发件人和收件人是一样的，那就是自己给自己发——在网页上填写收件人
+        message.setRecipient(Message.RecipientType.TO, new InternetAddress("XXXX@qq.com"));
+        // 设置收件人
+        // 邮件的标题——在网页上填写邮件标题
+        message.setSubject("简单邮件发送实现");
+        // 设置邮件主题
+        // 邮件的文本内容——在网页上填写邮件内容
+        message.setContent("<h2 style='color:red'>你好啊！</h2>", "text/html;charset=UTF-8");
+        // 设置邮件的具体内容
+
+        // 5.发送邮件——在网页上点击发送按钮
+        ts.sendMessage(message, message.getAllRecipients());
+
+        // 6.关闭连接对象，即关闭服务器上的连接资源
+        ts.close();
+    }
+}
+```
+
+- 运行测试
+
+![image-20210816164449987](img/File/image-20210816164449987.png)
+
+### 3.复杂邮件
+
+- 复杂邮件就是非纯文本的邮件，可能还包含了图片和附件等资源。
+- **MIME（多用途互联网邮件扩展类型）**
+- 先认识两个类一个名词：
+
+- **MimeBodyPart类**
+
+  -  javax.mail.internet.MimeBodyPart类表示的是一个MIME消息，它和MimeMessage类一样都是从Part接口继承过来。
+  - 即一个MIME消息对应一个MimeBodyPart对象，而MimeBodyPart对象就是我们写的邮件内容中的元素。
+
+- **MimeMultipart类**
+  - javax.mail.internet.MimeMultipart是抽象类 Multipart的实现子类，它用来组合多个MIME消息。一个MimeMultipart对象可以包含多个代表MIME消息的MimeBodyPart对象。
+  - 即一个MimeMultipart对象表示多个MimeBodyPart的集合，而一个MimeMultipart表示的就是我们一封邮件的内容。
+
+- MimeMultipart对象的使用的时候需要设置setSubType()的属性值，一共就下面3种取值：
+
+  - alternative：表明这个MimeMultipart对象中的MimeMessage对象的数据是纯文本文件；
+  - related：表明这个MimeMultipart对象中的MimeMessage对象的数据包含非纯文本文件；
+  - mixed：表明这个MimeMultipart对象中的MimeMessage对象的数据包含附件；
+
+  > 我们在使得的时候如果不知道使用哪一个，直接使用mixed即可，使用这个属性值一定不会报错。
+
+  ![image-20210816170022329](img/File/image-20210816170022329.png)
+
+- 相较于简单邮件，复杂邮件变化的地方只是在于邮件内容本身会发送变化，而其他的步骤都是一样的：
+  1. 准备一些参数；
+  2. 获取session对象；
+  3. 获取传输对象；
+  4. 登陆授权；
+  5. 写邮件 (和简单邮件相区别)；
+  6. 发送邮件；
+  7. 关闭服务器资源。
+
+> 发送包含图片的复杂邮件
+
+```java
+package com.github.test;
+
+import com.sun.mail.util.MailSSLSocketFactory;
+
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.util.Properties;
+
+/**
+ * @Author: subei
+ * @Description: 图片的邮件
+ */
+public class MailDemo01 {
+    public static void main(String[] args) throws Exception {
+        Properties prop = new Properties();
+        prop.setProperty("mail.host", "smtp.qq.com");
+        // 设置QQ邮件服务器
+        prop.setProperty("mail.transport.protocol", "smtp");
+        // 邮件发送协议
+        prop.setProperty("mail.smtp.auth", "true");
+        // 需要验证用户名密码
+
+        // 关于QQ邮箱，还要设置SSL加密，加上以下代码即可
+        MailSSLSocketFactory sf = new MailSSLSocketFactory();
+        sf.setTrustAllHosts(true);
+        prop.put("mail.smtp.ssl.enable", "true");
+        prop.put("mail.smtp.ssl.socketFactory", sf);
+
+        // 使用JavaMail发送邮件的5个步骤
+
+        // 1.创建定义整个应用程序所需的环境信息的 Session 对象
+        // 使用QQ邮箱的时候才需要，其他邮箱不需要这一段代码
+        Session session = Session.getDefaultInstance(prop, new Authenticator() {
+            // 获取和SMTP服务器的连接对象
+            @Override
+            public PasswordAuthentication getPasswordAuthentication() {
+                // 发件人邮件用户名、授权码
+                return new PasswordAuthentication("XXXX@qq.com", "授权码");
+            }
+        });
+
+        // 开启Session的debug模式，这样就可以查看到程序发送Email的运行状态
+        session.setDebug(true);
+
+        // 2.通过session得到transport对象
+        Transport ts = session.getTransport();
+        // 通过这一次和SMTP服务器的连接对象获取发送邮件的传输对象
+
+        // 3.使用邮箱的用户名和授权码连上SMTP邮件服务器，即登陆
+        ts.connect("smtp.qq.com", "XXXX@qq.com", "授权码");
+
+        // 4.创建邮件对象MimeMessage——点击网页上的写信
+        // 创建一个邮件对象
+        MimeMessage message = new MimeMessage(session);
+        // 指明邮件的发件人——在网页上填写发件人
+        message.setFrom(new InternetAddress("XXXX@qq.com"));
+        // 设置发件人
+        // 指明邮件的收件人，现在发件人和收件人是一样的，那就是自己给自己发——在网页上填写收件人
+        message.setRecipient(Message.RecipientType.TO, new InternetAddress("XXXX@qq.com"));
+        // 设置收件人
+        // 邮件的标题——在网页上填写邮件标题
+        message.setSubject("简单邮件发送实现");
+        // 设置邮件主题
+
+        System.out.println("=============================复杂邮件的邮件内容设置==================================");
+
+        // 准备邮件数据
+
+        // 准备图片数据
+        // 获取一个图片的MimeBodyPart对象
+        MimeBodyPart image = new MimeBodyPart();
+        // 由于图片需要字符化才能传输，所以需要获取一个DataHandler对象
+        DataHandler dh = new DataHandler(new FileDataSource("图片的绝对地址"));
+        // 将图片序列化
+        image.setDataHandler(dh);
+        // 为图片的MimeBodyPart对象设置一个ID，我们在文字中就可以使用它了
+        image.setContentID("p6.jpg");
+
+        // 准备正文数据
+        MimeBodyPart text = new MimeBodyPart();
+        // 获取一个文本的MimeBodyPart对象
+        text.setContent("这是一封邮件正文带图片<img src='cid:p6.jpg'>的邮件", "text/html;charset=UTF-8");
+        // 设置文本内容，注意在里面嵌入了<img src='cid:p6.jpg'>
+
+        // 描述数据关系
+        // 获取MimeMultipart
+        MimeMultipart mm = new MimeMultipart();
+        // 将文本MimeBodyPart对象加入MimeMultipart中
+        mm.addBodyPart(text);
+        // 将图片MimeBodyPart对象加入MimeMultipart中
+        mm.addBodyPart(image);
+        // 设置MimeMultipart对象的相对熟悉为related，即发送的数据为文本+非附件资源
+        mm.setSubType("related");
+
+        // 设置到消息中，保存修改
+        message.setContent(mm);
+        // 将MimeMultipart放入消息对象中
+        message.saveChanges();
+        // 保存上面的修改
+
+        System.out.println("===============================================================");
+
+        // 5.发送邮件——在网页上点击发送按钮
+        ts.sendMessage(message, message.getAllRecipients());
+
+        // 6.关闭连接对象，即关闭服务器上的连接资源
+        ts.close();
+    }
+}
+```
+
+- 只需修改第5步：
+
+```java
+        // 准备图片数据
+        // 获取一个图片的MimeBodyPart对象
+        MimeBodyPart image = new MimeBodyPart();
+        // 由于图片需要字符化才能传输，所以需要获取一个DataHandler对象
+        DataHandler dh = new DataHandler(new FileDataSource("图片的绝对地址"));
+        // 将图片序列化
+        image.setDataHandler(dh);
+        // 为图片的MimeBodyPart对象设置一个ID，我们在文字中就可以使用它了
+        image.setContentID("p6.jpg");
+
+        // 准备正文数据
+        MimeBodyPart text = new MimeBodyPart();
+        // 获取一个文本的MimeBodyPart对象
+        text.setContent("这是一封邮件正文带图片<img src='cid:p6.jpg'>的邮件", "text/html;charset=UTF-8");
+        // 设置文本内容，注意在里面嵌入了<img src='cid:p6.jpg'>
+
+        // 描述数据关系
+        // 获取MimeMultipart
+        MimeMultipart mm = new MimeMultipart();
+        // 将文本MimeBodyPart对象加入MimeMultipart中
+        mm.addBodyPart(text);
+        // 将图片MimeBodyPart对象加入MimeMultipart中
+        mm.addBodyPart(image);
+        // 设置MimeMultipart对象的相对熟悉为related，即发送的数据为文本+非附件资源
+        mm.setSubType("related");
+
+        // 设置到消息中，保存修改
+        message.setContent(mm);
+        // 将MimeMultipart放入消息对象中
+        message.saveChanges();
+```
+
+- 测试运行：
+
+![image-20210816171744359](img/File/image-20210816171744359.png)
+
+> 发送包含附件的复杂邮件
+
+- 需修改的代码：
+
+```java
+        System.out.println("=============================复杂邮件的邮件内容设置==================================");
+
+        // 图片
+        MimeBodyPart body1 = new MimeBodyPart();
+        body1.setDataHandler(new DataHandler(new FileDataSource("图片的绝对地址")));
+        // 图片设置ID
+        body1.setContentID("some.png");
+
+        // 文本
+        MimeBodyPart body2 = new MimeBodyPart();
+        body2.setContent("请注意，这是文本附件<img src='cid:test.png'>","text/html;charset=utf-8");
+
+        // 附件
+        MimeBodyPart body3 = new MimeBodyPart();
+        body3.setDataHandler(new DataHandler(new FileDataSource("附件1的绝对地址")));
+        // 附件设置名字
+        body3.setFileName("demo.c");
+
+        MimeBodyPart body4 = new MimeBodyPart();
+        body4.setDataHandler(new DataHandler(new FileDataSource("附件2的绝对地址")));
+        // 附件设置名字
+        body4.setFileName("demo.txt");
+
+        // 拼装邮件正文内容
+        MimeMultipart multipart1 = new MimeMultipart();
+        multipart1.addBodyPart(body1);
+        multipart1.addBodyPart(body2);
+        // 1.文本和图片内嵌成功！
+        multipart1.setSubType("related");
+
+        // new MimeBodyPart().setContent(multipart1);
+        // 将拼装好的正文内容设置为主体
+        MimeBodyPart contentText =  new MimeBodyPart();
+        contentText.setContent(multipart1);
+
+        // 拼接附件
+        MimeMultipart allFile =new MimeMultipart();
+        // 附件
+        allFile.addBodyPart(body3);
+        // 附件
+        allFile.addBodyPart(body4);
+        // 正文
+        allFile.addBodyPart(contentText);
+        // 正文和附件都存在邮件中，所有类型设置为mixed；
+        allFile.setSubType("mixed");
+
+        // 设置到消息中，保存修改
+        message.setContent(allFile);
+        // 将MimeMultipart放入消息对象中
+        message.saveChanges();
+        // 保存上面的修改
+
+        System.out.println("===============================================================");
+```
+
+- 测试运行：
+
+![image-20210816172826825](img/File/image-20210816172826825.png)
+
+### 4.网站注册发送邮件功能实现
+
+- 创建一个javaWeb项目；
+
+![image-20210816192521945](img/File/image-20210816192521945.png)
+
+![image-20210816202351298](img/File/image-20210816202351298.png)
+
+![image-20210816202432179](img/File/image-20210816202432179.png)
+
+- 环境搭建完成，测试通过。
+- 导入maven依赖——pom.xml：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>mail</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <!--   Servlet 依赖   -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <!--        JSP 依赖   -->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+        <!--        JSTL表达式的依赖-->
+        <dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>jstl-api</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!--        standard标签库-->
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
+```
+
+- 拷贝前端素材；
+  - index.jsp——注册页面；
+  - info.jsp——提示成功页面；
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%--注册填写邮箱的前端页面--%>
+<html>
+<head>
+  <title>注册</title>
+</head>
+<body>
+
+<form action="${pageContext.request.contextPath}/RegisterServlet.do" method="post">
+  用户名：<input type="text" name="username"><br/>
+  密码：<input type="password" name="password"><br/>
+  邮箱：<input type="text" name="email"><br/>
+  <input type="submit" value="注册">
+</form>
+
+</body>
+</html>
+```
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>注册成功</title>
+</head>
+<body>
+
+<h2>🎉注册成功🎉</h2>
+${message}
+
+</body>
+</html>
+```
+
+- 编写User.java
+
+```java
+package com.github.pojo;
+
+public class User {
+    private String username;
+    private String password;
+    private String email;
+
+    public User() {
+    }
+
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+}
+```
+
+- 编写工具类Sendmail.java
+
+```java
+package com.github.util;
+
+/**
+ * 多线程实现邮件发送
+ * 使用多线程的原因就是提高用户的体验，一旦一个页面3s及以上的时间白屏就可能被用户关掉
+ * 所以我们在用户提交表单之后，将费时的邮件发送工作使用一个子线程来完成，而主线程还是去完成它自己的事情
+ * 这么做就可以提高用户体验，不然用户等待邮件发送的时间
+ */
+
+import com.github.pojo.User;
+import com.sun.mail.util.MailSSLSocketFactory;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+
+/**
+ * @author subei
+ * 多线程这种处理就可以称为异步处理
+ */
+public class Sendmail extends Thread{
+
+    // 用于向客户发送邮件的邮箱
+    private String from = "XXXX@qq.com";
+    // 用于登陆SMTP服务器的用户名
+    private String username = "XXXX@qq.com";
+    // 授权码
+    private String password = "授权码";
+    // 发送邮件的地址
+    private String host = "smtp.qq.com";
+
+    private User user;
+    public Sendmail(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public void run() {
+        try {
+            Properties prop = new Properties();
+            // 设置QQ邮件服务器
+            prop.setProperty("mail.host", host);
+            // 邮件发送协议
+            prop.setProperty("mail.transport.protocol", "smtp");
+            // 需要验证用户名密码
+            prop.setProperty("mail.smtp.auth", "true");
+
+            // 关于QQ邮箱，还要设置SSL加密，加上以下代码即可
+            MailSSLSocketFactory sf = new MailSSLSocketFactory();
+            sf.setTrustAllHosts(true);
+            prop.put("mail.smtp.ssl.enable", "true");
+            prop.put("mail.smtp.ssl.socketFactory", sf);
+
+            // 1.创建定义整个应用程序所需的环境信息的 Session 对象
+            // 使用QQ邮箱的时候才需要，其他邮箱不需要这一段代码
+            // 获取和SMTP服务器的连接对象
+            Session session = Session.getDefaultInstance(prop, new Authenticator() {
+                @Override
+                public PasswordAuthentication getPasswordAuthentication() {
+                    // 发件人邮件用户名、授权码
+                    return new PasswordAuthentication("XXXX@qq.com", "授权码");
+                }
+            });
+
+            // 开启Session的debug模式，这样就可以查看到程序发送Email的运行状态
+            session.setDebug(true);
+
+            // 2.通过session得到transport对象
+            Transport ts = session.getTransport();
+
+            // 3.使用邮箱的用户名和授权码连上SMTP邮件服务器，即登陆
+            ts.connect(host, username, password);
+
+            //4、创建邮件对象MimeMessage——点击网页上的写信
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
+            message.setSubject("用户注册邮件！");
+            message.setContent("<p><h2>恭喜注册成功！</h2></p>您的用户名为: <h4>"+user.getUsername()+
+                    "</h4><p>您的密码:" + user.getPassword() +
+                    "</p><p>请妥善保管您的密码，如有问题请及时联系网站客服，再次欢迎您的加入！！</p>", "text/html;charset=UTF-8");
+
+            // 5.发送邮件——在网页上点击发送按钮
+            ts.sendMessage(message, message.getAllRecipients());
+
+            // 6.关闭连接对象，即关闭服务器上的连接资源
+            ts.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+- 编写Servlet.java
+
+```java
+package com.github.servlet;
+
+import com.github.pojo.User;
+import com.github.util.Sendmail;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class RegisterServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 1.接收用户填写的表单数据
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        String email = req.getParameter("email");
+        System.out.println(username+password+email);
+
+        // 2.向用户邮箱发送邮件，注意发送邮件很耗时，所以我们启动一个子线程去做这件事，而用户则是直接跳转注册成功页面，以免降低用户体验
+        User user = new User(username,password,email);
+        // 获取子线程对象
+        Sendmail sendmail = new Sendmail(user);
+        // 启动子线程
+        new Thread(sendmail).start();
+
+        // 3.视图跳转
+        req.setAttribute("message","注册成功！我们已经向您的邮箱发送了邮件，请您及时进行查收。由于网络原因，您收到邮件的时间存在延迟，敬请谅解~");
+        req.getRequestDispatcher("info.jsp").forward(req,resp);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
+}
+```
+
+- web.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.github.servlet.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet.do</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+```
+
+- 运行测试，遇到如下报错。
+
+![image-20210816220713042](img/File/image-20210816220713042.png)
+
+- 检查Artifacts；
+
+![image-20210816220834897](img/File/image-20210816220834897.png)
+
+![image-20210816221739919](img/File/image-20210816221739919.png)
+
+![image-20210816221810512](img/File/image-20210816221810512.png)
+
+- ==再次运行，还是报错500==；
+  - 将activation-1.1.jar、mail-1.4.7.jar导入到Tomcat中的lib文件夹中。
+
+![image-20210816222056864](img/File/image-20210816222056864.png)
+
+- 再次运行。
+
+![image-20210816222219348](img/File/image-20210816222219348.png)
+
+![image-20210816222304081](img/File/image-20210816222304081.png)
+
+## 🎉🎉全剧终🎉🎉
 

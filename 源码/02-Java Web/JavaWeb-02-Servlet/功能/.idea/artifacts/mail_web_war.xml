@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="mail-web:war">
+    <output-path>$PROJECT_DIR$/../file/mail-web/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>mail-web</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="mail-web.war">
+      <element id="artifact" artifact-name="mail-web:war exploded" />
+    </root>
+  </artifact>
+</component>

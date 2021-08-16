@@ -3,8 +3,15 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/JSP02/web/javaBean.jsp" value="file://$PROJECT_DIR$/JSP02/web" />
+        <entry key="file://$PROJECT_DIR$/Jsp/web/core-for.jsp" value="file://$PROJECT_DIR$/Jsp/web" />
+        <entry key="file://$PROJECT_DIR$/Jsp/web/core-foreach.jsp" value="file://$PROJECT_DIR$/Jsp/web" />
+        <entry key="file://$PROJECT_DIR$/Jsp/web/core-if.jsp" value="file://$PROJECT_DIR$/Jsp/web" />
+        <entry key="file://$PROJECT_DIR$/Jsp/web/coreif.jsp" value="file://$PROJECT_DIR$/Jsp/web" />
         <entry key="file://$PROJECT_DIR$/Jsp/web/index.jsp" value="file://$PROJECT_DIR$/Jsp/web" />
         <entry key="file://$PROJECT_DIR$/Jsp/web/jsp2.jsp" value="file://$PROJECT_DIR$/Jsp/web" />
+        <entry key="file://$PROJECT_DIR$/Jsp/web/jspTag.jsp" value="file://$PROJECT_DIR$/Jsp/web" />
+        <entry key="file://$PROJECT_DIR$/Jsp/web/pageContextDemo01.jsp" value="file://$PROJECT_DIR$/Jsp/web" />
       </map>
     </option>
   </component>
