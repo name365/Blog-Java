@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.10">
+<title>RSocket</title>
+<style>
+@import 'css/spring.css';
+
+.listingblock .switch {
+    border-style: none;
+    display: inline-block;
+    position: relative;
+    bottom: -3px;
+}
+
+.listingblock .switch--item {
+    padding: 10px;
+    background-color: #e6e1dc;
+    color: #282c34;
+    display: inline-block;
+    cursor: pointer;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.listingblock .switch--item:not(:first-child) {
+    border-style: none;
+}
+
+.listingblock .switch--item.selected {
+    background-color: #282c34;
+    color: #e6e1dc;
+}
+
+.listingblock pre.highlightjs {
+    padding: 0;
+}
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.hidden {
+	display: none;
+}
+
+.switch {
+	border-width: 1px 1px 0 1px;
+	border-style: solid;
+	border-color: #7a2518;
+	display: inline-block;
+}
+
+.switch--item {
+	padding: 10px;
+	background-color: #ffffff;
+	color: #7a2518;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.switch--item:not(:first-child) {
+	border-width: 0 0 0 1px;
+	border-style: solid;
+	border-color: #7a2518;
+}
+
+.switch--item.selected {
+	background-color: #7a2519;
+	color: #ffffff;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script type="text/javascript">
+function addBlockSwitches() {
+	$('.primary').each(function() {
+		primary = $(this);
+		createSwitchItem(primary, createBlockSwitch(primary)).item.addClass("selected");
+		primary.children('.title').remove();
+	});
+	$('.secondary').each(function(idx, node) {
+		secondary = $(node);
+		primary = findPrimary(secondary);
+		switchItem = createSwitchItem(secondary, primary.children('.switch'));
+		switchItem.content.addClass('hidden');
+		findPrimary(secondary).append(switchItem.content);
+		secondary.remove();
+	});
+}
+
+function createBlockSwitch(primary) {
+	blockSwitch = $('<div class="switch"></div>');
+	primary.prepend(blockSwitch);
+	return blockSwitch;
+}
+
+function findPrimary(secondary) {
+	candidate = secondary.prev();
+	while (!candidate.is('.primary')) {
+		candidate = candidate.prev();
+	}
+	return candidate;
+}
+
+function createSwitchItem(block, blockSwitch) {
+	blockName = block.children('.title').text();
+	content = block.children('.content').first().append(block.next('.colist'));
+	item = $('<div class="switch--item">' + blockName + '</div>');
+	blockSwitch.append(item);
+	return {'item': item, 'content': content};
+}
+
+function globalSwitch() {
+	$('.switch--item').each(function() {
+		var blockId = blockIdForSwitchItem($(this));
+		$(this).off('click');
+		$(this).on('click', function() {
+			selectedText = $(this).text()
+			window.localStorage.setItem(blockId, selectedText);
+			$(".switch--item").filter(function() {
+				return blockIdForSwitchItem($(this)) === blockId;
+			}).filter(function() {
+				return $(this).text() === selectedText;
+			}).each(function() {
+				select($(this))
+			});
+		});
+		if ($(this).text() === window.localStorage.getItem(blockId)) {
+			select($(this))
+		}
+	});
+}
+
+function blockIdForSwitchItem(item) {
+	idComponents = []
+	idComponents.push(item.text().toLowerCase());
+	item.siblings(".switch--item").each(function(index, sibling) {
+		idComponents.push($(sibling).text().toLowerCase());
+	});
+	return idComponents.sort().join("-")
+}
+
+function select(selected) {
+	selected.addClass('selected');
+	selected.siblings().removeClass('selected');
+	selectedContent = selected.parent().siblings(".content").eq(selected.index())
+	selectedContent.removeClass('hidden');
+	selectedContent.siblings().addClass('hidden');
+}
+
+$(addBlockSwitches);
+$(globalSwitch);
+
+</script>
+
+</head>
+<body id="rsocket" class="book">
+<div id="header">
+<h1>Spring Framework Documentation</h1>
+<span><strong>5.3.9</strong></span>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section describes Spring Framework&#8217;s support for the RSocket protocol.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rsocket-overview"><a class="anchor" href="#rsocket-overview"></a>1. Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>RSocket is an application protocol for multiplexed, duplex communication over TCP,
+WebSocket, and other byte stream transports, using one of the following interaction
+models:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Request-Response</code>&#8201;&#8212;&#8201;send one message and receive one back.</p>
+</li>
+<li>
+<p><code>Request-Stream</code>&#8201;&#8212;&#8201;send one message and receive a stream of messages back.</p>
+</li>
+<li>
+<p><code>Channel</code>&#8201;&#8212;&#8201;send streams of messages in both directions.</p>
+</li>
+<li>
+<p><code>Fire-and-Forget</code>&#8201;&#8212;&#8201;send a one-way message.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Once the initial connection is made, the "client" vs "server" distinction is lost as
+both sides become symmetrical and each side can initiate one of the above interactions.
+This is why in the protocol calls the participating sides "requester" and "responder"
+while the above interactions are called "request streams" or simply "requests".</p>
+</div>
+<div class="paragraph">
+<p>These are the key features and benefits of the RSocket protocol:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.reactive-streams.org/">Reactive Streams</a> semantics across network boundary&#8201;&#8212;&#8201;for streaming requests such as <code>Request-Stream</code> and <code>Channel</code>, back pressure signals
+travel between requester and responder, allowing a requester to slow down a responder at
+the source, hence reducing reliance on network layer congestion control, and the need
+for buffering at the network level or at any level.</p>
+</li>
+<li>
+<p>Request throttling&#8201;&#8212;&#8201;this feature is named "Leasing" after the <code>LEASE</code> frame that
+can be sent from each end to limit the total number of requests allowed by other end
+for a given time. Leases are renewed periodically.</p>
+</li>
+<li>
+<p>Session resumption&#8201;&#8212;&#8201;this is designed for loss of connectivity and requires some state
+to be maintained. The state management is transparent for applications, and works well
+in combination with back pressure which can stop a producer when possible and reduce
+the amount of state required.</p>
+</li>
+<li>
+<p>Fragmentation and re-assembly of large messages.</p>
+</li>
+<li>
+<p>Keepalive (heartbeats).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>RSocket has <a href="https://github.com/rsocket">implementations</a> in multiple languages. The
+<a href="https://github.com/rsocket/rsocket-java">Java library</a> is built on <a href="https://projectreactor.io/">Project Reactor</a>,
+and <a href="https://github.com/reactor/reactor-netty">Reactor Netty</a> for the transport. That means
+signals from Reactive Streams Publishers in your application propagate transparently
+through RSocket across the network.</p>
+</div>
+<div class="sect2">
+<h3 id="rsocket-protocol"><a class="anchor" href="#rsocket-protocol"></a>1.1. The Protocol</h3>
+<div class="paragraph">
+<p>One of the benefits of RSocket is that it has well defined behavior on the wire and an
+easy to read <a href="https://rsocket.io/docs/Protocol">specification</a> along with some protocol
+<a href="https://github.com/rsocket/rsocket/tree/master/Extensions">extensions</a>. Therefore it is
+a good idea to read the spec, independent of language implementations and higher level
+framework APIs. This section provides a succinct overview to establish some context.</p>
+</div>
+<div class="paragraph">
+<p><strong>Connecting</strong></p>
+</div>
+<div class="paragraph">
+<p>Initially a client connects to a server via some low level streaming transport such
+as TCP or WebSocket and sends a <code>SETUP</code> frame to the server to set parameters for the
+connection.</p>
+</div>
+<div class="paragraph">
+<p>The server may reject the <code>SETUP</code> frame, but generally after it is sent (for the client)
+and received (for the server), both sides can begin to make requests, unless <code>SETUP</code>
+indicates use of leasing semantics to limit the number of requests, in which case
+both sides must wait for a <code>LEASE</code> frame from the other end to permit making requests.</p>
+</div>
+<div class="paragraph">
+<p><strong>Making Requests</strong></p>
+</div>
+<div class="paragraph">
+<p>Once a connection is established, both sides may initiate a request through one of the
+frames <code>REQUEST_RESPONSE</code>, <code>REQUEST_STREAM</code>, <code>REQUEST_CHANNEL</code>, or <code>REQUEST_FNF</code>. Each of
+those frames carries one message from the requester to the responder.</p>
+</div>
+<div class="paragraph">
+<p>The responder may then return <code>PAYLOAD</code> frames with response messages, and in the case
+of <code>REQUEST_CHANNEL</code> the requester may also send <code>PAYLOAD</code> frames with more request
+messages.</p>
+</div>
+<div class="paragraph">
+<p>When a request involves a stream of messages such as <code>Request-Stream</code> and <code>Channel</code>,
+the responder must respect demand signals from the requester. Demand is expressed as a
+number of messages. Initial demand is specified in <code>REQUEST_STREAM</code> and
+<code>REQUEST_CHANNEL</code> frames. Subsequent demand is signaled via <code>REQUEST_N</code> frames.</p>
+</div>
+<div class="paragraph">
+<p>Each side may also send metadata notifications, via the <code>METADATA_PUSH</code> frame, that do not
+pertain to any individual request but rather to the connection as a whole.</p>
+</div>
+<div class="paragraph">
+<p><strong>Message Format</strong></p>
+</div>
+<div class="paragraph">
+<p>RSocket messages contain data and metadata. Metadata can be used to send a route, a
+security token, etc. Data and metadata can be formatted differently. Mime types for each
+are declared in the <code>SETUP</code> frame and apply to all requests on a given connection.</p>
+</div>
+<div class="paragraph">
+<p>While all messages can have metadata, typically metadata such as a route are per-request
+and therefore only included in the first message on a request, i.e. with one of the frames
+<code>REQUEST_RESPONSE</code>, <code>REQUEST_STREAM</code>, <code>REQUEST_CHANNEL</code>, or <code>REQUEST_FNF</code>.</p>
+</div>
+<div class="paragraph">
+<p>Protocol extensions define common metadata formats for use in applications:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rsocket/rsocket/blob/master/Extensions/CompositeMetadata.md">Composite Metadata</a>-- multiple,
+independently formatted metadata entries.</p>
+</li>
+<li>
+<p><a href="https://github.com/rsocket/rsocket/blob/master/Extensions/Routing.md">Routing</a>&#8201;&#8212;&#8201;the route for a request.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rsocket-java"><a class="anchor" href="#rsocket-java"></a>1.2. Java Implementation</h3>
+<div class="paragraph">
+<p>The <a href="https://github.com/rsocket/rsocket-java">Java implementation</a> for RSocket is built on
+<a href="https://projectreactor.io/">Project Reactor</a>. The transports for  TCP and WebSocket are
+built on <a href="https://github.com/reactor/reactor-netty">Reactor Netty</a>. As a Reactive Streams
+library, Reactor simplifies the job of implementing the protocol. For applications it is
+a natural fit to use <code>Flux</code> and <code>Mono</code> with declarative operators and transparent back
+pressure support.</p>
+</div>
+<div class="paragraph">
+<p>The API in RSocket Java is intentionally minimal and basic. It focuses on protocol
+features and leaves the application programming model (e.g. RPC codegen vs other) as a
+higher level, independent concern.</p>
+</div>
+<div class="paragraph">
+<p>The main contract
+<a href="https://github.com/rsocket/rsocket-java/blob/master/rsocket-core/src/main/java/io/rsocket/RSocket.java">io.rsocket.RSocket</a>
+models the four request interaction types with <code>Mono</code> representing a promise for a
+single message, <code>Flux</code> a stream of messages, and <code>io.rsocket.Payload</code> the actual
+message with access to data and metadata as byte buffers. The <code>RSocket</code> contract is used
+symmetrically. For requesting, the application is given an <code>RSocket</code> to perform
+requests with. For responding, the application implements <code>RSocket</code> to handle requests.</p>
+</div>
+<div class="paragraph">
+<p>This is not meant to be a thorough introduction. For the most part, Spring applications
+will not have to use its API directly. However it may be important to see or experiment
+with RSocket independent of Spring. The RSocket Java repository contains a number of
+<a href="https://github.com/rsocket/rsocket-java/tree/master/rsocket-examples">sample apps</a> that
+demonstrate its API and protocol features.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rsocket-spring"><a class="anchor" href="#rsocket-spring"></a>1.3. Spring Support</h3>
+<div class="paragraph">
+<p>The <code>spring-messaging</code> module contains the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#rsocket-requester">RSocketRequester</a>&#8201;&#8212;&#8201;fluent API to make requests through an <code>io.rsocket.RSocket</code>
+with data and metadata encoding/decoding.</p>
+</li>
+<li>
+<p><a href="#rsocket-annot-responders">Annotated Responders</a>&#8201;&#8212;&#8201;<code>@MessageMapping</code> annotated handler methods for
+responding.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>spring-web</code> module contains <code>Encoder</code> and <code>Decoder</code> implementations such as Jackson
+CBOR/JSON, and Protobuf that RSocket applications will likely need. It also contains the
+<code>PathPatternParser</code> that can be plugged in for efficient route matching.</p>
+</div>
+<div class="paragraph">
+<p>Spring Boot 2.2 supports standing up an RSocket server over TCP or WebSocket, including
+the option to expose RSocket over WebSocket in a WebFlux server. There is also client
+support and auto-configuration for an <code>RSocketRequester.Builder</code> and <code>RSocketStrategies</code>.
+See the
+<a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-rsocket">RSocket section</a>
+in the Spring Boot reference for more details.</p>
+</div>
+<div class="paragraph">
+<p>Spring Security 5.2 provides RSocket support.</p>
+</div>
+<div class="paragraph">
+<p>Spring Integration 5.2 provides inbound and outbound gateways to interact with RSocket
+clients and servers. See the Spring Integration Reference Manual for more details.</p>
+</div>
+<div class="paragraph">
+<p>Spring Cloud Gateway supports RSocket connections.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rsocket-requester"><a class="anchor" href="#rsocket-requester"></a>2. RSocketRequester</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>RSocketRequester</code> provides a fluent API to perform RSocket requests, accepting and
+returning objects for data and metadata instead of low level data buffers. It can be used
+symmetrically, to make requests from clients and to make requests from servers.</p>
+</div>
+<div class="sect2">
+<h3 id="rsocket-requester-client"><a class="anchor" href="#rsocket-requester-client"></a>2.1. Client Requester</h3>
+<div class="paragraph">
+<p>To obtain an <code>RSocketRequester</code> on the client side is to connect to a server which involves
+sending an RSocket <code>SETUP</code> frame with connection settings. <code>RSocketRequester</code> provides a
+builder that helps to prepare an <code>io.rsocket.core.RSocketConnector</code> including connection
+settings for the <code>SETUP</code> frame.</p>
+</div>
+<div class="paragraph">
+<p>This is the most basic way to connect with default settings:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">RSocketRequester requester = RSocketRequester.builder().tcp("localhost", 7000);
+
+URI url = URI.create("https://example.org:8080/rsocket");
+RSocketRequester requester = RSocketRequester.builder().webSocket(url);</code></pre>
+</div>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">val requester = RSocketRequester.builder().tcp("localhost", 7000)
+
+URI url = URI.create("https://example.org:8080/rsocket");
+val requester = RSocketRequester.builder().webSocket(url)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above does not connect immediately. When requests are made, a shared connection is
+established transparently and used.</p>
+</div>
+<div class="sect3">
+<h4 id="rsocket-requester-client-setup"><a class="anchor" href="#rsocket-requester-client-setup"></a>2.1.1. Connection Setup</h4>
+<div class="paragraph">
+<p><code>RSocketRequester.Builder</code> provides the following to customize the initial <code>SETUP</code> frame:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>dataMimeType(MimeType)</code>&#8201;&#8212;&#8201;set the mime type for data on the connection.</p>
+</li>
+<li>
+<p><code>metadataMimeType(MimeType)</code>&#8201;&#8212;&#8201;set the mime type for metadata on the connection.</p>
+</li>
+<li>
+<p><code>setupData(Object)</code>&#8201;&#8212;&#8201;data to include in the <code>SETUP</code>.</p>
+</li>
+<li>
+<p><code>setupRoute(String, Object&#8230;&#8203;)</code>&#8201;&#8212;&#8201;route in the metadata to include in the <code>SETUP</code>.</p>
+</li>
+<li>
+<p><code>setupMetadata(Object, MimeType)</code>&#8201;&#8212;&#8201;other metadata to include in the <code>SETUP</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For data, the default mime type is derived from the first configured <code>Decoder</code>. For
+metadata, the default mime type is
+<a href="https://github.com/rsocket/rsocket/blob/master/Extensions/CompositeMetadata.md">composite metadata</a> which allows multiple
+metadata value and mime type pairs per request. Typically both don&#8217;t need to be changed.</p>
+</div>
+<div class="paragraph">
+<p>Data and metadata in the <code>SETUP</code> frame is optional. On the server side,
+<a href="#rsocket-annot-connectmapping">@ConnectMapping</a> methods can be used to handle the start of a
+connection and the content of the <code>SETUP</code> frame. Metadata may be used for connection
+level security.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="rsocket-requester-client-strategies"><a class="anchor" href="#rsocket-requester-client-strategies"></a>2.1.2. Strategies</h4>
+<div class="paragraph">
+<p><code>RSocketRequester.Builder</code> accepts <code>RSocketStrategies</code> to configure the requester.
+You&#8217;ll need to use this to provide encoders and decoders for (de)-serialization of data and
+metadata values. By default only the basic codecs from <code>spring-core</code> for <code>String</code>,
+<code>byte[]</code>, and <code>ByteBuffer</code> are registered. Adding <code>spring-web</code> provides access to more that
+can be registered as follows:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">RSocketStrategies strategies = RSocketStrategies.builder()
+	.encoders(encoders -&gt; encoders.add(new Jackson2CborEncoder()))
+	.decoders(decoders -&gt; decoders.add(new Jackson2CborDecoder()))
+	.build();
+
+RSocketRequester requester = RSocketRequester.builder()
+	.rsocketStrategies(strategies)
+	.tcp("localhost", 7000);</code></pre>
+</div>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">val strategies = RSocketStrategies.builder()
+		.encoders { it.add(Jackson2CborEncoder()) }
+		.decoders { it.add(Jackson2CborDecoder()) }
+		.build()
+
+val requester = RSocketRequester.builder()
+		.rsocketStrategies(strategies)
+		.tcp("localhost", 7000)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>RSocketStrategies</code> is designed for re-use. In some scenarios, e.g. client and server in
+the same application, it may be preferable to declare it in Spring configuration.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="rsocket-requester-client-responder"><a class="anchor" href="#rsocket-requester-client-responder"></a>2.1.3. Client Responders</h4>
+<div class="paragraph">
+<p><code>RSocketRequester.Builder</code> can be used to configure responders to requests from the
+server.</p>
+</div>
+<div class="paragraph">
+<p>You can use annotated handlers for client-side responding based on the same
+infrastructure that&#8217;s used on a server, but registered programmatically as follows:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">RSocketStrategies strategies = RSocketStrategies.builder()
+	.routeMatcher(new PathPatternRouteMatcher())  <i class="conum" data-value="1"></i><b>(1)</b>
+	.build();
+
+SocketAcceptor responder =
+	RSocketMessageHandler.responder(strategies, new ClientHandler()); <i class="conum" data-value="2"></i><b>(2)</b>
+
+RSocketRequester requester = RSocketRequester.builder()
+	.rsocketConnector(connector -&gt; connector.acceptor(responder)) <i class="conum" data-value="3"></i><b>(3)</b>
+	.tcp("localhost", 7000);</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Use <code>PathPatternRouteMatcher</code>, if <code>spring-web</code> is present, for efficient
+route matching.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Create a responder from a class with <code>@MessageMaping</code> and/or <code>@ConnectMapping</code> methods.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Register the responder.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">val strategies = RSocketStrategies.builder()
+		.routeMatcher(PathPatternRouteMatcher())  <i class="conum" data-value="1"></i><b>(1)</b>
+		.build()
+
+val responder =
+	RSocketMessageHandler.responder(strategies, new ClientHandler()); <i class="conum" data-value="2"></i><b>(2)</b>
+
+val requester = RSocketRequester.builder()
+		.rsocketConnector { it.acceptor(responder) } <i class="conum" data-value="3"></i><b>(3)</b>
+		.tcp("localhost", 7000)</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Use <code>PathPatternRouteMatcher</code>, if <code>spring-web</code> is present, for efficient
+route matching.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Create a responder from a class with <code>@MessageMaping</code> and/or <code>@ConnectMapping</code> methods.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Register the responder.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Note the above is only a shortcut designed for programmatic registration of client
+responders. For alternative scenarios, where client responders are in Spring configuration,
+you can still declare <code>RSocketMessageHandler</code> as a Spring bean and then apply as follows:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">ApplicationContext context = ... ;
+RSocketMessageHandler handler = context.getBean(RSocketMessageHandler.class);
+
+RSocketRequester requester = RSocketRequester.builder()
+	.rsocketConnector(connector -&gt; connector.acceptor(handler.responder()))
+	.tcp("localhost", 7000);</code></pre>
+</div>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">import org.springframework.beans.factory.getBean
+
+val context: ApplicationContext = ...
+val handler = context.getBean&lt;RSocketMessageHandler&gt;()
+
+val requester = RSocketRequester.builder()
+		.rsocketConnector { it.acceptor(handler.responder()) }
+		.tcp("localhost", 7000)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For the above you may also need to use <code>setHandlerPredicate</code> in <code>RSocketMessageHandler</code> to
+switch to a different strategy for detecting client responders, e.g. based on a custom
+annotation such as <code>@RSocketClientResponder</code> vs the default <code>@Controller</code>. This
+is necessary in scenarios with client and server, or multiple clients in the same
+application.</p>
+</div>
+<div class="paragraph">
+<p>See also <a href="#rsocket-annot-responders">Annotated Responders</a>, for more on the programming model.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="rsocket-requester-client-advanced"><a class="anchor" href="#rsocket-requester-client-advanced"></a>2.1.4. Advanced</h4>
+<div class="paragraph">
+<p><code>RSocketRequesterBuilder</code> provides a callback to expose the underlying
+<code>io.rsocket.core.RSocketConnector</code> for further configuration options for keepalive
+intervals, session resumption, interceptors, and more. You can configure options
+at that level as follows:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">RSocketRequester requester = RSocketRequester.builder()
+	.rsocketConnector(connector -&gt; {
+		// ...
+	})
+	.tcp("localhost", 7000);</code></pre>
+</div>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">val requester = RSocketRequester.builder()
+		.rsocketConnector {
+			//...
+		}
+		.tcp("localhost", 7000)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rsocket-requester-server"><a class="anchor" href="#rsocket-requester-server"></a>2.2. Server Requester</h3>
+<div class="paragraph">
+<p>To make requests from a server to connected clients is a matter of obtaining the
+requester for the connected client from the server.</p>
+</div>
+<div class="paragraph">
+<p>In <a href="#rsocket-annot-responders">Annotated Responders</a>, <code>@ConnectMapping</code> and <code>@MessageMapping</code> methods support an
+<code>RSocketRequester</code> argument. Use it to access the requester for the connection. Keep in
+mind that <code>@ConnectMapping</code> methods are essentially handlers of the <code>SETUP</code> frame which
+must be handled before requests can begin. Therefore, requests at the very start must be
+decoupled from handling. For example:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">@ConnectMapping
+Mono&lt;Void&gt; handle(RSocketRequester requester) {
+	requester.route("status").data("5")
+		.retrieveFlux(StatusReport.class)
+		.subscribe(bar -&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
+			// ...
+		});
+	return ... <i class="conum" data-value="2"></i><b>(2)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Start the request asynchronously, independent from handling.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Perform handling and return completion <code>Mono&lt;Void&gt;</code>.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">@ConnectMapping
+suspend fun handle(requester: RSocketRequester) {
+	GlobalScope.launch {
+		requester.route("status").data("5").retrieveFlow&lt;StatusReport&gt;().collect { <i class="conum" data-value="1"></i><b>(1)</b>
+			// ...
+		}
+	}
+	/// ... <i class="conum" data-value="2"></i><b>(2)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Start the request asynchronously, independent from handling.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Perform handling in the suspending function.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rsocket-requester-requests"><a class="anchor" href="#rsocket-requester-requests"></a>2.3. Requests</h3>
+<div class="paragraph">
+<p>Once you have a <a href="#rsocket-requester-client">client</a> or
+<a href="#rsocket-requester-server">server</a> requester, you can make requests as follows:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">ViewBox viewBox = ... ;
+
+Flux&lt;AirportLocation&gt; locations = requester.route("locate.radars.within") <i class="conum" data-value="1"></i><b>(1)</b>
+		.data(viewBox) <i class="conum" data-value="2"></i><b>(2)</b>
+		.retrieveFlux(AirportLocation.class); <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Specify a route to include in the metadata of the request message.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Provide data for the request message.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Declare the expected response.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">val viewBox: ViewBox = ...
+
+val locations = requester.route("locate.radars.within") <i class="conum" data-value="1"></i><b>(1)</b>
+		.data(viewBox) <i class="conum" data-value="2"></i><b>(2)</b>
+		.retrieveFlow&lt;AirportLocation&gt;() <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Specify a route to include in the metadata of the request message.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Provide data for the request message.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Declare the expected response.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The interaction type is determined implicitly from the cardinality of the input and
+output. The above example is a <code>Request-Stream</code> because one value is sent and a stream
+of values is received. For the most part you don&#8217;t need to think about this as long as the
+choice of input and output matches an RSocket interaction type and the types of input and
+output expected by the responder. The only example of an invalid combination is many-to-one.</p>
+</div>
+<div class="paragraph">
+<p>The <code>data(Object)</code> method also accepts any Reactive Streams <code>Publisher</code>, including
+<code>Flux</code> and <code>Mono</code>, as well as any other producer of value(s) that is registered in the
+<code>ReactiveAdapterRegistry</code>. For a multi-value <code>Publisher</code> such as <code>Flux</code> which produces the
+same types of values, consider using one of the overloaded <code>data</code> methods to avoid having
+type checks and <code>Encoder</code> lookup on every element:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">data(Object producer, Class&lt;?&gt; elementClass);
+data(Object producer, ParameterizedTypeReference&lt;?&gt; elementTypeRef);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>data(Object)</code> step is optional. Skip it for requests that don&#8217;t send data:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">Mono&lt;AirportLocation&gt; location = requester.route("find.radar.EWR"))
+	.retrieveMono(AirportLocation.class);</code></pre>
+</div>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">import org.springframework.messaging.rsocket.retrieveAndAwait
+
+val location = requester.route("find.radar.EWR")
+	.retrieveAndAwait&lt;AirportLocation&gt;()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Extra metadata values can be added if using
+<a href="https://github.com/rsocket/rsocket/blob/master/Extensions/CompositeMetadata.md">composite metadata</a> (the default) and if the
+values are supported by a registered <code>Encoder</code>. For example:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">String securityToken = ... ;
+ViewBox viewBox = ... ;
+MimeType mimeType = MimeType.valueOf("message/x.rsocket.authentication.bearer.v0");
+
+Flux&lt;AirportLocation&gt; locations = requester.route("locate.radars.within")
+		.metadata(securityToken, mimeType)
+		.data(viewBox)
+		.retrieveFlux(AirportLocation.class);</code></pre>
+</div>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">import org.springframework.messaging.rsocket.retrieveFlow
+
+val requester: RSocketRequester = ...
+
+val securityToken: String = ...
+val viewBox: ViewBox = ...
+val mimeType = MimeType.valueOf("message/x.rsocket.authentication.bearer.v0")
+
+val locations = requester.route("locate.radars.within")
+		.metadata(securityToken, mimeType)
+		.data(viewBox)
+		.retrieveFlow&lt;AirportLocation&gt;()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For <code>Fire-and-Forget</code> use the <code>send()</code> method that returns <code>Mono&lt;Void&gt;</code>. Note that the <code>Mono</code>
+indicates only that the message was successfully sent, and not that it was handled.</p>
+</div>
+<div class="paragraph">
+<p>For <code>Metadata-Push</code> use the <code>sendMetadata()</code> method with a <code>Mono&lt;Void&gt;</code> return value.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rsocket-annot-responders"><a class="anchor" href="#rsocket-annot-responders"></a>3. Annotated Responders</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>RSocket responders can be implemented as <code>@MessageMapping</code> and <code>@ConnectMapping</code> methods.
+<code>@MessageMapping</code> methods handle individual requests while <code>@ConnectMapping</code> methods handle
+connection-level events (setup and metadata push). Annotated responders are supported
+symmetrically, for responding from the server side and for responding from the client side.</p>
+</div>
+<div class="sect2">
+<h3 id="rsocket-annot-responders-server"><a class="anchor" href="#rsocket-annot-responders-server"></a>3.1. Server Responders</h3>
+<div class="paragraph">
+<p>To use annotated responders on the server side, add <code>RSocketMessageHandler</code> to your Spring
+configuration to detect <code>@Controller</code> beans with <code>@MessageMapping</code> and <code>@ConnectMapping</code>
+methods:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">@Configuration
+static class ServerConfig {
+
+	@Bean
+	public RSocketMessageHandler rsocketMessageHandler() {
+		RSocketMessageHandler handler = new RSocketMessageHandler();
+		handler.routeMatcher(new PathPatternRouteMatcher());
+		return handler;
+	}
+}</code></pre>
+</div>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">@Configuration
+class ServerConfig {
+
+	@Bean
+	fun rsocketMessageHandler() = RSocketMessageHandler().apply {
+		routeMatcher = PathPatternRouteMatcher()
+	}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then start an RSocket server through the Java RSocket API and plug the
+<code>RSocketMessageHandler</code> for the responder as follows:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">ApplicationContext context = ... ;
+RSocketMessageHandler handler = context.getBean(RSocketMessageHandler.class);
+
+CloseableChannel server =
+	RSocketServer.create(handler.responder())
+		.bind(TcpServerTransport.create("localhost", 7000))
+		.block();</code></pre>
+</div>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">import org.springframework.beans.factory.getBean
+
+val context: ApplicationContext = ...
+val handler = context.getBean&lt;RSocketMessageHandler&gt;()
+
+val server = RSocketServer.create(handler.responder())
+		.bind(TcpServerTransport.create("localhost", 7000))
+		.awaitSingle()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>RSocketMessageHandler</code> supports
+<a href="https://github.com/rsocket/rsocket/blob/master/Extensions/CompositeMetadata.md">composite</a> and
+<a href="https://github.com/rsocket/rsocket/blob/master/Extensions/Routing.md">routing</a> metadata by default. You can set its
+<a href="#rsocket-metadata-extractor">MetadataExtractor</a> if you need to switch to a
+different mime type or register additional metadata mime types.</p>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll need to set the <code>Encoder</code> and <code>Decoder</code> instances required for metadata and data
+formats to support. You&#8217;ll likely need the <code>spring-web</code> module for codec implementations.</p>
+</div>
+<div class="paragraph">
+<p>By default <code>SimpleRouteMatcher</code> is used for matching routes via <code>AntPathMatcher</code>.
+We recommend plugging in the <code>PathPatternRouteMatcher</code> from <code>spring-web</code> for
+efficient route matching. RSocket routes can be hierarchical but are not URL paths.
+Both route matchers are configured to use "." as separator by default and there is no URL
+decoding as with HTTP URLs.</p>
+</div>
+<div class="paragraph">
+<p><code>RSocketMessageHandler</code> can be configured via <code>RSocketStrategies</code> which may be useful if
+you need to share configuration between a client and a server in the same process:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">@Configuration
+static class ServerConfig {
+
+	@Bean
+	public RSocketMessageHandler rsocketMessageHandler() {
+		RSocketMessageHandler handler = new RSocketMessageHandler();
+		handler.setRSocketStrategies(rsocketStrategies());
+		return handler;
+	}
+
+	@Bean
+	public RSocketStrategies rsocketStrategies() {
+		return RSocketStrategies.builder()
+			.encoders(encoders -&gt; encoders.add(new Jackson2CborEncoder()))
+			.decoders(decoders -&gt; decoders.add(new Jackson2CborDecoder()))
+			.routeMatcher(new PathPatternRouteMatcher())
+			.build();
+	}
+}</code></pre>
+</div>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">@Configuration
+class ServerConfig {
+
+	@Bean
+	fun rsocketMessageHandler() = RSocketMessageHandler().apply {
+		rSocketStrategies = rsocketStrategies()
+	}
+
+	@Bean
+	fun rsocketStrategies() = RSocketStrategies.builder()
+			.encoders { it.add(Jackson2CborEncoder()) }
+			.decoders { it.add(Jackson2CborDecoder()) }
+			.routeMatcher(PathPatternRouteMatcher())
+			.build()
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rsocket-annot-responders-client"><a class="anchor" href="#rsocket-annot-responders-client"></a>3.2. Client Responders</h3>
+<div class="paragraph">
+<p>Annotated responders on the client side need to be configured in the
+<code>RSocketRequester.Builder</code>. For details, see
+<a href="#rsocket-requester-client-responder">Client Responders</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rsocket-annot-messagemapping"><a class="anchor" href="#rsocket-annot-messagemapping"></a>3.3. @MessageMapping</h3>
+<div class="paragraph">
+<p>Once <a href="#rsocket-annot-responders-server">server</a> or
+<a href="#rsocket-annot-responders-client">client</a> responder configuration is in place,
+<code>@MessageMapping</code> methods can be used as follows:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">@Controller
+public class RadarsController {
+
+	@MessageMapping("locate.radars.within")
+	public Flux&lt;AirportLocation&gt; radars(MapRequest request) {
+		// ...
+	}
+}</code></pre>
+</div>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">@Controller
+class RadarsController {
+
+	@MessageMapping("locate.radars.within")
+	fun radars(request: MapRequest): Flow&lt;AirportLocation&gt; {
+		// ...
+	}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above <code>@MessageMapping</code> method responds to a Request-Stream interaction having the
+route "locate.radars.within". It supports a flexible method signature with the option to
+use the following method arguments:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method Argument</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Payload</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The payload of the request. This can be a concrete value of asynchronous types like
+  <code>Mono</code> or <code>Flux</code>.</p>
+<p class="tableblock">  <strong>Note:</strong> Use of the annotation is optional. A method argument that is not a simple type
+  and is not any of the other supported arguments, is assumed to be the expected payload.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RSocketRequester</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requester for making requests to the remote end.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@DestinationVariable</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value extracted from the route based on variables in the mapping pattern, e.g.
+  <code>@MessageMapping("find.radar.{id}")</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Header</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Metadata value registered for extraction as described in <a href="#rsocket-metadata-extractor">MetadataExtractor</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Headers Map&lt;String, Object&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All metadata values registered for extraction as described in <a href="#rsocket-metadata-extractor">MetadataExtractor</a>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The return value is expected to be one or more Objects to be serialized as response
+payloads. That can be asynchronous types like <code>Mono</code> or <code>Flux</code>, a concrete value, or
+either <code>void</code> or a no-value asynchronous type such as <code>Mono&lt;Void&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>The RSocket interaction type that an <code>@MessageMapping</code> method supports is determined from
+the cardinality of the input (i.e. <code>@Payload</code> argument) and of the output, where
+cardinality means the following:</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Cardinality</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Either an explicit value, or a single-value asynchronous type such as <code>Mono&lt;T&gt;</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Many</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A multi-value asynchronous type such as <code>Flux&lt;T&gt;</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For input this means the method does not have an <code>@Payload</code> argument.</p>
+<p class="tableblock">  For output this is <code>void</code> or a no-value asynchronous type such as <code>Mono&lt;Void&gt;</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The table below shows all input and output cardinality combinations and the corresponding
+interaction type(s):</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Input Cardinality</th>
+<th class="tableblock halign-left valign-top">Output Cardinality</th>
+<th class="tableblock halign-left valign-top">Interaction Types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0, 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fire-and-Forget, Request-Response</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0, 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Request-Response</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0, 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Many</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Request-Stream</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Many</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0, 1, Many</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Request-Channel</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="rsocket-annot-connectmapping"><a class="anchor" href="#rsocket-annot-connectmapping"></a>3.4. @ConnectMapping</h3>
+<div class="paragraph">
+<p><code>@ConnectMapping</code> handles the <code>SETUP</code> frame at the start of an RSocket connection, and
+any subsequent metadata push notifications through the <code>METADATA_PUSH</code> frame, i.e.
+<code>metadataPush(Payload)</code> in <code>io.rsocket.RSocket</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>@ConnectMapping</code> methods support the same arguments as
+<a href="#rsocket-annot-messagemapping">@MessageMapping</a> but based on metadata and data from the <code>SETUP</code> and
+<code>METADATA_PUSH</code> frames. <code>@ConnectMapping</code> can have a pattern to narrow handling to
+specific connections that have a route in the metadata, or if no patterns are declared
+then all connections match.</p>
+</div>
+<div class="paragraph">
+<p><code>@ConnectMapping</code> methods cannot return data and must be declared with <code>void</code> or
+<code>Mono&lt;Void&gt;</code> as the return value. If handling returns an error for a new
+connection then the connection is rejected. Handling must not be held up to make
+requests to the <code>RSocketRequester</code> for the connection. See
+<a href="#rsocket-requester-server">Server Requester</a> for details.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rsocket-metadata-extractor"><a class="anchor" href="#rsocket-metadata-extractor"></a>4. MetadataExtractor</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Responders must interpret metadata.
+<a href="https://github.com/rsocket/rsocket/blob/master/Extensions/CompositeMetadata.md">Composite metadata</a> allows independently
+formatted metadata values (e.g. for routing, security, tracing) each with its own mime
+type. Applications need a way to configure metadata mime types to support, and a way
+to access extracted values.</p>
+</div>
+<div class="paragraph">
+<p><code>MetadataExtractor</code> is a contract to take serialized metadata and return decoded
+name-value pairs that can then be accessed like headers by name, for example via <code>@Header</code>
+in annotated handler methods.</p>
+</div>
+<div class="paragraph">
+<p><code>DefaultMetadataExtractor</code> can be given <code>Decoder</code> instances to decode metadata. Out of
+the box it has built-in support for
+<a href="https://github.com/rsocket/rsocket/blob/master/Extensions/Routing.md">"message/x.rsocket.routing.v0"</a> which it decodes to
+<code>String</code> and saves under the "route" key. For any other mime type you&#8217;ll need to provide
+a <code>Decoder</code> and register the mime type as follows:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">DefaultMetadataExtractor extractor = new DefaultMetadataExtractor(metadataDecoders);
+extractor.metadataToExtract(fooMimeType, Foo.class, "foo");</code></pre>
+</div>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">import org.springframework.messaging.rsocket.metadataToExtract
+
+val extractor = DefaultMetadataExtractor(metadataDecoders)
+extractor.metadataToExtract&lt;Foo&gt;(fooMimeType, "foo")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Composite metadata works well to combine independent metadata values. However the
+requester might not support composite metadata, or may choose not to use it. For this,
+<code>DefaultMetadataExtractor</code> may needs custom logic to map the decoded value to the output
+map. Here is an example where JSON is used for metadata:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">DefaultMetadataExtractor extractor = new DefaultMetadataExtractor(metadataDecoders);
+extractor.metadataToExtract(
+	MimeType.valueOf("application/vnd.myapp.metadata+json"),
+	new ParameterizedTypeReference&lt;Map&lt;String,String&gt;&gt;() {},
+	(jsonMap, outputMap) -&gt; {
+		outputMap.putAll(jsonMap);
+	});</code></pre>
+</div>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">import org.springframework.messaging.rsocket.metadataToExtract
+
+val extractor = DefaultMetadataExtractor(metadataDecoders)
+extractor.metadataToExtract&lt;Map&lt;String, String&gt;&gt;(MimeType.valueOf("application/vnd.myapp.metadata+json")) { jsonMap, outputMap -&gt;
+	outputMap.putAll(jsonMap)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When configuring <code>MetadataExtractor</code> through <code>RSocketStrategies</code>, you can let
+<code>RSocketStrategies.Builder</code> create the extractor with the configured decoders, and
+simply use a callback to customize registrations as follows:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">RSocketStrategies strategies = RSocketStrategies.builder()
+	.metadataExtractorRegistry(registry -&gt; {
+		registry.metadataToExtract(fooMimeType, Foo.class, "foo");
+		// ...
+	})
+	.build();</code></pre>
+</div>
+</div>
+<div class="listingblock secondary">
+<div class="title">Kotlin</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">import org.springframework.messaging.rsocket.metadataToExtract
+
+val strategies = RSocketStrategies.builder()
+		.metadataExtractorRegistry { registry: MetadataExtractorRegistry -&gt;
+			registry.metadataToExtract&lt;Foo&gt;(fooMimeType, "foo")
+			// ...
+		}
+		.build()</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 5.3.9<br>
+Last updated 2021-07-14 06:36:18 UTC
+</div>
+</div>
+<link rel="stylesheet" href="js/highlight/styles/googlecode.min.css">
+<script src="js/highlight/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+<script type="text/javascript" src="js/tocbot/tocbot.min.js"></script>
+<script type="text/javascript" src="js/toc.js"></script>
+</body>
+</html>

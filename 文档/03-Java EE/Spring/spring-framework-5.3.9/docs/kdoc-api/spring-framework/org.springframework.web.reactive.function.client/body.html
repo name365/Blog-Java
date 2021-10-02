@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>body - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="index.html">org.springframework.web.reactive.function.client</a>&nbsp;/&nbsp;<a href="./body.html">body</a><br/>
+<br/>
+<h1>body</h1>
+<a name="org.springframework.web.reactive.function.client$body(org.springframework.web.reactive.function.client.WebClient.RequestBodySpec, org.springframework.web.reactive.function.client.body.S)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">, </span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html"><span class="identifier">Publisher</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestBodySpec.html"><span class="identifier">RequestBodySpec</span></a><span class="symbol">.</span><span class="identifier">body</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.client$body(org.springframework.web.reactive.function.client.WebClient.RequestBodySpec, org.springframework.web.reactive.function.client.body.S)/publisher">publisher</span><span class="symbol">:</span>&nbsp;<span class="identifier">S</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestHeadersSpec.html"><span class="identifier">RequestHeadersSpec</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestBodySpec.html#body(P, java.lang.Class<T>)">WebClient.RequestBodySpec.body</a> providing a <code>body(Publisher&lt;T&gt;)</code> variant
+leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.0</p>
+<a name="org.springframework.web.reactive.function.client$body(org.springframework.web.reactive.function.client.WebClient.RequestBodySpec, kotlinx.coroutines.flow.Flow((org.springframework.web.reactive.function.client.body.T)))"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestBodySpec.html"><span class="identifier">RequestBodySpec</span></a><span class="symbol">.</span><span class="identifier">body</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.client$body(org.springframework.web.reactive.function.client.WebClient.RequestBodySpec, kotlinx.coroutines.flow.Flow((org.springframework.web.reactive.function.client.body.T)))/flow">flow</span><span class="symbol">:</span>&nbsp;<span class="identifier">Flow</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestHeadersSpec.html"><span class="identifier">RequestHeadersSpec</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestBodySpec.html#body(P, java.lang.Class<T>)">WebClient.RequestBodySpec.body</a> providing a <code>body(Flow&lt;T&gt;)</code> variant
+leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<h3>Parameters</h3>
+<p><a name="flow"></a>
+<code>flow</code> - the <a href="#">Flow</a> to write to the request</p>
+<p><a name="T"></a>
+<code>T</code> - the type of the elements contained in the flow</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+<a name="org.springframework.web.reactive.function.client$body(org.springframework.web.reactive.function.client.WebClient.RequestBodySpec, kotlin.Any)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestBodySpec.html"><span class="identifier">RequestBodySpec</span></a><span class="symbol">.</span><span class="identifier">body</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.client$body(org.springframework.web.reactive.function.client.WebClient.RequestBodySpec, kotlin.Any)/producer">producer</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestHeadersSpec.html"><span class="identifier">RequestHeadersSpec</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestBodySpec.html#body(P, java.lang.Class<T>)">WebClient.RequestBodySpec.body</a> providing a <code>body&lt;T&gt;(Any)</code> variant
+leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<h3>Parameters</h3>
+<p><a name="producer"></a>
+<code>producer</code> - the producer to write to the request. This must be a
+<a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html">Publisher</a> or another producer adaptable to a
+<a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html">Publisher</a> via <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/ReactiveAdapterRegistry.html">org.springframework.core.ReactiveAdapterRegistry</a></p>
+<p><a name="T"></a>
+<code>T</code> - the type of the elements contained in the producer</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+</BODY>
+</HTML>

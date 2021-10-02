@@ -1,0 +1,26 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:org.springframework.transaction.reactive$transactional(kotlinx.coroutines.flow.Flow((org.springframework.transaction.reactive.transactional.T)), org.springframework.transaction.reactive.TransactionalOperator)org.springframework.transaction.reactive/kotlinx.coroutines.flow.-flow/transactional.html
+$dokka.location:org.springframework.web.reactive.server$awaitFormData(org.springframework.web.server.ServerWebExchange)org.springframework.web.reactive.server/org.springframework.web.server.-server-web-exchange/await-form-data.html
+$dokka.location:org.springframework.web.reactive.server$awaitMultipartData(org.springframework.web.server.ServerWebExchange)org.springframework.web.reactive.server/org.springframework.web.server.-server-web-exchange/await-multipart-data.html
+$dokka.location:org.springframework.web.reactive.server$awaitPrincipal(org.springframework.web.server.ServerWebExchange)org.springframework.web.reactive.server/org.springframework.web.server.-server-web-exchange/await-principal.html
+$dokka.location:org.springframework.web.reactive.server$awaitSession(org.springframework.web.server.ServerWebExchange)org.springframework.web.reactive.server/org.springframework.web.server.-server-web-exchange/await-session.html
+$dokka.location:org.springframework.web.reactive.server$principal(org.springframework.web.server.ServerWebExchange.Builder, kotlin.coroutines.SuspendFunction0((java.security.Principal)))org.springframework.web.reactive.server/org.springframework.web.server.-server-web-exchange.-builder/principal.html
+org.springframework.beans.factory
+org.springframework.context.annotation
+org.springframework.context.support
+org.springframework.core.env
+org.springframework.jdbc.core
+org.springframework.jdbc.core.namedparam
+org.springframework.messaging.rsocket
+org.springframework.r2dbc.core
+org.springframework.test.web.reactive.server
+org.springframework.test.web.servlet
+org.springframework.test.web.servlet.result
+org.springframework.transaction.reactive
+org.springframework.ui
+org.springframework.web.client
+org.springframework.web.reactive.function.client
+org.springframework.web.reactive.function.server
+org.springframework.web.reactive.server
+org.springframework.web.servlet.function

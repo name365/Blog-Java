@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--view层 模板-->
+<div id="app">
+    <todo>
+        <todo-title slot="todo-title" :title="title"></todo-title>
+
+        <!--增加了v-on:remove="removeTodoItems"自定义事件，该组件会调用Vue实例中定义的-->
+        <todo-items slot="todo-items" v-for="(item, index) in todoItems" :item="item" :index="index"  @remove="removeItems"></todo-items>
+        <div>Vue</div>
+        <div>Vue</div>
+        <div>Vue</div>
+        <div slot="num">Vue</div>
+    </todo>
+</div>
+
+<!-- 1.导入Vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    Vue.component('todo',{
+        template: '<div>\
+            <slot name="todo-title"></slot>\
+                <ul>\
+                    <slot name="todo-items"></slot>\
+                </ul>\
+            \<h1><slot></slot></h1>\
+            \<h2><slot name="num"></slot></h2>\
+        </div>'
+    });
+
+    Vue.component('todo-title',{
+        props:['title'],
+        template: '<div>{{title}}</div>'
+    });
+
+    // 这里的index，就是数组的下标，使用for循环遍历的时候，可以循环出来！
+    Vue.component('todo-items',{
+        props: ['item','index'],
+        template: '<li>{{index}}——{{item}}<button @click="remove">删除</button></li>',
+        methods: {
+            remove(index) {
+                this.$emit('remove',index)
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el:"#app",
+        // Model:数据
+        data:{
+            title: 'Vue学习笔记',
+            todoItems: ['Java','前端','运维','安卓']
+        },
+        methods: {
+            removeItems(index) {
+                console.log("删除了" + this.todoItems[index] + "OK")
+                this.todoItems.splice(index,1) // 一次删除一个元素
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

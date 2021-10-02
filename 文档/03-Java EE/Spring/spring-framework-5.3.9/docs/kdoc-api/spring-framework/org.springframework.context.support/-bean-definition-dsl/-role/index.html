@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>BeanDefinitionDsl.Role - spring-framework</title>
+<link rel="stylesheet" href="../../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="../../index.html">org.springframework.context.support</a>&nbsp;/&nbsp;<a href="../index.html">BeanDefinitionDsl</a>&nbsp;/&nbsp;<a href="./index.html">Role</a><br/>
+<br/>
+<h1>Role</h1>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">Role</span></code>
+<p>Role enum constants.</p>
+<h3>Enum Values</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-a-p-p-l-i-c-a-t-i-o-n.html">APPLICATION</a></h4>
+</td>
+<td>
+<p>Role hint indicating that a <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/config/BeanDefinition.html">BeanDefinition</a> is a major part
+of the application. Typically corresponds to a user-defined bean.</p>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="-s-u-p-p-o-r-t.html">SUPPORT</a></h4>
+</td>
+<td>
+<p>Role hint indicating that a <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/config/BeanDefinition.html">BeanDefinition</a> is a supporting
+part of some larger configuration, typically an outer
+<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/parsing/ComponentDefinition.html">org.springframework.beans.factory.parsing.ComponentDefinition</a>.
+<a href="-s-u-p-p-o-r-t.html">SUPPORT</a> beans are considered important enough to be aware of
+when looking more closely at a particular
+<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/parsing/ComponentDefinition.html">org.springframework.beans.factory.parsing.ComponentDefinition</a>,
+but not when looking at the overall configuration of an application.</p>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="-i-n-f-r-a-s-t-r-u-c-t-u-r-e.html">INFRASTRUCTURE</a></h4>
+</td>
+<td>
+<p>Role hint indicating that a <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/config/BeanDefinition.html">BeanDefinition</a> is providing an
+entirely background role and has no relevance to the end-user. This hint is
+used when registering beans that are completely part of the internal workings
+of a <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/parsing/ComponentDefinition.html">org.springframework.beans.factory.parsing.ComponentDefinition</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>org.springframework.core.env - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="./index.html">org.springframework.core.env</a><br/>
+<br/>
+<h2>Package org.springframework.core.env</h2>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="get.html">get</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/env/PropertyResolver.html#getProperty(java.lang.String)">PropertyResolver.getProperty</a> providing Array like getter returning a
+nullable <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>.</p>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/env/PropertyResolver.html"><span class="identifier">PropertyResolver</span></a><span class="symbol">.</span><span class="identifier">get</span><span class="symbol">(</span><span class="identifier" id="org.springframework.core.env$get(org.springframework.core.env.PropertyResolver, kotlin.String)/key">key</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-property.html">getProperty</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/env/PropertyResolver.html#getProperty(java.lang.String)">PropertyResolver.getProperty</a> providing a <code>getProperty&lt;Foo&gt;(...)</code>
+variant returning a nullable <code>Foo</code>.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/env/PropertyResolver.html"><span class="identifier">PropertyResolver</span></a><span class="symbol">.</span><span class="identifier">getProperty</span><span class="symbol">(</span><span class="identifier" id="org.springframework.core.env$getProperty(org.springframework.core.env.PropertyResolver, kotlin.String)/key">key</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-required-property.html">getRequiredProperty</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/env/PropertyResolver.html#getRequiredProperty(java.lang.String)">PropertyResolver.getRequiredProperty</a> providing a
+<code>getRequiredProperty&lt;Foo&gt;(...)</code> variant.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/env/PropertyResolver.html"><span class="identifier">PropertyResolver</span></a><span class="symbol">.</span><span class="identifier">getRequiredProperty</span><span class="symbol">(</span><span class="identifier" id="org.springframework.core.env$getRequiredProperty(org.springframework.core.env.PropertyResolver, kotlin.String)/key">key</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>综合案例</title>
+    <style type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <!-- v-if -->
+    <div v-if="isLogin">你好</div>
+    <!-- v-else -->
+    <div v-else>请登录后操作</div>
+    <!-- v-show -->
+    <div v-show="isLogin">你好</div>
+    <!-- v-else-if -->
+    <div v-if="type === 'A'">A</div>
+    <div v-else-if="type === 'B'">B</div>
+    <div v-else-if="type === 'C'">C</div>
+    <div v-else>Not A/B/C</div>
+    <!-- v-for基本使用 -->
+    <ul>
+        <li v-for="item in items">
+            {{item}}
+        </li>
+    </ul>
+    <!-- v-for高级使用 -->
+    <ul>
+        <li v-for="(value, key, index) in object">
+            {{ index }}. {{ key }} - {{ value }}
+        </li>
+    </ul>
+    <!-- v-text -->
+    <div v-text="message"></div>
+    <!-- v-html -->
+    <div v-html="msgHtml"></div>
+    <!-- v-on部分 -->
+    <div>本场比赛得分：{{count}}</div>
+    <!-- 常规写法 -->
+    <button v-on:click="add">加分</button>
+    <!-- @缩写 -->
+    <button @click="add">加分</button><br/>
+    <!-- v-model input -->
+    <input type="text" v-model="message"><br/>
+    <!-- v-model textarea -->
+    <textarea  cols="30" rows="10" v-model="message"></textarea><br/>
+    <!-- v-model checkbox -->
+    <input type="checkbox" id="first" value="1" v-model="status">
+    <label for="first">有效</label>
+    <input type="checkbox" id="second" value="2" v-model="status">
+    <label for="second">无效</label>
+    <div>状态：{{status}}</div>
+    <!-- v-model radio -->
+    <input type="radio" id="one" value="男" v-model="sex">
+    <label for="one">男</label>
+    <input type="radio" id="two" value="女" v-model="sex">
+    <label for="one">女</label>
+    <div>性别：{{sex}}</div>
+    <!-- v-model select -->
+    <select v-model="selected">
+        <option disabled value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <div>Selected: {{ selected }}</div>
+    <!-- v-model select -->
+    <img v-bind:src="imgSrc"  width="200px"><br/>
+    <img :src="imgSrc"  width="200px"><br/>
+    <!-- v-pre -->
+    <div v-pre>{{message}}</div>
+    <!-- v-cloak -->
+    <div v-cloak>{{message}}</div>
+    <!-- v-pre -->
+    <div v-once>第一次绑定的值：{{message}}</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    var app=new Vue({
+        el:'#app',
+        data:{
+            isLogin: false,
+            type: 'K',
+            items:[20,23,18,65],
+            object: {
+                firstName: 'Jack',
+                lastName: 'Subei'
+            },
+            message: 'hello Vue',
+            msgHtml: '<h2>hello Vue!</h2>',
+            count: 1,
+            status: [],
+            sex: '男',
+            selected: '',
+            imgSrc:'https://vuex.vuejs.org/flow.png'
+
+        },
+        methods: {
+            add() {
+                this.count++;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

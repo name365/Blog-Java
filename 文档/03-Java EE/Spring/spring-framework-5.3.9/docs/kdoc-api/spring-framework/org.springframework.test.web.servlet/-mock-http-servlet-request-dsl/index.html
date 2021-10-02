@@ -1,0 +1,219 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MockHttpServletRequestDsl - spring-framework</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="../index.html">org.springframework.test.web.servlet</a>&nbsp;/&nbsp;<a href="./index.html">MockHttpServletRequestDsl</a><br/>
+<br/>
+<h1>MockHttpServletRequestDsl</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">MockHttpServletRequestDsl</span></code>
+<p>Provide a <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/servlet/request/MockHttpServletRequestBuilder.html">MockHttpServletRequestBuilder</a> Kotlin DSL in order to be able to write idiomatic Kotlin code.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="../get.html">MockMvc.get</a></p>
+<p><a href="../post.html">MockMvc.post</a></p>
+<p><a href="../put.html">MockMvc.put</a></p>
+<p><a href="../patch.html">MockMvc.patch</a></p>
+<p><a href="../delete.html">MockMvc.delete</a></p>
+<p><a href="../options.html">MockMvc.options</a></p>
+<p><a href="../head.html">MockMvc.head</a></p>
+<p><a href="../request.html">MockMvc.request</a></p>
+</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="accept.html">accept</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">accept</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/MediaType.html"><span class="identifier">MediaType</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="character-encoding.html">characterEncoding</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">characterEncoding</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="content.html">content</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">content</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="content-type.html">contentType</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">contentType</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/MediaType.html"><span class="identifier">MediaType</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="context-path.html">contextPath</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">contextPath</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="flash-attrs.html">flashAttrs</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flashAttrs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="params.html">params</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">params</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/util/MultiValueMap.html"><span class="identifier">MultiValueMap</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="path-info.html">pathInfo</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">pathInfo</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="principal.html">principal</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">principal</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/security/Principal.html"><span class="identifier">Principal</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="secure.html">secure</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">secure</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="servlet-path.html">servletPath</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">servletPath</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="session.html">session</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">session</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/mock/web/MockHttpSession.html"><span class="identifier">MockHttpSession</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="session-attrs.html">sessionAttrs</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">sessionAttrs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="accept.html">accept</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">accept</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$accept(kotlin.Array((org.springframework.http.MediaType)))/mediaTypes">mediaTypes</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/MediaType.html"><span class="identifier">MediaType</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="cookie.html">cookie</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">cookie</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$cookie(kotlin.Array((javax.servlet.http.Cookie)))/cookies">cookies</span><span class="symbol">:</span>&nbsp;<span class="identifier">Cookie</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="flash-attr.html">flashAttr</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">flashAttr</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$flashAttr(kotlin.String, kotlin.Any)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$flashAttr(kotlin.String, kotlin.Any)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="header.html">header</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">header</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$header(kotlin.String, kotlin.Array((kotlin.Any)))/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="keyword">vararg</span> <span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$header(kotlin.String, kotlin.Array((kotlin.Any)))/values">values</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="headers.html">headers</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">headers</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$headers(kotlin.Function1((org.springframework.http.HttpHeaders, kotlin.Unit)))/headers">headers</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/HttpHeaders.html"><span class="identifier">HttpHeaders</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="locale.html">locale</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">locale</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$locale(kotlin.Array((java.util.Locale)))/locales">locales</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/util/Locale.html"><span class="identifier">Locale</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="merge.html">merge</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">merge</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$merge(org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder)/parent">parent</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/servlet/request/MockHttpServletRequestBuilder.html"><span class="identifier">MockHttpServletRequestBuilder</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="param.html">param</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">param</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$param(kotlin.String, kotlin.Array((kotlin.String)))/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="keyword">vararg</span> <span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$param(kotlin.String, kotlin.Array((kotlin.String)))/values">values</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="request-attr.html">requestAttr</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">requestAttr</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$requestAttr(kotlin.String, kotlin.Any)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$requestAttr(kotlin.String, kotlin.Any)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="session-attr.html">sessionAttr</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">sessionAttr</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$sessionAttr(kotlin.String, kotlin.Any)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$sessionAttr(kotlin.String, kotlin.Any)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="with.html">with</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">with</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.MockHttpServletRequestDsl$with(org.springframework.test.web.servlet.request.RequestPostProcessor)/processor">processor</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/servlet/request/RequestPostProcessor.html"><span class="identifier">RequestPostProcessor</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="../-mock-multipart-http-servlet-request-dsl/index.html">MockMultipartHttpServletRequestDsl</a></h4>
+</td>
+<td>
+<p>Provide a <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/servlet/request/MockMultipartHttpServletRequestBuilder.html">MockMultipartHttpServletRequestBuilder</a> Kotlin DSL in order to be able to write idiomatic Kotlin code.</p>
+<code><span class="keyword">class </span><span class="identifier">MockMultipartHttpServletRequestDsl</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">MockHttpServletRequestDsl</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

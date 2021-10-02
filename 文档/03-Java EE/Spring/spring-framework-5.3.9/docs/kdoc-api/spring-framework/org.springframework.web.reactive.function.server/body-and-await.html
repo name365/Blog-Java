@@ -1,0 +1,21 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>bodyAndAwait - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="index.html">org.springframework.web.reactive.function.server</a>&nbsp;/&nbsp;<a href="./body-and-await.html">bodyAndAwait</a><br/>
+<br/>
+<h1>bodyAndAwait</h1>
+<a name="org.springframework.web.reactive.function.server$bodyAndAwait(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlinx.coroutines.flow.Flow((org.springframework.web.reactive.function.server.bodyAndAwait.T)))"></a>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">bodyAndAwait</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$bodyAndAwait(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlinx.coroutines.flow.Flow((org.springframework.web.reactive.function.server.bodyAndAwait.T)))/flow">flow</span><span class="symbol">:</span>&nbsp;<span class="identifier">Flow</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a></code>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html#body(P, java.lang.Class<T>)">ServerResponse.BodyBuilder.body</a> with <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a> and
+<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/ParameterizedTypeReference.html">ParameterizedTypeReference</a> parameters providing a <code>bodyAndAwait(Flow&lt;T&gt;)</code> variant.
+This extension is not subject to type erasure and retains actual generic type arguments.</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+</BODY>
+</HTML>

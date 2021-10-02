@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--设置dao接口-->
+<mapper namespace="com.jiaxuan.shop.dao.CartDao">
+
+    <resultMap id="CartMap" type="Cart">
+        <id column="id" property="id"/>
+        <result column="customer_id" property="customerId"/>
+        <result column="product_num" property="productNum"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <association property="product" javaType="Product" column="product_id">
+            <id property="id" column="p.id"/>
+            <result property="name" column="name"/>
+            <result property="price" column="price"/>
+            <result property="image" column="image"/>
+        </association>
+    </resultMap>
+
+    <sql id="CartColumn">
+        id,
+        customer_id,
+        product_id,
+        product_num,
+        total_price,
+        status,
+        create_time
+    </sql>
+
+    <select id="selectCartByCustomerIdAndCartId" resultMap="CartMap">
+        select t.id,t.customer_id,t.product_num,t.total_price,t.status, t.create_time,p.id 'p.id',p.name,p.image,p.price
+        from t_cart t
+          left join t_product p
+        on t.product_id = p.id
+        where t.id = #{cartId} and customer_id = #{customerId} and status = 1
+    </select>
+
+    <select id="selectCartByCustomerIdAndProductId" resultType="Cart">
+        select
+        <include refid="CartColumn"/>
+        from t_cart
+        where customer_id = #{customerId} and product_id = #{productId} and status = 1
+    </select>
+
+    <select id="selectRedirectCartByCustomerIdAndProductId" resultType="Cart">
+        select
+        <include refid="CartColumn"/>
+        from t_cart
+        where customer_id = #{customerId} and product_id = #{productId} and status = 2
+    </select>
+
+    <insert id="insertCart" parameterType="Cart" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into t_cart
+          (customer_id, product_id, product_num,total_price,status,create_time)
+        values
+          (#{customerId},#{product.id},#{productNum},#{totalPrice},#{status},#{createTime})
+    </insert>
+
+    <select id="selectAllCartByCustomerId" parameterType="integer" resultMap="CartMap">
+        select t.id,t.customer_id,t.product_num,t.total_price,t.status, t.create_time,p.id 'p.id',p.name,p.image,p.price
+        from t_cart t
+          left join t_product p
+        on t.product_id = p.id
+        where customer_id = #{customerId} and status = 1
+    </select>
+
+    <select id="selectCartByCartIdsAndCustomerId" resultMap="CartMap">
+        select t.id,t.customer_id,t.product_num,t.total_price,t.status, t.create_time,p.id 'p.id',p.name,p.image,p.price
+        from t_cart t
+          left join t_product p
+        on t.product_id = p.id
+        where t.id in
+          <if test="cartIds != null and cartIds.length > 0">
+            <foreach collection="cartIds" item="cartId" open="(" separator="," close=")">
+                #{cartId}
+            </foreach>
+          </if>
+        and customer_id = #{customerId} and status = #{status}
+    </select>
+
+    <select id="selectRedirectCartByCartIdsAndCustomerId" resultMap="CartMap">
+        select t.id,t.customer_id,t.product_num,t.total_price,t.status, t.create_time,p.id 'p.id',p.name,p.image,p.price
+        from t_cart t
+        left join t_product p
+        on t.product_id = p.id
+        where t.id in
+        <if test="cartIds != null and cartIds.length > 0">
+            <foreach collection="cartIds" item="cartId" open="(" separator="," close=")">
+                #{cartId}
+            </foreach>
+        </if>
+        and customer_id = #{customerId} and status = #{status}
+    </select>
+
+    <update id="updateCartNumAndTotalPriceById">
+        update t_cart
+          set product_num = #{productNum},
+              total_price = #{totalPrice}
+        where id = #{id}
+    </update>
+
+    <update id="updateCartStatusByCustomerId">
+        update t_cart
+          set status = #{status}
+        where customer_id = #{customerId}
+    </update>
+
+    <update id="updateCartStatusByCartIdAndCustomerId">
+        update t_cart
+          set status = #{status}
+        where id = #{cartId} and customer_id = #{customerId}
+    </update>
+
+    <!--TODO: 更新数据，当条件是一个整型的数组的时候，使用 foreach 语句-->
+    <update id="updateCartStatusByCartIdAndCustomerIds">
+        update t_cart
+        set status = #{status}
+        where id in
+        <if test="cartIds != null and cartIds.length > 0">
+            <foreach collection="cartIds" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        and customer_id = #{customerId}
+    </update>
+
+    <update id="updateProductNumAndPriceByCartIdAndCustomerIdAndStatus">
+        update t_cart
+          set product_num = #{productNum},
+              total_price = #{totalPrice}
+        where id = #{cartId} and customer_id = #{customerId} and status = #{status}
+    </update>
+
+    <delete id="deleteCartById" parameterType="integer">
+        delete from t_cart
+        where id = #{id}
+    </delete>
+</mapper>

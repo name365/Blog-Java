@@ -1,0 +1,122 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>org.springframework.messaging.rsocket - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="./index.html">org.springframework.messaging.rsocket</a><br/>
+<br/>
+<h2>Package org.springframework.messaging.rsocket</h2>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="connect-and-await.html">connectAndAwait</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/Builder.html#connect(io.rsocket.transport.ClientTransport)">RSocketRequester.Builder.connect</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/Builder.html"><span class="identifier">Builder</span></a><span class="symbol">.</span><span class="identifier">connectAndAwait</span><span class="symbol">(</span><span class="identifier" id="org.springframework.messaging.rsocket$connectAndAwait(org.springframework.messaging.rsocket.RSocketRequester.Builder, io.rsocket.transport.ClientTransport)/transport">transport</span><span class="symbol">:</span>&nbsp;<span class="identifier">ClientTransport</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester.html"><span class="identifier">RSocketRequester</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="connect-tcp-and-await.html">connectTcpAndAwait</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/Builder.html#connectTcp(java.lang.String, int)">RSocketRequester.Builder.connectTcp</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/Builder.html"><span class="identifier">Builder</span></a><span class="symbol">.</span><span class="identifier">connectTcpAndAwait</span><span class="symbol">(</span><span class="identifier" id="org.springframework.messaging.rsocket$connectTcpAndAwait(org.springframework.messaging.rsocket.RSocketRequester.Builder, kotlin.String, kotlin.Int)/host">host</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.messaging.rsocket$connectTcpAndAwait(org.springframework.messaging.rsocket.RSocketRequester.Builder, kotlin.String, kotlin.Int)/port">port</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester.html"><span class="identifier">RSocketRequester</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="connect-web-socket-and-await.html">connectWebSocketAndAwait</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/Builder.html#connectWebSocket(java.net.URI)">RSocketRequester.Builder.connectWebSocket</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/Builder.html"><span class="identifier">Builder</span></a><span class="symbol">.</span><span class="identifier">connectWebSocketAndAwait</span><span class="symbol">(</span><span class="identifier" id="org.springframework.messaging.rsocket$connectWebSocketAndAwait(org.springframework.messaging.rsocket.RSocketRequester.Builder, java.net.URI)/uri">uri</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/net/URI.html"><span class="identifier">URI</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester.html"><span class="identifier">RSocketRequester</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="data-with-type.html">dataWithType</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RequestSpec.html#data(java.lang.Object)">RSocketRequester.RequestSpec.data</a> providing a <code>dataWithType&lt;Foo&gt;(Any)</code>
+variant leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RequestSpec.html"><span class="identifier">RequestSpec</span></a><span class="symbol">.</span><span class="identifier">dataWithType</span><span class="symbol">(</span><span class="identifier" id="org.springframework.messaging.rsocket$dataWithType(org.springframework.messaging.rsocket.RSocketRequester.RequestSpec, kotlin.Any)/producer">producer</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html"><span class="identifier">RetrieveSpec</span></a></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RequestSpec.html#data(java.lang.Object)">RSocketRequester.RequestSpec.data</a> providing a <code>dataWithType(Publisher&lt;T&gt;)</code>
+variant leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RequestSpec.html"><span class="identifier">RequestSpec</span></a><span class="symbol">.</span><span class="identifier">dataWithType</span><span class="symbol">(</span><span class="identifier" id="org.springframework.messaging.rsocket$dataWithType(org.springframework.messaging.rsocket.RSocketRequester.RequestSpec, org.reactivestreams.Publisher((org.springframework.messaging.rsocket.dataWithType.T)))/publisher">publisher</span><span class="symbol">:</span>&nbsp;<a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html"><span class="identifier">Publisher</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html"><span class="identifier">RetrieveSpec</span></a></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RequestSpec.html#data(java.lang.Object)">RSocketRequester.RequestSpec.data</a> providing a <code>dataWithType(Flow&lt;T&gt;)</code>
+variant leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RequestSpec.html"><span class="identifier">RequestSpec</span></a><span class="symbol">.</span><span class="identifier">dataWithType</span><span class="symbol">(</span><span class="identifier" id="org.springframework.messaging.rsocket$dataWithType(org.springframework.messaging.rsocket.RSocketRequester.RequestSpec, kotlinx.coroutines.flow.Flow((org.springframework.messaging.rsocket.dataWithType.T)))/flow">flow</span><span class="symbol">:</span>&nbsp;<span class="identifier">Flow</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html"><span class="identifier">RetrieveSpec</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="metadata-to-extract.html">metadataToExtract</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/MetadataExtractorRegistry.html#metadataToExtract(org.springframework.util.MimeType, java.lang.Class<?>, java.lang.String)">MetadataExtractorRegistry.metadataToExtract</a> providing a <code>metadataToExtract&lt;Foo&gt;(...)</code>
+variant leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/MetadataExtractorRegistry.html"><span class="identifier">MetadataExtractorRegistry</span></a><span class="symbol">.</span><span class="identifier">metadataToExtract</span><span class="symbol">(</span><span class="identifier" id="org.springframework.messaging.rsocket$metadataToExtract(org.springframework.messaging.rsocket.MetadataExtractorRegistry, org.springframework.util.MimeType, kotlin.String)/mimeType">mimeType</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/util/MimeType.html"><span class="identifier">MimeType</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.messaging.rsocket$metadataToExtract(org.springframework.messaging.rsocket.MetadataExtractorRegistry, org.springframework.util.MimeType, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/MetadataExtractorRegistry.html"><span class="identifier">MetadataExtractorRegistry</span></a><span class="symbol">.</span><span class="identifier">metadataToExtract</span><span class="symbol">(</span><span class="identifier" id="org.springframework.messaging.rsocket$metadataToExtract(org.springframework.messaging.rsocket.MetadataExtractorRegistry, org.springframework.util.MimeType, kotlin.Function2((org.springframework.messaging.rsocket.metadataToExtract.T, kotlin.collections.MutableMap((kotlin.String, kotlin.Any)), kotlin.Unit)))/mimeType">mimeType</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/util/MimeType.html"><span class="identifier">MimeType</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.messaging.rsocket$metadataToExtract(org.springframework.messaging.rsocket.MetadataExtractorRegistry, org.springframework.util.MimeType, kotlin.Function2((org.springframework.messaging.rsocket.metadataToExtract.T, kotlin.collections.MutableMap((kotlin.String, kotlin.Any)), kotlin.Unit)))/mapper">mapper</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">T</span><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html"><span class="identifier">MutableMap</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="retrieve-and-await.html">retrieveAndAwait</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html#retrieveMono(java.lang.Class<T>)">RSocketRequester.RetrieveSpec.retrieveMono</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html"><span class="identifier">RetrieveSpec</span></a><span class="symbol">.</span><span class="identifier">retrieveAndAwait</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="retrieve-and-await-or-null.html">retrieveAndAwaitOrNull</a></h4>
+</td>
+<td>
+<p>Nullable coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html#retrieveMono(java.lang.Class<T>)">RSocketRequester.RetrieveSpec.retrieveMono</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html"><span class="identifier">RetrieveSpec</span></a><span class="symbol">.</span><span class="identifier">retrieveAndAwaitOrNull</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="retrieve-flow.html">retrieveFlow</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html#retrieveFlux(java.lang.Class<T>)">RSocketRequester.RetrieveSpec.retrieveFlux</a>.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html"><span class="identifier">RetrieveSpec</span></a><span class="symbol">.</span><span class="identifier">retrieveFlow</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Flow</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="retrieve-flux.html">retrieveFlux</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html#retrieveFlux(java.lang.Class<T>)">RSocketRequester.RetrieveSpec.retrieveFlux</a> providing a <code>retrieveFlux&lt;Foo&gt;()</code>
+variant leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html"><span class="identifier">RetrieveSpec</span></a><span class="symbol">.</span><span class="identifier">retrieveFlux</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html"><span class="identifier">Flux</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="retrieve-mono.html">retrieveMono</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html#retrieveMono(java.lang.Class<T>)">RSocketRequester.RetrieveSpec.retrieveMono</a> providing a <code>retrieveMono&lt;Foo&gt;()</code>
+variant leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html"><span class="identifier">RetrieveSpec</span></a><span class="symbol">.</span><span class="identifier">retrieveMono</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html"><span class="identifier">Mono</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="send-and-await.html">sendAndAwait</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html#send()">RSocketRequester.RetrieveSpec.send</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html"><span class="identifier">RetrieveSpec</span></a><span class="symbol">.</span><span class="identifier">sendAndAwait</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

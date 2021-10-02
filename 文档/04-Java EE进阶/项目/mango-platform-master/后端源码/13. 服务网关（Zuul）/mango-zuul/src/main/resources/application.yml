@@ -1,0 +1,19 @@
+server:
+  port: 8010
+spring:
+  application:
+    name: mango-zuul
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        serviceName: ${spring.application.name}    # 注册到consul的服务名称
+zuul:
+  routes:
+    ribbon:
+      path: /ribbon/**
+      serviceId: mango-consumer  # 转发到消费者 /ribbon/
+    feign:
+      path: /feign/**
+      serviceId: mango-consumer  # 转发到消费者 /feign/

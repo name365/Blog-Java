@@ -1,0 +1,19 @@
+@CHARSET "utf-8";
+.successMsg{
+    background: rgba(176, 255, 163, 0.6);
+    color:white;
+    text-align: center;
+    border-radius:4px;
+}
+.errorMsg{
+    background:rgba(255,0,0,0.6);
+    color:white;
+    text-align: center;
+    border-radius:4px;
+}
+.okInfo{
+    color:green;
+}
+.errorInfo{
+    color:red;
+}

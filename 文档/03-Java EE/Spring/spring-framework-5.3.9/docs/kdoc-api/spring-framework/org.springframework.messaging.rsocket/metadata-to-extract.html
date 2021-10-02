@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>metadataToExtract - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="index.html">org.springframework.messaging.rsocket</a>&nbsp;/&nbsp;<a href="./metadata-to-extract.html">metadataToExtract</a><br/>
+<br/>
+<h1>metadataToExtract</h1>
+<a name="org.springframework.messaging.rsocket$metadataToExtract(org.springframework.messaging.rsocket.MetadataExtractorRegistry, org.springframework.util.MimeType, kotlin.String)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/MetadataExtractorRegistry.html"><span class="identifier">MetadataExtractorRegistry</span></a><span class="symbol">.</span><span class="identifier">metadataToExtract</span><span class="symbol">(</span><span class="identifier" id="org.springframework.messaging.rsocket$metadataToExtract(org.springframework.messaging.rsocket.MetadataExtractorRegistry, org.springframework.util.MimeType, kotlin.String)/mimeType">mimeType</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/util/MimeType.html"><span class="identifier">MimeType</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.messaging.rsocket$metadataToExtract(org.springframework.messaging.rsocket.MetadataExtractorRegistry, org.springframework.util.MimeType, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/MetadataExtractorRegistry.html#metadataToExtract(org.springframework.util.MimeType, java.lang.Class<?>, java.lang.String)">MetadataExtractorRegistry.metadataToExtract</a> providing a <code>metadataToExtract&lt;Foo&gt;(...)</code>
+variant leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<h3>Parameters</h3>
+<p><a name="mimeType"></a>
+<code>mimeType</code> - the mime type of metadata entries to extract</p>
+<p><a name="name"></a>
+<code>name</code> - assign a name for the decoded value; if not provided, then
+the mime type is used as the key</p>
+<p><a name="T"></a>
+<code>T</code> - the target value type to decode to</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+<a name="org.springframework.messaging.rsocket$metadataToExtract(org.springframework.messaging.rsocket.MetadataExtractorRegistry, org.springframework.util.MimeType, kotlin.Function2((org.springframework.messaging.rsocket.metadataToExtract.T, kotlin.collections.MutableMap((kotlin.String, kotlin.Any)), kotlin.Unit)))"></a>
+<code><span class="keyword">inline</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/MetadataExtractorRegistry.html"><span class="identifier">MetadataExtractorRegistry</span></a><span class="symbol">.</span><span class="identifier">metadataToExtract</span><span class="symbol">(</span><span class="identifier" id="org.springframework.messaging.rsocket$metadataToExtract(org.springframework.messaging.rsocket.MetadataExtractorRegistry, org.springframework.util.MimeType, kotlin.Function2((org.springframework.messaging.rsocket.metadataToExtract.T, kotlin.collections.MutableMap((kotlin.String, kotlin.Any)), kotlin.Unit)))/mimeType">mimeType</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/util/MimeType.html"><span class="identifier">MimeType</span></a><span class="symbol">, </span><span class="keyword">noinline</span> <span class="identifier" id="org.springframework.messaging.rsocket$metadataToExtract(org.springframework.messaging.rsocket.MetadataExtractorRegistry, org.springframework.util.MimeType, kotlin.Function2((org.springframework.messaging.rsocket.metadataToExtract.T, kotlin.collections.MutableMap((kotlin.String, kotlin.Any)), kotlin.Unit)))/mapper">mapper</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">T</span><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html"><span class="identifier">MutableMap</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/MetadataExtractorRegistry.html#metadataToExtract(org.springframework.util.MimeType, java.lang.Class<?>, java.lang.String)">MetadataExtractorRegistry.metadataToExtract</a> providing a <code>metadataToExtract&lt;Foo&gt;(...)</code>
+variant leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<h3>Parameters</h3>
+<p><a name="mimeType"></a>
+<code>mimeType</code> - the mime type of metadata entries to extract</p>
+<p><a name="mapper"></a>
+<code>mapper</code> - custom logic to add the decoded value to the output map</p>
+<p><a name="T"></a>
+<code>T</code> - the target value type to decode to</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+</BODY>
+</HTML>

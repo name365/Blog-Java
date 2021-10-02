@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>awaitExchange - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="index.html">org.springframework.web.reactive.function.client</a>&nbsp;/&nbsp;<a href="./await-exchange.html">awaitExchange</a><br/>
+<br/>
+<h1>awaitExchange</h1>
+<a name="org.springframework.web.reactive.function.client$awaitExchange(org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec((org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec((org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec(()))))))"></a>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestHeadersSpec.html"><span class="identifier">RequestHeadersSpec</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestHeadersSpec.html"><span class="identifier">RequestHeadersSpec</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">.</span><s><span class="identifier">awaitExchange</span></s><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/ClientResponse.html"><span class="identifier">ClientResponse</span></a></code><br/>
+<strong>Deprecated:</strong> Deprecated since 5.3 due to the possibility to leak memory and/or connections; please,use awaitExchange { } or exchangeToFlow { } instead; consider also using retrieve()which provides access to the response status and headers via ResponseEntity along with error status handling.<br/>
+<br/>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestHeadersSpec.html#exchange()">WebClient.RequestHeadersSpec.exchange</a>.</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+<a name="org.springframework.web.reactive.function.client$awaitExchange(org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec((org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec((org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec(()))))), kotlin.coroutines.SuspendFunction1((org.springframework.web.reactive.function.client.ClientResponse, org.springframework.web.reactive.function.client.awaitExchange.T)))"></a>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestHeadersSpec.html"><span class="identifier">RequestHeadersSpec</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestHeadersSpec.html"><span class="identifier">RequestHeadersSpec</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">awaitExchange</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.client$awaitExchange(org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec((org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec((org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec(()))))), kotlin.coroutines.SuspendFunction1((org.springframework.web.reactive.function.client.ClientResponse, org.springframework.web.reactive.function.client.awaitExchange.T)))/responseHandler">responseHandler</span><span class="symbol">:</span>&nbsp;<span class="keyword">suspend </span><span class="symbol">(</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/ClientResponse.html"><span class="identifier">ClientResponse</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">T</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/client/WebClient/RequestHeadersSpec.html#exchangeToMono(java.util.function.Function<org.springframework.web.reactive.function.client.ClientResponse,? extends reactor.core.publisher.Mono<V>>)">WebClient.RequestHeadersSpec.exchangeToMono</a>.</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.3</p>
+</BODY>
+</HTML>

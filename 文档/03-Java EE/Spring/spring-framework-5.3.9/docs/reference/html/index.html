@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.10">
+<title>Spring Framework Documentation</title>
+<style>
+@import 'css/spring.css';
+
+.listingblock .switch {
+    border-style: none;
+    display: inline-block;
+    position: relative;
+    bottom: -3px;
+}
+
+.listingblock .switch--item {
+    padding: 10px;
+    background-color: #e6e1dc;
+    color: #282c34;
+    display: inline-block;
+    cursor: pointer;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.listingblock .switch--item:not(:first-child) {
+    border-style: none;
+}
+
+.listingblock .switch--item.selected {
+    background-color: #282c34;
+    color: #e6e1dc;
+}
+
+.listingblock pre.highlightjs {
+    padding: 0;
+}
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.hidden {
+	display: none;
+}
+
+.switch {
+	border-width: 1px 1px 0 1px;
+	border-style: solid;
+	border-color: #7a2518;
+	display: inline-block;
+}
+
+.switch--item {
+	padding: 10px;
+	background-color: #ffffff;
+	color: #7a2518;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.switch--item:not(:first-child) {
+	border-width: 0 0 0 1px;
+	border-style: solid;
+	border-color: #7a2518;
+}
+
+.switch--item.selected {
+	background-color: #7a2519;
+	color: #ffffff;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script type="text/javascript">
+function addBlockSwitches() {
+	$('.primary').each(function() {
+		primary = $(this);
+		createSwitchItem(primary, createBlockSwitch(primary)).item.addClass("selected");
+		primary.children('.title').remove();
+	});
+	$('.secondary').each(function(idx, node) {
+		secondary = $(node);
+		primary = findPrimary(secondary);
+		switchItem = createSwitchItem(secondary, primary.children('.switch'));
+		switchItem.content.addClass('hidden');
+		findPrimary(secondary).append(switchItem.content);
+		secondary.remove();
+	});
+}
+
+function createBlockSwitch(primary) {
+	blockSwitch = $('<div class="switch"></div>');
+	primary.prepend(blockSwitch);
+	return blockSwitch;
+}
+
+function findPrimary(secondary) {
+	candidate = secondary.prev();
+	while (!candidate.is('.primary')) {
+		candidate = candidate.prev();
+	}
+	return candidate;
+}
+
+function createSwitchItem(block, blockSwitch) {
+	blockName = block.children('.title').text();
+	content = block.children('.content').first().append(block.next('.colist'));
+	item = $('<div class="switch--item">' + blockName + '</div>');
+	blockSwitch.append(item);
+	return {'item': item, 'content': content};
+}
+
+function globalSwitch() {
+	$('.switch--item').each(function() {
+		var blockId = blockIdForSwitchItem($(this));
+		$(this).off('click');
+		$(this).on('click', function() {
+			selectedText = $(this).text()
+			window.localStorage.setItem(blockId, selectedText);
+			$(".switch--item").filter(function() {
+				return blockIdForSwitchItem($(this)) === blockId;
+			}).filter(function() {
+				return $(this).text() === selectedText;
+			}).each(function() {
+				select($(this))
+			});
+		});
+		if ($(this).text() === window.localStorage.getItem(blockId)) {
+			select($(this))
+		}
+	});
+}
+
+function blockIdForSwitchItem(item) {
+	idComponents = []
+	idComponents.push(item.text().toLowerCase());
+	item.siblings(".switch--item").each(function(index, sibling) {
+		idComponents.push($(sibling).text().toLowerCase());
+	});
+	return idComponents.sort().join("-")
+}
+
+function select(selected) {
+	selected.addClass('selected');
+	selected.siblings().removeClass('selected');
+	selectedContent = selected.parent().siblings(".content").eq(selected.index())
+	selectedContent.removeClass('hidden');
+	selectedContent.siblings().addClass('hidden');
+}
+
+$(addBlockSwitches);
+$(globalSwitch);
+
+</script>
+
+</head>
+<body class="book">
+<div id="header">
+<h1>Spring Framework Documentation</h1>
+<span><strong>5.3.9</strong></span>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<a href="overview.html#overview">Overview</a> 
+</td>
+<td class="hdlist2">
+<p>history, design philosophy, feedback,
+getting started.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a href="core.html#spring-core">Core</a> 
+</td>
+<td class="hdlist2">
+<p>IoC Container, Events, Resources, i18n,
+Validation, Data Binding, Type Conversion, SpEL, AOP.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a href="testing.html#testing">Testing</a> 
+</td>
+<td class="hdlist2">
+<p>Mock Objects, TestContext Framework,
+Spring MVC Test, WebTestClient.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a href="data-access.html#spring-data-tier">Data Access</a> 
+</td>
+<td class="hdlist2">
+<p>Transactions, DAO Support,
+JDBC, R2DBC, O/R Mapping, XML Marshalling.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a href="web.html#spring-web">Web Servlet</a> 
+</td>
+<td class="hdlist2">
+<p>Spring MVC, WebSocket, SockJS,
+STOMP Messaging.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a href="web-reactive.html#spring-webflux">Web Reactive</a> 
+</td>
+<td class="hdlist2">
+<p>Spring WebFlux, WebClient,
+WebSocket, RSocket.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a href="integration.html#spring-integration">Integration</a> 
+</td>
+<td class="hdlist2">
+<p>Remoting, JMS, JCA, JMX,
+Email, Tasks, Scheduling, Caching.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a href="languages.html#languages">Languages</a> 
+</td>
+<td class="hdlist2">
+<p>Kotlin, Groovy, Dynamic Languages.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a href="appendix.html#appendix">Appendix</a> 
+</td>
+<td class="hdlist2">
+<p>Spring properties.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a href="https://github.com/spring-projects/spring-framework/wiki"><strong>Wiki</strong></a> 
+</td>
+<td class="hdlist2">
+<p>What&#8217;s New, Upgrade Notes, Supported Versions,
+and other cross-version information.</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This documentation is also available as <a href="https://docs.spring.io/spring-framework/docs/5.3.9/reference/pdf/index.pdf">PDF</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Rod Johnson, Juergen Hoeller, Keith Donald, Colin Sampaleanu, Rob Harrop, Thomas Risberg,
+Alef Arendsen, Darren Davison, Dmitriy Kopylenko, Mark Pollack, Thierry Templier, Erwin
+Vervaet, Portia Tung, Ben Hale, Adrian Colyer, John Lewis, Costin Leau, Mark Fisher, Sam
+Brannen, Ramnivas Laddad, Arjen Poutsma, Chris Beams, Tareq Abedrabbo, Andy Clement, Dave
+Syer, Oliver Gierke, Rossen Stoyanchev, Phillip Webb, Rob Winch, Brian Clozel, Stephane
+Nicoll, Sebastien Deleuze, Jay Bryant, Mark Paluch</p>
+</div>
+<div class="paragraph">
+<p>Copyright © 2002 - 2021 Pivotal, Inc. All Rights Reserved.</p>
+</div>
+<div class="paragraph">
+<p>Copies of this document may be made for your own use and for distribution to others,
+provided that you do not charge any fee for such copies and further provided that each
+copy contains this Copyright Notice, whether distributed in print or electronically.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 5.3.9<br>
+Last updated 2021-07-14 06:36:18 UTC
+</div>
+</div>
+<link rel="stylesheet" href="js/highlight/styles/googlecode.min.css">
+<script src="js/highlight/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+<script type="text/javascript" src="js/tocbot/tocbot.min.js"></script>
+<script type="text/javascript" src="js/toc.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--设置dao接口-->
+<mapper namespace="com.jiaxuan.shop.dao.ProductTypeDao">
+
+    <sql id="productTypeColumn">
+        id,
+        name,
+        status
+    </sql>
+
+    <select id="selectAll" resultType="ProductType">
+        select <include refid="productTypeColumn"/>
+        from t_product_type
+    </select>
+
+    <select id="selectProductTypeById" resultType="ProductType">
+        select <include refid="productTypeColumn"/>
+        from t_product_type
+        where id = #{id}
+    </select>
+
+    <select id="selectProductTypeByName" resultType="ProductType">
+        select <include refid="productTypeColumn"/>
+        from t_product_type
+        where name = #{name}
+    </select>
+
+    <select id="findAllEnableProductTypes" resultType="ProductType">
+        select <include refid="productTypeColumn"/>
+        from t_product_type
+        where status = #{status}
+    </select>
+
+    <select id="selectAllValidByStatus" resultType="ProductType">
+        select <include refid="productTypeColumn"/>
+        from t_product_type
+        where status = #{status}
+    </select>
+
+    <insert id="insertProductType">
+        insert into t_product_type
+          (name,status)
+        values
+          (#{name},#{status})
+    </insert>
+
+    <update id="updateName">
+        update t_product_type
+        set name = #{name}
+        where id = #{id}
+    </update>
+
+    <update id="updateStatus">
+        update t_product_type
+        set status = #{status}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteProductTypeById">
+        delete from t_product_type
+        where id = #{id}
+    </delete>
+
+</mapper>

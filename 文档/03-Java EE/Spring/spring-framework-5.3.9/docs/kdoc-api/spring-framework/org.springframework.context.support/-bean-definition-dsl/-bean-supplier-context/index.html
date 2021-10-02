@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>BeanDefinitionDsl.BeanSupplierContext - spring-framework</title>
+<link rel="stylesheet" href="../../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="../../index.html">org.springframework.context.support</a>&nbsp;/&nbsp;<a href="../index.html">BeanDefinitionDsl</a>&nbsp;/&nbsp;<a href="./index.html">BeanSupplierContext</a><br/>
+<br/>
+<h1>BeanSupplierContext</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">BeanSupplierContext</span></code>
+<p>Limit access to <code>ref()</code> and <code>provider()</code> to bean supplier lambdas.</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Limit access to <code>ref()</code> and <code>provider()</code> to bean supplier lambdas.</p>
+<code><span class="identifier">BeanSupplierContext</span><span class="symbol">(</span><span class="identifier" id="org.springframework.context.support.BeanDefinitionDsl.BeanSupplierContext$<init>(org.springframework.context.support.GenericApplicationContext)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/context/support/GenericApplicationContext.html"><span class="identifier">GenericApplicationContext</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="provider.html">provider</a></h4>
+</td>
+<td>
+<p>Return a provider for the specified bean, allowing for lazy on-demand retrieval
+of instances, including availability and uniqueness options.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">provider</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/ObjectProvider.html"><span class="identifier">ObjectProvider</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="ref.html">ref</a></h4>
+</td>
+<td>
+<p>Get a reference to the bean by type or type + name with the syntax
+<code>ref&lt;Foo&gt;()</code> or <code>ref&lt;Foo&gt;("foo")</code>. When leveraging Kotlin type inference
+it could be as short as <code>ref()</code> or <code>ref("foo")</code>.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">ref</span><span class="symbol">(</span><span class="identifier" id="org.springframework.context.support.BeanDefinitionDsl.BeanSupplierContext$ref(kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

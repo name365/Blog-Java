@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RouterFunctionDsl.accept - spring-framework</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="../index.html">org.springframework.web.reactive.function.server</a>&nbsp;/&nbsp;<a href="index.html">RouterFunctionDsl</a>&nbsp;/&nbsp;<a href="./accept.html">accept</a><br/>
+<br/>
+<h1>accept</h1>
+<a name="org.springframework.web.reactive.function.server.RouterFunctionDsl$accept(org.springframework.http.MediaType, kotlin.Function1((org.springframework.web.reactive.function.server.ServerRequest, reactor.core.publisher.Mono((org.springframework.web.reactive.function.server.ServerResponse)))))"></a>
+<code><span class="keyword">fun </span><span class="identifier">accept</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server.RouterFunctionDsl$accept(org.springframework.http.MediaType, kotlin.Function1((org.springframework.web.reactive.function.server.ServerRequest, reactor.core.publisher.Mono((org.springframework.web.reactive.function.server.ServerResponse)))))/mediaType">mediaType</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/MediaType.html"><span class="identifier">MediaType</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.web.reactive.function.server.RouterFunctionDsl$accept(org.springframework.http.MediaType, kotlin.Function1((org.springframework.web.reactive.function.server.ServerRequest, reactor.core.publisher.Mono((org.springframework.web.reactive.function.server.ServerResponse)))))/f">f</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html"><span class="identifier">Mono</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Route to the given handler function if the given accept predicate applies.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RouterFunctions.html#route()">RouterFunctions.route</a></p>
+</p>
+<a name="org.springframework.web.reactive.function.server.RouterFunctionDsl$accept(kotlin.Array((org.springframework.http.MediaType)))"></a>
+<code><span class="keyword">fun </span><span class="identifier">accept</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="org.springframework.web.reactive.function.server.RouterFunctionDsl$accept(kotlin.Array((org.springframework.http.MediaType)))/mediaTypes">mediaTypes</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/MediaType.html"><span class="identifier">MediaType</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a></code>
+<p>Return a <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html">RequestPredicate</a> that tests if the request's
+<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest/Headers.html#accept()">accept</a> header is
+<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/MediaType.html#isCompatibleWith(org.springframework.http.MediaType)">compatible</a> with any of the given media types.</p>
+<h3>Parameters</h3>
+<p><a name="mediaTypes"></a>
+<code>mediaTypes</code> - the media types to match the request's accept header against</p>
+<p><strong>Return</strong><br/>
+a predicate that tests the request's accept header against the given media types</p>
+</BODY>
+</HTML>

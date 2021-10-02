@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--设置dao接口-->
+<mapper namespace="com.jiaxuan.shop.dao.SystemUserDao">
+
+    <sql id="SystemUserColumn">
+        id,
+        name,
+        login_name,
+        password,
+        phone,
+        email,
+        is_valid,
+        create_date,
+        role_id
+    </sql>
+
+    <!--多表查询映射map-->
+    <resultMap id="systemUserMap" type="SystemUser">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="loginName" column="login_name"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="isValid" column="is_valid"/>
+        <result property="createDate" column="create_date"/>
+        <!--关联的Role对象,column 表示两个表对应连接的关系-->
+        <association property="role" javaType="Role" column="role_id">
+            <!--role角色表中的对应关系-->
+            <id property="id" column="r.id"/>
+            <result property="roleName" column="role_name"/>
+        </association>
+    </resultMap>
+
+    <!--单表查询-->
+    <resultMap id="systemUserMap2" type="SystemUser">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="loginName" column="login_name"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="isValid" column="is_valid"/>
+        <result property="createDate" column="create_date"/>
+        <!--关联的Role对象,column 表示两个表对应连接的关系-->
+        <association property="role" javaType="Role" column="role_id">
+            <!--role角色表中的对应关系-->
+            <id property="id" column="role_id"/>
+        </association>
+    </resultMap>
+
+    <!--查找出来的对象跟实体类对应不上，则需要使用map 多表查询-->
+    <select id="selectAllSytemUsers" resultMap="systemUserMap">
+        select s.id,s.name,s.login_name,s.password,s.phone,s.email,s.is_valid,s.create_date,s.role_id,r.id 'r.id',r.role_name
+        from t_sysuser s
+          left join t_role r ON s.role_id = r.id
+    </select>
+
+    <select id="selectSystemUserById" resultMap="systemUserMap2">
+        select
+        <include refid="SystemUserColumn"/>
+        from t_sysuser
+        where id = #{id}
+    </select>
+
+    <select id="selectSystemUserByLoginName" resultMap="systemUserMap2">
+        select
+        <include refid="SystemUserColumn"/>
+        from t_sysuser
+        where login_name = #{loginName}
+    </select>
+
+    <select id="selectSystemUserByLoginNameAndPassword" resultMap="systemUserMap">
+        select s.id,s.name,s.login_name,s.password,s.phone,s.email,s.is_valid,s.create_date,s.role_id,r.id 'r.id',r.role_name
+        from t_sysuser s
+          left join t_role r ON s.role_id = r.id
+        where login_name = #{loginName} and password = #{password} and is_valid = #{isValid}
+    </select>
+
+    <select id="selectSystemUserByParams" parameterType="com.jiaxuan.shop.params.SystemUserParam"
+            resultMap="systemUserMap">
+      select s.id,s.name,s.login_name,s.password,s.phone,s.email,s.is_valid,s.create_date,s.role_id,r.id 'r.id',r.role_name
+        from t_sysuser s
+          left join t_role r on r.id = s.role_id
+      <where>
+          <if test="name != null and name !=''">
+              and name like concat(concat('%',#{name}),'%')
+          </if>
+          <if test="loginName != null and loginName != ''">
+              and login_name like concat(concat('%',#{loginName}),'%')
+          </if>
+          <if test="phone != null and phone != ''">
+              and phone = #{phone}
+          </if>
+          <if test="roleId != null and roleId != -1">
+              and role_id = #{roleId}
+          </if>
+          <if test="isValid != null and isValid != -1">
+              and is_valid = #{isValid}
+          </if>
+      </where>
+    </select>
+
+    <insert id="insertSystemUser" parameterType="SystemUser">
+        insert into t_sysuser
+          (name, login_name, password, phone, email, is_valid, create_date, role_id)
+        values
+          (#{name},#{loginName},#{password},#{phone},#{email},#{isValid},#{createDate},#{role.id})
+    </insert>
+
+    <update id="updateSystemUser" parameterType="SystemUser">
+        update t_sysuser
+        set name=#{name},
+            phone=#{phone},
+            email=#{email},
+            role_id=#{role.id}
+        where id=#{id}
+    </update>
+
+    <update id="updateSystemUserStatus">
+        update t_sysuser
+        set is_valid=#{isValid}
+        where id=#{id}
+    </update>
+
+</mapper>

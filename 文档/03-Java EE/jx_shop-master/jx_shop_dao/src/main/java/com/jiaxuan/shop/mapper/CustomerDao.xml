@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--设置dao接口-->
+<mapper namespace="com.jiaxuan.shop.dao.CustomerDao">
+
+    <sql id="CustomerColumn">
+        id,
+        name,
+        login_name,
+        password,
+        phone,
+        address,
+        is_valid,
+        regist_date
+    </sql>
+
+    <select id="selectCustomerById" resultType="Customer">
+        select <include refid="CustomerColumn"/>
+        from t_customer
+        where id = #{id}
+    </select>
+
+     <select id="selectByLoginNameAndPassword" resultType="Customer">
+        select <include refid="CustomerColumn"/>
+         from t_customer
+         where login_name = #{loginName} and password = #{password} and is_valid = #{isValid}
+     </select>
+
+    <select id="selectByPhone" resultType="Customer">
+        select <include refid="CustomerColumn"/>
+        from t_customer
+        where phone = #{phone}
+    </select>
+
+    <select id="selectByLoginName" resultType="Customer">
+        select <include refid="CustomerColumn"/>
+        from t_customer
+        where login_name = #{loginName}
+    </select>
+
+    <select id="selectAllCustomers" resultType="Customer">
+        select <include refid="CustomerColumn"/>
+        from t_customer
+    </select>
+
+    <select id="selectCustomersByParams" parameterType="com.jiaxuan.shop.params.CustomerParam" resultType="Customer">
+        select <include refid="CustomerColumn"/>
+        from t_customer
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat(concat('%',#{name}),'%')
+            </if>
+            <if test="loginName != null and loginName != ''">
+                and login_name like concat(concat('%',#{loginName}),'%')
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="address != null and address != ''">
+                and address like concat(concat('%',#{address}),'%')
+            </if>
+            <if test="isValid != null and isValid != -1">
+                and  is_valid = #{isValid}
+            </if>
+        </where>
+
+    </select>
+
+    <insert id="insertCustomer" parameterType="Customer" useGeneratedKeys="true"
+    keyColumn="id" keyProperty="id">
+        insert into t_customer
+          (name, login_name, password, phone, address, is_valid, regist_date)
+        values
+          (#{name},#{loginName},#{password},#{phone},#{address},#{isValid},#{registDate})
+    </insert>
+
+    <update id="updateCustomerPassword" parameterType="Customer">
+        update t_customer
+          set password = #{password}
+        where id = #{id}
+    </update>
+
+    <update id="updateCustomer" parameterType="Customer">
+        update t_customer
+          set name = #{name},
+              phone = #{phone},
+              address = #{address}
+        where id = #{id}
+    </update>
+
+    <update id="updateCustomerStatus">
+      update t_customer
+        set is_valid = #{isValid}
+      where id = #{id}
+    </update>
+
+</mapper>

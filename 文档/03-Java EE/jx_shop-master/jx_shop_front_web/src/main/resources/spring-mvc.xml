@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--注解驱动-->
+    <mvc:annotation-driven>
+        <!--配置消息转换器，使用fastJson-->
+        <mvc:message-converters>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes" value="application/json;charset=utf-8"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!--扫包-->
+    <context:component-scan base-package="com.jiaxuan.front.shop"/>
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--静态资源,放在web-app下直接用以下配置-->
+    <mvc:default-servlet-handler/>
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <!--登录以及页面展示相关的接口放行-->
+            <mvc:exclude-mapping path="/front/customer/**"/>
+            <mvc:exclude-mapping path="/front/sms/**"/>
+            <mvc:exclude-mapping path="/front/product/**"/>
+            <mvc:exclude-mapping path="/front/cart/addToCart"/>
+            <!--不要拦截支付宝的异步通知接口-->
+            <mvc:exclude-mapping path="/front/pay/aliPayNotifyNotice"/>
+            <mvc:exclude-mapping path="/front/wxPay/goWxPay"/>
+            <mvc:exclude-mapping path="/front/wxPay/callback"/>
+            <mvc:exclude-mapping path="/css/**"/>
+            <mvc:exclude-mapping path="/fonts/**"/>
+            <mvc:exclude-mapping path="/iconfont/**"/>
+            <mvc:exclude-mapping path="/images/**"/>
+            <mvc:exclude-mapping path="/js/**"/>
+            <mvc:exclude-mapping path="/layer/**"/>
+            <bean class="com.jiaxuan.front.shop.interceptor.SessionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!--配置文件上传解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1000000"/>
+    </bean>
+
+</beans>

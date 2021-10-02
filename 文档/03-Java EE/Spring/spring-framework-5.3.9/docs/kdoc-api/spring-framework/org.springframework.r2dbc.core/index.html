@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>org.springframework.r2dbc.core - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="./index.html">org.springframework.r2dbc.core</a><br/>
+<br/>
+<h2>Package org.springframework.r2dbc.core</h2>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="await.html">await</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/DatabaseClient/GenericExecuteSpec.html#then()">DatabaseClient.GenericExecuteSpec.then</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/DatabaseClient/GenericExecuteSpec.html"><span class="identifier">GenericExecuteSpec</span></a><span class="symbol">.</span><span class="identifier">await</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-one.html">awaitOne</a></h4>
+</td>
+<td>
+<p>Non-nullable Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/RowsFetchSpec.html#one()">RowsFetchSpec.one</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/RowsFetchSpec.html"><span class="identifier">RowsFetchSpec</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">awaitOne</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-one-or-null.html">awaitOneOrNull</a></h4>
+</td>
+<td>
+<p>Nullable Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/RowsFetchSpec.html#one()">RowsFetchSpec.one</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/RowsFetchSpec.html"><span class="identifier">RowsFetchSpec</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">awaitOneOrNull</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-rows-updated.html">awaitRowsUpdated</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/UpdatedRowsFetchSpec.html#rowsUpdated()">UpdatedRowsFetchSpec.rowsUpdated</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/UpdatedRowsFetchSpec.html"><span class="identifier">UpdatedRowsFetchSpec</span></a><span class="symbol">.</span><span class="identifier">awaitRowsUpdated</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-single.html">awaitSingle</a></h4>
+</td>
+<td>
+<p>Non-nullable Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/RowsFetchSpec.html#first()">RowsFetchSpec.first</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/RowsFetchSpec.html"><span class="identifier">RowsFetchSpec</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">awaitSingle</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-single-or-null.html">awaitSingleOrNull</a></h4>
+</td>
+<td>
+<p>Nullable Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/RowsFetchSpec.html#first()">RowsFetchSpec.first</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/RowsFetchSpec.html"><span class="identifier">RowsFetchSpec</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">awaitSingleOrNull</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="bind.html">bind</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/DatabaseClient/GenericExecuteSpec.html#bind(int, java.lang.Object)">DatabaseClient.GenericExecuteSpec.bind</a> providing a variant leveraging reified type parameters</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/DatabaseClient/GenericExecuteSpec.html"><span class="identifier">GenericExecuteSpec</span></a><span class="symbol">.</span><span class="identifier">bind</span><span class="symbol">(</span><span class="identifier" id="org.springframework.r2dbc.core$bind(org.springframework.r2dbc.core.DatabaseClient.GenericExecuteSpec, kotlin.Int, org.springframework.r2dbc.core.bind.T)/index">index</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.r2dbc.core$bind(org.springframework.r2dbc.core.DatabaseClient.GenericExecuteSpec, kotlin.Int, org.springframework.r2dbc.core.bind.T)/value">value</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/DatabaseClient/GenericExecuteSpec.html"><span class="identifier">GenericExecuteSpec</span></a><span class="symbol">!</span></code><br/>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/DatabaseClient/GenericExecuteSpec.html"><span class="identifier">GenericExecuteSpec</span></a><span class="symbol">.</span><span class="identifier">bind</span><span class="symbol">(</span><span class="identifier" id="org.springframework.r2dbc.core$bind(org.springframework.r2dbc.core.DatabaseClient.GenericExecuteSpec, kotlin.String, org.springframework.r2dbc.core.bind.T)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.r2dbc.core$bind(org.springframework.r2dbc.core.DatabaseClient.GenericExecuteSpec, kotlin.String, org.springframework.r2dbc.core.bind.T)/value">value</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/DatabaseClient/GenericExecuteSpec.html"><span class="identifier">GenericExecuteSpec</span></a><span class="symbol">!</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="flow.html">flow</a></h4>
+</td>
+<td>
+<p>Coroutines <a href="#">Flow</a> variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/RowsFetchSpec.html#all()">RowsFetchSpec.all</a>.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/r2dbc/core/RowsFetchSpec.html"><span class="identifier">RowsFetchSpec</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">flow</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Flow</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,35 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>queryForList - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="index.html">org.springframework.jdbc.core</a>&nbsp;/&nbsp;<a href="./query-for-list.html">queryForList</a><br/>
+<br/>
+<h1>queryForList</h1>
+<a name="org.springframework.jdbc.core$queryForList(org.springframework.jdbc.core.JdbcOperations, kotlin.String)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/jdbc/core/JdbcOperations.html"><span class="identifier">JdbcOperations</span></a><span class="symbol">.</span><span class="identifier">queryForList</span><span class="symbol">(</span><span class="identifier" id="org.springframework.jdbc.core$queryForList(org.springframework.jdbc.core.JdbcOperations, kotlin.String)/sql">sql</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/jdbc/core/JdbcOperations.html#queryForList(java.lang.String, java.lang.Class<T>)">JdbcOperations.queryForList</a> providing a <code>queryForList&lt;Foo&gt;("...")</code> variant.</p>
+<p><strong>Author</strong><br/>
+Mario Arias</p>
+<p><strong>Since</strong><br/>
+5.0</p>
+<a name="org.springframework.jdbc.core$queryForList(org.springframework.jdbc.core.JdbcOperations, kotlin.String, kotlin.Array((kotlin.Any)), kotlin.IntArray)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/jdbc/core/JdbcOperations.html"><span class="identifier">JdbcOperations</span></a><span class="symbol">.</span><span class="identifier">queryForList</span><span class="symbol">(</span><span class="identifier" id="org.springframework.jdbc.core$queryForList(org.springframework.jdbc.core.JdbcOperations, kotlin.String, kotlin.Array((kotlin.Any)), kotlin.IntArray)/sql">sql</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.jdbc.core$queryForList(org.springframework.jdbc.core.JdbcOperations, kotlin.String, kotlin.Array((kotlin.Any)), kotlin.IntArray)/args">args</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.springframework.jdbc.core$queryForList(org.springframework.jdbc.core.JdbcOperations, kotlin.String, kotlin.Array((kotlin.Any)), kotlin.IntArray)/argTypes">argTypes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int-array/index.html"><span class="identifier">IntArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/jdbc/core/JdbcOperations.html#queryForList(java.lang.String, java.lang.Class<T>)">JdbcOperations.queryForList</a> providing a
+<code>queryForList&lt;Foo&gt;("...", arrayOf(arg1, argN), intArray(type1, typeN))</code> variant.</p>
+<p><strong>Author</strong><br/>
+Mario Arias</p>
+<p><strong>Since</strong><br/>
+5.0</p>
+<a name="org.springframework.jdbc.core$queryForList(org.springframework.jdbc.core.JdbcOperations, kotlin.String, kotlin.Array((kotlin.Any)))"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/jdbc/core/JdbcOperations.html"><span class="identifier">JdbcOperations</span></a><span class="symbol">.</span><span class="identifier">queryForList</span><span class="symbol">(</span><span class="identifier" id="org.springframework.jdbc.core$queryForList(org.springframework.jdbc.core.JdbcOperations, kotlin.String, kotlin.Array((kotlin.Any)))/sql">sql</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.jdbc.core$queryForList(org.springframework.jdbc.core.JdbcOperations, kotlin.String, kotlin.Array((kotlin.Any)))/args">args</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/jdbc/core/JdbcOperations.html#queryForList(java.lang.String, java.lang.Class<T>)">JdbcOperations.queryForList</a> providing a
+<code>queryForList&lt;Foo&gt;("...", arrayOf(arg1, argN))</code> variant.</p>
+<p><strong>Author</strong><br/>
+Mario Arias</p>
+<p><strong>Since</strong><br/>
+5.0</p>
+</BODY>
+</HTML>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- view层 模板 -->
+<div id="app">
+    输入的文本: <input type="text" v-model="message">{{message}}
+    <hr>
+    多行文本: <textarea name="" id="" cols="30" rows="10" v-model="message"></textarea>
+    {{message}}
+
+</div>
+
+<!-- 1.导入Vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: "123"
+        }
+    })
+</script>
+
+</body>
+</html>

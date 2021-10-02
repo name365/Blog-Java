@@ -1,0 +1,40 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RouterFunctionDsl.or - spring-framework</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="../index.html">org.springframework.web.servlet.function</a>&nbsp;/&nbsp;<a href="index.html">RouterFunctionDsl</a>&nbsp;/&nbsp;<a href="./or.html">or</a><br/>
+<br/>
+<h1>or</h1>
+<a name="org.springframework.web.servlet.function.RouterFunctionDsl$or(org.springframework.web.servlet.function.RequestPredicate, kotlin.String)"></a>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a><span class="symbol">.</span><span class="identifier">or</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.servlet.function.RouterFunctionDsl$or(org.springframework.web.servlet.function.RequestPredicate, kotlin.String)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a></code>
+<p>Return a composed request predicate that tests against both this predicate OR
+the <a href="or.html#org.springframework.web.servlet.function.RouterFunctionDsl$or(org.springframework.web.servlet.function.RequestPredicate, kotlin.String)/other">other</a> predicate (String processed as a path predicate). When evaluating the
+composed predicate, if this predicate is <code>true</code>, then the <a href="or.html#org.springframework.web.servlet.function.RouterFunctionDsl$or(org.springframework.web.servlet.function.RequestPredicate, kotlin.String)/other">other</a> predicate is not
+evaluated.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RequestPredicate.html#or(org.springframework.web.servlet.function.RequestPredicate)">RequestPredicate.or</a></p>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RequestPredicates.html#path(java.lang.String)">RequestPredicates.path</a></p>
+</p>
+<a name="org.springframework.web.servlet.function.RouterFunctionDsl$or(kotlin.String, org.springframework.web.servlet.function.RequestPredicate)"></a>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">.</span><span class="identifier">or</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.servlet.function.RouterFunctionDsl$or(kotlin.String, org.springframework.web.servlet.function.RequestPredicate)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a></code>
+<p>Return a composed request predicate that tests against both this predicate (String
+processed as a path predicate) OR the <a href="or.html#org.springframework.web.servlet.function.RouterFunctionDsl$or(kotlin.String, org.springframework.web.servlet.function.RequestPredicate)/other">other</a> predicate. When evaluating the
+composed predicate, if this predicate is <code>true</code>, then the <a href="or.html#org.springframework.web.servlet.function.RouterFunctionDsl$or(kotlin.String, org.springframework.web.servlet.function.RequestPredicate)/other">other</a> predicate is not
+evaluated.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RequestPredicate.html#or(org.springframework.web.servlet.function.RequestPredicate)">RequestPredicate.or</a></p>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RequestPredicates.html#path(java.lang.String)">RequestPredicates.path</a></p>
+</p>
+<a name="org.springframework.web.servlet.function.RouterFunctionDsl$or(org.springframework.web.servlet.function.RequestPredicate, org.springframework.web.servlet.function.RequestPredicate)"></a>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a><span class="symbol">.</span><span class="identifier">or</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.servlet.function.RouterFunctionDsl$or(org.springframework.web.servlet.function.RequestPredicate, org.springframework.web.servlet.function.RequestPredicate)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a></code>
+<p>Return a composed request predicate that tests against both this predicate OR
+the <a href="or.html#org.springframework.web.servlet.function.RouterFunctionDsl$or(org.springframework.web.servlet.function.RequestPredicate, org.springframework.web.servlet.function.RequestPredicate)/other">other</a> predicate. When evaluating the composed predicate, if this
+predicate is <code>true</code>, then the <a href="or.html#org.springframework.web.servlet.function.RouterFunctionDsl$or(org.springframework.web.servlet.function.RequestPredicate, org.springframework.web.servlet.function.RequestPredicate)/other">other</a> predicate is not evaluated.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RequestPredicate.html#or(org.springframework.web.servlet.function.RequestPredicate)">RequestPredicate.or</a></p>
+</p>
+</BODY>
+</HTML>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--设置dao接口-->
+<mapper namespace="com.jiaxuan.shop.dao.OrderDao">
+
+    <sql id="OrderColumn">
+        id,
+        order_number,
+        customer_id,
+        price,
+        create_date,
+        product_number,
+        status,
+        address
+    </sql>
+
+    <resultMap id="OrderMap" type="Order">
+        <id property="id" column="id"/>
+        <result property="price" column="price"/>
+        <result property="createDate" column="create_date"/>
+        <result property="status" column="status"/>
+        <result property="address" column="address"/>
+        <result property="orderNumber" column="order_number"/>
+        <result property="productNumber" column="product_number"/>
+        <association property="customer" column="customer_id" javaType="Customer">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="OrderMap2" type="Order">
+        <id property="id" column="id"/>
+        <result property="price" column="price"/>
+        <result property="createDate" column="create_date"/>
+        <result property="status" column="status"/>
+        <result property="address" column="address"/>
+        <result property="orderNumber" column="order_number"/>
+        <result property="productNumber" column="product_number"/>
+        <association property="customer" column="customer_id" javaType="Customer">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+
+    <select id="selectAllOrderByCustomerId" resultMap="OrderMap2">
+        select o.id,o.order_number,o.price,o.create_date,o.address,o.product_number,o.status
+        from t_order o
+        left join t_customer t on o.customer_id = t.id
+        where o.customer_id = #{customerId} and o.status != 5
+          order by o.create_date desc
+    </select>
+
+    <select id="selectOrdersByCustomerId" resultMap="OrderMap2">
+        select o.id,o.order_number,o.price,o.create_date,o.address,o.product_number,o.status
+        from t_order o
+        left join t_customer t on o.customer_id = t.id
+        where o.customer_id = #{customerId} and o.status = #{status}
+          order by o.create_date desc
+    </select>
+
+    <select id="selectOrderIdByOrderNoAndCustomerId" resultMap="OrderMap">
+      select o.id,o.order_number,o.price,o.create_date,o.address,o.product_number,o.status,c.id'c.id',c.name
+        from t_order o
+        left join t_customer c ON o.customer_id = c.id
+      where order_number = #{orderNo} and customer_id = #{customerId} and o.status != 5
+        order by o.create_date desc
+    </select>
+
+    <select id="selectOrderByOutTradeNo" resultMap="OrderMap">
+        select o.id,o.order_number,o.price,o.create_date,o.address,o.product_number,o.status,c.id'c.id',c.name
+        from t_order o
+        left join t_customer c ON o.customer_id = c.id
+        where order_number = #{outTradeNo}
+        order by o.create_date desc
+    </select>
+
+    <insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into t_order
+          (order_number, customer_id, price, create_date, product_number, status, address)
+        values
+          (#{orderNumber},#{customer.id},#{price},#{createDate},#{productNumber},#{status},#{address})
+    </insert>
+
+    <update id="updateOrderStatusByCustomerIdAndOrderId">
+        update t_order
+          set status = #{status}
+        where id = #{orderId} and customer_id = #{customerId}
+    </update>
+
+    <update id="updateOrderStatusByCustomerIdAndOrderNo">
+        update t_order
+        set status = #{status}
+        where order_number = #{orderNumber} and customer_id = #{customerId}
+    </update>
+
+    <update id="updateOrderStatusByOrderNo">
+        update t_order
+        set status = #{status}
+        where order_number = #{orderNumber}
+    </update>
+
+</mapper>

@@ -1,0 +1,155 @@
+ html,
+    body {
+        min-width: 980px;
+        height: 100%;
+    }
+
+    .head {
+        width: 100%;
+        height: 50px;
+        background: #337ab7;
+        line-height: 50px;
+        color: #fff;
+    }
+    .welcome{
+        width: 150px;
+        position: absolute;
+        top: 0;
+        right: 100px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .welcome .right{
+        margin-left: -40px;
+    }
+    .head p {
+        font-size: 20px;
+        font-weight: 900;
+        letter-spacing: 2px;
+    }
+
+    .head p span {
+        font-size: 16px;
+        margin-left: 10px;
+        font-weight: 400;
+    }
+    .wrapper-cc {
+        height: 100%;
+    }
+
+    .content-cc {
+        padding-bottom: 40px;
+        /* 必须使用和footer相同的高度 */
+    }
+
+    .flude-cc {
+        height: 100%;
+    }
+
+    .user-setting {
+        height: 100%;
+    }
+
+    .user-wrap {
+        height: 95%;
+        background: #f3f3f3;
+        padding-right: 0;
+        border-right: 1px solid #ddd;
+    }
+
+    #userPanel {
+        padding-left: 0;
+        height: 95%;
+    }
+
+    .panel-heading {
+        height: 70px;
+    }
+
+    .panel-heading h3 {
+        height: 70px;
+        line-height: 54px;
+        font-size: 22px;
+        font-weight: 600;
+        color: #0f92d4;
+    }
+
+    .panel-default {
+        height: 100%;
+    }
+
+    .panel-body {
+        height: 90%;
+        overflow: auto;
+    }
+
+    .footer {
+        position: relative;
+        margin-top: -40px;
+        /* footer高度的负值 */
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        clear: both;
+        color: #fff;
+        background: #337ab7;
+    }
+
+    .content-cc {
+        width: 100%;
+        height: 100%;
+    }
+
+    .wrapper-cc {
+        width: 100%;
+    }
+
+    .list-group li {
+        padding-left: 40px;
+    }
+
+    .list-group-item:last-child {
+        border-radius: 0;
+    }
+
+    .list-group-item:first-child {
+        border-radius: 0;
+    }
+
+    .list-group .active {
+        background: #28b9c0;
+        color: #fff;
+        border: none;
+    }
+
+    .list-group .active:hover {
+        background: #28b9c0;
+    }
+	 .file {
+		position: relative;
+		display: inline-block;
+		background: #D0EEFF;
+		border: 1px solid #99D3F5;
+		border-radius: 4px;
+		padding: 4px 12px;
+		overflow: hidden;
+		color: #1E88C7;
+		text-decoration: none;
+		text-indent: 0;
+		line-height: 20px;
+	}
+
+	.file input {
+		position: absolute;
+		font-size: 100px;
+		right: 0;
+		top: 0;
+		opacity: 0;
+	}
+
+	.file:hover {
+		background: #AADFFD;
+		border-color: #78C3F3;
+		color: #004974;
+		text-decoration: none;
+	}

@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>getForObject - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="index.html">org.springframework.web.client</a>&nbsp;/&nbsp;<a href="./get-for-object.html">getForObject</a><br/>
+<br/>
+<h1>getForObject</h1>
+<a name="org.springframework.web.client$getForObject(org.springframework.web.client.RestOperations, kotlin.String, kotlin.Array((kotlin.Any)))"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/client/RestOperations.html"><span class="identifier">RestOperations</span></a><span class="symbol">.</span><span class="identifier">getForObject</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.client$getForObject(org.springframework.web.client.RestOperations, kotlin.String, kotlin.Array((kotlin.Any)))/url">url</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="keyword">vararg</span> <span class="identifier" id="org.springframework.web.client$getForObject(org.springframework.web.client.RestOperations, kotlin.String, kotlin.Array((kotlin.Any)))/uriVariables">uriVariables</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code><br/>
+<a name="org.springframework.web.client$getForObject(org.springframework.web.client.RestOperations, kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/client/RestOperations.html"><span class="identifier">RestOperations</span></a><span class="symbol">.</span><span class="identifier">getForObject</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.client$getForObject(org.springframework.web.client.RestOperations, kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/url">url</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.web.client$getForObject(org.springframework.web.client.RestOperations, kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/uriVariables">uriVariables</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code><br/>
+<a name="org.springframework.web.client$getForObject(org.springframework.web.client.RestOperations, java.net.URI)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/client/RestOperations.html"><span class="identifier">RestOperations</span></a><span class="symbol">.</span><span class="identifier">getForObject</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.client$getForObject(org.springframework.web.client.RestOperations, java.net.URI)/url">url</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/net/URI.html"><span class="identifier">URI</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/client/RestOperations.html#getForObject(java.lang.String, java.lang.Class<T>, java.lang.Object...)">RestOperations.getForObject</a> providing a <code>getForObject&lt;Foo&gt;(...)</code>
+variant leveraging Kotlin reified type parameters. Like the original Java method, this
+extension is subject to type erasure. Use <a href="exchange.html">exchange</a> if you need to retain actual
+generic type arguments.</p>
+<p><strong>Author</strong><br/>
+Jon Schneider</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.0</p>
+</BODY>
+</HTML>

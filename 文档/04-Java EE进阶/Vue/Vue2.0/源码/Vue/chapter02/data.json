@@ -1,0 +1,25 @@
+{
+  "name": "subeiLY",
+  "url": "https://www.cnblogs.com/gh110/",
+  "page": 1,
+  "isNonProfit": true,
+  "address": {
+    "street": "万柏林",
+    "city": "山西太原",
+    "country": "中国"
+  },
+  "links": [
+    {
+      "name": "语雀",
+      "url": "https://www.yuque.com/nizhegechouloudetuboshu/library"
+    },
+    {
+      "name": "subeiLY",
+      "url": "https://blog.csdn.net/m0_46153949"
+    },
+    {
+      "name": "百度",
+      "url": "https://www.baidu.com/"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--view层 模板-->
+
+<div id="app">
+
+    <span v-bind:title="message">
+        鼠标悬停几秒查看此处动态绑定的提示信息！
+    </span>
+
+</div>
+
+<!-- 1.导入Vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        // Model:数据
+        data:{
+            message:'页面加载于:' + new Date().toLocaleDateString()
+        }
+    });
+</script>
+</body>
+</html>

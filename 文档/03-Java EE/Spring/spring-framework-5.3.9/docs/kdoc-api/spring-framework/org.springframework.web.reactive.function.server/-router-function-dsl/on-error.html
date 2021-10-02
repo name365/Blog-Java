@@ -1,0 +1,34 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RouterFunctionDsl.onError - spring-framework</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="../index.html">org.springframework.web.reactive.function.server</a>&nbsp;/&nbsp;<a href="index.html">RouterFunctionDsl</a>&nbsp;/&nbsp;<a href="./on-error.html">onError</a><br/>
+<br/>
+<h1>onError</h1>
+<a name="org.springframework.web.reactive.function.server.RouterFunctionDsl$onError(kotlin.Function1((kotlin.Throwable, kotlin.Boolean)), kotlin.Function2((kotlin.Throwable, org.springframework.web.reactive.function.server.ServerRequest, reactor.core.publisher.Mono((org.springframework.web.reactive.function.server.ServerResponse)))))"></a>
+<code><span class="keyword">fun </span><span class="identifier">onError</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server.RouterFunctionDsl$onError(kotlin.Function1((kotlin.Throwable, kotlin.Boolean)), kotlin.Function2((kotlin.Throwable, org.springframework.web.reactive.function.server.ServerRequest, reactor.core.publisher.Mono((org.springframework.web.reactive.function.server.ServerResponse)))))/predicate">predicate</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.web.reactive.function.server.RouterFunctionDsl$onError(kotlin.Function1((kotlin.Throwable, kotlin.Boolean)), kotlin.Function2((kotlin.Throwable, org.springframework.web.reactive.function.server.ServerRequest, reactor.core.publisher.Mono((org.springframework.web.reactive.function.server.ServerResponse)))))/responseProvider">responseProvider</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">,</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html"><span class="identifier">Mono</span></a><span class="symbol">&lt;</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Filters all exceptions that match the predicate by applying the given response provider
+function.</p>
+<h3>Parameters</h3>
+<p><a name="predicate"></a>
+<code>predicate</code> - the type of exception to filter</p>
+<p><a name="responseProvider"></a>
+<code>responseProvider</code> - a function that creates a response</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+<a name="org.springframework.web.reactive.function.server.RouterFunctionDsl$onError(kotlin.Function2((kotlin.Throwable, org.springframework.web.reactive.function.server.ServerRequest, reactor.core.publisher.Mono((org.springframework.web.reactive.function.server.ServerResponse)))))"></a>
+<code><span class="keyword">inline</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">&gt;</span> <span class="identifier">onError</span><span class="symbol">(</span><span class="keyword">noinline</span> <span class="identifier" id="org.springframework.web.reactive.function.server.RouterFunctionDsl$onError(kotlin.Function2((kotlin.Throwable, org.springframework.web.reactive.function.server.ServerRequest, reactor.core.publisher.Mono((org.springframework.web.reactive.function.server.ServerResponse)))))/responseProvider">responseProvider</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">,</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html"><span class="identifier">Mono</span></a><span class="symbol">&lt;</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Filters all exceptions that match the predicate by applying the given response provider
+function.</p>
+<h3>Parameters</h3>
+<p><a name="E"></a>
+<code>E</code> - the type of exception to filter</p>
+<p><a name="responseProvider"></a>
+<code>responseProvider</code> - a function that creates a response</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+</BODY>
+</HTML>

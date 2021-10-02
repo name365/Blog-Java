@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        <!-- v-cloak 解决闪烁问题 -->
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div>姓名:{{info.name}}</div>
+    <div>地址:{{info.address.country}}--{{info.address.city}}--{{info.address.street}}</div>
+    <div>链接:<a v-bind:href="info.url" target="_blank">{{info.url}}</a></div>
+</div>
+
+<!-- 引入JS文件 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    var app = new Vue({
+       el: "#app" ,
+        data() {
+           return {
+               info: {
+                   name: null,
+                   address: {
+                       country: null,
+                       city: null,
+                       street: null
+                   },
+                   url: null
+               }
+           }
+        },
+        mounted() { // 钩子函数  链式编程 ES6新特性
+           axios
+            .get('data.json')
+            .then(response => (this.info = response.data));
+        }
+    });
+</script>
+
+</body>
+</html>

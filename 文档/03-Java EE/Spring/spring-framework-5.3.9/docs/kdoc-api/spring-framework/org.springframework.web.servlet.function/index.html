@@ -1,0 +1,113 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>org.springframework.web.servlet.function - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="./index.html">org.springframework.web.servlet.function</a><br/>
+<br/>
+<h2>Package org.springframework.web.servlet.function</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-router-function-dsl/index.html">RouterFunctionDsl</a></h4>
+</td>
+<td>
+<p>Provide a WebMvc.fn <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RouterFunction.html">RouterFunction</a> Reactive Kotlin DSL created by <a href="router.html"><code>router { }</code></a> in order to be able to write idiomatic Kotlin code.</p>
+<code><span class="keyword">class </span><span class="identifier">RouterFunctionDsl</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="attribute-or-null.html">attributeOrNull</a></h4>
+</td>
+<td>
+<p>Nullable variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest.html#attribute(java.lang.String)">ServerRequest.attribute</a></p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">attributeOrNull</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.servlet.function$attributeOrNull(org.springframework.web.servlet.function.ServerRequest, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="body.html">body</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest.html#body(java.lang.Class<T>)">ServerRequest.body</a> providing a <code>body&lt;Foo&gt;()</code> variant
+leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">body</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="body-with-type.html">bodyWithType</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerResponse/BodyBuilder.html#body(java.lang.Object)">ServerResponse.BodyBuilder.body</a> providing a variant
+leveraging Kotlin reified type parameters.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">bodyWithType</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.servlet.function$bodyWithType(org.springframework.web.servlet.function.ServerResponse.BodyBuilder, org.springframework.web.servlet.function.bodyWithType.T)/body">body</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">!</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="content-length-or-null.html">contentLengthOrNull</a></h4>
+</td>
+<td>
+<p>Nullable variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest/Headers.html#contentLength()">ServerRequest.Headers.contentLength</a></p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest/Headers.html"><span class="identifier">Headers</span></a><span class="symbol">.</span><span class="identifier">contentLengthOrNull</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="content-type-or-null.html">contentTypeOrNull</a></h4>
+</td>
+<td>
+<p>Nullable variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest/Headers.html#contentType()">ServerRequest.Headers.contentType</a></p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest/Headers.html"><span class="identifier">Headers</span></a><span class="symbol">.</span><span class="identifier">contentTypeOrNull</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/MediaType.html"><span class="identifier">MediaType</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="param-or-null.html">paramOrNull</a></h4>
+</td>
+<td>
+<p>Nullable variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest.html#param(java.lang.String)">ServerRequest.param</a></p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">paramOrNull</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.servlet.function$paramOrNull(org.springframework.web.servlet.function.ServerRequest, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="plus.html">plus</a></h4>
+</td>
+<td>
+<p>Equivalent to <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RouterFunction.html#and(org.springframework.web.servlet.function.RouterFunction<T>)">RouterFunction.and</a>.</p>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RouterFunction.html"><span class="identifier">RouterFunction</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">plus</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.servlet.function$plus(org.springframework.web.servlet.function.RouterFunction((org.springframework.web.servlet.function.plus.T)), org.springframework.web.servlet.function.RouterFunction((org.springframework.web.servlet.function.plus.T)))/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RouterFunction.html"><span class="identifier">RouterFunction</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RouterFunction.html"><span class="identifier">RouterFunction</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">!</span><span class="symbol">&gt;</span><span class="symbol">!</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="principal-or-null.html">principalOrNull</a></h4>
+</td>
+<td>
+<p>Nullable variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest.html#param(java.lang.String)">ServerRequest.param</a></p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">principalOrNull</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/security/Principal.html"><span class="identifier">Principal</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="remote-address-or-null.html">remoteAddressOrNull</a></h4>
+</td>
+<td>
+<p>Nullable variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest.html#remoteAddress()">ServerRequest.remoteAddress</a></p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">remoteAddressOrNull</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/net/InetSocketAddress.html"><span class="identifier">InetSocketAddress</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="router.html">router</a></h4>
+</td>
+<td>
+<p>Allow to create easily a WebMvc.fn <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RouterFunction.html">RouterFunction</a> with a <a href="-router-function-dsl/index.html">Reactive router Kotlin DSL</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">router</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.servlet.function$router(kotlin.Function1((org.springframework.web.servlet.function.RouterFunctionDsl, kotlin.Unit)))/routes">routes</span><span class="symbol">:</span>&nbsp;<a href="-router-function-dsl/index.html"><span class="identifier">RouterFunctionDsl</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RouterFunction.html"><span class="identifier">RouterFunction</span></a><span class="symbol">&lt;</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

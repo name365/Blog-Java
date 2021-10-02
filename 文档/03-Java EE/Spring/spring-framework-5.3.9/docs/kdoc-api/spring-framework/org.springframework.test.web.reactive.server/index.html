@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>org.springframework.test.web.reactive.server - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="./index.html">org.springframework.test.web.reactive.server</a><br/>
+<br/>
+<h2>Package org.springframework.test.web.reactive.server</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-kotlin-body-spec/index.html">KotlinBodySpec</a></h4>
+</td>
+<td>
+<p>Kotlin compliant <code>WebTestClient.BodySpec</code> for expectations on the response body decoded
+to a single Object, see <a href="https://youtrack.jetbrains.com/issue/KT-5464">KT-5464</a> for
+more details.</p>
+<code><span class="keyword">interface </span><span class="identifier">KotlinBodySpec</span><span class="symbol">&lt;</span><span class="identifier">B</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="body.html">body</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/RequestBodySpec.html#body(S, java.lang.Class<T>)">RequestBodySpec.body</a> providing a variant without explicit class
+parameter thanks to Kotlin reified type parameters.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">, </span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html"><span class="identifier">Publisher</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/RequestBodySpec.html"><span class="identifier">RequestBodySpec</span></a><span class="symbol">.</span><span class="identifier">body</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.reactive.server$body(org.springframework.test.web.reactive.server.WebTestClient.RequestBodySpec, org.springframework.test.web.reactive.server.body.S)/publisher">publisher</span><span class="symbol">:</span>&nbsp;<span class="identifier">S</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/RequestHeadersSpec.html"><span class="identifier">RequestHeadersSpec</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/RequestBodySpec.html#body(S, java.lang.Class<T>)">RequestBodySpec.body</a> providing a <code>body&lt;T&gt;(Any)</code> variant
+leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/RequestBodySpec.html"><span class="identifier">RequestBodySpec</span></a><span class="symbol">.</span><span class="identifier">body</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.reactive.server$body(org.springframework.test.web.reactive.server.WebTestClient.RequestBodySpec, kotlin.Any)/producer">producer</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/RequestHeadersSpec.html"><span class="identifier">RequestHeadersSpec</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/RequestBodySpec.html#body(S, java.lang.Class<T>)">RequestBodySpec.body</a> providing a <code>body(Flow&lt;T&gt;)</code> variant
+leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/RequestBodySpec.html"><span class="identifier">RequestBodySpec</span></a><span class="symbol">.</span><span class="identifier">body</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.reactive.server$body(org.springframework.test.web.reactive.server.WebTestClient.RequestBodySpec, kotlinx.coroutines.flow.Flow((org.springframework.test.web.reactive.server.body.T)))/flow">flow</span><span class="symbol">:</span>&nbsp;<span class="identifier">Flow</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/RequestHeadersSpec.html"><span class="identifier">RequestHeadersSpec</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="expect-body.html">expectBody</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/ResponseSpec.html#expectBody(java.lang.Class<B>)">ResponseSpec.expectBody</a> providing an <code>expectBody&lt;Foo&gt;()</code> variant and
+a workaround for <a href="https://youtrack.jetbrains.com/issue/KT-5464">KT-5464</a> which
+prevents to use <code>WebTestClient.BodySpec</code> in Kotlin.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">B</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/ResponseSpec.html"><span class="identifier">ResponseSpec</span></a><span class="symbol">.</span><span class="identifier">expectBody</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="-kotlin-body-spec/index.html"><span class="identifier">KotlinBodySpec</span></a><span class="symbol">&lt;</span><span class="identifier">B</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="expect-body-list.html">expectBodyList</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/ResponseSpec.html#expectBodyList(java.lang.Class<E>)">ResponseSpec.expectBodyList</a> providing a <code>expectBodyList&lt;Foo&gt;()</code> variant.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/ResponseSpec.html"><span class="identifier">ResponseSpec</span></a><span class="symbol">.</span><span class="identifier">expectBodyList</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/ListBodySpec.html"><span class="identifier">ListBodySpec</span></a><span class="symbol">&lt;</span><span class="identifier">E</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="return-result.html">returnResult</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/ResponseSpec.html#returnResult(java.lang.Class<T>)">ResponseSpec.returnResult</a> providing a <code>returnResult&lt;Foo&gt;()</code> variant.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/WebTestClient/ResponseSpec.html"><span class="identifier">ResponseSpec</span></a><span class="symbol">.</span><span class="identifier">returnResult</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/reactive/server/FluxExchangeResult.html"><span class="identifier">FluxExchangeResult</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

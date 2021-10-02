@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>org.springframework.beans.factory - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="./index.html">org.springframework.beans.factory</a><br/>
+<br/>
+<h2>Package org.springframework.beans.factory</h2>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="find-annotation-on-bean.html">findAnnotationOnBean</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/ListableBeanFactory.html#findAnnotationOnBean(java.lang.String, java.lang.Class<A>)">ListableBeanFactory.findAnnotationOnBean</a> providing a
+<code>findAnnotationOnBean&lt;Foo&gt;("foo")</code> variant.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-annotation/index.html"><span class="identifier">Annotation</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/ListableBeanFactory.html"><span class="identifier">ListableBeanFactory</span></a><span class="symbol">.</span><span class="identifier">findAnnotationOnBean</span><span class="symbol">(</span><span class="identifier" id="org.springframework.beans.factory$findAnnotationOnBean(org.springframework.beans.factory.ListableBeanFactory, kotlin.String)/beanName">beanName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-annotation/index.html"><span class="identifier">Annotation</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-bean.html">getBean</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/BeanFactory.html#getBean(java.lang.String)">BeanFactory.getBean</a> providing a <code>getBean&lt;Foo&gt;()</code> variant.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/BeanFactory.html"><span class="identifier">BeanFactory</span></a><span class="symbol">.</span><span class="identifier">getBean</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/BeanFactory.html#getBean(java.lang.String)">BeanFactory.getBean</a> providing a <code>getBean&lt;Foo&gt;("foo")</code> variant.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/BeanFactory.html"><span class="identifier">BeanFactory</span></a><span class="symbol">.</span><span class="identifier">getBean</span><span class="symbol">(</span><span class="identifier" id="org.springframework.beans.factory$getBean(org.springframework.beans.factory.BeanFactory, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/BeanFactory.html#getBean(java.lang.String)">BeanFactory.getBean</a> providing a <code>getBean&lt;Foo&gt;(arg1, arg2)</code> variant.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/BeanFactory.html"><span class="identifier">BeanFactory</span></a><span class="symbol">.</span><span class="identifier">getBean</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="org.springframework.beans.factory$getBean(org.springframework.beans.factory.BeanFactory, kotlin.Array((kotlin.Any)))/args">args</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-bean-names-for-annotation.html">getBeanNamesForAnnotation</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/ListableBeanFactory.html#getBeanNamesForAnnotation(java.lang.Class<? extends java.lang.annotation.Annotation>)">ListableBeanFactory.getBeanNamesForAnnotation</a> providing a
+<code>getBeansOfType&lt;Foo&gt;()</code> variant.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-annotation/index.html"><span class="identifier">Annotation</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/ListableBeanFactory.html"><span class="identifier">ListableBeanFactory</span></a><span class="symbol">.</span><span class="identifier">getBeanNamesForAnnotation</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-bean-names-for-type.html">getBeanNamesForType</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/ListableBeanFactory.html#getBeanNamesForType(org.springframework.core.ResolvableType)">ListableBeanFactory.getBeanNamesForType</a> providing a
+<code>getBeanNamesForType&lt;Foo&gt;()</code> variant.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/ListableBeanFactory.html"><span class="identifier">ListableBeanFactory</span></a><span class="symbol">.</span><span class="identifier">getBeanNamesForType</span><span class="symbol">(</span><span class="identifier" id="org.springframework.beans.factory$getBeanNamesForType(org.springframework.beans.factory.ListableBeanFactory, kotlin.Boolean, kotlin.Boolean)/includeNonSingletons">includeNonSingletons</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="org.springframework.beans.factory$getBeanNamesForType(org.springframework.beans.factory.ListableBeanFactory, kotlin.Boolean, kotlin.Boolean)/allowEagerInit">allowEagerInit</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-bean-provider.html">getBeanProvider</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/BeanFactory.html#getBeanProvider(java.lang.Class<T>)">BeanFactory.getBeanProvider</a> providing a <code>getBeanProvider&lt;Foo&gt;()</code> variant.
+This extension is not subject to type erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/BeanFactory.html"><span class="identifier">BeanFactory</span></a><span class="symbol">.</span><span class="identifier">getBeanProvider</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/ObjectProvider.html"><span class="identifier">ObjectProvider</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-beans-of-type.html">getBeansOfType</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/ListableBeanFactory.html#getBeansOfType(java.lang.Class<T>)">ListableBeanFactory.getBeansOfType</a> providing a <code>getBeansOfType&lt;Foo&gt;()</code> variant.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/ListableBeanFactory.html"><span class="identifier">ListableBeanFactory</span></a><span class="symbol">.</span><span class="identifier">getBeansOfType</span><span class="symbol">(</span><span class="identifier" id="org.springframework.beans.factory$getBeansOfType(org.springframework.beans.factory.ListableBeanFactory, kotlin.Boolean, kotlin.Boolean)/includeNonSingletons">includeNonSingletons</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="org.springframework.beans.factory$getBeansOfType(org.springframework.beans.factory.ListableBeanFactory, kotlin.Boolean, kotlin.Boolean)/allowEagerInit">allowEagerInit</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-beans-with-annotation.html">getBeansWithAnnotation</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/ListableBeanFactory.html#getBeansWithAnnotation(java.lang.Class<? extends java.lang.annotation.Annotation>)">ListableBeanFactory.getBeansWithAnnotation</a> providing a
+<code>getBeansWithAnnotation&lt;Foo&gt;()</code> variant.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-annotation/index.html"><span class="identifier">Annotation</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/beans/factory/ListableBeanFactory.html"><span class="identifier">ListableBeanFactory</span></a><span class="symbol">.</span><span class="identifier">getBeansWithAnnotation</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

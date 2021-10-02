@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>body - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="index.html">org.springframework.web.reactive.function.server</a>&nbsp;/&nbsp;<a href="./body.html">body</a><br/>
+<br/>
+<h1>body</h1>
+<a name="org.springframework.web.reactive.function.server$body(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, org.reactivestreams.Publisher((org.springframework.web.reactive.function.server.body.T)))"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">body</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$body(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, org.reactivestreams.Publisher((org.springframework.web.reactive.function.server.body.T)))/publisher">publisher</span><span class="symbol">:</span>&nbsp;<a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html"><span class="identifier">Publisher</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html"><span class="identifier">Mono</span></a><span class="symbol">&lt;</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">&gt;</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html#body(P, java.lang.Class<T>)">ServerResponse.BodyBuilder.body</a> providing a <code>body(Publisher&lt;T&gt;)</code>
+variant. This extension is not subject to type erasure and retains actual generic
+type arguments.</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.0</p>
+<a name="org.springframework.web.reactive.function.server$body(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlin.Any)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">body</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$body(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlin.Any)/producer">producer</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html"><span class="identifier">Mono</span></a><span class="symbol">&lt;</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">&gt;</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html#body(P, java.lang.Class<T>)">ServerResponse.BodyBuilder.body</a> providing a <code>body&lt;T&gt;(Any)</code> variant
+leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<h3>Parameters</h3>
+<p><a name="producer"></a>
+<code>producer</code> - the producer to write to the response. This must be a
+<a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html">Publisher</a> or another producer adaptable to a
+<a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html">Publisher</a> via <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/ReactiveAdapterRegistry.html">org.springframework.core.ReactiveAdapterRegistry</a></p>
+<p><a name="T"></a>
+<code>T</code> - the type of the elements contained in the producer</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+</BODY>
+</HTML>

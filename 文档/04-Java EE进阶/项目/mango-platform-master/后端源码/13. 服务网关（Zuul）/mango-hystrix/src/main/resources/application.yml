@@ -1,0 +1,16 @@
+server:
+  port: 8501
+spring:
+  application:
+    name: mango-hystrix
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        serviceName: ${spring.application.name}	# 注册到consul的服务名称
+turbine:
+  instanceUrlSuffix: hystrix.stream    # 指定收集路径
+  appConfig: kitty-consumer    # 指定了需要收集监控信息的服务名，多个以“,”进行区分
+  clusterNameExpression: "'default'"    # 指定集群名称,若为default则为默认集群，多个集群则通过此配置区分
+  combine-host-port: true    # 此配置默认为false，则服务是以host进行区分，若设置为true则以host+port进行区分

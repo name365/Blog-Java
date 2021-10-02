@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>org.springframework.web.reactive.server.org.springframework.web.server.ServerWebExchange - spring-framework</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="../index.html">org.springframework.web.reactive.server</a>&nbsp;/&nbsp;<a href="./index.html">org.springframework.web.server.ServerWebExchange</a><br/>
+<br/>
+<h3>Extensions for org.springframework.web.server.ServerWebExchange</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="await-form-data.html">awaitFormData</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/server/ServerWebExchange.html#getFormData()">ServerWebExchange.getFormData</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/server/ServerWebExchange.html"><span class="identifier">ServerWebExchange</span></a><span class="symbol">.</span><span class="identifier">awaitFormData</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/util/MultiValueMap.html"><span class="identifier">MultiValueMap</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-multipart-data.html">awaitMultipartData</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/server/ServerWebExchange.html#getMultipartData()">ServerWebExchange.getMultipartData</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/server/ServerWebExchange.html"><span class="identifier">ServerWebExchange</span></a><span class="symbol">.</span><span class="identifier">awaitMultipartData</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/util/MultiValueMap.html"><span class="identifier">MultiValueMap</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/codec/multipart/Part.html"><span class="identifier">Part</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-principal.html">awaitPrincipal</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/server/ServerWebExchange.html#getPrincipal()">ServerWebExchange.getPrincipal</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/security/Principal.html"><span class="identifier">Principal</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/server/ServerWebExchange.html"><span class="identifier">ServerWebExchange</span></a><span class="symbol">.</span><span class="identifier">awaitPrincipal</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-session.html">awaitSession</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/server/ServerWebExchange.html#getSession()">ServerWebExchange.getSession</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/server/ServerWebExchange.html"><span class="identifier">ServerWebExchange</span></a><span class="symbol">.</span><span class="identifier">awaitSession</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/server/WebSession.html"><span class="identifier">WebSession</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

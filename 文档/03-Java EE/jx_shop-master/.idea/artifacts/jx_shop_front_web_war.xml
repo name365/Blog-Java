@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jx_shop_front_web:war">
+    <output-path>$PROJECT_DIR$/jx_shop_front_web/target</output-path>
+    <root id="archive" name="xmShopFront.war">
+      <element id="artifact" artifact-name="jx_shop_front_web:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>dataWithType - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="index.html">org.springframework.messaging.rsocket</a>&nbsp;/&nbsp;<a href="./data-with-type.html">dataWithType</a><br/>
+<br/>
+<h1>dataWithType</h1>
+<a name="org.springframework.messaging.rsocket$dataWithType(org.springframework.messaging.rsocket.RSocketRequester.RequestSpec, kotlin.Any)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RequestSpec.html"><span class="identifier">RequestSpec</span></a><span class="symbol">.</span><span class="identifier">dataWithType</span><span class="symbol">(</span><span class="identifier" id="org.springframework.messaging.rsocket$dataWithType(org.springframework.messaging.rsocket.RSocketRequester.RequestSpec, kotlin.Any)/producer">producer</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html"><span class="identifier">RetrieveSpec</span></a></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RequestSpec.html#data(java.lang.Object)">RSocketRequester.RequestSpec.data</a> providing a <code>dataWithType&lt;Foo&gt;(Any)</code>
+variant leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<h3>Parameters</h3>
+<p><a name="producer"></a>
+<code>producer</code> - the source of payload data value(s). This must be a
+<a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html">Publisher</a> or another producer adaptable to a
+<a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html">Publisher</a> via <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/ReactiveAdapterRegistry.html">org.springframework.core.ReactiveAdapterRegistry</a></p>
+<p><a name="T"></a>
+<code>T</code> - the type of values to be produced</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+<a name="org.springframework.messaging.rsocket$dataWithType(org.springframework.messaging.rsocket.RSocketRequester.RequestSpec, org.reactivestreams.Publisher((org.springframework.messaging.rsocket.dataWithType.T)))"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RequestSpec.html"><span class="identifier">RequestSpec</span></a><span class="symbol">.</span><span class="identifier">dataWithType</span><span class="symbol">(</span><span class="identifier" id="org.springframework.messaging.rsocket$dataWithType(org.springframework.messaging.rsocket.RSocketRequester.RequestSpec, org.reactivestreams.Publisher((org.springframework.messaging.rsocket.dataWithType.T)))/publisher">publisher</span><span class="symbol">:</span>&nbsp;<a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html"><span class="identifier">Publisher</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html"><span class="identifier">RetrieveSpec</span></a></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RequestSpec.html#data(java.lang.Object)">RSocketRequester.RequestSpec.data</a> providing a <code>dataWithType(Publisher&lt;T&gt;)</code>
+variant leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<h3>Parameters</h3>
+<p><a name="publisher"></a>
+<code>publisher</code> - the source of payload data value(s)</p>
+<p><a name="T"></a>
+<code>T</code> - the type of values to be produced</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+<a name="org.springframework.messaging.rsocket$dataWithType(org.springframework.messaging.rsocket.RSocketRequester.RequestSpec, kotlinx.coroutines.flow.Flow((org.springframework.messaging.rsocket.dataWithType.T)))"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RequestSpec.html"><span class="identifier">RequestSpec</span></a><span class="symbol">.</span><span class="identifier">dataWithType</span><span class="symbol">(</span><span class="identifier" id="org.springframework.messaging.rsocket$dataWithType(org.springframework.messaging.rsocket.RSocketRequester.RequestSpec, kotlinx.coroutines.flow.Flow((org.springframework.messaging.rsocket.dataWithType.T)))/flow">flow</span><span class="symbol">:</span>&nbsp;<span class="identifier">Flow</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RetrieveSpec.html"><span class="identifier">RetrieveSpec</span></a></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/messaging/rsocket/RSocketRequester/RequestSpec.html#data(java.lang.Object)">RSocketRequester.RequestSpec.data</a> providing a <code>dataWithType(Flow&lt;T&gt;)</code>
+variant leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<h3>Parameters</h3>
+<p><a name="flow"></a>
+<code>flow</code> - the <a href="#">Flow</a> to write to the request</p>
+<p><a name="T"></a>
+<code>T</code> - the source of payload data value(s)</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+</BODY>
+</HTML>

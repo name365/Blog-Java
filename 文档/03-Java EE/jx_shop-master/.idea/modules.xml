@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jx_shop_back_web/jx_shop_back_web.iml" filepath="$PROJECT_DIR$/jx_shop_back_web/jx_shop_back_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jx_shop_common/jx_shop_common.iml" filepath="$PROJECT_DIR$/jx_shop_common/jx_shop_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jx_shop_dao/jx_shop_dao.iml" filepath="$PROJECT_DIR$/jx_shop_dao/jx_shop_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jx_shop_front_web/jx_shop_front_web.iml" filepath="$PROJECT_DIR$/jx_shop_front_web/jx_shop_front_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jx_shop_parent.iml" filepath="$PROJECT_DIR$/jx_shop_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jx_shop_pojo/jx_shop_pojo.iml" filepath="$PROJECT_DIR$/jx_shop_pojo/jx_shop_pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jx_shop_service/jx_shop_service.iml" filepath="$PROJECT_DIR$/jx_shop_service/jx_shop_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xm_shop_back_web/xm_shop_back_web.iml" filepath="$PROJECT_DIR$/xm_shop_back_web/xm_shop_back_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xm_shop_common/xm_shop_common.iml" filepath="$PROJECT_DIR$/xm_shop_common/xm_shop_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xm_shop_dao/xm_shop_dao.iml" filepath="$PROJECT_DIR$/xm_shop_dao/xm_shop_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xm_shop_front_web/xm_shop_front_web.iml" filepath="$PROJECT_DIR$/xm_shop_front_web/xm_shop_front_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xm_shop_pojo/xm_shop_pojo.iml" filepath="$PROJECT_DIR$/xm_shop_pojo/xm_shop_pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xm_shop_service/xm_shop_service.iml" filepath="$PROJECT_DIR$/xm_shop_service/xm_shop_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xy_shop_parent.iml" filepath="$PROJECT_DIR$/xy_shop_parent.iml" />
+    </modules>
+  </component>
+</project>

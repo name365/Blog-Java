@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <li v-for="(items,index) in items">
+        {{items.message}}--{{index}}
+    </li>
+
+</div>
+
+<!-- 1.导入Vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            items: [
+                {message: 'Vue'},
+                {message: 'Element'},
+                {message: 'Ant Design Pro'},
+            ]
+        }
+    })
+</script>
+
+</body>
+</html>

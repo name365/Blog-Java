@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>beans - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="index.html">org.springframework.context.support</a>&nbsp;/&nbsp;<a href="./beans.html">beans</a><br/>
+<br/>
+<h1>beans</h1>
+<a name="org.springframework.context.support$beans(kotlin.Function1((org.springframework.context.support.BeanDefinitionDsl, kotlin.Unit)))"></a>
+<code><span class="keyword">fun </span><span class="identifier">beans</span><span class="symbol">(</span><span class="identifier" id="org.springframework.context.support$beans(kotlin.Function1((org.springframework.context.support.BeanDefinitionDsl, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="-bean-definition-dsl/index.html"><span class="identifier">BeanDefinitionDsl</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-bean-definition-dsl/index.html"><span class="identifier">BeanDefinitionDsl</span></a></code>
+<p>Functional bean definition Kotlin DSL.</p>
+<p>Example:</p>
+<pre><code>beans {
+	bean&lt;UserHandler&gt;()
+	bean&lt;Routes&gt;()
+	bean&lt;WebHandler&gt;("webHandler") {
+	RouterFunctions.toWebHandler(
+		ref&lt;Routes&gt;().router(),
+		HandlerStrategies.builder().viewResolver(ref()).build())
+	}
+	bean("messageSource") {
+		ReloadableResourceBundleMessageSource().apply {
+			setBasename("messages")
+			setDefaultEncoding("UTF-8")
+		}
+	}
+	bean {
+		val prefix = "classpath:/templates/"
+		val suffix = ".mustache"
+		val loader = MustacheResourceTemplateLoader(prefix, suffix)
+		MustacheViewResolver(Mustache.compiler().withLoader(loader)).apply {
+			setPrefix(prefix)
+			setSuffix(suffix)
+		}
+	}
+	profile("foo") {
+		bean&lt;Foo&gt;()
+	}
+}
+</code></pre>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>See Also</strong><br/>
+<p><a href="-bean-definition-dsl/index.html">BeanDefinitionDsl</a></p>
+</p>
+<p><strong>Since</strong><br/>
+5.0</p>
+</BODY>
+</HTML>

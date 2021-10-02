@@ -1,0 +1,40 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RouterFunctionDsl.and - spring-framework</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="../index.html">org.springframework.web.reactive.function.server</a>&nbsp;/&nbsp;<a href="index.html">RouterFunctionDsl</a>&nbsp;/&nbsp;<a href="./and.html">and</a><br/>
+<br/>
+<h1>and</h1>
+<a name="org.springframework.web.reactive.function.server.RouterFunctionDsl$and(org.springframework.web.reactive.function.server.RequestPredicate, kotlin.String)"></a>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a><span class="symbol">.</span><span class="identifier">and</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server.RouterFunctionDsl$and(org.springframework.web.reactive.function.server.RequestPredicate, kotlin.String)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a></code>
+<p>Return a composed request predicate that tests against both this predicate AND
+the <a href="and.html#org.springframework.web.reactive.function.server.RouterFunctionDsl$and(org.springframework.web.reactive.function.server.RequestPredicate, kotlin.String)/other">other</a> predicate (String processed as a path predicate). When evaluating the
+composed predicate, if this predicate is <code>false</code>, then the <a href="and.html#org.springframework.web.reactive.function.server.RouterFunctionDsl$and(org.springframework.web.reactive.function.server.RequestPredicate, kotlin.String)/other">other</a> predicate is not
+evaluated.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html#and(org.springframework.web.reactive.function.server.RequestPredicate)">RequestPredicate.and</a></p>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicates.html#path(java.lang.String)">RequestPredicates.path</a></p>
+</p>
+<a name="org.springframework.web.reactive.function.server.RouterFunctionDsl$and(kotlin.String, org.springframework.web.reactive.function.server.RequestPredicate)"></a>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">.</span><span class="identifier">and</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server.RouterFunctionDsl$and(kotlin.String, org.springframework.web.reactive.function.server.RequestPredicate)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a></code>
+<p>Return a composed request predicate that tests against both this predicate (String
+processed as a path predicate) AND the <a href="and.html#org.springframework.web.reactive.function.server.RouterFunctionDsl$and(kotlin.String, org.springframework.web.reactive.function.server.RequestPredicate)/other">other</a> predicate. When evaluating the
+composed predicate, if this predicate is <code>false</code>, then the <a href="and.html#org.springframework.web.reactive.function.server.RouterFunctionDsl$and(kotlin.String, org.springframework.web.reactive.function.server.RequestPredicate)/other">other</a> predicate is not
+evaluated.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html#and(org.springframework.web.reactive.function.server.RequestPredicate)">RequestPredicate.and</a></p>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicates.html#path(java.lang.String)">RequestPredicates.path</a></p>
+</p>
+<a name="org.springframework.web.reactive.function.server.RouterFunctionDsl$and(org.springframework.web.reactive.function.server.RequestPredicate, org.springframework.web.reactive.function.server.RequestPredicate)"></a>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a><span class="symbol">.</span><span class="identifier">and</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server.RouterFunctionDsl$and(org.springframework.web.reactive.function.server.RequestPredicate, org.springframework.web.reactive.function.server.RequestPredicate)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a></code>
+<p>Return a composed request predicate that tests against both this predicate AND
+the <a href="and.html#org.springframework.web.reactive.function.server.RouterFunctionDsl$and(org.springframework.web.reactive.function.server.RequestPredicate, org.springframework.web.reactive.function.server.RequestPredicate)/other">other</a> predicate. When evaluating the composed predicate, if this
+predicate is <code>false</code>, then the <a href="and.html#org.springframework.web.reactive.function.server.RouterFunctionDsl$and(org.springframework.web.reactive.function.server.RequestPredicate, org.springframework.web.reactive.function.server.RequestPredicate)/other">other</a> predicate is not evaluated.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html#and(org.springframework.web.reactive.function.server.RequestPredicate)">RequestPredicate.and</a></p>
+</p>
+</BODY>
+</HTML>

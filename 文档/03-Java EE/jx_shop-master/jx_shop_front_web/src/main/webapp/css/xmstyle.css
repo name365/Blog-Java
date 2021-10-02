@@ -1,0 +1,157 @@
+.my {
+    font-size: 12px;
+    text-decoration: none;
+    color: #666666;
+    letter-spacing: 1px;
+}
+
+.my:hover {
+    color: #ff7200 !important;
+    text-decoration: underline !important;
+}
+
+.myH4 {
+    height: 20px !important;
+    letter-spacing: 1px;
+    font-weight: normal;
+}
+
+.banner {
+    width: 100%;
+}
+
+.priceIcon {
+    color: #4AB344;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.title {
+    font-weight: normal;
+    color: #585858;
+    margin: 0;
+    font-size: 20px;
+    text-align: left;
+}
+
+.pic {
+    float: left;
+    margin-top: 35px;
+    width: 545px;
+    height: 60px;
+    border-bottom: 1px solid #D1D1D1;
+    background-color: white;
+}
+
+.pcc {
+    color: #4AB344;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.sellnum {
+    float: left;
+    width: 545px;
+    height: 80px;
+    border-bottom: 1px solid #D1D1D1;
+    background-color: white;
+}
+
+.sellnumWrap {
+    width: 314px;
+    height: 26px;
+    margin-top: 30px;
+}
+
+.sellnumDetail {
+    float: left;
+    width: 93px;
+    height: 26px;
+    text-align: right;
+}
+
+.sellnumborder {
+    border-left: 1px solid #D1D1D1;
+    height: 26px;
+    width: 1px;
+    float: left;
+    margin: 0 0 0 30px;
+}
+
+.cartCount {
+    float: left;
+    height: 70px;
+    background-color: white;
+    margin-top: 18px;
+}
+
+.cartCount1 input {
+    border: #e3e3e3 solid 1px;
+    padding: 5px 8px;
+    color: #848484;
+    font-size: 16px;
+    outline: none;
+    background: none;
+}
+
+.cartCount input {
+    border: #e3e3e3 solid 1px;
+    padding: 5px 8px;
+    color: #848484;
+    font-size: 16px;
+    outline: none;
+    background: none;
+}
+.cartCount span{
+    color: #848484;
+    font-size: 14px;
+    padding-right: 18px;
+    line-height: 70px
+}
+
+.textBox{
+    width:40px;
+    text-align: center;
+    color: #0F0F0F;
+}
+
+.Hgt {
+    color: #424242;
+    font-size: 14px;
+    padding-left: 10px;
+}
+/*购物车按钮部分*/
+.shop{
+    margin-top: 30px;
+    float: left;
+    width: 100%;
+    height: 42px;
+    background-color: white;
+}
+
+/*加入购车车按钮*/
+.shop .cartBtn{
+    color: #4AB344!important;
+    text-align:center;
+    width: 160px;
+    height: 42px;
+    border: 1px solid #4AB344;
+    line-height: 42px;
+    padding: 0
+}
+
+/*立即购买按钮*/
+.shop .buyBtn{
+    margin-left: 15px;
+    width: 160px;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    padding: 0
+}
+.imgShow{
+    width: 399px;
+    height: 399px;
+    text-align: center;
+    border: 1px solid #D1D1D1;
+}

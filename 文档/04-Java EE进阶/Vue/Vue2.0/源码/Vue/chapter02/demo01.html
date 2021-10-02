@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- 创建一个 todo-item 组件的实例,传递给组件中的值：props -->
+    <todo-item
+            v-for="item in items"
+            v-bind:todo="item"
+            v-bind:key="item.id">
+    </todo-item>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    // 1.定义一个名为 todo-item 的新组件
+    Vue.component("todo-item",{
+        // "prop"，类似于一个自定义 attribute。
+        // 这个 prop 名为 todo。
+        props: ['todo'],
+        template: '<li>{{todo.text}}</li>'
+    });
+
+    // 2. 实例化一个Vue
+    var app = new Vue({
+        el:"#app",
+        data: {
+            items: [
+                { id: 0, text: '蔬菜' },
+                { id: 1, text: '奶酪' },
+                { id: 2, text: '随便其它什么人吃的东西' }
+            ]
+        }
+    });
+</script>
+
+</body>
+</html>

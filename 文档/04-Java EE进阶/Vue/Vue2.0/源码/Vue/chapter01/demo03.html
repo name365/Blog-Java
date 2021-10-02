@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--view层 模板-->
+<div id="app">
+
+    <h1 v-if="ok">Yes</h1>
+    <h1 v-else>No</h1>
+
+</div>
+
+<!-- 1.导入Vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        // Model:数据
+        data:{
+            ok: false
+        }
+    });
+</script>
+</body>
+</html>

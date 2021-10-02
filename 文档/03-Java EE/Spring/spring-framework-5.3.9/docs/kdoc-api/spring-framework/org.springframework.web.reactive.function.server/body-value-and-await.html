@@ -1,0 +1,27 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>bodyValueAndAwait - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="index.html">org.springframework.web.reactive.function.server</a>&nbsp;/&nbsp;<a href="./body-value-and-await.html">bodyValueAndAwait</a><br/>
+<br/>
+<h1>bodyValueAndAwait</h1>
+<a name="org.springframework.web.reactive.function.server$bodyValueAndAwait(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlin.Any)"></a>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">bodyValueAndAwait</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$bodyValueAndAwait(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlin.Any)/body">body</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a></code>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html#bodyValue(java.lang.Object)">ServerResponse.BodyBuilder.bodyValue</a>.</p>
+<p>Set the body of the response to the given {@code Object} and return it.
+This convenience method combines <a href="body-value-and-await.html#org.springframework.web.reactive.function.server$bodyValueAndAwait(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlin.Any)/body">body</a> and
+<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/BodyInserters.html#fromValue(T)">org.springframework.web.reactive.function.BodyInserters.fromValue</a>.</p>
+<h3>Parameters</h3>
+<p><a name="body"></a>
+<code>body</code> - the body of the response</p>
+<h3>Exceptions</h3>
+<p><a name="IllegalArgumentException"></a>
+<code>IllegalArgumentException</code> - if <code>body</code> is a <a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html">Publisher</a> or an
+instance of a type supported by <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/ReactiveAdapterRegistry.html#getSharedInstance()">org.springframework.core.ReactiveAdapterRegistry.getSharedInstance</a>,</p>
+<p><strong>Return</strong><br/>
+the built response</p>
+</BODY>
+</HTML>

@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>CoRouterFunctionDsl.PUT - spring-framework</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="../index.html">org.springframework.web.reactive.function.server</a>&nbsp;/&nbsp;<a href="index.html">CoRouterFunctionDsl</a>&nbsp;/&nbsp;<a href="./-p-u-t.html">PUT</a><br/>
+<br/>
+<h1>PUT</h1>
+<a name="org.springframework.web.reactive.function.server.CoRouterFunctionDsl$PUT(kotlin.String, kotlin.coroutines.SuspendFunction1((org.springframework.web.reactive.function.server.ServerRequest, org.springframework.web.reactive.function.server.ServerResponse)))"></a>
+<code><span class="keyword">fun </span><span class="identifier">PUT</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server.CoRouterFunctionDsl$PUT(kotlin.String, kotlin.coroutines.SuspendFunction1((org.springframework.web.reactive.function.server.ServerRequest, org.springframework.web.reactive.function.server.ServerResponse)))/pattern">pattern</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.web.reactive.function.server.CoRouterFunctionDsl$PUT(kotlin.String, kotlin.coroutines.SuspendFunction1((org.springframework.web.reactive.function.server.ServerRequest, org.springframework.web.reactive.function.server.ServerResponse)))/f">f</span><span class="symbol">:</span>&nbsp;<span class="keyword">suspend </span><span class="symbol">(</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Adds a route to the given handler function that handles all HTTP <code>PUT</code> requests
+that match the given pattern.</p>
+<h3>Parameters</h3>
+<p><a name="pattern"></a>
+<code>pattern</code> - the pattern to match to</p>
+<a name="org.springframework.web.reactive.function.server.CoRouterFunctionDsl$PUT(kotlin.String, org.springframework.web.reactive.function.server.RequestPredicate, kotlin.coroutines.SuspendFunction1((org.springframework.web.reactive.function.server.ServerRequest, org.springframework.web.reactive.function.server.ServerResponse)))"></a>
+<code><span class="keyword">fun </span><span class="identifier">PUT</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server.CoRouterFunctionDsl$PUT(kotlin.String, org.springframework.web.reactive.function.server.RequestPredicate, kotlin.coroutines.SuspendFunction1((org.springframework.web.reactive.function.server.ServerRequest, org.springframework.web.reactive.function.server.ServerResponse)))/pattern">pattern</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.web.reactive.function.server.CoRouterFunctionDsl$PUT(kotlin.String, org.springframework.web.reactive.function.server.RequestPredicate, kotlin.coroutines.SuspendFunction1((org.springframework.web.reactive.function.server.ServerRequest, org.springframework.web.reactive.function.server.ServerResponse)))/predicate">predicate</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.web.reactive.function.server.CoRouterFunctionDsl$PUT(kotlin.String, org.springframework.web.reactive.function.server.RequestPredicate, kotlin.coroutines.SuspendFunction1((org.springframework.web.reactive.function.server.ServerRequest, org.springframework.web.reactive.function.server.ServerResponse)))/f">f</span><span class="symbol">:</span>&nbsp;<span class="keyword">suspend </span><span class="symbol">(</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Adds a route to the given handler function that handles all HTTP <code>PUT</code> requests
+that match the given pattern.</p>
+<h3>Parameters</h3>
+<p><a name="pattern"></a>
+<code>pattern</code> - the pattern to match to</p>
+<p><a name="predicate"></a>
+<code>predicate</code> - additional predicate to match</p>
+<p><strong>Since</strong><br/>
+5.2</p>
+<a name="org.springframework.web.reactive.function.server.CoRouterFunctionDsl$PUT(kotlin.String)"></a>
+<code><span class="keyword">fun </span><span class="identifier">PUT</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server.CoRouterFunctionDsl$PUT(kotlin.String)/pattern">pattern</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html"><span class="identifier">RequestPredicate</span></a></code>
+<p>Return a <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicate.html">RequestPredicate</a> that matches if request's HTTP method is <code>PUT</code>
+and the given <code>pattern</code> matches against the request path.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RequestPredicates.html#PUT(java.lang.String)">RequestPredicates.PUT</a></p>
+</p>
+</BODY>
+</HTML>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- view层 模板 -->
+<div id="app">
+    多选框:
+    <input type="checkbox" id="jack" value="Jack" v-model="message">
+    &nbsp;&nbsp;
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="join" value="Join" v-model="message">
+    &nbsp;&nbsp;
+    <label for="Join">Join</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="message">
+    &nbsp;&nbsp;
+    <label for="mike">Mike</label>
+    <span>选中的值:{{message}}</span>
+
+</div>
+
+<!-- 1.导入Vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: []
+        }
+    })
+</script>
+
+</body>
+</html>

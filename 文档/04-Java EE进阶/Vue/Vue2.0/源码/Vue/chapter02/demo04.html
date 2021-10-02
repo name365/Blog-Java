@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--view层 模板-->
+<div id="app">
+    <todo>
+        <todo-title slot="todo-title" :title="title"></todo-title>
+<!--        <todo-items slot="todo-items" v-for="(item, index) in todoItems" v-bind:item="item" v-bind:index="index"></todo-items>-->
+<!--         如下为简写 -->
+        <todo-items slot="todo-items" v-for="(item, index) in todoItems" :item="item" :index="index"></todo-items>
+    </todo>
+</div>
+
+<!-- 1.导入Vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    Vue.component('todo',{
+        template: '<div>\
+            <slot name="todo-title"></slot>\
+            <ul>\
+                <slot name="todo-items"></slot>\
+            </ul>\
+        </div>'
+    });
+
+    Vue.component('todo-title',{
+        props:['title'],
+        template: '<div>{{title}}</div>'
+    });
+
+    // 这里的index，就是数组的下标，使用for循环遍历的时候，可以循环出来！
+    Vue.component('todo-items',{
+        props: ['item','index'],
+        template: '<li>{{index+1}},{{item}}</li>'
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            title: 'Vue学习笔记',
+            todoItems: ['Java','前端','运维','安卓']
+        }
+    });
+</script>
+
+</body>
+</html>

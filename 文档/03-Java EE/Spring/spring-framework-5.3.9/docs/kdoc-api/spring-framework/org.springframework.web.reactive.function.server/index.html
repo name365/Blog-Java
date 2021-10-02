@@ -1,0 +1,280 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>org.springframework.web.reactive.function.server - spring-framework</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="./index.html">org.springframework.web.reactive.function.server</a><br/>
+<br/>
+<h2>Package org.springframework.web.reactive.function.server</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-co-router-function-dsl/index.html">CoRouterFunctionDsl</a></h4>
+</td>
+<td>
+<p>Provide a WebFlux.fn <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RouterFunction.html">RouterFunction</a> Coroutines Kotlin DSL created by <a href="co-router.html"><code>coRouter { }</code></a> in order to be able to write idiomatic Kotlin code.</p>
+<code><span class="keyword">class </span><span class="identifier">CoRouterFunctionDsl</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-router-function-dsl/index.html">RouterFunctionDsl</a></h4>
+</td>
+<td>
+<p>Provide a WebFlux.fn <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RouterFunction.html">RouterFunction</a> Reactive Kotlin DSL created by <a href="router.html"><code>router { }</code></a> in order to be able to write idiomatic Kotlin code.</p>
+<code><span class="keyword">class </span><span class="identifier">RouterFunctionDsl</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="attribute-or-null.html">attributeOrNull</a></h4>
+</td>
+<td>
+<p>Nullable variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#attribute(java.lang.String)">ServerRequest.attribute</a></p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">attributeOrNull</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$attributeOrNull(org.springframework.web.reactive.function.server.ServerRequest, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-body.html">awaitBody</a></h4>
+</td>
+<td>
+<p>Non-nullable Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#bodyToMono(java.lang.Class<? extends T>)">ServerRequest.bodyToMono</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">awaitBody</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code>
+<p><code>KClass</code> non-nullable Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#bodyToMono(java.lang.Class<? extends T>)">ServerRequest.bodyToMono</a>.
+Please consider <code>awaitBody&lt;Foo&gt;</code> variant if possible.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">awaitBody</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$awaitBody(org.springframework.web.reactive.function.server.ServerRequest, kotlin.reflect.KClass((org.springframework.web.reactive.function.server.awaitBody.T)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-body-or-null.html">awaitBodyOrNull</a></h4>
+</td>
+<td>
+<p>Nullable Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#bodyToMono(java.lang.Class<? extends T>)">ServerRequest.bodyToMono</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">awaitBodyOrNull</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span><span class="symbol">?</span></code>
+<p><code>KClass</code> nullable Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#bodyToMono(java.lang.Class<? extends T>)">ServerRequest.bodyToMono</a>.
+Please consider <code>awaitBodyOrNull&lt;Foo&gt;</code> variant if possible.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">awaitBodyOrNull</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$awaitBodyOrNull(org.springframework.web.reactive.function.server.ServerRequest, kotlin.reflect.KClass((org.springframework.web.reactive.function.server.awaitBodyOrNull.T)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-form-data.html">awaitFormData</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#formData()">ServerRequest.formData</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">awaitFormData</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/util/MultiValueMap.html"><span class="identifier">MultiValueMap</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-multipart-data.html">awaitMultipartData</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#multipartData()">ServerRequest.multipartData</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">awaitMultipartData</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/util/MultiValueMap.html"><span class="identifier">MultiValueMap</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/codec/multipart/Part.html"><span class="identifier">Part</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-principal.html">awaitPrincipal</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#principal()">ServerRequest.principal</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">awaitPrincipal</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/security/Principal.html"><span class="identifier">Principal</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="await-session.html">awaitSession</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#session()">ServerRequest.session</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">awaitSession</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/server/WebSession.html"><span class="identifier">WebSession</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="body.html">body</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html#body(P, java.lang.Class<T>)">ServerResponse.BodyBuilder.body</a> providing a <code>body(Publisher&lt;T&gt;)</code>
+variant. This extension is not subject to type erasure and retains actual generic
+type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">body</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$body(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, org.reactivestreams.Publisher((org.springframework.web.reactive.function.server.body.T)))/publisher">publisher</span><span class="symbol">:</span>&nbsp;<a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html"><span class="identifier">Publisher</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html"><span class="identifier">Mono</span></a><span class="symbol">&lt;</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">&gt;</span></code>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html#body(P, java.lang.Class<T>)">ServerResponse.BodyBuilder.body</a> providing a <code>body&lt;T&gt;(Any)</code> variant
+leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">body</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$body(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlin.Any)/producer">producer</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html"><span class="identifier">Mono</span></a><span class="symbol">&lt;</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="body-and-await.html">bodyAndAwait</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html#body(P, java.lang.Class<T>)">ServerResponse.BodyBuilder.body</a> with <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a> and
+<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/ParameterizedTypeReference.html">ParameterizedTypeReference</a> parameters providing a <code>bodyAndAwait(Flow&lt;T&gt;)</code> variant.
+This extension is not subject to type erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">bodyAndAwait</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$bodyAndAwait(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlinx.coroutines.flow.Flow((org.springframework.web.reactive.function.server.bodyAndAwait.T)))/flow">flow</span><span class="symbol">:</span>&nbsp;<span class="identifier">Flow</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="body-to-flow.html">bodyToFlow</a></h4>
+</td>
+<td>
+<p>Coroutines <a href="#">kotlinx.coroutines.flow.Flow</a> based variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#bodyToFlux(java.lang.Class<? extends T>)">ServerRequest.bodyToFlux</a>.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">bodyToFlow</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Flow</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p><code>KClass</code> coroutines <a href="#">kotlinx.coroutines.flow.Flow</a> based variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#bodyToFlux(java.lang.Class<? extends T>)">ServerRequest.bodyToFlux</a>.
+Please consider <code>bodyToFlow&lt;Foo&gt;</code> variant if possible.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">bodyToFlow</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$bodyToFlow(org.springframework.web.reactive.function.server.ServerRequest, kotlin.reflect.KClass((org.springframework.web.reactive.function.server.bodyToFlow.T)))/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Flow</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="body-to-flux.html">bodyToFlux</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#bodyToFlux(java.lang.Class<? extends T>)">ServerRequest.bodyToFlux</a> providing a <code>bodyToFlux&lt;Foo&gt;()</code> variant
+leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">bodyToFlux</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html"><span class="identifier">Flux</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="body-to-mono.html">bodyToMono</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#bodyToMono(java.lang.Class<? extends T>)">ServerRequest.bodyToMono</a> providing a <code>bodyToMono&lt;Foo&gt;()</code> variant
+leveraging Kotlin reified type parameters. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">bodyToMono</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html"><span class="identifier">Mono</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="body-to-server-sent-events.html">bodyToServerSentEvents</a></h4>
+</td>
+<td>
+<p>Extension for <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html#body(P, java.lang.Class<T>)">ServerResponse.BodyBuilder.body</a> providing a
+<code>bodyToServerSentEvents(Publisher&lt;T&gt;)</code> variant. This extension is not subject to type
+erasure and retains actual generic type arguments.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><s><span class="identifier">bodyToServerSentEvents</span></s><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$bodyToServerSentEvents(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, org.reactivestreams.Publisher((org.springframework.web.reactive.function.server.bodyToServerSentEvents.T)))/publisher">publisher</span><span class="symbol">:</span>&nbsp;<a href="https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/org/reactivestreams/Publisher.html"><span class="identifier">Publisher</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html"><span class="identifier">Mono</span></a><span class="symbol">&lt;</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="body-value-and-await.html">bodyValueAndAwait</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html#bodyValue(java.lang.Object)">ServerResponse.BodyBuilder.bodyValue</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">bodyValueAndAwait</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$bodyValueAndAwait(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlin.Any)/body">body</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="build-and-await.html">buildAndAwait</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RenderingResponse/Builder.html#build()">RenderingResponse.Builder.build</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RenderingResponse/Builder.html"><span class="identifier">Builder</span></a><span class="symbol">.</span><span class="identifier">buildAndAwait</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RenderingResponse.html"><span class="identifier">RenderingResponse</span></a></code>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/HeadersBuilder.html#build()">ServerResponse.HeadersBuilder.build</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/HeadersBuilder.html"><span class="identifier">HeadersBuilder</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/HeadersBuilder.html"><span class="identifier">HeadersBuilder</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">buildAndAwait</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="content-length-or-null.html">contentLengthOrNull</a></h4>
+</td>
+<td>
+<p>Nullable variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest/Headers.html#contentLength()">ServerRequest.Headers.contentLength</a></p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest/Headers.html"><span class="identifier">Headers</span></a><span class="symbol">.</span><span class="identifier">contentLengthOrNull</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="content-type-or-null.html">contentTypeOrNull</a></h4>
+</td>
+<td>
+<p>Nullable variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest/Headers.html#contentType()">ServerRequest.Headers.contentType</a></p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest/Headers.html"><span class="identifier">Headers</span></a><span class="symbol">.</span><span class="identifier">contentTypeOrNull</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/MediaType.html"><span class="identifier">MediaType</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="co-router.html">coRouter</a></h4>
+</td>
+<td>
+<p>Allow to create easily a WebFlux.fn <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RouterFunction.html">RouterFunction</a> with a <a href="-co-router-function-dsl/index.html">Coroutines router Kotlin DSL</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">coRouter</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$coRouter(kotlin.Function1((org.springframework.web.reactive.function.server.CoRouterFunctionDsl, kotlin.Unit)))/routes">routes</span><span class="symbol">:</span>&nbsp;<a href="-co-router-function-dsl/index.html"><span class="identifier">CoRouterFunctionDsl</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RouterFunction.html"><span class="identifier">RouterFunction</span></a><span class="symbol">&lt;</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="html.html">html</a></h4>
+</td>
+<td>
+<p>Shortcut for setting <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/MediaType.html#TEXT_HTML">MediaType.TEXT_HTML</a> <code>Content-Type</code> header.</p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">html</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">!</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="json.html">json</a></h4>
+</td>
+<td>
+<p>Shortcut for setting <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/MediaType.html#APPLICATION_JSON">MediaType.APPLICATION_JSON</a> <code>Content-Type</code> header.</p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">json</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">!</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="plus.html">plus</a></h4>
+</td>
+<td>
+<p>Equivalent to <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RouterFunction.html#and(org.springframework.web.reactive.function.server.RouterFunction<T>)">RouterFunction.and</a>.</p>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">&gt;</span> <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RouterFunction.html"><span class="identifier">RouterFunction</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">plus</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$plus(org.springframework.web.reactive.function.server.RouterFunction((org.springframework.web.reactive.function.server.plus.T)), org.springframework.web.reactive.function.server.RouterFunction((org.springframework.web.reactive.function.server.plus.T)))/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RouterFunction.html"><span class="identifier">RouterFunction</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RouterFunction.html"><span class="identifier">RouterFunction</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">!</span><span class="symbol">&gt;</span><span class="symbol">!</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="query-param-or-null.html">queryParamOrNull</a></h4>
+</td>
+<td>
+<p>Nullable variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#queryParam(java.lang.String)">ServerRequest.queryParam</a></p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">queryParamOrNull</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$queryParamOrNull(org.springframework.web.reactive.function.server.ServerRequest, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="remote-address-or-null.html">remoteAddressOrNull</a></h4>
+</td>
+<td>
+<p>Nullable variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html#remoteAddress()">ServerRequest.remoteAddress</a></p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">.</span><span class="identifier">remoteAddressOrNull</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/net/InetSocketAddress.html"><span class="identifier">InetSocketAddress</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="render-and-await.html">renderAndAwait</a></h4>
+</td>
+<td>
+<p>Coroutines variant of <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html#render(java.lang.String, java.lang.Object...)">ServerResponse.BodyBuilder.render</a>.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">renderAndAwait</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$renderAndAwait(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlin.String, kotlin.Array((kotlin.String)))/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="keyword">vararg</span> <span class="identifier" id="org.springframework.web.reactive.function.server$renderAndAwait(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlin.String, kotlin.Array((kotlin.String)))/modelAttributes">modelAttributes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a></code><br/>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">renderAndAwait</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$renderAndAwait(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.web.reactive.function.server$renderAndAwait(org.springframework.web.reactive.function.server.ServerResponse.BodyBuilder, kotlin.String, kotlin.collections.Map((kotlin.String, kotlin.Any)))/model">model</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="router.html">router</a></h4>
+</td>
+<td>
+<p>Allow to create easily a WebFlux.fn <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RouterFunction.html">RouterFunction</a> with a <a href="-router-function-dsl/index.html">Reactive router Kotlin DSL</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">router</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.reactive.function.server$router(kotlin.Function1((org.springframework.web.reactive.function.server.RouterFunctionDsl, kotlin.Unit)))/routes">routes</span><span class="symbol">:</span>&nbsp;<a href="-router-function-dsl/index.html"><span class="identifier">RouterFunctionDsl</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/RouterFunction.html"><span class="identifier">RouterFunction</span></a><span class="symbol">&lt;</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse.html"><span class="identifier">ServerResponse</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="sse.html">sse</a></h4>
+</td>
+<td>
+<p>Shortcut for setting <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/MediaType.html#TEXT_EVENT_STREAM">MediaType.TEXT_EVENT_STREAM</a> <code>Content-Type</code> header.</p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">sse</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">!</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="xml.html">xml</a></h4>
+</td>
+<td>
+<p>Shortcut for setting <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/http/MediaType.html#APPLICATION_XML">MediaType.APPLICATION_XML</a> <code>Content-Type</code> header.</p>
+<code><span class="keyword">fun </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">.</span><span class="identifier">xml</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/reactive/function/server/ServerResponse/BodyBuilder.html"><span class="identifier">BodyBuilder</span></a><span class="symbol">!</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

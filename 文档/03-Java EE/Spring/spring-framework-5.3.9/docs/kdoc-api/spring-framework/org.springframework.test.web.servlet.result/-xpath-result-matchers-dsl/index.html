@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>XpathResultMatchersDsl - spring-framework</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="../index.html">org.springframework.test.web.servlet.result</a>&nbsp;/&nbsp;<a href="./index.html">XpathResultMatchersDsl</a><br/>
+<br/>
+<h1>XpathResultMatchersDsl</h1>
+<code><span class="keyword">class </span><span class="identifier">XpathResultMatchersDsl</span></code>
+<p>Provide a <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/servlet/result/XpathResultMatchers.html">XpathResultMatchers</a> Kotlin DSL in order to be able to write idiomatic Kotlin code.</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.3</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="boolean-value.html">booleanValue</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">booleanValue</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.XpathResultMatchersDsl$booleanValue(kotlin.Boolean)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="does-not-exist.html">doesNotExist</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">doesNotExist</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="exists.html">exists</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">exists</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="node.html">node</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">node</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.XpathResultMatchersDsl$node(org.hamcrest.Matcher((org.w3c.dom.Node)))/matcher">matcher</span><span class="symbol">:</span>&nbsp;<span class="identifier">Matcher</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/org.w3c.dom/-node/index.html"><span class="identifier">Node</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="node-count.html">nodeCount</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">nodeCount</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.XpathResultMatchersDsl$nodeCount(org.hamcrest.Matcher((kotlin.Int)))/matcher">matcher</span><span class="symbol">:</span>&nbsp;<span class="identifier">Matcher</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">nodeCount</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.XpathResultMatchersDsl$nodeCount(kotlin.Int)/expectedCount">expectedCount</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="node-list.html">nodeList</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">nodeList</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.XpathResultMatchersDsl$nodeList(org.hamcrest.Matcher((org.w3c.dom.NodeList)))/matcher">matcher</span><span class="symbol">:</span>&nbsp;<span class="identifier">Matcher</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/org.w3c.dom/-node-list/index.html"><span class="identifier">NodeList</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="number.html">number</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">number</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.XpathResultMatchersDsl$number(org.hamcrest.Matcher((kotlin.Double)))/matcher">matcher</span><span class="symbol">:</span>&nbsp;<span class="identifier">Matcher</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">number</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.XpathResultMatchersDsl$number(kotlin.Double)/expectedValue">expectedValue</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="string.html">string</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">string</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.XpathResultMatchersDsl$string(org.hamcrest.Matcher((kotlin.String)))/matcher">matcher</span><span class="symbol">:</span>&nbsp;<span class="identifier">Matcher</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">string</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.XpathResultMatchersDsl$string(kotlin.String)/expectedValue">expectedValue</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

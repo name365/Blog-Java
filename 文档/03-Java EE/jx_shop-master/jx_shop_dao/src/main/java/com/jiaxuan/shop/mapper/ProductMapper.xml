@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--设置dao接口-->
+<mapper namespace="com.jiaxuan.shop.dao.ProductDao">
+
+    <resultMap id="productMap" type="Product">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="info" column="info"/>
+        <result property="image" column="image"/>
+        <association property="productType" javaType="ProductType" column="product_type_id">
+            <id property="id" column="product_type_id"/>
+        </association>
+    </resultMap>
+
+    <!--多表连接查询-->
+    <resultMap id="productMap2" type="Product">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="info" column="info"/>
+        <result property="image" column="image"/>
+        <association property="productType" javaType="ProductType" column="product_type_id">
+            <id property="id" column="pt.id"/>
+            <result property="name" column="pt.name"/>
+            <result property="status" column="status"/>
+        </association>
+    </resultMap>
+
+    <sql id="productColumn">
+        id,
+        name,
+        price,
+        info,
+        image,
+        product_type_id
+    </sql>
+
+    <select id="selectByProductParams" parameterType="com.jiaxuan.shop.params.ProductParam" resultMap="productMap">
+        select <include refid="productColumn"/>
+        from t_product
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat(concat('%',#{name}),'%')
+            </if>
+            <if test="minPrice != null and maxPrice != null">
+                and price between #{minPrice} and #{maxPrice}
+            </if>
+
+            <if test="minPrice != null">
+                and price &gt;= #{minPrice}
+            </if>
+
+            <if test="maxPrice != null">
+                and price &lt;= #{maxPrice}
+            </if>
+
+            <if test="productTypeId != null and productTypeId != -1">
+                and product_type_id = #{productTypeId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByProductName" resultMap="productMap">
+        select <include refid="productColumn"/>
+        from t_product
+        where name = #{name}
+    </select>
+
+    <select id="selectAllProducts" resultMap="productMap2">
+        select  p.id,p.name,p.info,p.price,p.image,p.product_type_id,pt.id 'pt.id',pt.name 'pt.name',pt.status
+        from t_product p
+        left join t_product_type pt
+        on p.product_type_id = pt.id
+    </select>
+
+    <select id="selectProductById" resultMap="productMap">
+        select <include refid="productColumn"/>
+        from t_product
+        where id = #{id}
+    </select>
+
+    <insert id="insertProduct" parameterType="Product">
+        insert into t_product
+        (name, price, info, image, product_type_id)
+        values
+        (#{name},#{price},#{info},#{image},#{productType.id})
+    </insert>
+
+    <update id="updateProduct" parameterType="Product">
+        update t_product
+        set name = #{name},
+            price = #{price},
+            info = #{info},
+            image = #{image},
+            product_type_id = #{productType.id}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteProductById">
+        delete from t_product
+        where id = #{id}
+    </delete>
+</mapper>

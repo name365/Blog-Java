@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RequestResultMatchersDsl - spring-framework</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="../index.html">org.springframework.test.web.servlet.result</a>&nbsp;/&nbsp;<a href="./index.html">RequestResultMatchersDsl</a><br/>
+<br/>
+<h1>RequestResultMatchersDsl</h1>
+<code><span class="keyword">class </span><span class="identifier">RequestResultMatchersDsl</span></code>
+<p>Provide a <a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/test/web/servlet/result/RequestResultMatchers.html">RequestResultMatchers</a> Kotlin DSL in order to be able to write idiomatic Kotlin code.</p>
+<p><strong>Author</strong><br/>
+Sebastien Deleuze</p>
+<p><strong>Since</strong><br/>
+5.3</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="async-not-started.html">asyncNotStarted</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">asyncNotStarted</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="async-result.html">asyncResult</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">asyncResult</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.RequestResultMatchersDsl$asyncResult(org.hamcrest.Matcher((org.springframework.test.web.servlet.result.RequestResultMatchersDsl.asyncResult.T)))/matcher">matcher</span><span class="symbol">:</span>&nbsp;<span class="identifier">Matcher</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">asyncResult</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.RequestResultMatchersDsl$asyncResult(kotlin.Any)/expectedResult">expectedResult</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="async-started.html">asyncStarted</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">asyncStarted</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="attribute.html">attribute</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">attribute</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.RequestResultMatchersDsl$attribute(kotlin.String, org.hamcrest.Matcher((org.springframework.test.web.servlet.result.RequestResultMatchersDsl.attribute.T)))/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.test.web.servlet.result.RequestResultMatchersDsl$attribute(kotlin.String, org.hamcrest.Matcher((org.springframework.test.web.servlet.result.RequestResultMatchersDsl.attribute.T)))/matcher">matcher</span><span class="symbol">:</span>&nbsp;<span class="identifier">Matcher</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">attribute</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.RequestResultMatchersDsl$attribute(kotlin.String, kotlin.Any)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.test.web.servlet.result.RequestResultMatchersDsl$attribute(kotlin.String, kotlin.Any)/expectedValue">expectedValue</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="session-attribute.html">sessionAttribute</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">sessionAttribute</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.RequestResultMatchersDsl$sessionAttribute(kotlin.String, org.hamcrest.Matcher((org.springframework.test.web.servlet.result.RequestResultMatchersDsl.sessionAttribute.T)))/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.test.web.servlet.result.RequestResultMatchersDsl$sessionAttribute(kotlin.String, org.hamcrest.Matcher((org.springframework.test.web.servlet.result.RequestResultMatchersDsl.sessionAttribute.T)))/matcher">matcher</span><span class="symbol">:</span>&nbsp;<span class="identifier">Matcher</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">sessionAttribute</span><span class="symbol">(</span><span class="identifier" id="org.springframework.test.web.servlet.result.RequestResultMatchersDsl$sessionAttribute(kotlin.String, kotlin.Any)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.test.web.servlet.result.RequestResultMatchersDsl$sessionAttribute(kotlin.String, kotlin.Any)/expectedValue">expectedValue</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="session-attribute-does-not-exist.html">sessionAttributeDoesNotExist</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">sessionAttributeDoesNotExist</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="org.springframework.test.web.servlet.result.RequestResultMatchersDsl$sessionAttributeDoesNotExist(kotlin.Array((kotlin.String)))/names">names</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

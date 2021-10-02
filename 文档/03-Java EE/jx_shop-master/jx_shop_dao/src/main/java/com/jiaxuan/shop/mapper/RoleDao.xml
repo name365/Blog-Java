@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--设置dao接口-->
+<mapper namespace="com.jiaxuan.shop.dao.RoleDao">
+
+    <sql id="RoleColumn">
+        id,
+        role_name
+    </sql>
+
+    <select id="selectAllRoles" resultType="Role">
+        select <include refid="RoleColumn"/>
+        from t_role
+    </select>
+
+</mapper>

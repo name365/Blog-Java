@@ -1,0 +1,23 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RouterFunctionDsl.resources - spring-framework</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">spring-framework</a>&nbsp;/&nbsp;<a href="../index.html">org.springframework.web.servlet.function</a>&nbsp;/&nbsp;<a href="index.html">RouterFunctionDsl</a>&nbsp;/&nbsp;<a href="./resources.html">resources</a><br/>
+<br/>
+<h1>resources</h1>
+<a name="org.springframework.web.servlet.function.RouterFunctionDsl$resources(kotlin.String, org.springframework.core.io.Resource)"></a>
+<code><span class="keyword">fun </span><span class="identifier">resources</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.servlet.function.RouterFunctionDsl$resources(kotlin.String, org.springframework.core.io.Resource)/path">path</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="org.springframework.web.servlet.function.RouterFunctionDsl$resources(kotlin.String, org.springframework.core.io.Resource)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/io/Resource.html"><span class="identifier">Resource</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Route requests that match the given pattern to resources relative to the given root location.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/RouterFunctions.html#resources(java.lang.String, org.springframework.core.io.Resource)">RouterFunctions.resources</a></p>
+</p>
+<a name="org.springframework.web.servlet.function.RouterFunctionDsl$resources(kotlin.Function1((org.springframework.web.servlet.function.ServerRequest, org.springframework.core.io.Resource)))"></a>
+<code><span class="keyword">fun </span><span class="identifier">resources</span><span class="symbol">(</span><span class="identifier" id="org.springframework.web.servlet.function.RouterFunctionDsl$resources(kotlin.Function1((org.springframework.web.servlet.function.ServerRequest, org.springframework.core.io.Resource)))/lookupFunction">lookupFunction</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/ServerRequest.html"><span class="identifier">ServerRequest</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/io/Resource.html"><span class="identifier">Resource</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Route to resources using the provided lookup function. If the lookup function provides a
+<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/core/io/Resource.html">Resource</a> for the given request, it will be it will be exposed using a
+<a href="https://docs.spring.io/spring-framework/docs/5.3.9/javadoc-api/org/springframework/web/servlet/function/HandlerFunction.html">HandlerFunction</a> that handles GET, HEAD, and OPTIONS requests.</p>
+</BODY>
+</HTML>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--设置dao接口-->
+<mapper namespace="com.jiaxuan.shop.dao.OrderItemDao">
+
+    <resultMap id="OrderItemMap" type="OrderItem">
+        <id property="id" column="id"/>
+        <result property="price" column="price"/>
+        <result property="num" column="num"/>
+        <association property="product" javaType="Product" column="product_id">
+            <id property="id" column="p.id"/>
+            <result property="price" column="p.price"/>
+            <result property="name" column="name"/>
+            <result property="image" column="image"/>
+        </association>
+    </resultMap>
+
+    <select id="selectOrderItemsByOrder" resultMap="OrderItemMap">
+        select t.id,t.price,t.num,p.id'p.id',p.price'p.price',p.name,p.image
+        from t_order_item t
+        left join t_product p ON t.product_id = p.id
+        where t.order_id = #{orderId}
+    </select>
+
+    <insert id="insertOrderItem" parameterType="OrderItem">
+        insert into t_order_item
+          (product_id, num, price, order_id)
+        values
+          (#{product.id},#{num},#{price},#{order.id})
+    </insert>
+
+    <insert id="insertOrderItemByOrderItems" parameterType="list">
+        insert into t_order_item
+          (product_id, num, price, order_id)
+        values
+        <if test="orderItemList != null and orderItemList.size() > 0">
+            <foreach collection="orderItemList" item="OrderItem" index="index" separator=",">
+                (#{OrderItem.product.id},#{OrderItem.num},#{OrderItem.price},#{OrderItem.order.id})
+            </foreach>
+        </if>
+    </insert>
+
+</mapper>
