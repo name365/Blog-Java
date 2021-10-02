@@ -1,8 +1,8 @@
-Vue
+# Vue 快速入门
 
 ![vue](img/01/logo.png)
 
-> 全文为Vue2.0版本学习笔记！！！
+> 全文为Vue2.0版本学习笔记！！！3.0版本请参考文末。
 
 ## 1.前端核心分析
 
@@ -2141,9 +2141,12 @@ npm run dev
 
 ## 9.WebPack的使用
 
+![image-20211002124237169](img/04/image-20211002124237169.png)
+
 ### 1.什么是Webpack
 
-- 本质上， webpack是一个现代JavaScript应用程序的静态模块打包器(module bundler) 。当webpack处理应用程序时， 它会递归地构建一个依赖关系图(dependency graph) ， 其中包含应用程序需要的每个模块， 然后将所有这些模块打包成一个或多个bundle。
+- 本质上， webpack是一个现代JavaScript应用程序的`静态模块打包器`(module bundler) 。
+- 工作原理：当webpack处理应用程序时， 它会递归地构建一个依赖关系图(dependency graph) ， 其中包含应用程序需要的每个模块， 然后将所有这些模块打包成一个或多个bundle。
 - Webpack是当下最热门的前端资源模块化管理和打包工具， 它可以将许多松散耦合的模块按照依赖和规则打包成符合生产环境部署的前端资源。还可以将按需加载的模块进行代码分离，等到实际需要时再异步加载。通过loader转换， 任何形式的资源都可以当做模块， 比如Commons JS、AMD、ES 6、CSS、JSON、Coffee Script、LESS等；
 - 伴随着移动互联网的大潮， 当今越来越多的网站已经从网页模式进化到了WebApp模式。它们运行在现代浏览器里， 使用HTML 5、CSS 3、ES 6等新的技术来开发丰富的功能， 网页已经不仅仅是完成浏览器的基本需求； WebApp通常是一个SPA(单页面应用) ， 每一个视图通过异步的方式加载，这导致页面初始化和使用过程中会加载越来越多的JS代码，这给前端的开发流程和资源组织带来了巨大挑战。
 - 前端开发和其他开发工作的主要区别，首先是前端基于多语言、多层次的编码和组织工作，其次前端产品的交付是基于浏览器的，这些资源是通过增量加载的方式运行到浏览器端，如何在开发环境组织好这些碎片化的代码和资源，并且保证他们在浏览器端快速、优雅的加载和更新，就需要一个模块化系统，这个理想中的模块化系统是前端工程师多年来一直探索的难题。
@@ -2287,9 +2290,10 @@ module "localModule"{}
 
 - **安装（==管理员身份进入CMD安装==）：**
 
-```javascript
-npm install webpack -g
-npm install webpack-cli -g
+```shell
+npm i webpack webpack-cli -g 
+# 或
+yarn global add webpack webpack-cl # 一次性全局安装两个模块
 ```
 
 - 测试安装成功
@@ -2297,6 +2301,8 @@ npm install webpack-cli -g
 ```shell
 webpack -v
 webpack-cli -v
+# 或
+webpack --version
 ```
 
 ![image-20211001233110335](img/04/image-20211001233110335.png)
@@ -2335,37 +2341,58 @@ module.exports = {
 ### 5.使用webpack
 
 1. 创建项目（创建一个空文件夹，用idea打开）。
+
 2. 创建一个名为modules的目录，用于放置JS模块等资源文件。
-3. 在modules下创建模块文件，如hello.js，用于编写JS模块相关代码。
+
+   ![image-20211002111438096](img/04/image-20211002111438096.png)
+
+3. 在==modules下==创建模块文件，如hello.js，用于编写JS模块相关代码。
 
 ```js
-//暴露一个方法
+// 暴露一个方法
 exports.sayHi = function() {
-    document.write("<h1>狂神说ES6</h1>")
+    document.write("<h1>Java全栈笔记学习</h1>")
 }
 ```
 
-1. 在modules下创建一个名为main.js的入口文件，用于打包时设置entry属性。
+4. 在==modules下==创建一个名为main.js的入口文件，用于打包时设置entry属性。
 
 ```js
-//require 导入一个模块，就可以调用这个模块中的方法了
+// require 导入一个模块，就可以调用这个模块中的方法了
 var hello = require("./hello");
 hello.sayHi();
 ```
 
-1. 在项目目录下创建webpack.config.js配置文件，使用webpack命令打包。
+5. 在==项目目录下==创建webpack.config.js配置文件，使用webpack命令打包。
 
 ```js
-module.exports = {
-	entry:"./modules/main.js",
-	output:{
-		filename:"./js/bundle.js"
-	}
+/**
+ * webpack的配置
+ */
+// 引入path模块
+const path = require('path')
 
+
+// 把整个配置暴露出去
+module.exports = {
+    // 入口 [以这个文件为入口 开始打包]
+    entry:"./modules/main.js",
+
+    // 出口
+    output:{
+        path: path.resolve(__dirname, 'dist'),   // 要输出的路径  必须是一个绝对路径
+        filename:"./js/bundle.js",	// 输出的文件名，最终打包出来的文件 叫什么名字（bundle）
+        publicPath:"./"
+    },
+
+    // 模式
+    mode: "development",  // 开发模式
 }
 ```
 
-1. 在项目目录下创建HTML页面，如index.html，导入webpack打包后的JS文件。
+![image-20211002123102179](img/04/image-20211002123102179.png)
+
+6. 在==项目目录下==创建HTML页面，如index.html，导入webpack打包后的JS文件。
 
 ```html
 <!doctype html>
@@ -2380,8 +2407,13 @@ module.exports = {
 </html>
 ```
 
-1. 在IDEA控制台中直接执行webpack；如果失败的话，就使用管理员权限运行即可！
-2. 运行HTML看效果。
+7. 在IDEA控制台中直接执行`webpack`；如果失败的话，就使用管理员权限运行即可！
+
+8. 运行HTML看效果。
+
+![image-20211002123507685](img/04/image-20211002123507685.png)
+
+![image-20211002123519102](img/04/image-20211002123519102.png)
 
 - **说明**
 
@@ -2390,11 +2422,491 @@ module.exports = {
 webpack --watch
 ```
 
+### 6.核心loader
+
+> 概念
+
+- webpack默认只能打包 `javaScript`, 不能处理其他类型的文件，需要loader，loader可以把其他格式的文件，处理成 `webpack `能正常打包的东西。
+
+#### 1.loader处理css
+
+1. 下载loader==[管理员身份]==
+
+```shell
+yarn add css-loader style-loader -D  
+# 或  
+npm i css-loader style-loader -D
+```
+
+2. 配置loader
+
+```js
+// 配置loader
+module: {
+    // 规则
+    rules: [
+        {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader'],  // 处理这个格式的文件 需要使用哪些loader
+            /* 
+        说明：
+          css-loader:  解析css，让webpack可以识别打包css代码
+          style-loader: 把css通过style标签，插入到html的header中，才能生效
+           注意： use数组中，loader解析是有顺序的，从右到左。
+  */
+        },
+    ]
+},
+```
+
+#### 2.loader处理less
+
+- 概念：less是css的预处理语言，增强了css的写法，可以写：`嵌套` `变量` ， less直接引入不能生效，需要编译成css引入才能生效。
+
+- 编译方式： vscode自带插件： `Easy-LESS` (黄黄那个)
+
+- loader处理less
+
+  1. 下载对应的loader
+
+  ```javascript
+  yarn add less-loader less -D
+  ```
+
+  2. 配置loader
+
+  ```javascript
+  {
+      test: /\.less$/,
+          use: ['style-loader', 'css-loader', 'less-loader'],  // 处理这个格式的文件 需要使用哪些loader
+  },
+  ```
+
+#### 3.loader处理img
+
+> 处理less或css中写的背景图
+
+1. 下载对应的loader
+
+```javascript
+yarn add url-loader file-loader -D
+```
+
+2. 配置这个loader
+
+```javascript
+{
+    test: /\.(png|jpg|gif)$/,
+        loader: 'url-loader',  // 使用这个loader 处理这种格式的文件
+            options: {  // 写上自己定义的配置
+                name: '[hash].[ext]',  // 输出图片的名字  
+                    limit:  10 * 1024, // 限制大小 大于这个值的图片 单独输出 不打包到bundle.js中， 否则打出来的包比较大。小图就直接打包进去，经过base64转码。
+            }
+            },
+```
+
+> 打包html & 打包html中引入的img图片
+
+1. 下载对应的 loader 和 打包html的插件
+
+```javascript
+yarn add html-loader  html-webpack-plugin@next -D
+```
+
+2. 写上对应的配置
+- loader的配置
+
+```javascript
+{
+    test: /\.(png|jpg|gif)$/,
+        loader: 'url-loader',  // 使用这个loader 处理这种格式的文件
+            options: {  // 写上自己定义的配置
+                name: '[hash].[ext]',  // 输出图片的名字  
+                    limit: 10 * 1024, // 限制大小 大于这个值的图片 单独输出 不打包到bundle.js中， 否则打出来的包比较大。小图就直接打包进去，经过base64转码。
+                        esModule: false,  // 关闭es6的模块化 全部使用node的模块化
+            }
+            },
+
+                {
+                    test: /\.html$/,
+                        use: ['html-loader'],  // 处理这个格式的文件 需要使用哪些loader
+                },
+```
+
+- 插件的配置
+
+```javascript
+const HtmlWebpackPlugin = require('html-webpack-plugin') // 引入插件
+
+// 插件
+plugins: [
+    // 使用插件 这个插件是把 html 打包到 dist 里面
+    new HtmlWebpackPlugin({
+        template: "./src/index.html", // 你要以哪个html为模板 进行打包
+    })
+],
+```
+
+#### 4.打包字体图标
+
+1. 下载对应的loader（前面处理img以及下载过了）
+
+```javascript
+yarn add file-loader -D
+```
+
+2. 配置
+
+```javascript
+{
+    test: /\.(eot|svg|ttf|woff|woff2)$/,
+        use: ['file-loader'],  // 处理这个格式的文件 需要使用哪些loader
+},
+```
+
+#### 5.es6编译到es5
+
+- 下载对应的loader和模块
+
+  ```javascript
+  yarn add babel-core babel-loader@7.1.5 babel-preset-es2015 -D
+  ```
+
+- 配置
+
+  ```javascript
+  {
+      test: /\.js$/,
+          use: ['babel-loader'],  // 处理这个格式的文件 需要使用哪些loader
+              exclude: /node_modules/,  // 排除
+  }
+  ```
+
+- 在项目的根目录 创建 .babelrc 文件
+
+  ```java
+  {
+      "presets": [
+          "es2015"
+      ]
+  }
+  ```
+
+### 7.插件
+
+#### 1.插件的使用步骤
+
+- 下载插件
+
+  ```javascript
+  yarn add 插件名 -D
+  ```
+
+- 引入插件
+
+  ```javascript
+  const 变量名 = require('插件名')
+  ```
+
+- new插件，在里面写配置
+
+  ```javascript
+  plugins: [
+      new 变量名({
+          key: val  // 写配置
+      })
+  ]
+  ```
+
+#### 2.打包html的插件
+
+- 下载插件
+
+  ```javascript
+  yarn add html-webpack-plugin@next -D
+  ```
+
+- 引入插件
+
+  ```javascript
+  const HtmlWebpackPlugin = require('html-webpack-plugin')
+  ```
+
+- new插件，在里面写配置
+
+  ```javascript
+  plugins: [
+      // 打包html的插件
+      new HtmlWebpackPlugin({
+          template: "./src/index.html", // 以哪个html为模板
+          filename: "home.html",  // 输出的文件名
+          // 压缩优化
+          // minify: {
+          //   collapseWhitespace: true, // 移除空格 
+          //   removeComments: true, // 移除注释
+          // },
+      }),
+  ]
+  ```
+
+- 注意： index.html本身只是模板，不需要引入东西，打包出来的，会自动引入。
+
+#### 3.提取css的插件
+
+- 下载插件
+
+  ```javascript
+  yarn add mini-css-extract-plugin -D
+  ```
+
+- 引入插件
+
+  ```javascript
+  const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+  ```
+
+- new插件，在里面写配置
+
+  ```javascript
+  plugins: [
+      // 使用提取css的插件 （把css从 bundle里面弄出来）  
+      new MiniCssExtractPlugin({
+        filename: "index.css",
+      }),
+  ]
+  ```
+
+- 注意： index.html本身只是模板，不需要引入东西，打包出来的，会自动引入。
+
+#### 4.压缩css
+
+   ```javascript
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')  // 压缩css
+
+// 压缩css
+new OptimizeCssAssetsWebpackPlugin()
+   ```
+
+### 8.启动开发服务器
+
+- 全局安装 & 本地安装 webpack-dev-server
+
+```javascript
+yarn global add webpack-dev-server
+yarn add webpack-dev-server -D
+```
+
+- 配置
+
+```javascript
+// 开发服务器
+devServer: {
+    contentBase: path.resolve(__dirname, 'dist'), // 启动服务器目录
+    compress: true, // 启动gzip
+    port: 8848,  // 端口
+    open: true, // 自动打开服务
+    openPage:"home.html"//打开指定页面
+},
+```
+
+- 启动
+
+```javascript
+webpack serve
+```
+
+- 修改 `package.json`  
+
+```javascript
+ "scripts": {
+    "serve": "webpack serve",
+    "build": "webpack --progress"
+  },
+```
+
+- 运行命令：
+
+```javascript
+启动开发服务器：  yarn serve
+打包：     yarn build
+```
+
+### 9.完整配置
+
+> package.json
+
+```javascript
+{
+  "name": "fitness-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "serve": "webpack serve",
+    "build": "webpack --progress"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^5.0.1",
+    "file-loader": "^6.2.0",
+    "html-loader": "^1.3.2",
+    "html-webpack-plugin": "4.5.0",
+    "less": "^3.12.2",
+    "less-loader": "^7.1.0",
+    "mini-css-extract-plugin": "^1.3.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "postcss-loader": "^4.1.0",
+    "postcss-preset-env": "^6.7.0",
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
+    "webpack": "5.10.1",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "browserslist": {
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ],
+    "production": [
+      ">0.1%",
+      "not op_mini all"
+    ]
+  }
+}
+```
+
+> webpack.config.js
+
+```javascript
+//引入
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin")// 引入打包html的插件
+const MiniCssExtractPlugin = require("mini-css-extract-plugin") // 提取css
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')  // 压缩css
+
+//暴露
+module.exports = {
+    target: "web",  // 目标是浏览器
+
+    //入口 [以这个文件为入口 开始打包]
+    entry: "./src/js/index.js",
+
+    //出口
+    output: {
+        path: path.resolve(__dirname, "dist"),  // 要输出的路径  必须是一个绝对路径
+        filename: "bundle.js",  // 输出的文件名，最终打包出来的文件 叫什么名字（bundle）
+        publicPath: './', // 所有资源的基础路径  静态资源最终访问路
+    },
+    //配置
+    module: {
+        //规则
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: '../'
+                        }
+                    },
+                    "css-loader"],
+            },
+
+            //less 打包
+            {
+                test: /\.less$/,
+                // 提取js中的css
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: '../'
+                        }
+                    },
+                    "css-loader",
+                    "less-loader"
+                ]
+            },
+            //css背景图片打包
+            {
+                test: /\.(png|jpg|gif)$/,
+                loader: 'url-loader',  // 使用这个loader 处理这种格式的文件
+                options: {  // 写上自己定义的配置
+                    name: '[hash].[ext]',  // 输出图片的名字  
+                    limit: 10 * 1024, // 限制大小 大于这个值的图片 单独输出 不打包到bundle.js中， 否则打出来的包比较大。小图就直接打包进去，经过base64转码。
+                    esModule: false,  // 关闭es6的模块化 全部使用node的模块化
+                }
+            },
+            //HTML引入图片打包
+            {
+                test: /\.html$/,
+                use: ['html-loader'],
+            },
+            //字体图标
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                use: ['file-loader'],  // 处理这个格式的文件 需要使用哪些loader
+            },
+
+            {
+                test: /\.js$/,
+                use: ['babel-loader'],  // 处理这个格式的文件 需要使用哪些loader
+                exclude: /node_modules/,  // 排除
+            }
+        ]
+    },
+    // 插件
+    plugins: [
+        // 使用插件 这个插件是把 html 打包到 dist 里面
+        new HtmlWebpackPlugin({
+            template: "./src/index.html", // 你要以哪个html为模板 进行打包
+            filename: 'index.html'
+        }),
+
+        // 提取css
+        new MiniCssExtractPlugin({
+            filename: "index.css",
+        }),
+
+        // 压缩css
+        new OptimizeCssAssetsWebpackPlugin()
+
+    ],
+    //模式
+    mode: "production",  // 开发模式
+
+    // 开发服务器
+    devServer: {
+        contentBase: path.resolve(__dirname, 'dist'), // 启动服务器目录
+        compress: true, // 启动gzip压缩
+        port: 666,  // 端口
+        open: true // 自动打开服务
+    },
+}
+
+```
+
+> .babelrc
+
+```javascript
+{
+    "presets": [
+        "es2015"
+    ]
+}
+```
+
 ## 10.vue-router路由
 
 ### 1.说明
 
-Vue Router是Vue.js官方的路由管理器。它和Vue.js的核心深度集成， 让构建单页面应用变得易如反掌。包含的功能有：
+> Vue Router是Vue.js官方的路由管理器。它和Vue.js的核心深度集成， 让构建单页面应用变得易如反掌。包含的功能有：
 
 - 嵌套的路由/视图表
 - 模块化的、基于组件的路由配置
@@ -2407,27 +2919,39 @@ Vue Router是Vue.js官方的路由管理器。它和Vue.js的核心深度集成�
 
 ### 2.安装
 
+> 参考：http://www.axios-js.com/zh-cn/docs/vue-axios.html
+
 **基于第一个vue-cli进行测试学习； 先查看node modules中是否存在vue-router**
-vue-router是一个插件包， 所以我们还是需要用n pm/cn pm来进行安装的。打开命令行工具，进入你的项目目录，输入下面命令。
+vue-router是一个插件包， 所以我们还是需要用npm/cnpm来进行安装的。打开命令行工具，进入你的项目目录，输入下面命令。
 
 ```shell
 npm install vue-router --save-dev
+# 或
+cnpm install vue-router --save-dev
+# 或
+yarn add vue-router --save-dev
 ```
 
 如果在一个模块化工程中使用它，必须要通过Vue.use()明确地安装路由功能：
 
-```shell
+```js
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
-Vue.use(VueRouter);
+// 显示声明使用VueRouter
+Vue.use(VueAxios, axios)
 ```
 
 ### 3.测试
 
-1、先删除没有用的东西
-2、`components` 目录下存放我们自己编写的组件
-3、定义一个`Content.vue` 的组件
+1. 先删除没有用的东西
+
+2. `components` 目录下存放我们自己编写的组件
+
+![image-20211002144943545](img/04/image-20211002144943545.png)
+
+3. 定义一个`Content.vue` 的组件
 
 ```html
 <template>
@@ -2459,62 +2983,63 @@ Vue.use(VueRouter);
 </script>
 ```
 
-4、安装路由，在src目录下，新建一个文件夹：`router`，专门存放路由，配置路由index.js，如下
+4. 安装路由，在src目录下，新建一个文件夹：`router`，专门存放路由，配置路由index.js，如下
 
 ```js
 import Vue from'vue'
-//导入路由插件
+// 导入路由插件
 import Router from 'vue-router'
-//导入上面定义的组件
+// 导入上面定义的组件
 import Content from '../components/Content'
 import Main from '../components/Main'
-//安装路由
+
+// 安装路由
 Vue.use(Router) ;
-//配置路由
+// 配置路由
 export default new Router({
-	routes:[
-		{
-			//路由路径
-			path:'/content',
-			//路由名称
-			name:'content',
-			//跳转到组件
-			component:Content
-			},
-        {
-			//路由路径
-			path:'/main',
-			//路由名称
-			name:'main',
-			//跳转到组件
-			component:Mian
-		}
-	]
+  routes:[
+    {
+      // 路由路径
+      path:'/content',
+      // 路由名称
+      name:'content',
+      // 跳转到组件
+      component:Content
+    },
+    {
+      // 路由路径
+      path:'/main',
+      // 路由名称
+      name:'main',
+      // 跳转到组件
+      component:Main
+    }
+  ]
 });
 ```
 
-5、在`main.js`中配置路由
+5. 在`main.js`中配置路由
 
 ```js
 import Vue from 'vue'
 import App from './App'
-
 //导入上面创建的路由配置目录
-import router from './router'//自动扫描里面的路由配置
+import router from './router' // 自动扫描里面的路由配置
 
 //来关闭生产模式下给出的提示
 Vue.config.productionTip = false;
 
+/* eslint-disable no-new */
 new Vue({
-	el:"#app",
-	//配置路由
-	router,
-	components:{App},
-	template:'<App/>'
-});
+  el: '#app',
+  // 配置路由
+  router,
+  components: { App },
+  template: '<App/>'
+})
 ```
 
-6、在`App.vue`中使用路由
+6. 在`App.vue`中使用路由
 
 ```html
 <template>
@@ -2523,7 +3048,7 @@ new Vue({
 			router-link：默认会被渲染成一个<a>标签，to属性为指定链接
 			router-view：用于渲染路由匹配到的组件
 		-->
-		<router-link to="/">首页</router-link>
+		<router-link to="/main">首页</router-link>
 		<router-link to="/content">内容</router-link>
 		<router-view></router-view>
 	</div>
@@ -2538,13 +3063,23 @@ new Vue({
 <style></style>
 ```
 
+7. 在终端输入`npm run dev`运行项目。
+
+![image-20211002144807367](img/04/image-20211002144807367.png)
+
+![image-20211002144629136](img/04/image-20211002144629136.png)
+
 ## 11.实战上手
 
 ### 1.创建工程
 
 <font color=red>注意：命令行都要使用管理员模式运行</font>
-1、创建一个名为hello-vue的工程`vue init webpack hello-vue`
-2、安装依赖， 我们需要安装vue-router、element-ui、sass-loader和node-sass四个插件
+
+1. 创建一个名为hello-vue的工程`vue init webpack hello-vue`。
+
+![image-20211002175501124](img/04/image-20211002175501124.png)
+
+2. 安装依赖， 我们需要安装vue-router、element-ui、sass-loader和node-sass四个插件。
 
 ```shell
 #进入工程目录
@@ -2561,41 +3096,47 @@ cnpm install sass-loader node-sass --save-dev
 npm run dev
 ```
 
-3、Npm命令解释：
+3. Npm命令解释：
 
-- `npm install moduleName`：安装模块到项目目录下
-- `npm install -g moduleName`：-g的意思是将模块安装到全局，具体安装到磁盘哪个位置要看npm config prefix的位置
-- `npm install -save moduleName`：–save的意思是将模块安装到项目目录下， 并在package文件的dependencies节点写入依赖，-S为该命令的缩写
-- `npm install -save-dev moduleName`:–save-dev的意思是将模块安装到项目目录下，并在package文件的devDependencies节点写入依赖，-D为该命令的缩写
+- `npm install moduleName`：安装模块到项目目录下。
+- `npm install -g moduleName`：-g的意思是将模块安装到全局，具体安装到磁盘哪个位置要看npm config prefix的位置。
+- `npm install -save moduleName`：–save的意思是将模块安装到项目目录下， 并在package文件的dependencies节点写入依赖，-S为该命令的缩写。
+- `npm install -save-dev moduleName`:–save-dev的意思是将模块安装到项目目录下，并在package文件的devDependencies节点写入依赖，-D为该命令的缩写。
+
+![image-20211002155946083](img/04/image-20211002155946083.png)
 
 ### 2.创建登录页面
 
-  把没有用的初始化东西删掉！
-  在源码目录中创建如下结构：
+- ==把没有用的初始化东西删掉==！
+
+> 在源码目录中创建如下结构：
 
 - assets：用于存放资源文件
 - components：用于存放Vue功能组件
 - views：用于存放Vue视图组件
 - router：用于存放vue-router配置
 
-![1595337979139](10实战快速上手.assets/1595337979139.png)
+![image-20211002181737215](img/05/image-20211002181737215.png)
 
-  **创建首页视图，在views目录下创建一个名为Main.vue的视图组件：**
+- **创建首页视图，在views目录下创建一个名为Main.vue的视图组件**：
 
 ```html
 <template>
-	<div>首页</div>
+  <div>首页</div>
 </template>
+
 <script>
-	export default {
-		name:"Main"
-	}
+  export default {
+    name: "Main"
+  }
 </script>
+
 <style scoped>
+
 </style>
 ```
 
-  创建登录页视图在views目录下创建名为Login.vue的视图组件，其中el-form的元素为ElementUI组件；
+- 创建登录页视图在views目录下创建名为Login.vue的视图组件，其中el-form的元素为ElementUI组件；
 
 ```html
 <template>
@@ -2626,44 +3167,44 @@ npm run dev
 </template>
 
 <script>
-  export default {
-    name: "Login",
-    data() {
-      return {
-        form: {
-          username: '',
-          password: ''
-        },
+export default {
+  name: "Login",
+  data() {
+    return {
+      form: {
+        username: '',
+        password: ''
+      },
 
-        // 表单验证，需要在 el-form-item 元素中增加 prop 属性
-        rules: {
-          username: [
-            {required: true, message: '账号不可为空', trigger: 'blur'}
-          ],
-          password: [
-            {required: true, message: '密码不可为空', trigger: 'blur'}
-          ]
-        },
+      // 表单验证，需要在 el-form-item 元素中增加 prop 属性
+      rules: {
+        username: [
+          {required: true, message: '账号不可为空', trigger: 'blur'}
+        ],
+        password: [
+          {required: true, message: '密码不可为空', trigger: 'blur'}
+        ]
+      },
 
-        // 对话框显示和隐藏
-        dialogVisible: false
-      }
-    },
-    methods: {
-      onSubmit(formName) {
-        // 为表单绑定验证功能
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
-            this.$router.push("/main");
-          } else {
-            this.dialogVisible = true;
-            return false;
-          }
-        });
-      }
+      // 对话框显示和隐藏
+      dialogVisible: false
+    }
+  },
+  methods: {
+    onSubmit(formName) {
+      // 为表单绑定验证功能
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
+          this.$router.push("/main");
+        } else {
+          this.dialogVisible = true;
+          return false;
+        }
+      });
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -2684,38 +3225,36 @@ npm run dev
     color: #303133;
   }
 </style>
-
 ```
 
 创建路由，在router目录下创建一个名为`index.js`的vue-router路由配置文件
 
 ```js
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 import Main from '../views/Main'
 import Login from '../views/Login'
 
-Vue.use(VueRouter);
+Vue.use(Router);
 
-export default new VueRouter({
+export default new Router({
   routes:[
     {
       path:'/login',
       name:'login',
-      component:Main
+      component:Login
     },{
-    path: '/main',
+      path: '/main',
       name:'main',
-      component: Login
+      component: Main
     }
   ]
 });
-
 ```
 
 APP.vue
 
-```html
+```vue
 <template>
   <div id="app">
     <router-view></router-view>
@@ -2723,31 +3262,15 @@ APP.vue
 </template>
 
 <script>
-
-
-export default {
-  name: 'App',
-
-}
+  export default {
+    name: 'App'
+  }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
 ```
 
 main.js
 
 ```js
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from "./router"
@@ -2770,77 +3293,69 @@ new Vue({
 
 1. 输入命令
 
-   ```shell
-   npm run dev
-   ```
+```shell
+npm run dev
+```
 
-2. 如果报错如下图：<font color=red>Module build failed: TypeError: loaderContext.getResolve is not a function</font>（sass-loader版本太高）
+2. 如果报错如下图：<font color=red>Module build failed: TypeError: this.getOptions is not a function</font>（sass-loader版本太高）
 
-   ![1595331174087](10实战快速上手.assets/1595331174087.png)
+![image-20211002181642485](img/05/image-20211002181642485.png)
 
-   <font color=red>解决:</font>
+<font color=red>解决:</font>
 
-   1. 修改配置文件，重新安装
-   		
-      ```
-      //1.修改sass-loader的版本为^7.3.1
-      //2.重新安装配置环境
-      npm install
-      //或者
-      cnpm install
-      ```
-      
-      ![1595331325382](10实战快速上手.assets/1595331325382.png)
-      
-   2. 卸载当前，重新下载
-   
-       ```shell
-       // 卸载当前版本
-       npm uninstall sass-loader
-       // 安装7.3.1版本
-       npm install sass-loader@7.3.1 --save-dev
-       ```
-   
-   3. 如果报错为：<font color=red>Module build failed: Error: Cannot find module 'node-sass'</font>
-   
-       ![1595332641414](10实战快速上手.assets/1595332641414.png)
-   
-       - npm执行
-   
-         ```shell
-         npm install node-sass --save-dev
-         ```
-   
-       - npm执行报错，则cnpm执行
-   
-         ```shell
-         cnpm install node-sass --save
-         ```
-   
-         - 如果cnpm没有安装
-   
-           ```shell
-           npm install -g cnpm --registry=https://registry.npm.taobao.org
-           
-           //或者
-           npm install -g cnpm
-           ```
-   
-3. 再次执行终于成功
+1. 修改配置文件——修改sass-loader的版本为^7.3.1
 
-   ```shell
-   npm run dev
-   ```
+   ![image-20211002181947471](img/05/image-20211002181947471.png)
 
-   
+2. 重新安装配置环境
 
-   ![1595333969422](10实战快速上手.assets/1595333969422.png)
+ ```shell
+ npm install
+ # 或者
+ cnpm install
+ ```
 
-   ![1595338033562](10实战快速上手.assets/1595338033562.png)
+3. 卸载当前，重新下载。
+
+```shell
+# 卸载当前版本
+npm uninstall sass-loader
+# 安装7.3.1版本
+npm install sass-loader@7.3.1 --save-dev
+```
+
+4. 如果报错为：<font color=red>Module build failed: Error: Node Sass version 6.0.1 is incompatible with ^4.0.0.</font>。
+
+![image-20211002183111728](img/05/image-20211002183111728.png)
+
+- npm执行
+
+```shell
+# 1、卸载： 
+npm uninstall node-sass
+
+# 2、安装： 
+npm install node-sass@4.14.1
+
+# 3、执行：
+npm install node-sass --save-dev
+```
+
+5. 再次执行，终于成功
+
+```shell
+npm run dev
+```
+
+![image-20211002183824551](img/05/image-20211002183824551.png)
+
+![image-20211002185736635](img/05/image-20211002185736635.png)
+
+![image-20211002185727155](img/05/image-20211002185727155.png)
 
 ### 4.路由嵌套
 
-嵌套路由又称子路由，在实际应用中，通常由多层嵌套的组件组合而成。同样地，URL 中各段动态路径也按某种结构对应嵌套的各层组件，例如：
+> 嵌套路由又称==子路由==，在实际应用中，通常由多层嵌套的组件组合而成。同样地，URL 中各段动态路径也按某种结构对应嵌套的各层组件，例如：
 
 ```shell
 /user/foo/profile                     /user/foo/posts
@@ -2903,20 +3418,25 @@ new Vue({
    import Login from '../views/Login'
    
    import UserList from '../views/user/List'
-   import UserProfile from '../views/user/proFile'
+   import UserProfile from '../views/user/Profile'
    
    Vue.use(Router);
    
    export default new Router({
-     routes: [
+     routes:[
        {
-         path: '/login',
-         component: Login
-       },
-       {
+         path:'/login',
+         name:'login',
+         component:Login
+       },{
          path: '/main',
+         name:'main',
          component: Main,
          children: [
+           {
+             path: '/main',
+             component: Login
+           },
            {
              path: '/user/profile',
              component: UserProfile
@@ -2928,123 +3448,139 @@ new Vue({
          ]
        }
      ]
-   })
-   
+   });
    ```
 
 4. 修改首页视图，我们修改 Main.vue 视图组件，此处使用了 ElementUI 布局容器组件，代码如下：
 
    ```vue
    <template>
-       <div>
+     <div>
+       <el-container>
+         <el-aside width="200px">
+           <el-menu :default-openeds="['1']">
+             <el-submenu index="1">
+   
+               <template slot="title">
+                 <i class="el-icon-caret-right"></i>用户管理
+               </template>
+   
+               <el-menu-item-group>
+                 <el-menu-item index="1-1">
+                   <router-link to="/user/profile">个人信息</router-link>
+                 </el-menu-item>
+   
+                 <el-menu-item index="1-2">
+                   <router-link to="/user/list">用户列表</router-link>
+                 </el-menu-item>
+   
+               </el-menu-item-group>
+             </el-submenu>
+   
+             <el-submenu index="2">
+               <template slot="title">
+                 <i class="el-icon-caret-right"></i>内容管理
+               </template>
+               <el-menu-item-group>
+                 <el-menu-item index="2-1">人员管理</el-menu-item>
+                 <el-menu-item index="2-2">财务列表</el-menu-item>
+               </el-menu-item-group>
+             </el-submenu>
+           </el-menu>
+         </el-aside>
+   
          <el-container>
-           <el-aside width="200px">
-             <el-menu :default-openeds="['1']">
-               <el-submenu index="1">
-                 <template slot="title"><i class="el-icon-caret-right"></i>用户管理</template>
-                 <el-menu-item-group>
-                   <el-menu-item index="1-1">
-                     <router-link to="/user/profile">个人信息</router-link>
-                   </el-menu-item>
-                   <el-menu-item index="1-2">
-                     <router-link to="/user/list">用户列表</router-link>
-                   </el-menu-item>
-                 </el-menu-item-group>
-               </el-submenu>
-               <el-submenu index="2">
-                 <template slot="title"><i class="el-icon-caret-right"></i>内容管理</template>
-                 <el-menu-item-group>
-                   <el-menu-item index="2-1">分类管理</el-menu-item>
-                   <el-menu-item index="2-2">内容列表</el-menu-item>
-                 </el-menu-item-group>
-               </el-submenu>
-             </el-menu>
-           </el-aside>
+           <el-header style="text-align: right; font-size: 12px">
+             <el-dropdown>
+               <i class="el-icon-setting" style="margin-right: 15px"></i>
    
-           <el-container>
-             <el-header style="text-align: right; font-size: 12px">
-               <el-dropdown>
-                 <i class="el-icon-setting" style="margin-right: 15px"></i>
-                 <el-dropdown-menu slot="dropdown">
-                   <el-dropdown-item>个人信息</el-dropdown-item>
-                   <el-dropdown-item>退出登录</el-dropdown-item>
-                 </el-dropdown-menu>
-               </el-dropdown>
-             </el-header>
+               <el-dropdown-menu slot="dropdown">
+                 <el-dropdown-item>个人信息</el-dropdown-item>
+                 <el-dropdown-item>退出登录</el-dropdown-item>
+               </el-dropdown-menu>
+             </el-dropdown>
    
-             <el-main>
-               <router-view />
-             </el-main>
-           </el-container>
+           </el-header>
+   
+           <el-main>
+             <router-view/>
+           </el-main>
          </el-container>
-       </div>
+   
+       </el-container>
+     </div>
    </template>
    
    <script>
-       export default {
-           name: "Main"
-       }
+   export default {
+     name: "Main"
+   }
    </script>
    
    <style scoped lang="scss">
-     .el-header {
-       background-color: #B3C0D1;
-       color: #333;
-       line-height: 60px;
-     }
+   .el-header {
+     background-color: #B3C0D1;
+     color: #333;
+     line-height: 60px;
+   }
    
-     .el-aside {
-       color: #333;
-     }
+   .el-aside {
+     color: #333;
+   }
    </style>
    ```
+   
+   <font color=red>说明：</font>在元素中配置了用于展示嵌套路由,主要使用个人信息展示嵌套路由内容。
 
-   <font color=red>说明：</font>
-
-   在元素中配置了用于展示嵌套路由,主要使用个人信息展示嵌套路由内容
+![image-20211002214720452](img/05/image-20211002214720452.png)
 
 #### 参数传递
 
-我们经常需要把某种模式匹配到的所有路由，全都映射到同个组件。例如，我们有一个 User 组件，对于所有 ID 各不相同的用户，都要使用这个组件来渲染。此时我们就需要传递参数了；
+- 我们经常需要把某种模式匹配到的所有路由，全都映射到同个组件。例如，我们有一个 User 组件，对于所有 ID 各不相同的用户，都要使用这个组件来渲染。此时就需要传递参数了。
 
 #### 组件转发
 
-##### $route方式
+> $route方式
 
-1. 修改路由配置, 
+1. 修改路由配置
 
-   - 主要是在 path 属性中增加了 :id，:name 这样的占位符
+   - 主要是在 path 属性中增加了 :id、:name 这样的占位符。【index.js】
 
        ```js
        {
-           path: '/main',
-               component: Main,
-                   children: [
-                       {
-                           path: '/user/profile/:id/:name',
-                           name: 'UserProfile',
-                           component: UserProfile
-                       },
-                       {
-                           path: '/user/list',
-                           component: UserList
-                       }
-                   ]
-       }
+             path: '/main',
+             name:'main',
+             component: Main,
+             children: [
+               {
+                 path: '/main',
+                 component: Login
+               },
+               {
+                 path: '/user/profile/:id/:name',
+                 name: 'UserProfile',
+                 component: UserProfile
+               },
+               {
+                 path: '/user/list',
+                 component: UserList
+               }
+             ]
+           }
        ```
 
 2. 传递参数
 
-   - 此时我们将 to 改为了 :to，是为了将这一属性当成对象使用，
+   - 此时我们将 to 改为了 :to，是为了将这一属性当成对象使用。
    
-   - 注意 router-link 中的 name 属性名称一定要和路由中的name 属性名称 匹配，因为这样 Vue 才能找到对应的路由路径；
+   - 注意：router-link 中的 name 属性名称一定要和路由中的name 属性名称 匹配，因为这样 Vue 才能找到对应的路由路径。【Main.vue】
    
      ```vue
      <!--name:传组件名， params：传递参数， 需要对象： v-bind-->
-     <router-link :to="{name:'UserProfile',params:{id:1,name:'狂神'}}">个人信息</router-link>
+     <router-link :to="{name:'UserProfile',params:{id:1,name:'subei'}}">个人信息</router-link>
      ```
    
-3. 接收参数, 在目标组件中
+3. 接收参数, 在目标组件中。【Profile.vue】
 
    ```vue
    <div>
@@ -3054,22 +3590,27 @@ new Vue({
    </div>
    ```
 
-   
+   ![image-20211002221550459](img/05/image-20211002221550459.png)
 
-##### 使用 props 的方式
+> 使用 props 的方式
 
 1. 修改路由配置 , 主要增加了 props: true 属性
 
    ```js
-   routes: [
+   routes:[
        {
-         path: '/login',
-         component: Login
-       },
-       {
+         path:'/login',
+         name:'login',
+         component:Login
+       },{
          path: '/main',
+         name:'main',
          component: Main,
          children: [
+           {
+             path: '/main',
+             component: Login
+           },
            {
              path: '/user/profile/:id/:name',
              name: 'UserProfile',
@@ -3085,22 +3626,41 @@ new Vue({
      ]
    ```
 
-2. 传递参数和之前一样
-
-3. 接收参数为目标组件增加 props 属性
+2. 传递参数和之前一样。
 
    ```vue
-   <div>
+   <!--name:传组件名， params：传递参数， 需要对象： v-bind-->
+   <router-link :to="{name:'UserProfile',params:{id:1,name:'subei'}}">个人信息</router-link>
+   ```
+
+3. 接收参数为目标组件增加 props 属性。
+
+   ```vue
+   <template>
+     <div>
        <h1>个人信息</h1>
        {{id}}
        {{name}}
-   </div>
+     </div>
+   </template>
+   
+   <script>
+   export default {
+     name: "UserProfile",
+     props: ['id','name']
+   }
+   </script>
+   
+   <style scoped>
+   
+   </style>
    ```
 
+![image-20211002223050740](img/05/image-20211002222646864.png)
 
 #### 组件重定向
 
-- 重定向的意思大家都明白，但 Vue 中的重定向是作用在路径不同但组件相同的情况下，比如：
+- 重定向的意思大家都明白，但 Vue 中的重定向是作用在路径不同但组件相同的情况下，比如：【index.js】
 
   ```js
   {
@@ -3109,11 +3669,11 @@ new Vue({
   }
   ```
 
-- 说明：这里定义了两个路径，一个是 /main ，一个是 /goHome
+- 说明：这里定义了两个路径，一个是 /main ，一个是 /goHome。
 
-  - 其中 /goHome 重定向到了 /main 路径，由此可以看出重定向不需要定义组件；
+  - 其中 /goHome 重定向到了 /main 路径，由此可以看出重定向不需要定义组件。
 
-- 使用的话，只需要设置对应路径即可；
+- 使用的话，只需要设置对应路径即可。【Main.vue】
 
   ```vue
   <el-menu-item index="1-3">
@@ -3121,14 +3681,15 @@ new Vue({
   </el-menu-item>
   ```
 
+![image-20211002223549352](img/05/image-20211002223549352.png)
 
 ### 5.路由模式与 404
 
 #### 1.路由模式有两种
 
-- hash：路径带 # 符号，如 http://localhost/#/login
+- hash：路径带 # 符号，如 http://localhost:8080/#/login
 
-  - 默认为hash路由模式
+  - 默认为hash路由模式。【index.js】
 
     ```js
     export default new Router({
@@ -3136,7 +3697,7 @@ new Vue({
     })
     ```
 
-- history：路径不带 # 符号，如 http://localhost/login
+- history：路径不带 # 符号，如 http://localhost:8080/login
 
   - history路由模式
 
@@ -3167,9 +3728,8 @@ new Vue({
    <style scoped>
    
    </style>
-   
    ```
-
+   
 2. 修改路由配置，代码如下：
 
    ```js
@@ -3186,19 +3746,22 @@ new Vue({
    })
    ```
 
+![image-20211002225547293](img/05/image-20211002225547293.png)
 
 ### 6.路由钩子与异步请求
 
 #### 1.路由钩子
 
-- `beforeRouteEnter`：在进入路由前执
+- `beforeRouteEnter`：在进入路由前执。
 
-- `beforeRouteLeave`：在离开路由前执行
+- `beforeRouteLeave`：在离开路由前执行。
+
+- 【Profile.vue】
 
   ```js
   export default {
-        name: "UserProFile",
-        props: ['id','name'],
+        name: "UserProfile",
+    	  props: ['id','name'],
         beforeRouteEnter: (to,from,next) => {
           console.log('进入路由之前')
           next()
@@ -3212,17 +3775,23 @@ new Vue({
 
 参数说明：
 
-- to：路由将要跳转的路径信息
-- from：路径跳转前的路径信息
-- next：路由的控制参数
-- next() 跳入下一个页面
-- next(’/path’) 改变路由的跳转方向，使其跳到另一个路由
-- next(false) 返回原来的页面
-- next((vm)=>{}) 仅在 beforeRouteEnter 中可用，vm 是组件实例
+- to：路由将要跳转的路径信息。
+- from：路径跳转前的路径信息。
+- next：路由的控制参数。
+  - next() 跳入下一个页面。
+  - next(’/path’) 改变路由的跳转方向，使其跳到另一个路由。
+  - next(false) 返回原来的页面。
+  - next((vm)=>{}) 仅在 beforeRouteEnter 中可用，vm 是组件实例。
 
-#### 2.异步请求
+![image-20211002230135724](img/05/image-20211002230135724.png)
 
-1. 安装 Axios `cnpm install --save vue-axios`
+#### 2.在钩子函数中异步请求
+
+1. 安装 Axios 
+
+   ```shell
+   npm install --save vue-axios
+   ```
 
 2. `main.js`引用 Axios
 
@@ -3237,23 +3806,23 @@ new Vue({
 
    ```json
    {
-     "name": "狂神说Java",
-     "url": "https://blog.kuangstudy.com",
+     "name": "subeiLY",
+     "url": "https://www.cnblogs.com/gh110/",
      "page": 1,
      "isNonProfit": true,
      "address": {
-       "street": "含光门",
-       "city": "陕西西安",
+       "street": "万柏林",
+       "city": "山西太原",
        "country": "中国"
      },
      "links": [
        {
-         "name": "bilibili",
-         "url": "https://space.bilibili.com/95256449"
+         "name": "语雀",
+         "url": "https://www.yuque.com/nizhegechouloudetuboshu/library"
        },
        {
-         "name": "狂神说Java",
-         "url": "https://blog.kuangstudy.com"
+         "name": "subeiLY",
+         "url": "https://blog.csdn.net/m0_46153949"
        },
        {
          "name": "百度",
@@ -3265,15 +3834,18 @@ new Vue({
 
 4. 运行项目`npm run dev`看是否正常
 
-   - 因为cnpm可能安装失败，重新安装一下`cnpm install --save vue-axios`
+   - 因为cnpm可能安装失败，重新安装一下`npm install --save vue-axios`
 
-   ![1595383163158](10实战快速上手.assets/1595383163158.png)
+   ![image-20211002230437014](img/05/image-20211002230437014.png)
+
+   ![image-20211002232222334](img/05/image-20211002232222334.png)
 
 5. 在 beforeRouteEnter 中进行异步请求
 
    ```js
    export default {
-       name: "UserProFile",
+       name: "UserProfile",
+   
        props: ['id','name'],
        beforeRouteEnter: (to,from,next) => {
            console.log('进入路由之前');//加载数据
@@ -3297,6 +3869,8 @@ new Vue({
        }
    }
    ```
+
+![image-20211002232429204](img/05/image-20211002232429204.png)
 
 ## 12.深入学习Vue3.0
 
