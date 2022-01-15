@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+
+    <h1>测试页面</h1>
+    <!-- 所有的html元素都可以被thymeleaf替换接管： th:元素名
+    th:text就是将div中的内容设置为它指定的值 -->
+    <div th:text="${msg}"></div>
+
+    <!--  不转义  -->
+    <div th:utext="${msg}"></div>
+    
+    <!--遍历数据-->
+    <!--th:each每次遍历都会生成当前这个标签：官网#9-->
+    <h3 th:each="user :${users}" th:text="${user}"></h3>
+</body>
+</html>
