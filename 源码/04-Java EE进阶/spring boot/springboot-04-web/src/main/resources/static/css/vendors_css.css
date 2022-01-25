@@ -1,0 +1,48 @@
+/****************************/
+/** Imports Plugin css **/
+/****************************/
+@import url(bootstrap.css);
+@import url(perfect-scrollbar.css);
+@import url(morris.css);
+@import url(owl.carousel.css);
+@import url(owl.theme.default.min.css);
+@import url(horizontal-timeline.css);
+@import url(flexslider.css);
+@import url(prism.css);
+@import url(datatables.min.css);
+@import url(magnific-popup.css);
+@import url(animated-masonry-gallery.css);
+@import url(ekko-lightbox.css);
+@import url(jquery-jvectormap-2.0.2.css);
+@import url(bootstrap-editable.css);
+@import url(sweetalert.css);
+@import url(bootstrap-markdown.css);
+@import url(dropzone.css);
+@import url(select2.min.css);
+@import url(daterangepicker.css);
+@import url(bootstrap-datepicker.min.css);
+@import url(bootstrap-colorpicker.min.css);
+@import url(bootstrap-select.css);
+@import url(bootstrap-tagsinput.css);
+@import url(jquery.bootstrap-touchspin.css);
+@import url(jquery.raty.css);
+@import url(ion.rangeSlider.css);
+@import url(ion.rangeSlider.skinModern.css);
+@import url(gridstack.css);
+@import url(jquery.toast.css);
+@import url(nestable.css);
+@import url(switch.css);
+@import url(c3.min.css);
+@import url(chartist.css);
+@import url(slider.css);
+@import url(blue.css);
+@import url(bootstrap3-wysihtml5.min.css);
+@import url(bootstrap3-wysihtml5.css);
+@import url(all.css);
+@import url(bootstrap-timepicker.min.css);
+@import url(pace.min.css);
+@import url(fullcalendar.min.css);
+@import "fullcalendar.print.min.css" print;
+@import url(weather-icons.css);
+
+/*# sourceMappingURL=vendors_css.css.map */

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<!--顶部导航栏,利用th:fragment提取出来,命名为topbar -->
+<header class="main-header" th:fragment="topbar">
+<div class="d-flex align-items-center logo-box justify-content-start" >
+    <a href="#" class="waves-effect waves-light nav-link d-none d-md-inline-block mx-10 push-btn bg-transparent" data-toggle="push-menu" role="button">
+        <span class="icon-Align-left"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+    </a>
+    <!-- Logo -->
+    <a href="" class="logo">
+        <!-- logo-->
+        <div class="logo-lg">
+            <span class="light-logo"><img th:src="@{/picture/logo-dark-text.png}" alt="logo"></span>
+            <span class="dark-logo"><img th:src="@{/picture/logo-light-text.png}" alt="logo"></span>
+        </div>
+    </a>
+</div>
+<!-- Header Navbar -->
+<nav class="navbar navbar-static-top">
+    <!-- Sidebar toggle button-->
+    <div class="app-menu">
+        <ul class="header-megamenu nav">
+            <li class="btn-group nav-item d-md-none">
+                <a href="#" class="waves-effect waves-light nav-link push-btn" data-toggle="push-menu" role="button">
+                    <span class="icon-Align-left"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+                </a>
+            </li>
+            <li class="btn-group nav-item d-none d-xl-inline-block">
+                <a href="contact_app_chat.html" class="waves-effect waves-light nav-link svg-bt-icon" title="Chat">
+                    <i class="icon-Chat"><span class="path1"></span><span class="path2"></span></i>
+                </a>
+            </li>
+            <li class="btn-group nav-item d-none d-xl-inline-block">
+                <a href="mailbox.html" class="waves-effect waves-light nav-link svg-bt-icon" title="Mailbox">
+                    <i class="icon-Mailbox"><span class="path1"></span><span class="path2"></span></i>
+                </a>
+            </li>
+            <li class="btn-group nav-item d-none d-xl-inline-block">
+                <a href="extra_taskboard.html" class="waves-effect waves-light nav-link svg-bt-icon" title="Taskboard">
+                    <i class="icon-Clipboard-check"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="navbar-custom-menu r-side">
+        <ul class="nav navbar-nav">
+            <li class="btn-group nav-item d-lg-inline-flex d-none">
+                <a href="#" data-provide="fullscreen" class="waves-effect waves-light nav-link full-screen" title="Full Screen">
+                    <i class="icon-Expand-arrows"><span class="path1"></span><span class="path2"></span></i>
+                </a>
+            </li>
+            <li class="btn-group d-lg-inline-flex d-none">
+                <div class="app-menu">
+                    <div class="search-bx mx-5">
+                        <form>
+                            <div class="input-group">
+                                <input type="search" class="form-control" placeholder="搜索" aria-label="Search" aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn" type="submit" id="button-addon3"><i class="ti-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+            <!-- Notifications -->
+            <li class="dropdown notifications-menu">
+                <a href="#" class="waves-effect waves-light dropdown-toggle" data-toggle="dropdown" title="Notifications">
+                    <i class="icon-Notifications"><span class="path1"></span><span class="path2"></span></i>
+                </a>
+                <ul class="dropdown-menu animated bounceIn">
+
+                    <li class="header">
+                        <div class="p-20">
+                            <div class="flexbox">
+                                <div>
+                                    <h4 class="mb-0 mt-0">通知</h4>
+                                </div>
+                                <div>
+                                    <a href="#" class="text-danger">全部清除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <!--内部菜单：包含实际数据 -->
+                        <ul class="menu sm-scrol">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-users text-info"></i> Curabitur id eros quis nunc suscipit blandit.
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-warning text-warning"></i> 在后院的任何地方。
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-users text-danger"></i> 在那之前，除非有很多痛苦，否则渡轮的优势就是价格。
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-shopping-cart text-success"></i> 在怀孕药物和保存
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-user text-danger"></i> 摆脱发酵的压力真是太好了。
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-user text-primary"></i> 现在我们的客户
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-user text-success"></i> 有时不痛不痒，但巧克力本身融资。
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="footer">
+                        <a href="#">查看全部</a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- User Account-->
+            <li class="dropdown user user-menu">
+                <a href="#" class="waves-effect waves-light dropdown-toggle" data-toggle="dropdown" title="User">
+                    <i class="icon-User"><span class="path1"></span><span class="path2"></span></i>
+                </a>
+                <ul class="dropdown-menu animated flipInX">
+                    <li class="user-body">
+                        <a class="dropdown-item" href="#"><i class="ti-user text-muted mr-2"></i> 轮廓</a>
+                        <a class="dropdown-item" href="#"><i class="ti-wallet text-muted mr-2"></i> 我的钱包</a>
+                        <a class="dropdown-item" href="#"><i class="ti-settings text-muted mr-2"></i> 设置</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/user/loginOut}"><i class="ti-lock text-muted mr-2"></i> 注销</a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Control Sidebar Toggle Button -->
+            <li>
+                <a href="#" data-toggle="control-sidebar" title="Setting" class="waves-effect waves-light">
+                    <i class="icon-Settings"><span class="path1"></span><span class="path2"></span></i>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+</header>
+
+<!--侧边栏,利用th:fragment提取出来,命名为sidebar-->
+<aside class="main-sidebar" th:fragment="siderbar">
+    <!-- sidebar-->
+    <section class="sidebar position-relative">
+        <div class="multinav">
+            <div class="multinav-scroll" style="height: 100%;">
+                <!-- sidebar menu-->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">仪表板 & Apps</li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+                            <span>仪表板</span>
+                            <span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="" ><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>首页</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i span="" class="icon-Layout-grid"><span class="path1"></span><span class="path2"></span></i>
+                            <span>应用</span>
+                            <span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="extra_calendar.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>日历</a></li>
+                            <li><a href="contact_app.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>联系人列表</a></li>
+                            <li><a href="contact_app_chat.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>聊天</a></li>
+                            <li><a href="extra_taskboard.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>任务</a></li>
+                            <li><a href="mailbox.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>邮箱</a></li>
+                        </ul>
+                    </li>
+                    <li class="header">UI组件</li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="icon-Write"><span class="path1"></span><span class="path2"></span></i>
+                            <span>用户界面元素</span>
+                            <span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="ui_grid.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>表格样式</a></li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>图表
+                                    <span class="pull-right-container">
+								<i class="fa fa-angle-right pull-right"></i>
+							</span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="box_cards.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>用户卡</a></li>
+                                    <li><a href="box_advanced.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>高级卡</a></li>
+                                    <li><a href="box_basic.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>基本卡</a></li>
+                                    <li><a href="box_color.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>卡片颜色</a></li>
+                                    <li><a href="box_group.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>卡组</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="ui_badges.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>徽章</a></li>
+                            <li><a href="ui_border_utilities.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>边界</a></li>
+                            <li><a href="ui_buttons.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>按钮</a></li>
+                            <li><a href="ui_color_utilities.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>颜色</a></li>
+                            <li><a href="ui_dropdown.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>下拉列表</a></li>
+                            <li><a href="ui_dropdown_grid.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>下拉网格</a></li>
+                            <li><a href="ui_progress_bars.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>进度条</a></li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>图标
+                                    <span class="pull-right-container">
+								<i class="fa fa-angle-right pull-right"></i>
+							</span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="icons_fontawesome.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>图标</a></li>
+                                    <li><a href="icons_glyphicons.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>字形</a></li>
+                                    <li><a href="icons_material.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>材质图标</a></li>
+                                    <li><a href="icons_themify.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>主题化图标</a></li>
+                                    <li><a href="icons_simpleline.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Simple Line Icons</a></li>
+                                    <li><a href="icons_cryptocoins.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Cryptocoins Icons</a></li>
+                                    <li><a href="icons_flag.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Flag Icons</a></li>
+                                    <li><a href="icons_weather.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Weather Icons</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="ui_ribbons.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>丝带</a></li>
+                            <li><a href="ui_sliders.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>滑块</a></li>
+                            <li><a href="ui_typography.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>字体排版</a></li>
+                            <li><a href="ui_tab.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>制表符</a></li>
+                            <li><a href="ui_timeline.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>时间线</a></li>
+                            <li><a href="ui_timeline_horizontal.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>水平时间轴</a></li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>组件
+                                    <span class="pull-right-container">
+								<i class="fa fa-angle-right pull-right"></i>
+							</span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="component_bootstrap_switch.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>引导开关</a></li>
+                                    <li><a href="component_date_paginator.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>日期分页器</a></li>
+                                    <li><a href="component_media_advanced.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>高级媒体</a></li>
+                                    <li><a href="component_rangeslider.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>范围滑块</a></li>
+                                    <li><a href="component_rating.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>评级</a></li>
+                                    <li><a href="component_animations.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>动画</a></li>
+                                    <li><a href="extension_fullscreen.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>全屏</a></li>
+                                    <li><a href="extension_pace.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Pace</a></li>
+                                    <li><a href="component_nestable.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>可嵌套</a></li>
+                                    <li><a href="component_portlet_draggable.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>可拖动的Portlets</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="icon-File"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                            <span>表格 & 表单</span>
+                            <span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>表格
+                                    <span class="pull-right-container">
+								<i class="fa fa-angle-right pull-right"></i>
+							</span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="forms_advanced.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Form Elements</a></li>
+                                    <li><a href="forms_general.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Form Layout</a></li>
+                                    <li><a href="forms_wizard.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Form Wizard</a></li>
+                                    <li><a href="forms_validation.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Form Validation</a></li>
+                                    <li><a href="forms_mask.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Formatter</a></li>
+                                    <li><a href="forms_xeditable.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Xeditable Editor</a></li>
+                                    <li><a href="forms_dropzone.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Dropzone</a></li>
+                                    <li><a href="forms_code_editor.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Code Editor</a></li>
+                                    <li><a href="forms_editors.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Editor</a></li>
+                                    <li><a href="forms_editor_markdown.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Markdown</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>表单
+                                    <span class="pull-right-container">
+								<i class="fa fa-angle-right pull-right"></i>
+							</span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="tables_simple.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Simple tables</a></li>
+                                    <li><a href="tables_data.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Data tables</a></li>
+                                    <li><a href="tables_editable.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Editable Tables</a></li>
+                                    <li><a href="tables_color.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Table Color</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="icon-Chart-pie"><span class="path1"></span><span class="path2"></span></i>
+                            <span>部件</span>
+                            <span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="charts_chartjs.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>ChartJS</a></li>
+                            <li><a href="charts_flot.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Flot</a></li>
+                            <li><a href="charts_inline.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Inline charts</a></li>
+                            <li><a href="charts_morris.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Morris</a></li>
+                            <li><a href="charts_peity.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Peity</a></li>
+                            <li><a href="charts_chartist.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Chartist</a></li>
+                            <li><a href="charts_c3_axis.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Axis Chart</a></li>
+                            <li><a href="charts_c3_bar.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Bar Chart</a></li>
+                            <li><a href="charts_c3_data.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Data Chart</a></li>
+                            <li><a href="charts_c3_line.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Line Chart</a></li>
+                            <li><a href="charts_echarts_basic.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Basic Charts</a></li>
+                            <li><a href="charts_echarts_bar.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Bar Chart</a></li>
+                            <li><a href="charts_echarts_pie_doughnut.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Pie & Doughnut Chart</a></li>
+                        </ul>
+                    </li>
+                    <li class="header">COLLECTIONS</li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="icon-Library"><span class="path1"></span><span class="path2"></span></i>
+                            <span>小部件</span>
+                            <span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="widgets_blog.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Blog</a></li>
+                            <li><a href="widgets_chart.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Chart</a></li>
+                            <li><a href="widgets_list.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List</a></li>
+                            <li><a href="widgets_social.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Social</a></li>
+                            <li><a href="widgets_statistic.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Statistic</a></li>
+                            <li><a href="widgets_weather.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Weather</a></li>
+                            <li><a href="widgets.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Widgets</a></li>
+                            <li><a href="email_index.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Emails</a></li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Maps
+                                    <span class="pull-right-container">
+								<i class="fa fa-angle-right pull-right"></i>
+							</span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="map_google.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Google Map</a></li>
+                                    <li><a href="map_vector.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Vector Map</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Modals
+                                    <span class="pull-right-container">
+								<i class="fa fa-angle-right pull-right"></i>
+							</span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="component_modals.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Modals</a></li>
+                                    <li><a href="component_sweatalert.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Sweet Alert</a></li>
+                                    <li><a href="component_notification.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Toastr</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="icon-Cart"><span class="path1"></span><span class="path2"></span></i>
+                            <span>电子商务</span>
+                            <span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li> <a th:href="@{/emps}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>产品</a></li>
+                            <li><a href="emp/ecommerce_cart.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>产品购物车</a></li>
+                            <li><a th:href="@{/add}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>产品编辑</a></li>
+                            <li><a href="emp/ecommerce_details.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>产品详情</a></li>
+                            <li><a href="emp/ecommerce_orders.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>产品订单</a></li>
+                            <li><a href="emp/ecommerce_checkout.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>产品结账</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="icon-User"><span class="path1"></span><span class="path2"></span></i>
+                            <span>页面</span>
+                            <span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="invoice.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Invoice</a></li>
+                            <li><a href="invoicelist.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Invoice List</a></li>
+                            <li><a href="extra_app_ticket.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Support Ticket</a></li>
+                            <li><a href="extra_profile.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>User Profile</a></li>
+                            <li><a href="contact_userlist_grid.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Userlist Grid</a></li>
+                            <li><a href="contact_userlist.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Userlist</a></li>
+                            <li><a href="sample_faq.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>FAQs</a></li>
+                            <li><a href="sample_blank.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Blank</a></li>
+                            <li><a href="sample_coming_soon.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Coming Soon</a></li>
+                            <li><a href="sample_custom_scroll.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Custom Scrolls</a></li>
+                            <li><a href="sample_gallery.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Gallery</a></li>
+                            <li><a href="sample_lightbox.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Lightbox Popup</a></li>
+                            <li><a href="sample_pricing.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Pricing</a></li>
+                        </ul>
+                    </li>
+                    <li class="header">登录 & 错误 </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="icon-Chat-locked"><span class="path1"></span><span class="path2"></span></i>
+                            <span>认证</span>
+                            <span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="auth_login.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>登录</a></li>
+                            <li><a href="auth_register.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>注册</a></li>
+                            <li><a href="auth_lockscreen.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>锁屏</a></li>
+                            <li><a href="auth_user_pass.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>恢复密码</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="icon-Chat-check"><span class="path1"></span><span class="path2"></span></i>
+                            <span>杂项</span>
+                            <span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="error_404.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>404页面</a></li>
+                            <li><a href="error_500.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>500页面</a></li>
+                            <li><a href="error_maintenance.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>维护页面</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <div class="sidebar-footer">
+        <a href="javascript:void(0)" class="link" data-toggle="tooltip" title="" data-original-title="设置" aria-describedby="tooltip92529"><span class="icon-Settings-2"></span></a>
+        <a href="mailbox.html" class="link" data-toggle="tooltip" title="" data-original-title="电子邮件"><span class="icon-Mail"></span></a>
+        <a th:href="@{/user/loginOut}" class="link" data-toggle="tooltip" title="" data-original-title="注销"><span class="icon-Lock-overturning"><span class="path1"></span><span class="path2"></span></span></a>
+    </div>
+</aside>
+
+<!--底部-->
+
+</html>
