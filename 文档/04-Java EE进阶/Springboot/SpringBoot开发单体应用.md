@@ -1,10 +1,18 @@
-Spring Boot 开发单体应用
+# Spring Boot 开发单体应用
 
 ## 1.SpringBoot Web开发
 
-**自动装配**
+> **使用SpringBoot的步骤：**
 
-- spring boot到底帮我们配置了什么？我们能不能进行修改？能修改哪些东西25？能不能打展？
+1. 创建一个SpringBoot应用，选择我们需要的模块，SpringBoot就会默认将我们的需要的模块自动配置好；
+
+2. 手动在配置文件中配置部分配置项目就可以运行起来了。
+
+3. 专注编写业务代码，不需要考虑以前那样一大堆的配置了。
+
+> **自动装配**
+
+- spring boot到底帮我们配置了什么？我们能不能进行修改？能修改哪些东西？能不能扩展？
   - xxxxAutoConfiguraion.. 向容器中自动配置组件；
   - xxxxProperties：自动配置类，装配配置文件中自定义的一些内容！
 
@@ -70,7 +78,7 @@ public void addResourceHandlers(ResourceHandlerRegistry registry) {
 > 第二种静态资源映射规则
 
 - 当项目中要是使用自己的静态资源该怎么导入呢？看下一行代码；
-- 去找staticPathPattern发现第二种映射规则 ： /** , 访问当前的项目任意资源，它会去找 resourceProperties 这个类，我们可以点进去看一下分析：
+- 去找staticPathPattern发现第二种映射规则：/**, 访问当前的项目任意资源，它会去找 resourceProperties 这个类，我们可以点进去看一下分析：
 
 ```java
 public class ResourceProperties {
@@ -118,7 +126,7 @@ public class ResourceProperties {
 - 也可以自己通过配置文件来指定一下，哪些文件夹是需要我们放静态资源文件的，在 application.properties中配置；
 
 ```properties
-spring.resources.static-locations=classpath:/coding/,classpath:/github/
+spring.web.resources.static-locations=classpath:/coding/,classpath:/github/
 ```
 
 - 一旦自己定义了静态文件夹的路径，原来的自动配置就都会失效了！
@@ -162,6 +170,10 @@ private Resource getIndexHtml(String location) {
 - 比如我访问 http://localhost:8080/ ，就会找静态资源文件夹下的 index.html 【可以测试一下】 
 - 新建一个 index.html ，在我们上面的3个目录中任意一个；然后访问测试 http://localhost:8080/ 看结果！
 
+- 注意：==此功能需要取消自定义静态资源路径==。
+
+![image-20220115204555581](img/02/image-20220115204555581.png)
+
 ![image-20211101192817071](img/02/image-20211101192817071.png)
 
 > 关于网站图标说明：
@@ -172,7 +184,7 @@ private Resource getIndexHtml(String location) {
 
 - 与其他静态资源一样，Spring Boot在配置的静态内容位置中查找 favicon.ico。如果存在这样的文件，它将自动用作应用程序的favicon。
 
-1. 关闭SpringBoot默认图标
+1. 关闭SpringBoot默认图标！
 
 ```properties
 # 关闭默认图标
@@ -293,10 +305,10 @@ public class TestController {
 
 ![image-20211102140015383](img/02/image-20211102140015383.png)
 
-> Thymeleaf 语法学习
+> Thymeleaf语法学习
 
 - 语法学习，参考官网：[Thymeleaf](https://www.thymeleaf.org/)
-- 做个最简单的练习 ： 我们需要查出一些数据，在页面中展示。
+- 做个最简单的练习：我们需要查出一些数据，在页面中展示。
 
 1. 修改测试请求，增加数据传输；
 
@@ -476,7 +488,7 @@ public String test2(Map<String, Object> map) {
 
 - 途径一：源码分析；
 
-- 途径二：官方文档！ 地址 ：[Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/2.5.6/reference/htmlsingle/#features.developing-web-applications.spring-mvc.auto-configuration)
+- 途径二：官方文档！地址：[Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/2.5.6/reference/htmlsingle/#features.developing-web-applications.spring-mvc.auto-configuration)
 
 ```java
 Spring MVC Auto-configuration
@@ -522,7 +534,7 @@ If you want to take complete control of Spring MVC, you can add your own @Config
 
 - 仔细对照，看一下它怎么实现的，它告诉我们SpringBoot已经帮我们自动配置好了SpringMVC，然后自动配置了哪些东西呢？
 
-> **ContentNegotiatingViewResolver 内容协商视图解析器** 
+> **ContentNegotiatingViewResolver 内容协商视图解析器**。 
 
 自动配置了ViewResolver，就是之前学习的SpringMVC的视图解析器；
 
@@ -607,13 +619,25 @@ protected void initServletContext(ServletContext servletContext) {
 1. 在主程序中去写一个视图解析器来试试；
 
 ```java
+@Bean // 放到bean中
+public ViewResolver myViewResolver(){
+    return new MyViewResolver();
+}
+
+// 写一个静态内部类，视图解析器就需要实现ViewResolver接口
+private static class MyViewResolver implements ViewResolver{
+    @Override
+    public View resolveViewName(String s, Locale locale) throws Exception {
+        return null;
+    }
+}
 ```
 
 2. 看我们自己写的视图解析器有没有起作用呢？ 我们给 DispatcherServlet 中的doDispatch方法加个断点进行调试一下，因为所有的请求都会走到这个方法中。
 
 ![image-20211102152226759](img/02/image-20211102152226759.png)
 
-3. 启动我们的项目，然后随便访问一个页面，看一下Debug信息；
+3. 启动我们的项目，然后`在浏览器随便访问一个页面`，看一下Debug信息；
 
 ![image-20211102152244379](img/02/image-20211102152244379.png)
 
@@ -694,7 +718,7 @@ public class MyMVCConfig implements WebMvcConfigurer {
 
 
 
-> 确实也跳转过来了！所以说，要扩展SpringMVC，官方就推荐我们这么去使用，既保SpringBoot 留所有的自动配置，也能用我们扩展的配置！ 
+> 确实也跳转过来了！所以说，要扩展SpringMVC，官方推荐我们这么去使用，既保留SpringBoot 所有的自动配置，也能用我们扩展的配置！ 
 
 - 具体可以去分析一下原理： 
   1. WebMvcAutoConfiguration 是 SpringMVC的自动配置类，里面有一个类 WebMvcAutoConfigurationAdapter
@@ -820,6 +844,7 @@ public class WebMvcAutoConfiguration {
 ```
 
 - 总结一句话：@EnableWebMvc将WebMvcConfigurationSupport组件导入进来了；而导入的WebMvcConfigurationSupport只是SpringMVC最基本的功能！
+- ==这就是在SpringMVC上加了一层封装==！
 
 ----
 
@@ -1483,7 +1508,7 @@ public class LoginController {
 
 - 优化，登录成功后，由于是转发，链接不变，可以重定向到首页！
 
-4.  再添加一个视图控制映射，在的自己的MyMvcConfig中：
+4.  再添加一个视图控制映射，在自己的MyMvcConfig中：
 
 ```java
 registry.addViewController("/main.html").setViewName("dashboard");
@@ -1591,7 +1616,7 @@ public void addInterceptors(InterceptorRegistry registry) {
 
 > RestFul 风格
 
-- 要求 ： 需要使用 Restful风格实现CRUD操作！
+- 要求： 需要使用 Restful风格实现CRUD操作！
 
 |      | 普通CRUD（uri来区分操作） | RestfulCRUD       |
 | :--: | ------------------------- | ----------------- |
@@ -1860,7 +1885,7 @@ public class EmployeeController {
 
 ```html
 	<!--导航栏-->
-	<div th:replace="~{commons/commons::topbar}" }></div>
+	<div th:replace="~{commons/commons::topbar}"></div>
 	
 		<div class="container-fluid">
 			<div class="row">
@@ -2165,7 +2190,7 @@ public String getDateFormat() {
 }
 ```
 
-- 所以可以自定义的去修改这个时间格式化问题，在配置文件中修改一 下；
+- 所以可以自定义的去修改这个时间格式化问题，在配置文件中修改一下；
 
 ```properties
 # 日期格式化
@@ -2343,9 +2368,179 @@ spring.mvc.date-format=yyyy-MM-dd
 
 ## 14.定制错误数据
 
+> SpringBoot 默认的错误处理机制 
+
+1. 浏览器访问的默认的错误处理效果：
+
+![image-20220126120109271](img/02/image-20220126120109271.png)
+
+2. 如果是其他客户端，默认响应一个 json 数据；
 
 
 
+
+
+> 错误处理原理分析:
+
+我们看到自动配置类：ErrorMvcAutoConfiguration 错误处理的自动配置类； 
+
+这里面注入了几个很重要的 bean； 
+
+1. DefaultErrorAttributes 
+
+2. BasicErrorController 
+
+3. ErrorPageCustomizer 
+
+4. DefaultErrorViewResolver 
+
+**错误处理步骤**： 
+
+- 一旦系统出现了 4xx 或者 5xx 之类的错误，ErrorPageCustomizer 就会生效（定制错误的响应规则）
+
+```java
+    @Bean
+    public ErrorPageCustomizer errorPageCustomizer(DispatcherServletPath
+                                                           dispatcherServletPath) {
+        // 点进这个类
+        return new ErrorPageCustomizer(this.serverProperties,
+                dispatcherServletPath);
+    }
+```
+
+- 发现一个方法 registerErrorPages 注册错误页面：
+
+```java
+@Override
+public void registerErrorPages(ErrorPageRegistry errorPageRegistry) {
+    ErrorPage errorPage = new ErrorPage(
+        // 这里有个 getPath() 路径，我们点进去
+        this.dispatcherServletPath.getRelativePath(this.properties.getError().getPath()));
+    errorPageRegistry.addErrorPages(errorPage);
+}
+// getPath
+public String getPath() {
+    return this.path;
+}
+// this.path;
+@Value("${error.path:/error}")
+private String path = "/error";
+```
+
+- 系统一旦出现错误之后就会来到 /error 请求进行处理；这个请求会被 BasicErrorController 处理：
+
+```java
+@Controller
+// 处理默认的 /error 请求
+@RequestMapping("${server.error.path:${error.path:/error}}")
+public class BasicErrorController extends AbstractErrorController {
+}
+```
+
+- 这个类有两个方法：
+
+```java
+// 产生html类型的数据，浏览器发送的请求会被这个方法处理
+@RequestMapping(produces = MediaType.TEXT_HTML_VALUE)
+public ModelAndView errorHtml(HttpServletRequest request,
+                              HttpServletResponse response) {
+    HttpStatus status = getStatus(request);
+    Map<String, Object> model = Collections.unmodifiableMap(getErrorAttributes(request,
+                                            isIncludeStackTrace(request, MediaType.TEXT_HTML)));
+    response.setStatus(status.value());
+    // 去哪个页面拿错误页面呢？resolveErrorView 方法
+    ModelAndView modelAndView = resolveErrorView(request, response, status,model);
+    return (modelAndView != null) ? modelAndView : new ModelAndView("error",model);
+}
+// 返回 json 类型的数据，其他的客户端请求会被这个方法处理
+@RequestMapping
+public ResponseEntity<Map<String, Object>> error(HttpServletRequest request)
+{
+    HttpStatus status = getStatus(request);
+    if (status == HttpStatus.NO_CONTENT) {
+        return new ResponseEntity<>(status);
+    }
+    Map<String, Object> body = getErrorAttributes(request,
+                                                  isIncludeStackTrace(request, MediaType.ALL));
+    return new ResponseEntity<>(body, status);
+}
+```
+
+- 来看看resolveErrorView 这个方法：
+
+```java
+protected ModelAndView resolveErrorView(HttpServletRequest request,
+                                        HttpServletResponse response,
+                                        HttpStatus status,
+                                        Map<String, Object> model) {
+    // 拿到所有的 errorViewResolvers 错误视图解析器
+    for (ErrorViewResolver resolver : this.errorViewResolvers) {
+        ModelAndView modelAndView = resolver.resolveErrorView(request,
+                                                              status, model);
+        if (modelAndView != null) {
+            return modelAndView;
+        }
+    }
+    return null;
+}
+```
+
+- 在之前看到有这样一个bean DefaultErrorViewResolver 默认的错误视图解析器 :
+
+```java
+public class DefaultErrorViewResolver implements ErrorViewResolver, Ordered
+{
+    private static final Map<Series, String> SERIES_VIEWS;
+    static {
+        Map<Series, String> views = new EnumMap<>(Series.class);
+        views.put(Series.CLIENT_ERROR, "4xx"); // 客户端错误
+        views.put(Series.SERVER_ERROR, "5xx"); // 服务端错误
+        SERIES_VIEWS = Collections.unmodifiableMap(views);
+    }
+    // .....
+    @Override // HttpStatus 状态码
+    public ModelAndView resolveErrorView(HttpServletRequest request,
+                                         HttpStatus status, Map<String, Object> model) {
+        ModelAndView modelAndView = resolve(String.valueOf(status.value()),
+                model);
+        if (modelAndView == null &&
+                SERIES_VIEWS.containsKey(status.series())) {
+// 通过状态码解析视图
+            modelAndView = resolve(SERIES_VIEWS.get(status.series()),
+                    model);
+        }
+        return modelAndView;
+    }
+    // 去 error 路径下解析视图
+    private ModelAndView resolve(String viewName, Map<String, Object> model)
+    {
+// 比如 error/404 error/500
+        String errorViewName = "error/" + viewName;
+        TemplateAvailabilityProvider provider =
+                this.templateAvailabilityProviders.getProvider(errorViewName,
+                        this.applicationContext);
+        if (provider != null) {
+            return new ModelAndView(errorViewName, model);
+        }
+        return resolveResource(errorViewName, model);
+    }
+}
+```
+
+- 所以说：定制错误页面，我们可以建立一个 error 目录，然后放入对应的错误码html文件！ 比如：404.html 500.html 4xx.html 5xx.html 
+- 这些页面的信息数据在哪里呢？
+- 我们找到 DefaultErrorAttributes 这个bean对象；里面有很多的 addxx 方法，就是添加不同的信息；
+
+```java
+// addStatus
+// addErrorDetails
+// addErrorMessage
+// addStackTrace
+// addPath
+// 这里面存了一些错误的信息，我们可以在错误页面直接取出来
+```
+
+> 至此，用SpringBoot开发一个简单的单体应用对我们来说就没什么太大的问题了！
 
 
 

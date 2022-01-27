@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.mapper.EmployeeMapper">
+
+    <resultMap id="EmployeeMap" type="Employee">
+        <id property="id" column="eid"/>
+        <result property="lastName" column="last_name"/>
+        <result property="email" column="email"/>
+        <result property="gender" column="gender"/>
+        <result property="birth" column="birth"/>
+        <association property="eDepartment"  javaType="Department">
+            <id property="id" column="did"/>
+            <result property="departmentName" column="dname"/>
+        </association>
+    </resultMap>
+
+    <select id="getEmployees" resultMap="EmployeeMap">
+        select e.id as eid,last_name,email,gender,birth,d.id as did,d.department_name as dname
+        from department d,employee e
+        where d.id = e.department
+    </select>
+
+    <insert id="save" parameterType="Employee">
+        insert into employee (last_name,email,gender,department,birth)
+        values (#{lastName},#{email},#{gender},#{department},#{birth});
+    </insert>
+
+    <select id="get" resultType="Employee">
+        select * from employee where id = #{id}
+    </select>
+
+    <delete id="delete" parameterType="int">
+        delete from employee where id = #{id}
+    </delete>
+
+</mapper>

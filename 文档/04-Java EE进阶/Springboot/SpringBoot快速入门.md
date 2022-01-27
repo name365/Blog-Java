@@ -1167,7 +1167,7 @@ public class HttpProperties {
 
 2. 我们看我们需要的功能有没有在SpringBoot默认写好的自动配置类当中；
 3. 我们再来看这个自动配置类中到底配置了哪些组件；（只要我们要用的组件存在在其中，我们就不需要再手动配置了）。
-4. 给容器中自动配置类添加组件的时候，会从properties类中获取某些属性。我们只需要在配置文件中 指定这些属性的值即可；
+4. 给容器中自动配置类添加组件的时候，会从properties类中获取某些属性。我们只需要在配置文件中指定这些属性的值即可；
    1. xxxxAutoConfigurartion：自动配置类；给容器中添加组件；
    2. xxxxProperties:封装配置文件中相关属性。
 
@@ -1181,16 +1181,16 @@ public class HttpProperties {
 
 - 那么多的自动配置类，必须在一定的条件下才能生效；也就是说，加载了这么多的配置类，但不是所有的都生效了。
 - 如何知道哪些自动配置类生效？
-- 可以通过启用 debug=true属性；来让控制台打印自动配置报告，这样就可以很方便的知道哪些自动配置类生效。
+- 可以通过启用debug=true属性；来让控制台打印自动配置报告，这样就可以很方便的知道哪些自动配置类生效。
 
 ```properties
 # 开启springboot的调试类
 debug=true
 ```
 
-- Positive matches:（自动配置类启用的：正匹配） 
-- Negative matches:（没有启动，没有匹配成功的自动配置类：负匹配） 
-- Unconditional classes: （没有条件的类）
+- Positive matches:（自动配置类启用的：正匹配）; 
+- Negative matches:（没有启动，没有匹配成功的自动配置类：负匹配）; 
+- Unconditional classes:（没有条件的类）;
 
 ## 10.自定义starter
 
@@ -1198,7 +1198,7 @@ debug=true
 
 > 说明
 
-- 启动器模块是一个 空 jar 文件，仅提供辅助性依赖管理，这些依赖可能用于自动装配或者其他类库。
+- 启动器模块是一个空jar文件，仅提供辅助性依赖管理，这些依赖可能用于自动装配或者其他类库。
 
 > 命名归约： 
 
@@ -1282,7 +1282,7 @@ debug=true
 </project>
 ```
 
-5. 将 autoconfigure 项目下多余的文件都删掉，Pom中只留下一个 starter，这是所有的启动器基本配置。
+5. ==将autoconfigure项目下多余的文件都删掉，pom中只留下一个starter==，这是所有的启动器基本配置。
 
 ![image-20211028190145864](img/01/image-20211028190145864.png)
 
@@ -1356,8 +1356,8 @@ import org.springframework.context.annotation.Configuration;
  * 自动配制类
 
  */
-@Configuration
 
+@Configuration
 /**
  * EnableConfigurationProperties的作用
  * 1、开启HelloProperties配置绑定功能
