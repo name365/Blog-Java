@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title th:text="${article.title}"></title>
+</head>
+<body>
+
+<div>
+    <!--文章头部信息：标题，作者，最后更新日期，导航-->
+    <h2 style="margin: auto 0" th:text="${article.title}"></h2>
+    作者：<span style="float: left" th:text="${article.author}"></span>
+    <!--文章主体内容-->
+    <div id="doc-content">
+        <textarea style="display:none;" placeholder="markdown" th:text="${article.content}"></textarea>
+    </div>
+
+</div>
+
+<link rel="stylesheet" th:href="@{/editormd/css/editormd.preview.css}" />
+<script th:src="@{/lib/jquery.min.js}"></script>
+<script th:src="@{/lib/marked.min.js}"></script>
+<script th:src="@{/lib/prettify.min.js}"></script>
+<script th:src="@{/lib/raphael.min.js}"></script>
+<script th:src="@{/lib/underscore.min.js}"></script>
+<script th:src="@{/lib/sequence-diagram.min.js}"></script>
+<script th:src="@{/lib/flowchart.min.js}"></script>
+<script th:src="@{/lib/jquery.flowchart.min.js}"></script>
+<script th:src="@{/editormd.js}"></script>
+
+<script type="text/javascript">
+    var testEditor;
+    $(function () {
+        testEditor = editormd.markdownToHTML("doc-content", {//注意：这里是上面DIV的id
+            htmlDecode: "style,script,iframe",
+            emoji: true,
+            taskList: true,
+            tocm: true,
+            tex: true, // 默认不解析
+            flowChart: true, // 默认不解析
+            sequenceDiagram: true, // 默认不解析
+            codeFold: true
+        });});
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>哇哈哈'Blog</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+  <!--Editor.md-->
+  <link rel="stylesheet" th:href="@{/css/editormd.css}"/>
+  <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+      <!--博客表单-->
+      <form name="mdEditorForm">
+        <div>
+          标题：<input type="text" name="title">
+        </div>
+        <div>
+          作者：<input type="text" name="author">
+        </div>
+        <div id="article-content">
+          <textarea name="content" id="content" style="display:none;"> </textarea>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+</body>
+
+<!--editormd-->
+<script th:src="@{/lib/jquery.min.js}"></script>
+<script th:src="@{/editormd.js}"></script>
+
+<script type="text/javascript">
+  var testEditor;
+
+  //window.onload = function(){ }
+  $(function() {
+    testEditor = editormd("article-content", {
+      width : "95%",
+      height : 400,
+      syncScrolling : "single",
+      path : "../lib/",
+      saveHTMLToTextarea : true,    // 保存 HTML 到 Textarea
+      emoji: true,
+      theme: "dark",//工具栏主题
+      previewTheme: "dark",//预览主题
+      editorTheme: "pastel-on-dark",//编辑主题
+      tex : true,                   // 开启科学公式TeX语言支持，默认关闭
+      flowChart : true,             // 开启流程图支持，默认关闭
+      sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
+      // 图片上传
+      imageUpload : true,
+      imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+      imageUploadURL : "/article/file/upload",  // 这个是上传图片时的访问地址
+      onload : function() {
+        console.log('onload', this);
+      },
+      /*指定需要显示的功能按钮*/
+      toolbarIcons : function() {
+        return ["undo","redo","|",
+          "bold","del","italic","quote","ucwords","uppercase","lowercase","|",
+          "h1","h2","h3","h4","h5","h6","|",
+          "list-ul","list-ol","hr","|",
+          "link","reference-link","image","code","preformatted-text",
+          "code-block","table","datetime","emoji","html-entities","pagebreak","|",
+          "goto-line","watch","preview","fullscreen","clear","search","|",
+          "help","info","releaseIcon", "index"]
+      },
+
+      /*自定义功能按钮，下面我自定义了2个，一个是发布，一个是返回首页*/
+      toolbarIconTexts : {
+        releaseIcon : "<span bgcolor=\"gray\">发布</span>",
+        index : "<span bgcolor=\"red\">返回首页</span>",
+      },
+
+      /*给自定义按钮指定回调函数*/
+      toolbarHandlers:{
+        releaseIcon : function(cm, icon, cursor, selection) {
+          //表单提交
+          mdEditorForm.method = "post";
+          mdEditorForm.action = "/article/addArticle";//提交至服务器的路径
+          mdEditorForm.submit();
+        },
+        index : function(){
+          window.location.href = '/';
+        },
+      }
+    });
+  });
+</script>
+
+</html>

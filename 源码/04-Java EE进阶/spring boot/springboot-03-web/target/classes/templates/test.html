@@ -13,7 +13,7 @@
 
     <!--  不转义  -->
     <div th:utext="${msg}"></div>
-    
+
     <!--遍历数据-->
     <!--th:each每次遍历都会生成当前这个标签：官网#9-->
     <h3 th:each="user :${users}" th:text="${user}"></h3>

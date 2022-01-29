@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.mapper.ArticleMapper">
+
+    <select id="queryArticles" resultType="Article">
+        select * from article
+    </select>
+
+    <select id="getArticleById" resultType="Article">
+        select * from article where id = #{id}
+    </select>
+
+    <insert id="addArticle" parameterType="Article">
+        insert into article (author,title,content) values (#{author},#{title},#{content});
+    </insert>
+
+    <delete id="deleteArticleById" parameterType="int">
+        delete from article where id = #{id}
+    </delete>
+
+</mapper>
