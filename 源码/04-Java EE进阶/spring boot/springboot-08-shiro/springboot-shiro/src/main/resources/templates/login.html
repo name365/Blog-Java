@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+    <p th:if="${session.loginUser==null}">
+        <a th:href="@{/toLogin}">登录</a>
+    </p>
+
+<hr />
+        <p style="color:red;" th:text="${msg}"></p>
+        <form th:action="@{/login}">
+            <p>
+                用户名： <input type="text" name="username">
+            </p>
+            <p>
+                密码： <input type="text" name="password">
+            </p>
+            <p>
+                <input type="submit">
+            </p>
+        </form>
+</body>
+</html>

@@ -1,0 +1,22 @@
+auth-server: http://localhost:8881/auth
+server:
+  port: 8883
+  servlet:
+    context-path: /
+  session:
+    cookie:
+        name: SESSION2
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      clientId: SampleClientId
+      clientSecret: secret
+      accessTokenUri: ${auth-server}/oauth/token
+      userAuthorizationUri: ${auth-server}/oauth/authorize
+    resource:
+      userInfoUri: ${auth-server}/user
+spring:
+  thymeleaf:
+    cache: false        

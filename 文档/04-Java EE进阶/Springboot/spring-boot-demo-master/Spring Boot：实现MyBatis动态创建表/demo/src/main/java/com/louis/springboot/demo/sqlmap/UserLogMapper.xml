@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.louis.springboot.demo.dao.UserLogMapper">
+  <resultMap id="BaseResultMap" type="com.louis.springboot.demo.model.UserLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="operation" jdbcType="VARCHAR" property="operation" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="params" jdbcType="VARCHAR" property="params" />
+    <result column="time" jdbcType="BIGINT" property="time" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_name, operation, method, params, time, ip
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ${tableName}
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ${tableName}
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.louis.springboot.demo.model.UserLog">
+    insert into ${tableName} (id, user_name, operation, 
+      method, params, time, 
+      ip)
+    values (#{userLog.id,jdbcType=BIGINT}, #{userLog.userName,jdbcType=VARCHAR}, #{userLog.operation,jdbcType=VARCHAR}, 
+      #{userLog.method,jdbcType=VARCHAR}, #{userLog.params,jdbcType=VARCHAR}, #{userLog.time,jdbcType=BIGINT}, 
+      #{userLog.ip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.louis.springboot.demo.model.UserLog">
+    insert into ${tableName}
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userLog.id != null">
+        id,
+      </if>
+      <if test="userLog.userName != null">
+        user_name,
+      </if>
+      <if test="userLog.operation != null">
+        operation,
+      </if>
+      <if test="userLog.method != null">
+        method,
+      </if>
+      <if test="userLog.params != null">
+        params,
+      </if>
+      <if test="userLog.time != null">
+        time,
+      </if>
+      <if test="userLog.ip != null">
+        ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userLog.id != null">
+        #{userLog.id,jdbcType=BIGINT},
+      </if>
+      <if test="userLog.userName != null">
+        #{userLog.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userLog.operation != null">
+        #{userLog.operation,jdbcType=VARCHAR},
+      </if>
+      <if test="userLog.method != null">
+        #{userLog.method,jdbcType=VARCHAR},
+      </if>
+      <if test="userLog.params != null">
+        #{userLog.params,jdbcType=VARCHAR},
+      </if>
+      <if test="userLog.time != null">
+        #{userLog.time,jdbcType=BIGINT},
+      </if>
+      <if test="userLog.ip != null">
+        #{userLog.ip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.louis.springboot.demo.model.UserLog">
+    update ${tableName}
+    <set>
+      <if test="userLog.userName != null">
+        user_name = #{userLog.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userLog.operation != null">
+        operation = #{userLog.operation,jdbcType=VARCHAR},
+      </if>
+      <if test="userLog.method != null">
+        method = #{userLog.method,jdbcType=VARCHAR},
+      </if>
+      <if test="userLog.params != null">
+        params = #{userLog.params,jdbcType=VARCHAR},
+      </if>
+      <if test="userLog.time != null">
+        time = #{userLog.time,jdbcType=BIGINT},
+      </if>
+      <if test="userLog.ip != null">
+        ip = #{userLog.ip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{userLog.id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.louis.springboot.demo.model.UserLog">
+    update ${tableName}
+    set user_name = #{userLog.userName,jdbcType=VARCHAR},
+      operation = #{userLog.operation,jdbcType=VARCHAR},
+      method = #{userLog.method,jdbcType=VARCHAR},
+      params = #{userLog.params,jdbcType=VARCHAR},
+      time = #{userLog.time,jdbcType=BIGINT},
+      ip = #{userLog.ip,jdbcType=VARCHAR}
+    where id = #{userLog.id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ${tableName}
+  </select>
+  
+  <select id="existTable" parameterType="String" resultType="Integer">  
+    select count(*)  
+    from information_schema.TABLES  
+    where table_name=#{tableName} 
+  </select>
+  
+  <update id="dropTable">  
+    DROP TABLE IF EXISTS ${tableName} 
+  </update>  
+  
+  <update id="createTable" parameterType="String">  
+    CREATE TABLE ${tableName} (
+	  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
+	  `user_name` varchar(50) DEFAULT NULL COMMENT '用户名',
+	  `operation` varchar(50) DEFAULT NULL COMMENT '用户操作',
+	  `method` varchar(200) DEFAULT NULL COMMENT '请求方法',
+	  `params` varchar(5000) DEFAULT NULL COMMENT '请求参数',
+	  `time` bigint(20) NOT NULL COMMENT '执行时长(毫秒)',
+	  `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
+	  PRIMARY KEY (`id`)
+	) ENGINE=InnoDB AUTO_INCREMENT=2897 DEFAULT CHARSET=utf8 COMMENT='用户操作日志';
+  </update> 
+</mapper>
