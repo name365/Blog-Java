@@ -3961,15 +3961,526 @@ public String show(@PathVariable("id") int id,Model model){
 
 ## 9.整合Dubbo+Zookeeper
 
+### 1.分布式理论
 
+> 什么是分布式系统？
 
+- 在《分布式系统原理与范型》一书中有如下定义：“分布式系统是若干独立计算机的集合，这些计算机对于用户来说就像单个相关系统”；
+- 分布式系统是由一组通过网络进行通信、为了完成共同的任务而协调工作的计算机节点组成的系统。分布式系统的出现是为了用廉价的、普通的机器完成单个计算机无法完成的计算、存储任务。其目的是**利用更多的机器，处理更多的数据**。
 
+> 分布式系统（distributed system）是建立在网络之上的软件系统。
 
+- 首先需要明确的是，只有当单个节点的处理能力无法满足日益增长的计算、存储任务的时候，且硬件的提升（加内存、加磁盘、使用更好的CPU）高昂到得不偿失的时候，应用程序也不能进一步优化的时候，我们才需要考虑分布式系统。
+- 因为，分布式系统要解决的问题本身就是和单机系统一样的，而由于分布式系统多节点、通过网络通信的拓扑结构，会引入很多单机系统没有的问题，为了解决这些问题又会引入更多的机制、协议，带来更多的问题。
 
+> [Dubbo文档](https://dubbo.apache.org/docs/v2.7/user/preface/background/)
 
+- DUBBO官网：https://dubbo.apache.org/zh/
 
+![image-20220201185923590](img/08/image-20220201185923590.png)
 
+- 随着互联网的飞速发展，Web应用的规模不断扩大，最终我们发现传统的垂直架构（单体）已经无法应对。分布式服务架构和流计算架构势在必行，迫切需要一个治理体系来保证架构的有序演进。
 
+![图片](img/08/dubbo-architecture-roadmap.jpg)
+
+> 单体架构
+
+- 当流量很低时，只有一个应用，所有的特性都部署在一起，减少部署节点和成本。此时，数据访问框架（ORM）是简化 CRUD 工作量的关键。
+
+![image-20220201190250133](img/08/image-20220201190250133.png)
+
+- 适用于小型网站，小型管理系统，将所有功能都部署到一个功能里，简单易用。
+- 缺点：
+  - 1、性能扩展比较难
+  - 2、协同开发问题
+  - 3、不利于升级维护
+
+> 垂直架构
+
+- 当流量变大时，添加单体应用实例并不能很好地加速访问，提高效率的一种方法是将单体应用拆分成离散的应用程序。此时，用于加速前端页面开发的Web框架（MVC）是关键。
+
+![image-20220201190535059](img/08/image-20220201190535059.png)
+
+- 通过切分业务来实现各个模块独立部署，降低了维护和部署的难度，团队各司其职更易管理，性能扩展
+  也更方便，更有针对性。
+- 缺点： 公用模块无法重复利用，开发性的浪费
+
+> 分布式服务架构
+
+- 当垂直应用越来越多时，应用之间的交互是不可避免的，一些核心业务被提取出来，作为独立的服务，逐渐形成一个稳定的服务中心，这样前端应用就可以更好地响应多变的市场需求。迅速地。此时，用于业务重用和集成的分布式服务框架（RPC）是关键。
+
+![image-20220201191915211](img/08/image-20220201191915211.png)
+
+> 流计算架构
+
+- 当服务越来越多时，容量评估变得困难，而且小规模的服务也经常造成资源浪费。为了解决这些问题，需要增加调度中心，根据流量对集群容量进行管理，提高集群的利用率。这时，用来提高机器利用率的资源调度和治理中心（SOA）是关键。
+
+![image-20220201192347218](img/08/image-20220201192347218.png)
+
+### 2.什么是RPC?
+
+> RPC【Remote Procedure Call】是指远程过程调用，像调用本地方法一样调用远程方法，是一种进程间通信方式，他是一种技术的思想，而不是规范。
+>
+> 它允许程序调用另一个地址空间（通常是共享网络的另一台机器上）的过程或函数，而不用程序员显式编码这个远程调用的细节。即程序员无论是调用本地的还是远程的函数，本质上编写的调用代码基本相同。
+
+- 也就是说两台服务器A，B，一个应用部署在A服务器上，想要调用B服务器上应用提供的函数/方法，由于不在一个内存空间，不能直接调用，需要通过网络来表达调用的语义和传达调用的数据。
+- 为什么要用RPC呢？
+  - 就是无法在一个进程内，甚至一个计算机内通过本地调用的方式完成的需求，比如不同的系统间的通讯，甚至不同的组织间的通讯，由于计算能力需要横向扩展，需要在多台机器组成的集群上部署应用。RPC就是要像调用本地的函数一样去调远程函数；
+
+<center>RPC基本原理</center>
+
+![img](img/08/rpc.png)
+
+- 服务消费方(client)调用以本地调用方式调用服务;
+- client stub接收到调用后负责将方法、参数等组装成能够进行网络传输的消息体;
+- client stub找到服务地址，并将消息发送到服务端;
+- server stub收到消息后进行解码;
+- server stub根据解码结果调用本地的服务;
+- 本地服务执行并将结果返回给server stub;
+- server stub将返回结果打包成消息并发送至消费方;
+- client stub接收到消息，并进行解码;
+- 服务消费方得到最终结果。
+
+> 具体参考：[简书](https://www.jianshu.com/p/2accc2840a1b)；[官网说法](https://dubbo.apache.org/zh/docs/v3.0/concepts/rpc-protocol/)。
+
+<center>时序步骤解析</center>
+
+![聊聊Apache Dubbo，概念、架构和负载均衡](img/08/rpc2.png)
+
+> RPC两个核心模块：通讯，序列化。
+
+### 3.什么是dubbo?
+
+> Apache Dubbo |ˈdʌbəʊ| 是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。
+
+- [dubbo官网](https://dubbo.apache.org/zh/)
+  1. 了解Dubbo的特性；
+  2. 查看官方文档
+
+<center>Dubbo架构</center>
+
+![//imgs/architecture.png](img/08/architecture.png)
+
+- 服务提供者**（Provider）**：暴露服务的服务提供方，服务提供者在启动时，向注册中心注册自己提供的服务。
+- 服务消费者**（Consumer）**: 调用远程服务的服务消费方，服务消费者在启动时，向注册中心订阅自己所需的服务，服务消费者，从提供者地址列表中，基于软负载均衡算法，选一台提供者进行调用，如果调用失败，再选另一台调用。
+- 注册中心**（Registry）**：注册中心返回服务提供者地址列表给消费者，如果有变更，注册中心将基于长连接推送变更数据给消费者。
+- 监控中心**（Monitor）**：服务消费者和提供者，在内存中累计调用次数和调用时间，定时每分钟发送一次统计数据到监控中心。
+- 调用关系说明
+  - 服务容器负责启动，加载，运行服务提供者。
+  - 服务提供者在启动时，向注册中心注册自己提供的服务。
+  - 服务消费者在启动时，向注册中心订阅自己所需的服务。
+  - 注册中心返回服务提供者地址列表给消费者，如果有变更，注册中心将基于长连接推送变更数据给消费者。
+  - 服务消费者，从提供者地址列表中，基于软负载均衡算法，选一台提供者进行调用，如果调用失败，再选另一台调用。
+  - 服务消费者和提供者，在内存中累计调用次数和调用时间，定时每分钟发送一次统计数据到监控中心。
+
+> Dubbo的基本要求
+
+![图片](img/08/dubbo-service-governance.jpg)
+
+- 在大规模服务出现之前，应用程序可能只是通过 RMI 或 Hessian 暴露或引用远程服务，通过配置服务 URL 进行调用，通过 F5 等硬件完成负载均衡。
+- **当服务越来越多，配置服务URL变得非常困难，F5硬件负载均衡器的单点压力也越来越大。**此时，需要一个服务注册中心来动态注册和发现服务，使服务的位置透明化。通过在消费者端获取服务提供者地址列表，可以实现软负载均衡和Failover，减少对F5硬件负载均衡器的依赖和部分成本。
+- **当事情进一步发展时，服务依赖变得如此复杂，以至于它甚至无法告诉之前启动哪些应用程序，甚至架构师也无法完全描述应用程序架构关系**。这时就需要自动绘制应用程序的依赖关系图，帮助架构师理清关系。
+- **然后，流量变得更重，服务的容量问题暴露出来，需要多少台机器来支持这个服务？什么时候应该加机器？**要解决这些问题，首先要将每天的服务调用量和响应时间量作为容量规划的参考。二、动态调整权重，增加一台在线机器的权重，并记录响应时间的变化，直到达到阈值，记录此时的访问次数，然后将此访问次数乘以总机器数计算反过来的能力。
+
+> 更多参考：[网页](https://geeknb.com/8277.html)。
+
+### 4.Dubbo环境搭建
+
+- 点进dubbo官方文档，推荐我们使用[Zookeeper注册中心](https://dubbo.apache.org/zh/docs/v3.0/references/registry/zookeeper/)!
+- 什么是zookeeper呢？可以查看[官方文档](https://zookeeper.apache.org/doc/r3.7.0/index.html)！
+
+![img](img/08/fVKeBy0dUyfT5xJX.jpg)
+
+> window下安装zookeeper
+
+- 参考教程：[菜鸟教程](https://www.runoob.com/w3cnote/zookeeper-tutorial.html) 
+
+1. 下载zookeeper：[地址①](https://zookeeper.apache.org/releases.html)，[地址②](https://downloads.apache.org/zookeeper/)，下载3.7.0！解压zookeeper;
+
+   ![image-20220201211254509](img/08/image-20220201205744846.png)
+
+2. 运行/bin/zkServer.cmd ，初次运行会报错，没有zoo.cfg配置文件；
+
+![image-20220201210135868](img/08/image-20220201210135868.png)
+
+> 可能遇到问题：闪退!
+>
+> - 解决方案：编辑zkServer.cmd文件末尾添加`pause`。这样运行出错就不会退出，会提示错误信息，方便找到原因。
+
+![image-20220201210237343](img/08/image-20220201210237343.png)
+
+![image-20220201211548931](img/08/image-20220201211548931.png)
+
+> 报错：`错误: 找不到或无法加载主类 org.apache.zookeeper.server.quorum.QuorumPeerMain`
+
+- 下载编译后的二进制的包，就好了。地址：https://www.apache.org/dyn/closer.lua/zookeeper/zookeeper-3.7.0/apache-zookeeper-3.7.0-bin.tar.gz
+
+----
+
+3. 将conf目录下的zoo_sample.cfg文件，复制一份，重命名为zoo.cfg:
+
+![image-20220201211651798](img/08/image-20220201211651798.png)
+
+4. 在安装目录下面新建一个空的 data 文件夹和 log 文件夹:
+
+![image-20220201211816453](img/08/image-20220201211816453.png)
+
+5. 修改 zoo.cfg 配置文件，将 dataDir=/tmp/zookeeper 修改成 zookeeper 安装目录所在的 data 文件夹，再添加一条添加数据日志的配置(需要根据自己的安装路径修改)。
+
+![image-20220201212030577](img/08/image-20220201212030577.png)
+
+6. 修改完成后再次双击 zkServer.cmd 启动程序:
+
+![image-20220201214249259](img/08/image-20220201214249259.png)
+
+----
+
+> `Zookeeper启动失败：Unexpected exception, exiting abnormally java.net.BindException: Address alr`
+
+- 这是2181端口被占用导致的，需要结束占用2181端口的进程。
+- 进去命令提示符之后，输入“netstat -aon | findstr 2181”命令，按回车键，如下图所示：
+
+![image-20220201215117361](img/08/image-20220201215117361.png)
+
+- 打开任务管理器，显示进程的pid之后，找到pid为19236的进程，点击结束进程。
+
+![image-20220201215230993](img/08/image-20220201215230993.png)
+
+- 结束进程之后，再次运行项目，就正常运行了。
+
+-----
+
+7. 测试，双击zkCli.cmd 启动客户端。
+   - `ls /`：列出zookeeper根下保存的所有节点。
+   - `create –e /subei 123`：创建一个subei节点，值为123。
+   - `get /subei`：获取/subei节点的值。
+
+![image-20220201214626067](img/08/image-20220201214626067.png)
+
+### 5.window下安装dubbo-admin
+
+- dubbo本身并不是一个服务软件。它其实就是一个jar包，能够帮你的java程序连接到zookeeper，并利用zookeeper消费、提供服务。
+- 但是为了让用户更好的管理监控众多的dubbo服务，官方提供了一个可视化的监控程序dubbo-admin，不过这个监控即使不装也不影响使用。
+
+1. 下载dubbo-admin
+
+- 地址：[https://github.com/apache/dubbo-admin/tree/master-0.2.0](https://github.com/apache/dubbo-admin/tree/master-0.2.0)
+
+2. 解压进入目录
+
+- 修改 dubbo-admin-master-0.2.0\dubbo-admin\src\main\resources\application.properties 指定zookeeper地址
+
+```java
+server.port=7001
+spring.velocity.cache=false
+spring.velocity.charset=UTF-8
+spring.velocity.layout-url=/templates/default.vm
+spring.messages.fallback-to-system-locale=false
+spring.messages.basename=i18n/message
+spring.root.password=root
+spring.guest.password=guest
+# 注册中心的地址
+dubbo.registry.address=zookeeper://127.0.0.1:2181
+```
+
+3. 在项目目录下打包dubbo-admin
+
+```properties
+mvn clean package -Dmaven.test.skip=true
+```
+
+- 过程有点慢，需要耐心等待！直到成功！
+
+![image-20220203204736788](img/08/image-20220203204736788.png)
+
+4. 执行dubbo-admin\target下的dubbo-admin-0.0.1-SNAPSHOT.jar
+
+```java
+java -jar dubbo-admin-0.0.1-SNAPSHOT.jar
+```
+
+![image-20220203204908083](img/08/image-20220203204908083.png)
+
+- 注意：==zookeeper的服务一定要打开==！
+- 执行完毕，去访问一下 http://localhost:7001/，这时候需要输入登录账户和密码，都是默认的`root-root`；登录成功后，查看界面。
+
+![image-20220203205512464](img/08/image-20220203205512464.png)
+
+![image-20220203205530394](img/08/image-20220203205530394.png)
+
+> 安装完成！
+
+----
+
+> 新版实现
+
+1. 下载代码: `git clone https://github.com/apache/dubbo-admin.git`
+
+2. 在 `dubbo-admin-server/src/main/resources/application.properties`中指定注册中心地址
+
+3. 构建
+
+   > - `mvn clean package -Dmaven.test.skip=true`
+
+   ![image-20220203210914435](img/08/image-20220203210914435.png)
+
+4. 启动
+
+   - `mvn --projects dubbo-admin-server spring-boot:run`
+     或者
+   - `cd dubbo-admin-distribution/target; java -jar dubbo-admin-0.1.jar`
+
+5. 访问 `http://localhost:8080`
+
+> 不太稳定，启动失败！！！
+
+### 6.框架搭建
+
+1. 启动zookeeper！ 
+
+- 双击 zkServer.cmd 启动程序！
+
+2. IDEA创建一个空项目； 
+3. 创建一个模块，实现服务提供者：provider-server，选择web依赖即可； 
+
+![image-20220203220712022](img/08/image-20220203220712022.png)
+
+4. 项目创建完毕，写一个服务，比如卖票的服务；
+
+> 编写接口：
+
+```java
+package com.github.service;
+
+public interface TicketService {
+    public String getTicket();
+}
+```
+
+> 编写实现类：
+
+```java
+package com.github.service;
+
+public class TicketServiceImpl implements TicketService {
+    @Override
+    public String getTicket() {
+        return "《subeiLY》";
+    }
+}
+```
+
+5. 创建一个模块，实现服务消费者：consumer-server，选择web依赖即可 
+
+![image-20220204111541626](img/08/image-20220204111541626.png)
+
+6. 项目创建完毕，写一个服务，比如用户的服务； 编写service
+
+```java
+package com.github.service;
+
+public class UserService {
+    // 获取去注册中心的服务
+}
+```
+
+### 7.服务提供者
+
+1. 将服务提供者注册到注册中心，需要整合Dubbo和zookeeper，所以需要导包。
+   - 从dubbo官网进入github，看下方的帮助文档，找到[dubbo-springboot](https://mvnrepository.com/artifact/org.apache.dubbo/dubbo-spring-boot-starter/2.7.8)，找到依赖包。
+
+```xml
+<!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo-spring-boot-starter -->
+<dependency>
+    <groupId>org.apache.dubbo</groupId>
+    <artifactId>dubbo-spring-boot-starter</artifactId>
+    <version>2.7.8</version>
+</dependency>
+```
+
+- zookeeper的包我们去maven仓库下载，[zkclient](https://mvnrepository.com/artifact/com.github.sgroschupf/zkclient/0.1)；
+
+```xml
+<!-- https://mvnrepository.com/artifact/com.github.sgroschupf/zkclient -->
+<dependency>
+    <groupId>com.github.sgroschupf</groupId>
+    <artifactId>zkclient</artifactId>
+    <version>0.1</version>
+</dependency>
+```
+
+- zookeeper及其依赖包，解决日志冲突，还需要剔除日志依赖；
+
+```xml
+<!-- https://mvnrepository.com/artifact/org.apache.curator/curator-framework -->
+<dependency>
+    <groupId>org.apache.curator</groupId>
+    <artifactId>curator-framework</artifactId>
+    <version>5.2.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.curator/curator-recipes -->
+<dependency>
+    <groupId>org.apache.curator</groupId>
+    <artifactId>curator-recipes</artifactId>
+    <version>5.2.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
+<dependency>
+    <groupId>org.apache.zookeeper</groupId>
+    <artifactId>zookeeper</artifactId>
+    <version>3.7.0</version>
+    <!--排除这个slf4j-log4j12-->
+    <exclusions>
+        <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```
+
+2. 在springboot配置文件中配置dubbo相关属性！
+
+```properties
+# 当前应用名字
+dubbo.application.name=provider-server
+# 注册中心地址
+dubbo.registry.address=zookeeper://127.0.0.1:2181
+# 扫描指定包下服务
+dubbo.scan.base-packages=com.github.service
+```
+
+3. 在service的实现类中配置服务注解，发布服务！注意导包问题。
+
+```java
+package com.github.service;
+
+import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Component;
+
+@Service //将服务发布出去
+@Component //放在容器中
+public class TicketServiceImpl implements TicketService {
+    @Override
+    public String getTicket() {
+        return "《subeiLY》";
+    }
+}
+```
+
+> 逻辑理解：应用启动起来，dubbo就会扫描指定的包下带有@component注解的服务，将它发布在指定的注册中心中！
+
+### 8.消费者
+
+1. 导入依赖，和之前的依赖一样；
+
+```xml
+<!--   导入依赖：Dubbo + Zookeeper   -->
+<!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo-spring-boot-starter -->
+<dependency>
+    <groupId>org.apache.dubbo</groupId>
+    <artifactId>dubbo-spring-boot-starter</artifactId>
+    <version>2.7.8</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/com.github.sgroschupf/zkclient -->
+<dependency>
+    <groupId>com.github.sgroschupf</groupId>
+    <artifactId>zkclient</artifactId>
+    <version>0.1</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.curator/curator-framework -->
+<dependency>
+    <groupId>org.apache.curator</groupId>
+    <artifactId>curator-framework</artifactId>
+    <version>5.2.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.curator/curator-recipes -->
+<dependency>
+    <groupId>org.apache.curator</groupId>
+    <artifactId>curator-recipes</artifactId>
+    <version>5.2.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
+<dependency>
+    <groupId>org.apache.zookeeper</groupId>
+    <artifactId>zookeeper</artifactId>
+    <version>3.7.0</version>
+    <!--排除这个slf4j-log4j12-->
+    <exclusions>
+        <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```
+
+2. 配置参数
+
+```properties
+# 当前应用名字
+dubbo.application.name=consumer-server
+# 注册中心地址
+dubbo.registry.address=zookeeper://127.0.0.1:2181
+```
+
+3. 本来正常步骤是需要将服务提供者的接口打包，然后用pom文件导入，这里使用简单的方式，直接将服务的接口拿过来，路径必须保证正确，即和服务提供者相同；
+
+![image-20220204114553842](img/08/image-20220204114553842.png)
+
+4. 完善消费者的服务类
+
+```java
+package com.github.provider.seriver;
+
+import com.github.consumer.seriver.TicketService;
+import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.stereotype.Service;
+
+@Service // 注入到容器中
+public class UserService {
+    @Reference // 远程引用指定的服务，他会按照全类名进行匹配，看谁给注册中心注册了这个全类名
+    TicketService ticketService;
+    public void bugTicket(){
+        String ticket = ticketService.getTicket();
+        System.out.println("在注册中心买到:"+ticket);
+    }
+}
+```
+
+5. 测试类
+
+```java
+import com.github.provider.seriver.UserService;
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ConsumerServerApplicationTests {
+    @Autowired
+    UserService userService;
+    @Test
+    public void contextLoads() {
+        userService.bugTicket();
+    }
+}
+```
+
+6. 启动测试
+
+- 开启zookeeper 
+- 打开dubbo-admin实现监控【可以不用做】
+- 开启服务者
+
+![image-20220204121145213](img/08/image-20220204121145213.png)
+
+- 消费者消费测试
+
+> SpingBoot + dubbo + zookeeper实现分布式开发的应用，其实就是一个服务拆分的思想!!!
 
 ## 🎉🎉结束🎉🎉
 
