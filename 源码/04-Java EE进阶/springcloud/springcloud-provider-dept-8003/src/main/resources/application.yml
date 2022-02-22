@@ -1,0 +1,39 @@
+server:
+  port: 8003
+# mybatis的配置
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  type-aliases-package: com.github.pojo
+  mapper-locations:
+    - classpath:mybatis/mapper/**/*.xml
+# spring的相关配置
+spring:
+  application:
+    name: springcloud-provider-dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource # 数据源
+    driver-class-name: org.gjt.mm.mysql.Driver # mysql驱动
+    url: jdbc:mysql://localhost:3306/springcloud03?useSSL=false #数据库名称
+    username: root
+    password: root
+    dbcp2:
+      min-idle: 5 #数据库连接池的最小维持连接数
+      initial-size: 5 #初始化连接数
+      max-total: 5 #最大连接数
+      max-wait-millis: 200 #等待连接获取的最大超时时间
+
+# Eureka配置：配置服务注册中心地址
+eureka:
+  client:
+    service-url:
+      # 注册中心地址7001-7003
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: springcloud-provider-dept-8003 # 与client平级
+ #   prefer-ip-address: true # true表示访问路径可以显示IP地址
+
+# info配置
+info:
+  app.name: subei-springcloud  # 项目的名称
+  company.name: www.subeily.top  # 公司的名称
+
