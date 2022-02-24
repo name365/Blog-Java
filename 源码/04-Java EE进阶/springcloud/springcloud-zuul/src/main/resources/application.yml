@@ -1,0 +1,32 @@
+server:
+  port: 4399
+spring:
+  application:
+    name: springcloud-zuul
+
+
+
+#Eureka的配置，服务注册到哪里
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: zuul4399.com
+    prefer-ip-address: true #改为true后默认显示的是ip地址而不再是localhost  方便团队不同人使用
+
+# info配置
+info:
+  app.name: subei-springcloud  # 项目的名称
+  company.name: www.subeily.top  # 公司的名称
+
+# zull 路由网关配置
+zuul:
+  # 路由相关配置
+  # 原来访问路由 eg:http://subeily.com:4399/springcloud-provider-dept/dept/get/2
+  # zull路由配置后访问路由 eg: http://subeily.com:4399/subeily/mydept/dept/get/2
+  routes:
+    mydept.serviceId: springcloud-provider-dept # eureka注册中心的服务提供方路由名称
+    mydept.path: /mydept/** # 将eureka注册中心的服务提供方路由名称 改为自定义路由名称
+  ignored-services: "*" # 不能再使用这个路径访问了，*： 忽略,隐藏全部的服务名称~
+  prefix: /subeily # 设置公共的前缀

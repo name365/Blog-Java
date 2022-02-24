@@ -1,0 +1,4 @@
+com\github\service\DeptClientService.class
+com\github\FeignDeptConsumer80.class
+com\github\config\ConfigBean.class
+com\github\controller\DeptConsumerController.class

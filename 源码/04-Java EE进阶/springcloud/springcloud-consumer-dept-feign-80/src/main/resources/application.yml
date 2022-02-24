@@ -1,0 +1,31 @@
+server:
+  port: 80
+
+# Eureka配置
+eureka:
+  client:
+    register-with-eureka: false # false表示不向注册中心注册自己
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+
+# Hystrix配置
+feign:
+  hystrix:
+    enabled: true
+
+#hystrix的超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 90000
+#ribbon的超时时间
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+
+

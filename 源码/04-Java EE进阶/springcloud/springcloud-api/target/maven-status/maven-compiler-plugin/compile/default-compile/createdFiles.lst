@@ -1,0 +1,4 @@
+com\github\service\DeptClientService.class
+com\github\service\DeptClientServiceFallbackFactory.class
+com\github\pojo\Dept.class
+com\github\service\DeptClientServiceFallbackFactory$1.class

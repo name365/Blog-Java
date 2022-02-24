@@ -14,12 +14,6 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class ConfigBean {
 
-    @Bean
-    public IRule myRule(){
-        // 使用我们重新选择的随机算法，替代默认的轮询！
-        return new RandomRule();
-    }
-
     // @Configuration -- spring  applicationContext.xml
     // 配置负载均衡实现RestTemplate
     // IRule
