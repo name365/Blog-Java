@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: springcloud-config-eureka
+
+# 不加这个配置会报Cannot execute request on any known server 这个错：连接Eureka服务端地址不对
+# 或者直接注释掉eureka依赖 这里暂时用不到eureka
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false

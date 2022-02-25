@@ -2761,23 +2761,557 @@ public class SpringCloudZuulApp4399 {
 
 > 服务端
 
+- 前提:
+
+  - 在码云上新建仓库 springcloud-config，==仓库要开源哦==！！！
+    - [生成/添加SSH公钥](https://gitee.com/help/articles/4181#article-header0)
+  - 拉取到本地，编写application.yaml配置文件
+
+  ![image-20220225172517418](img/06/image-20220225172403569.png)
+
+```yaml
+spring:
+  profiles:
+    active: dev
+    
+---
+spring:
+  profiles: dev
+  application:
+    name: springcloud-config-dev
+    
+---
+spring:
+  profiles: test
+  application:
+    name: springcloud-config-test
+```
+
+- 将本地git仓库springcloud-config文件夹下新建的application.yml提交到码云仓库:
+
+![image-20220225173808811](img/06/image-20220225173808811.png)
+
+![image-20220225173832549](img/06/image-20220225173832549.png)
+
+- HTTP服务具有以下格式的资源：
+
+```shell
+/{application}/{profile}[/{label}]
+/{application}-{profile}.yml
+/{label}/{application}-{profile}.yml
+/{application}-{profile}.properties
+/{label}/{application}-{profile}.properties
+```
+
 - 新建模块 springcloud-config-server-3344，导入依赖
 
-
-
-
+```xml
+<dependencies>
+    <!--web-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!--config-->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-config-server</artifactId>
+        <version>2.1.1.RELEASE</version>
+    </dependency>
+    <!--eureka-->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-eureka</artifactId>
+        <version>1.4.6.RELEASE</version>
+    </dependency>
+</dependencies>
+```
 
 - 编写配置文件
 
+```yaml
+server:
+  port: 3344
 
+spring:
+  application:
+    name: springcloud-config-server
+  # 连接码云远程仓库
+  cloud:
+    config:
+      server:
+        git:
+          # 注意是https的而不是ssh
+          uri: https://gitee.com/yang365/springcloud-config.git
+          # 通过 config-server可以连接到git，访问其中的资源以及配置~
 
+# 不加这个配置会报Cannot execute request on any known server 这个错：连接Eureka服务端地址不对
+# 或者直接注释掉eureka依赖 这里暂时用不到eureka
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+```
 
+- 主启动类
 
-## 思维导图
+```java
+@EnableConfigServer   // 开启spring cloud config server服务
+@SpringBootApplication
+public class ConfigServer3344 {
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigServer3344.class,args);
+    }
+}
+```
 
+- 测试
 
+  - 启动 ConfigServer3344 即可；
 
-## 🎉结束啦🎉
+  - 访问 http://localhost:3344/application-dev.yaml
+
+    ![image-20220225202051854](img/06/image-20220225202051854.png)
+
+  - 访问 http://localhost:3344/application/test/master
+
+    ![image-20220225202108065](img/06/image-20220225202108065.png)
+
+  - 访问 http://localhost:3344/master/application-dev.yaml
+
+    ![image-20220225202123168](img/06/image-20220225202123168.png)
+
+  - 访问不存在的配置
+
+![image-20220225202246907](img/06/image-20220225202246907.png)
+
+> 客户端
+
+- 在本地库编写一个配置文件config-client.yaml，并且上传到码云仓库。
+
+```yaml
+spring:
+  profiles:
+    active: dev
+
+---
+server:
+  port: 8201
+#spring配置
+spring:
+  profiles: dev
+  application:
+    name: springcloud-config-client
+#Eureka的配置，服务注册到哪里
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+
+---
+server:
+  port: 8202
+#spring配置
+spring:
+  profiles: test
+  application:
+    name: springcloud-config-client
+#Eureka的配置，服务注册到哪里
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+```
+
+![image-20220225203405428](img/06/image-20220225203405428.png)
+
+![image-20220225203555050](img/06/image-20220225203555050.png)
+
+- 新建 springcloud-config-client-3355 模块，导入依赖
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-config</artifactId>
+        <version>2.1.1.RELEASE</version>
+    </dependency>
+    <!--——web-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!--actuator完善监控信息-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+</dependencies>
+```
+
+- resources下创建application.yml和bootstrap.yml配置文件
+
+> 其中bootstrap.yml是系统级别的配置文件，application.yml是用户级别的配置文件，系统级别更高级。因为要访问远程库的配置文件，所以一些重要的配置编写在系统级别的配置文件中。
+
+- bootstrap.yaml
+
+```yaml
+# 系统级别的配置
+spring:
+  cloud:
+    config:
+      name: config-client # 需要从git上读取的资源名称，不要后缀
+      profile: dev
+      label: master
+      uri: http://localhost:3344
+```
+
+- application.yml
+
+```yaml
+# 用户级别的配置
+spring:
+  application:
+    name: springcloud-config-client
+    
+# 不加这个配置会报Cannot execute request on any known server 这个错：连接Eureka服务端地址不对
+# 或者直接注释掉eureka依赖 这里暂时用不到eureka
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+```
+
+- 创建controller包下的**ConfigClientController.java** 用于测试
+
+```java
+@RestController
+public class ConfigClientController {
+
+    @Value("${spring.application.name}")
+    private String applicationName; //获取微服务名称
+
+    @Value("${eureka.client.service-url.defaultZone}")
+    private String eurekaServer; //获取Eureka服务
+
+    @Value("${server.port}")
+    private String port; //获取服务端的端口号
+    
+    @RequestMapping("/config")
+    public String getConfig(){
+        return "applicationName:"+applicationName +
+                "eurekaServer:"+eurekaServer +
+                "port:"+port;
+    }
+}
+```
+
+- 编写主启动类
+
+```java
+@SpringBootApplication
+public class ConfigClient3355 {
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigClient3355.class,args);
+    }
+}
+```
+
+- 测试一下，先启动3344，后启动客户端，然后访问 http://localhost:8201/config/
+
+![image-20220225204557627](img/06/image-20220225204557627.png)
+
+- 在bootstrap.yaml文件中，切换一下环境dev->test
+
+```yaml
+# 系统级别的配置
+spring:
+  cloud:
+    config:
+      name: config-client # 需要从git上读取的资源名称，不要后缀
+      profile: test
+      label: master
+      uri: http://localhost:3344
+```
+
+- 重新测试，继续访问 http://localhost:8201/config 发现没用了。访问 http://localhost:8202/config
+
+![image-20220225204939567](img/06/image-20220225204939567.png)
+
+> 实战一下
+>
+> - 需求：把之前的7001、8001配置文件修改成远程库读取配置文件，实现配置与编码解耦。
+
+- 本地新建config-dept.yaml和config-eureka.yaml并提交到码云仓库。
+
+![image-20220225214805081](img/06/image-20220225214805081.png)
+
+- config-dept.yaml
+  - 其中为了测试dev和test唯一的不同是连接的数据库不同。
+
+```yaml
+spring:
+  profiles:
+    active: dev
+    
+---
+server:
+  port: 8001
+# mybatis的配置
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  type-aliases-package: com.github.pojo
+  mapper-locations:
+    - classpath:mybatis/mapper/**/*.xml
+# spring的相关配置
+spring:
+  profiles: dev
+  application:
+    name: springcloud-config-dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource # 数据源
+    driver-class-name: org.gjt.mm.mysql.Driver # mysql驱动
+    url: jdbc:mysql://localhost:3306/springcloud?useSSL=false #数据库名称
+    username: root
+    password: root
+    dbcp2:
+      min-idle: 5 #数据库连接池的最小维持连接数
+      initial-size: 5 #初始化连接数
+      max-total: 5 #最大连接数
+      max-wait-millis: 200 #等待连接获取的最大超时时间
+
+# Eureka配置：配置服务注册中心地址
+eureka:
+  client:
+    service-url:
+      # 注册中心地址7001-7003
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: springcloud-provider-dept-8001 # 与client平级
+ #   prefer-ip-address: true # true表示访问路径可以显示IP地址
+
+# info配置
+info:
+  app.name: subei-springcloud  # 项目的名称
+  company.name: www.subeily.top  # 公司的名称
+    
+---
+server:
+  port: 8001
+# mybatis的配置
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  type-aliases-package: com.github.pojo
+  mapper-locations:
+    - classpath:mybatis/mapper/**/*.xml
+# spring的相关配置
+spring:
+  profiles: test
+  application:
+    name: springcloud-config-dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource # 数据源
+    driver-class-name: org.gjt.mm.mysql.Driver # mysql驱动
+    url: jdbc:mysql://localhost:3306/springcloud?useSSL=false #数据库名称
+    username: root
+    password: root
+    dbcp2:
+      min-idle: 5 #数据库连接池的最小维持连接数
+      initial-size: 5 #初始化连接数
+      max-total: 5 #最大连接数
+      max-wait-millis: 200 #等待连接获取的最大超时时间
+
+# Eureka配置：配置服务注册中心地址
+eureka:
+  client:
+    service-url:
+      # 注册中心地址7001-7003
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: springcloud-provider-dept-8001 # 与client平级
+ #   prefer-ip-address: true # true表示访问路径可以显示IP地址
+
+# info配置
+info:
+  app.name: subei-springcloud  # 项目的名称
+  company.name: www.subeily.top  # 公司的名称
+```
+
+- config-eureka.yaml
+
+```yaml
+spring:
+  profiles:
+    active: dev
+    
+---
+server:
+  port: 7001
+
+#spring配置
+spring:
+  profiles: dev
+  application:
+    name: springcloud-config-eureka
+    
+# Eureka配置
+eureka:
+  instance:
+    hostname: eureka7001.com #eureka服务端的实例名称
+  client:
+    register-with-eureka: false #是否将自己注册到Eureka服务器中，本身是服务器，无需注册
+    fetch-registry: false #false表示自己端就是注册中心，职责是维护服务实例，并不需要检索服务
+    service-url:
+      # 单机 defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      # 设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个defaultZone地址
+      defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+    
+---
+server:
+  port: 7001
+
+#spring配置
+spring:
+  profiles: test
+  application:
+    name: springcloud-config-eureka
+    
+# Eureka配置
+eureka:
+  instance:
+    hostname: eureka7001.com #eureka服务端的实例名称
+  client:
+    register-with-eureka: false #是否将自己注册到Eureka服务器中，本身是服务器，无需注册
+    fetch-registry: false #false表示自己端就是注册中心，职责是维护服务实例，并不需要检索服务
+    service-url:
+      # 单机 defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      # 设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个defaultZone地址
+      defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+```
+
+- 新建springcloud-config-eureka-7001模块，内容和之前的springcloud-eureka-7001一样
+
+- 修改springcloud-config-eureka-7001的配置文件，换成远程库读取
+
+  - 添加bootstrap.yaml系统配置文件
+
+  ```yaml
+  # 系统级别的配置
+  spring:
+    cloud:
+      config:
+        name: config-eureka # 需要从git上读取的资源名称，不要后缀
+        profile: dev
+        label: master
+        uri: http://localhost:3344
+  ```
+
+  - 修改application.yaml
+
+  ```yaml
+  spring:
+    application:
+      name: springcloud-config-eureka
+  
+  # 不加这个配置会报Cannot execute request on any known server 这个错：连接Eureka服务端地址不对
+  # 或者直接注释掉eureka依赖 这里暂时用不到eureka
+  eureka:
+    client:
+      register-with-eureka: false
+      fetch-registry: false
+  ```
+
+- 新建springcloud-config-provider-dept-8001模块，内容和之前的springcloud-provider-dept-8001一样
+
+- 修改springcloud-config-provider-dept-8001的配置文件，换成远程库读取
+
+  - 添加bootstrap.yaml系统配置文件
+
+  ```yaml
+  # 系统级别的配置
+  spring:
+    cloud:
+      config:
+        name: config-dept # 需要从git上读取的资源名称，不要后缀
+        profile: dev
+        label: master
+        uri: http://localhost:3344
+  ```
+
+  - 修改application.yaml
+
+  ```yaml
+  spring:
+    application:
+      name: springcloud-config-provider-dept
+  
+  # 不加这个配置会报Cannot execute request on any known server 这个错：连接Eureka服务端地址不对
+  # 或者直接注释掉eureka依赖 这里暂时用不到eureka
+  eureka:
+    client:
+      register-with-eureka: false
+      fetch-registry: false
+  ```
+
+- ==在7001、8001的pom.xml中添加spring cloud config依赖==。
+
+```xml
+<!--config-->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-config</artifactId>
+    <version>2.1.1.RELEASE</version>
+</dependency>
+```
+
+- 测试
+
+  - 启动cofig3344服务端、客户端7001和8001
+  - 访问 http://localhost:3344/master/config-eureka-dev.yaml ,
+    ![image-20220225220302796](img/06/image-20220225220302796.png)
+
+  > 说明config服务端没问题
+
+  - 访问 http://localhost:7001/
+    ![image-20220225220633386](img/06/image-20220225220633386.png)
+
+  > 说明远程配置读取成功
+
+  - 访问 http://localhost:8001/dept/get/2
+    ![image-20220225220714829](img/06/image-20220225220714829.png)
+
+  > 说明8001也从远程库读取配置文件成功
+
+  - 修改客户端8001的配置文件，变成读取test版的配置文件
+
+  ```yaml
+  # 系统级别的配置
+  spring:
+    cloud:
+      config:
+        name: config-dept # 需要从git上读取的资源名称，不要后缀
+        profile: test
+        label: master
+        uri: http://localhost:3344
+  
+  # 不加这个配置会报Cannot execute request on any known server 这个错：连接Eureka服务端地址不对
+  # 或者直接注释掉eureka依赖 这里暂时用不到eureka
+  eureka:
+    client:
+      register-with-eureka: false
+      fetch-registry: false
+  ```
+
+  - 重新启动访问 http://localhost:8001/dept/get/2
+    ![image-20220225221008365](img/06/image-20220225221008365.png)
+
+- 测试成功。
+
+## 总结导图
+
+![spring cloud NetFlix](spring%20cloud%20NetFlix.png)
+
+## 🎉cloud结束啦🎉
 
 
 

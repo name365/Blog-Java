@@ -1,0 +1,15 @@
+# 系统级别的配置
+spring:
+  cloud:
+    config:
+      name: config-dept # 需要从git上读取的资源名称，不要后缀
+      profile: test
+      label: master
+      uri: http://localhost:3344
+
+# 不加这个配置会报Cannot execute request on any known server 这个错：连接Eureka服务端地址不对
+# 或者直接注释掉eureka依赖 这里暂时用不到eureka
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
