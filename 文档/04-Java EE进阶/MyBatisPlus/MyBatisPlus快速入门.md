@@ -1476,25 +1476,25 @@ class MybatisPlusDatasourceApplicationTests {
 
 **功能**：
 
-- **XML 跳转** ![跳转](https://baomidou.com/img/mybatisx-jump.gif)
+- **XML 跳转** ![跳转](img/04/mybatisx-jump.gif)
 
-- **生成代码(需先在 idea 配置 Database 配置数据源)** ![生成代码](https://baomidou.com/img/mybatisx-generate.gif)
+- **生成代码(需先在 idea 配置 Database 配置数据源)** ![生成代码](img/04/mybatisx-generate.gif)
 
-- **重置模板** ![生成代码](https://baomidou.com/img/mybatisx-reset-template.gif)
+- **重置模板** ![生成代码](img/04/mybatisx-reset-template.gif)
 
 > **JPA 提示**
 
 - 生成新增
-  ![生成新增](https://baomidou.com/img/mybatisx-tip-insert.gif)
+  ![生成新增](img/04/mybatisx-tip-insert.gif)
 
 - 生成查询
-  ![生成查询](https://baomidou.com/img/mybatisx-tip-select.gif)
+  ![生成查询](img/04/mybatisx-tip-select.gif)
 
 - 生成修改
-  ![生成修改](https://baomidou.com/img/mybatisx-tip-update.gif)
+  ![生成修改](img/04/mybatisx-tip-update.gif)
 
 - 生成删除
-  ![生成删除](https://baomidou.com/img/mybatisx-tip-delete.gif)
+  ![生成删除](img/04/mybatisx-tip-delete.gif)
 
 
 ## 🎉结束了🎉
